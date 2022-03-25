@@ -2,10 +2,11 @@
 
 # Node.js 
 
-    [concept!] node.js free javascript from the browser, create ways(API?) allowing js interact with computer directly (like server)
+    [!] node.js free javascript from the browser, create ways(API?) 
+    [!] allowing js interact with computer directly (like server)
       - think of C++, it will manipulate memory directly through pointers; 
-      - javacripts is high-level language, cannot interact with low level things directly; use c++ and pointers to understand node.js
-      - this low level technology
+      - javacripts is high-level language, cannot interact with low level things directly; 
+      - use c++ and pointers to understand node.js (node is low level technology)
 
 
 # Server
@@ -17,7 +18,8 @@
 
     [!] why server?
       >> one way of running and rendering html & css & js is on the FrontEnd, browser itself
-      >> the other way is by sending all the code, and running on the somewhere that has large memory or capacity, and then send only the outcome back
+      >> the other way is by sending all the code
+        - running on the somewhere that has large memory or capacity, and then send only the outcome back
       >> so that free browser to do more complex things
 
 # Express
@@ -42,7 +44,8 @@
     
 # ex).
 
-    [1] get is a method: automatically combine with a resquest sent and a response sending back --> so there is two behavior hidden: send request & receive message
+    [1] get is a method: automatically combine with a resquest sent and a response sending back
+    [1] --> so there is two behavior hidden: send request & receive message
     [1] first parameter "/" means the path, where the server is looking responding
     [1] function that react to req and res
     [1] response here is not the somethings user received, is something computer receive
@@ -53,7 +56,8 @@
     [3] when sending data to server through html, you will need to include: <form action="/" method="post">
     [3] method is how you will interact with server
     [3] action is where you will interact with server
-    [3] if not .post method capturing data sending through html, meaning there is not such function inside server, and that is user's wrong operation, and result in 404
+    [3] if not .post method capturing data sending through html, meaning there is not such function inside server, 
+    [3] and that is user's wrong operation, and result in 404
 
     [4] print out the data sending from other place to out server
 
@@ -62,7 +66,8 @@
     >> const bodyParser = require("body-parser");             --- loading parser package
 
     >> const app = express();                                 --- creating express object for interacting with server
-    >> app.use(bodyParser.urlencoded({extended: true}));      --- parser object that can parser the data(into var, etc) received by the server
+    >> app.use(bodyParser.urlencoded({extended: true}));      --- parser object that can parser the data(into var, etc) 
+                                                              --- received by the server
 
     >> app.get("/", function(req, res) {                      --- 1
           res.sendFile(__dirname + "/index.html");            --- 2
@@ -80,8 +85,8 @@
 
         });
 
-    >> app.listen(3000, function() {                          --- listen method print out something when successfully reach to server
-        console.log("server is running on port 3000.")
+    >> app.listen(3000, function() {                          --- listen method print out something 
+        console.log("server is running on port 3000.")        --- when successfully reach the server
         })
 
 
