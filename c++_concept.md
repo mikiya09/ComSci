@@ -113,6 +113,10 @@
 
 # CLass
 
+    >> public 
+
+    >> private
+
 
 
 
@@ -148,6 +152,15 @@
 
     [+]: abstract data type (ADT) is the same concept -> you write declaration and implement in a separate file, 
          programmers who need your class just need to know the method you have described in the .h (header file), no need for details
+
+
+    < basic rule when making ADT >
+    [1]. make all the mmeber variables private members of the class 
+    [2]. make each of the basic operations that the programmer needs a public member function of the class,
+         and fully specify how to use each such member functions
+    [3]. make any helping functions private member function
+
+
 
 
 
