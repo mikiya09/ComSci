@@ -111,8 +111,43 @@
     }
 
 
+# CLass
 
 
+
+
+# Constructor
+    
+    [+] a special method that is called when a class is instantiated(实例化) into an object
+    [.] could either be implicit or explicit
+
+    < pay attention >
+    [+] constructor has the exactly same name as the class
+    [+] has no return and return type in the prefix
+
+    <ex.>
+    Class User {
+        public: 
+        User(string firstName, string lastName)
+        {
+          first_name = firstName;
+          last_name = lastName;
+          ...
+        }
+        ...
+        private: ...
+      } 
+
+    user1("Bruce", "Wayne"); 
+
+
+# Abstract Data Type
+    
+    [!]: think of it as if you know nothing about programming, you just know how to click button
+    [!]: you can still interact with programs because of some frontend development work has been done by someone
+
+    [+]: abstract data type (ADT) is the same concept -> you write declaration and implement in a separate file, 
+         programmers who need your class just need to know the method you have described in the .h (header file), no need for details
 
 
 
