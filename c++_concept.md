@@ -116,7 +116,7 @@
     >> public 
 
     >> private
-
+    [!]. private variable could only be accessed by member function inside this class
 
 
 
