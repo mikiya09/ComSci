@@ -111,12 +111,16 @@
     }
 
 
-# CLass
+# Class
 
     >> public 
 
     >> private
     [!]. private variable could only be accessed by member function inside this class
+
+    >> void output() const;
+      [ ]: this is just to ensure if any variable inside this class is a const, and you can still able to print out it
+      [ ]: because you are set the const variable to be passed in the first place
 
 
 
@@ -161,6 +165,20 @@
     [3]. make any helping functions private member function
 
 
+# Char v.s. String
+
+    [!] they are not equal
+    
+    [+]: char (data type)
+        - is array type data, but store character instead of number
+        - when using operator on them, we can actually comparing the address of the first element inside the char array
+        - therefore we can only use single quote, because char can only compare with char data type
+
+    [+]: string (data type)
+        * we have cstring and standard string library in C++
+        - when #include <string>, we are refering the standard string library 
+        - so when comparing the string object, we could use double quote
+    [.] therefore when you are comparing string data type, you can use double quote 
 
 
-
+# 
