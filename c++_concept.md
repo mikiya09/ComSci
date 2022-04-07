@@ -181,4 +181,74 @@
     [.] therefore when you are comparing string data type, you can use double quote 
 
 
-# 
+# Qualifier 
+
+    [+] public
+
+    [+] private
+
+    [+] protected
+      >> anything under the protected qualifier can be accessed by name in a derived class but not anywhere else.
+      >> so only accesseible in derived classes?
+
+      [ex.]
+      
+      class xxx : public yyy
+      {
+          public:
+          ...
+          private: 
+          ...
+          protected: 
+            double fraction(double percent);
+      }
+
+      [declaration]
+      double xxx:fraction(double percent)
+      {
+          return percent/100.0;
+      }
+
+
+# overloading
+
+
+
+# Inheritance & Polymorphism
+
+    [+]: when compiling the program, remember to include all .cpp file that are related, place the driver.cpp at first
+    [+]: that's saying, when compile a derived children class, you have to include at least three files
+         1. driver.cpp
+         2. child.cpp
+         3. parent.cpp
+ 
+
+# virtual 
+
+
+
+# I/O 
+
+    >> istream and ostream (formatting)
+    [ex.]
+
+    void BankAccount::output(ostream& outs) const 
+    {
+        outs.setf(ios::fixed);
+        outs.setf(ios::showpoint);
+        outs.precision(2);
+        outs << "Print Balance: &" << balance << endl;
+    }
+     
+    [+]: when you call this function, the input needed to pass to the function is "cout" --> like this backaccount.output(cout);
+
+
+    [ex.]
+    void BankAccount::input(istream& ins)
+    {
+        ins >> balance;
+    }
+
+    [+]: when calling it --> bankaccount.input(cin);
+         - in terminal, you will automatically be prompt to enter something 
+
