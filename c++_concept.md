@@ -252,3 +252,29 @@
     [+]: when calling it --> bankaccount.input(cin);
          - in terminal, you will automatically be prompt to enter something 
 
+
+
+
+# overriding & overloading
+
+    >> creating multiple version of a same function
+
+    >> return type is not part of the function, therefore changing the return type does not make overloading ok
+    [bad]:
+      int do_stuff(int) {..}
+      void do_stiff(int) {..}
+      --------------------
+      the above thing will mess up, you have to make the signature different
+
+
+# static
+
+# this
+
+# ->
+
+# const
+
+# setf/precision/overloading operator
+
+
