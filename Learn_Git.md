@@ -45,6 +45,17 @@
     >> git remote add origin https://github.com/user_name/repo_name.git
     >> git checkout master/main
 
+
+# Changing remote repo
+    [list current remote repo & also for checking]
+    >> git remote -v
+
+    [change]
+    >> git remote set-url origin https://github.com/userName/repoName.git
+
+    [reference]
+    >> https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories
+
 # push & pull
     [!]: when you create a new repo through github, pay attention to the name you adopt ("master" -> "main") 
     >> git push -u origin master/main
