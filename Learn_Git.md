@@ -1,6 +1,4 @@
 
-# Starting Using Git
-
 # Logic
     [#] initialize repo --> make changes --> add changes to stage --> commit changes --> push
 
