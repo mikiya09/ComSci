@@ -41,9 +41,13 @@
     >> git merge master                       (merge all stuff in my branch to master)
 
 # setting up remote repo
+    [set "main" branch]
+    >> git branch -M main
+
     [#] --> github.com --> "+" --> New Repository --> Name it --> Public/Private --> nothing more needed to add
     >> git remote add origin https://github.com/user_name/repo_name.git
-    >> git checkout master/main
+    >> git push -u origin main
+
 
 
 # Changing remote repo
