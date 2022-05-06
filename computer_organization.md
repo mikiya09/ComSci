@@ -323,9 +323,119 @@
 
 
 
+# assembly language
+
+
+    why is that the registar has different prefix letter, such as $t0, $s0, etc
+    explanation on April 5 pptx, and it's also on the green sheet
 
 
 
+    <4> float data type (32bit)
+        
+        PI: float
+
+    <5> double: data type take more digits than float (64bit)
+        - always take out two register space, because that's 32 bit base
+        - might cause overflow be doesn't matter a lot
+
+
+    <6> Division
+        - only take two arguments after the operator
+        >> div $t0, $t1
+        - and quotient goes to lo, while remaindar goes to hi in the registar
+        >> mflo $s0     # quotient
+        >> mfhi $s1     # remaindar
+
+    <7> Load Word (32bits)
+        >> get something from RAM into CPU(registar is inside CPU)
+
+
+    <8> Store word (32bits)
+        >> get variable from CPU into RAM
+
+
+    <9> Array
+
+        -- basic --
+        # Allocate space for the array --> int myArray[3];
+        >> myArray:    .space 12 # bytes (reserve for 3 ints: 4 bytes each)
+        
+    
+        # Initialized array --> int intArray[] = {10, 20, 30, 40, 50};
+        >> intArray:   .word    10, 20, 30, 40, 50
+
+
+        # Preload with the same value int SameValArray[5] = {[0...4] = 1}; 
+        >> SameValArray:    .word   1:5
+
+
+        # most straightforward way
+        >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
+
+
+        -- converting A[i] to Assembly --
+        ex).
+        >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
+        [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
+
+        >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
+        [!]: right to left
+
+
+        ??????????????????
+        -- loop --
+        should figure what's going on for the first looping example(while version)
+        ! la command(it's was used for storing the address of a array once in the example, what is it really mean)
+        la $t3, list, is this a special character only used for uploading address? or it has other usage
+        li $t2, 6
+
+        sll $t2, $t2, 2 
+        
+        for loop version
 
 
         
+    <10> Procedure Call
+        
+        >> jal proceduralName # jump and link
+
+        proceduralName(ex. display):
+        ..........
+
+
+        >> ja $ra   # jump return address (back to the calling method)
+
+        when meet jal, store the address or the work here, and jump to where the proceduralName at
+        and excecute the code inside the proceduralName, 
+        then jump back to where jal at
+
+
+
+    <11> leaf Procedure (function)
+        
+        pointer
+
+        >> stack pointer ($sp)
+
+
+    <12> non-leaf procedure (function calling function, recursively)
+
+
+
+
+
+
+# Decoding Instructions
+
+
+    <1> how to determine which format it is based on opcode
+        >> R format: 000000
+        >> I format: 001000?
+
+
+
+shift left logical: https://www.eecis.udel.edu/~davis/cpeg222/AssemblyTutorial/Chapter-12/ass12_2.html
+
+2N
+

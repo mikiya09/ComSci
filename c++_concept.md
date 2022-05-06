@@ -440,6 +440,7 @@
 
 # Friend Function
     >> private variable data needed to be accessed directly without using the object of that class
+        => it's your friend, so it can access to your private variable
 
     [ex.]
     friend bool equal (birthDate d1, brithDate d2) {...}
