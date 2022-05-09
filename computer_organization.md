@@ -323,103 +323,493 @@
 
 
 
-# assembly language
 
-
-    why is that the registar has different prefix letter, such as $t0, $s0, etc
-    explanation on April 5 pptx, and it's also on the green sheet
-
-
-
-    <4> float data type (32bit)
+# Computer Architecture
         
-        PI: float
+        >> concepts.
+            
+            + logical description of its components and basic operations
 
-    <5> double: data type take more digits than float (64bit)
-        - always take out two register space, because that's 32 bit base
-        - might cause overflow be doesn't matter a lot
+            + in pure assembly language, one assembly 'instruction' corresponds to one basic operation of the processor
 
-
-    <6> Division
-        - only take two arguments after the operator
-        >> div $t0, $t1
-        - and quotient goes to lo, while remaindar goes to hi in the registar
-        >> mflo $s0     # quotient
-        >> mfhi $s1     # remaindar
-
-    <7> Load Word (32bits)
-        >> get something from RAM into CPU(registar is inside CPU)
+            + the architecture is visiable in every instruction of the program
 
 
-    <8> Store word (32bits)
-        >> get variable from CPU into RAM
-
-
-    <9> Array
-
-        -- basic --
-        # Allocate space for the array --> int myArray[3];
-        >> myArray:    .space 12 # bytes (reserve for 3 ints: 4 bytes each)
+        >> Processor Architecture
         
-    
-        # Initialized array --> int intArray[] = {10, 20, 30, 40, 50};
-        >> intArray:   .word    10, 20, 30, 40, 50
+            [ 1 ]: describe basic components and basic operations
+
+            [ 2 ]: each processor 
+                    + has its own architecture
+                    + has its own assembly language
 
 
-        # Preload with the same value int SameValArray[5] = {[0...4] = 1}; 
-        >> SameValArray:    .word   1:5
+            [ ex ]:
+                    + Intel i5
+                    + AMD Ryzen
+                    + Apple M1
 
 
-        # most straightforward way
-        >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
 
-        -- converting A[i] to Assembly --
-        ex).
-        >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
-        [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
+# MIPS
 
-        >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
-        [!]: right to left
+        >> compare to C
+                C: is mostly independent of the processor it runs on the compiler that builds code specific to a processor
+        [ ! ]   A: is written to control a specific processor
+                    + human readable
+                    + generates binary codes for processor and its architecture
 
 
-        ??????????????????
-        -- loop --
-        should figure what's going on for the first looping example(while version)
-        ! la command(it's was used for storing the address of a array once in the example, what is it really mean)
-        la $t3, list, is this a special character only used for uploading address? or it has other usage
-        li $t2, 6
+        >> MIPS
 
-        sll $t2, $t2, 2 
+            [ 1 ]: MIPS processor
+                    + Reduced Instruction Set Computer(RISC), so firstly, it's a computer
+                        • microprocessor designed to perform a smaller number computer instructions so it can operate at a higher speed
+                        • Simpler, Less Circuitry, Less expensive
+                    
+                    + older computer is the opposite
+                        • more complex, more instruction, more cost
+
+
+                    + the concept of MIPS assembly are transferable to other processors
+
+
+                    [ex]: PS4, Tesla Model 4
+
+
+
+            [ 2 ]: MIPS Machine Instruction
+
+                    + basic machine circle
+                        1. fetch the next instruction from memory
+                        2. increment the program counter (next instruction) = 应该是计数器一样的东西，program counter 记录着现在到了哪个step
+                        3. execute the instruction
+            
+
+                    + machine code                                  :     assembly code
+                        0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
+                        0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
+                        0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
+                        0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
+                        0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
+            
+
+                    + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
+
+
+            
+            [ 3 ]: MIPS basic structure
+
+                    + Von Neumann Architecture
+
+                        <1>. Memory holds data AND instructions
+                        <2>. instructions execute one at a time
+                        <3>. Main components: Input, CPU, Memory, Output
+                        for figure: p22-8
+
+                        <4>. Von Neumann bottleneck
+                            - the idea that computer system throughput is limited,
+                              due to the relative ability of processors compared to top rates of data transfer.  
+                              According to this description of computer architecture, 
+                              a processor is idle(闲) for a certain amount of time while memory is accessed.
+
+
+
+
+                    + MIPS basics 
+                                                            ------------------------------------------------------
+                                                            |                                                    |
+                                                            |    --------------------------------------------    |
+                                                            |    |                                          |    |
+                                                            |    |                  CPU                     |    |
+                                                            |    |  (control unit + arithmetic/logic unit)  |    |
+                                                            |    |                                          |    |
+                                        Input Device --->   |    |       ^                       |          |    |   ---> Output device
+                                                            |    --------|-----------------------|-----------    |
+                                                            |    |       |                       V          |    |
+                                                            |    |               Memory Unit                |    |
+                                                            |    |                                          |    |
+                                                            |    |                                          |    |
+                                                            |    |------------------------------------------|    |           
+                                                            |                                                    |
+                                                            |----------------------------------------------------|    
+                                                            
+                                                                (reigstar is in CPU, RAM is in memory unit) 
+
+
+                    + Memory Model
+                        
+                        Data:
+                            - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
+                        
+                        Operation
+                        
+                            * Load: copy from address in memory to register inside the processor
+
+                            * Store: copy from register to memory at a designated address
+                
+
+
+                    + MIPS & Standard Computer Architecture 
+
+                        
+                            > hardware connected on a PCI bus to transmit data
+                            ===================================================================
+
+                            Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+
+
+                                                                                       <-- slow
+                            ----------------------------- Bus ----------------------------------
+
+
+
+
+# MARS: The MIPS Simulator
+
+
+        >> MARS (MIPS Assembler and Runtime Simulator)
+
+            + allow us to run machine code on laptop
+
+            + component
+                
+                <1> register - fost storage in CPU chips
+
+                    .. list of $v0 command ..
+
+
+                <2> MIPS Memory Segments (2 main part)
         
-        for loop version
+                    .data   # is comment
+                            # .data is where variables are stored, variable declaration
+                            # they are store in RAM, not registar (outside of CPU)
 
+                    .text   # where your code resides
+                            # unlike C/C++, the first line is the first to execute
+
+
+
+                <3>
+                =================================== example =====================================
+
+                        -----------------------------------------------------------------
+                        |                                                               |
+                        |   int:            it takes 4 bytes to hold a 32 bit integer   |
+                        |   char/string:    8 bits = 1 byte = 1 ASCII charater          |   --> refer to Memory model: MIPS memory is an array of 2^32 bytes (p45-8)
+                        |                                                               |       1001008 | 1001009 | 100100a | 100100b ... | 100100f
+                        |   - each charater has a unique address -                      |           H        e          l        l    ...      d
+                        |                                                               |
+                        -----------------------------------------------------------------    
+
+                .data   # declare your variables in RAM here
+
+                        num1: .word 7   # int num1 = 7
+                        num2: .word 10  
+
+                        num3: .word 0x1a2b3c4d  # valid, number in hex
+                        num4: .word 012         # valid, number in Octal(starts with 0)
+
+                        myString: .asciiz "Hello World\n" 
+                        
+
+
+                .text 
+                        lw $t0, num1    # load from RAM to registar(CPU)
+                        lw $t1, num1
+                        add $t2, $t0, $t1   # add two registers
+
+                        li $v0, 1       # 1 is for int
+                        syscall         # execute command
+
+
+
+
+                <4> RAT: Register Allocation Table
+                    
+                    • shows where you put your variables:
+
+                                    RAT
+                                    ---
+                    int a;          $s1 = a
+                    int b;          $s2 = b
+                    int c;          $s3 = c
+
+                =================================================================================
+
+
+# MARS operation
+            
+            [ 1 ] add / addi
+
+                  + add
+                        • add = Verilog R[rd] = R[rs] + R[rt]
+                            - R[] as an array of register values
+                            - rd, rs, rt as index value
+                        • add two registers and store stores in a register
+                            add $t3, $t1, $t2   # t3 = t2 + t1 
+                  + addi
+                        • addi = Verilog R[rt] = R[rs] + SignImm
+                            - Immediate means a constant number
+                            - addi $t1, $t2, 5  # t1 = t2 + 5
+                
+
+            [ 2 ] Labels (show later in the example)
+
+                + you can any self-defined label
+
+
+            [ 3 ] Branch (if and while)
+
+
+                + fastest (takes 1 instruction cycle)
+                    
+                    • beq (branch equal to)
+                    • bne (branch not equal to)
+
+                    • j (jump to)
+
+                + Pseudo-Instruction (takes 2 instruction)
+
+                    • bge (branch greater and equal than)
+                    • bgt (branch greater than)
+
+                    • bls (branch less and equal to)
+                    • blt (branch less than)
+
+
+
+                + ex
+                =========== while ==========
+                C++
+
+                int a=1;                        addi $s1, $zero, 1
+                int b=5;                        addi $s2, $zero, 5
+                int c=0;                        addi $s3, $zero, 0
+                while (a<b)
+                {                   whileloop:  beq $s1, $s2, endwhile      # check if $s1 and $s2 is equal, if yes, go to endwhile label
+                    c++;                        addi $s3, $s3, 1            # if no, execute line by line, that's assembly works
+                    b++;                        addi $s1, $s1, 1
+                }                               j whileloop                 # reach here, jump to whileloop label section
+                                    
+                cout << c;          endwhile:
+
+
+                ============= if ===========
+                int a=1;                    addi $s1, $zero, 1
+                int b=5;                    addi $s2, $zero, 5
+                int c=0;                    addi $s3, $zero, 0
+                if (a < b)
+                {                           bge $s1, $s2, else1
+                    c = 12;                 addi $s3, $zero, 12
+                }                           j printArea
+                else                 
+                    c = 42;          else1: addi $s3, $zero, 42
+                                 printArea: 
+                cout << c;
+
+
+
+                ============= print ==============
+                .data
+                        myNum: .word 9
+
+                .text
+                        li $v0, 1       # printing setup, 1 for print int
+                        la $a0, myNum   # load myNum to a0
+                        syscall         # execute
+
+
+                ============= exit politely ============
+                li $v0, 10
+                syscall
+
+
+
+
+# MARS operation 2
+
+        <1> subtract (two ways)
+            
+            + sub $a0, $s0, $s1
+            
+            + sub $t0, $s0, $s1
+              move $a0, $t0         # move means only different registar is design for different stuff
+                                    # check what's the meaning of $a0
+
+            
+        <2> multiply <3 ways> 
+
+            + mul (3 arguments)
+                
+                =====================================
+                addi $s0, $zero, 15     # s0 = 0 + 15
+                addi $s1, $zero, 4      # s1 = 0 + 4
+                mul $t0, $s0, $s1       # t0 = s0 * s1
+
+                li $v0, 1
+                add $a0, $zero, $t0
+                syscall
+
+
+            + mult: (2 arguments) - rarely use
+
+                =====================================
+                addi $t0, $zero, 2000       # t0 = 2000
+                addi $t1, $zero, 10         # t1 = 10
+                mult $t0, $t1               # t0 * t1
+
+                # result goes into h1 and lo, similar to division
+                mflo $s0
+                add $a0, $zero, $s0
+
+                li $v0, 1       # setting to 1 for printing integer
+                syscall
+
+
+            + sll: (shift left logical)
+        
+                =====================================
+                addi $s0, $zero, 12
+                sll $t0, $s0, 2         # s0 * 2 * 2 (based on explanation below, shift left one position make it two times greater, shift two position therefore 4 times greater)
+                add $a0, $zero, $t0
+
+                li $v0, 1
+                syscall
+
+
+                < understanding shift left logical >
+                -----------------------------------------------------------------------------------------------
+                | before: 0110 0001 = 97(base 10)                                                             |
+                |               <- move a bit left by one,                                                    |
+                |                 low-order bit is replaced by a zero bit and the high-order bit is discarded |
+                |                                                                                             |
+                | after:  1100 0010 = 194(base 10)                                                            |
+                |                                                                                             |
+                | 97 * 2 = 194                                                                                |
+                -----------------------------------------------------------------------------------------------
 
         
-    <10> Procedure Call
+
+        <3> Division
+            # only take two arguments after the operator
+            < 3 arguments >
+            >> div $s0, $t0, $t1                            # s0 = t0/t1
+            >> div $s0, $t1, 10                             # s0 = t1/10
+
+            < 2 arguments >
+            # and quotient goes to lo
+            # while remaindar goes to hi in the registar
+            >> div $t0, $t1                                 # t0 = t0/t1
+            >> mflo $s0     # quotient
+            >> mfhi $s1     # remaindar
+
+
+        <4> divide power
+
+
+
+
+# MARS operation 3
+
+        <1> Float & Double
+            + same idea as in C++, double type could hold more bits
+
+            PI: .float 3.141593                 # only 6 digits
+            PIDouble: .double 3.1415926535      # more digits
+
+            li $v0, 2           # 2 is for float
+            lwc1 $f12, PI       # load WORD into coprocessor 1 (location for float & double)
+
+            ldc1 $f2, PIDouble # load DOUBLE into coprocessor 1, at reg f2
+            ldc1 $f4, PIDouble # another copy       # double take up the space of 2 registers (because 64 bits)
+
+            add.d $f12, $f2, $f4
+            li $v0, 3               # 3 is for double 
+            syscall 
+
+
+
+        <2> Load & Store word
+
+
+        <3!> Array (special attention)
+
+            -- basic --
+            # Allocate space for the array --> int myArray[3];
+            >> myArray:    .space 12 # bytes (reserve for 3 ints: 4 bytes each)
+            
         
-        >> jal proceduralName # jump and link
-
-        proceduralName(ex. display):
-        ..........
+            # Initialized array --> int intArray[] = {10, 20, 30, 40, 50};
+            >> intArray:   .word    10, 20, 30, 40, 50
 
 
-        >> ja $ra   # jump return address (back to the calling method)
-
-        when meet jal, store the address or the work here, and jump to where the proceduralName at
-        and excecute the code inside the proceduralName, 
-        then jump back to where jal at
+            # Preload with the same value int SameValArray[5] = {[0...4] = 1}; 
+            >> SameValArray:    .word   1:5
 
 
+            # most straightforward way
+            >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
-    <11> leaf Procedure (function)
+
+            -- converting A[i] to Assembly --
+            ex).
+            >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
+            [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
+
+            >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
+            [!]: right to left
+
+
+            ??????????????????
+            -- loop --
+            should figure what's going on for the first looping example(while version)
+            ! la command(it's was used for storing the address of a array once in the example, what is it really mean)
+            la $t3, list, is this a special character only used for uploading address? or it has other usage
+            li $t2, 6
+
+            sll $t2, $t2, 2 
+            
+            for loop version
+
+
+
+
+        <4> Procedure Call (to be continue)
+            
+            >> jal proceduralName # jump and link
+
+            proceduralName(ex. display):
+            ..........
+
+
+            >> ja $ra   # jump return address (back to the calling method)
+
+            when meet jal, store the address or the work here, and jump to where the proceduralName at
+            and excecute the code inside the proceduralName, 
+            then jump back to where jal at
+
+
+
+        <5> leaf Procedure (function)
+            
+            pointer
+
+            >> stack pointer ($sp)
+
+
+        <6> non-leaf procedure (function calling function, recursively)
+
+
+
+
+
+
+# register holder meaning (green sheet)
         
-        pointer
-
-        >> stack pointer ($sp)
-
-
-    <12> non-leaf procedure (function calling function, recursively)
+        >> $a0
+        >> ....
 
 
 
@@ -429,13 +819,312 @@
 # Decoding Instructions
 
 
-    <1> how to determine which format it is based on opcode
-        >> R format: 000000
-        >> I format: 001000?
+        >> general steps
+
+            <1> Pull first 6 bits (on left) out
+
+            <2> Decode to find instruction
+
+            <3> Read the format (R, I, J)
+
+            <4> Read the instruction format and Verilog to get the answer syntax
+
+            <5> Decode the rest of the instruction to get rs, rt, etc
 
 
 
-shift left logical: https://www.eecis.udel.edu/~davis/cpeg222/AssemblyTutorial/Chapter-12/ass12_2.html
 
-2N
+        >> R format (for detail refer Green Sheet)
+
+              op    |    rs   |    rt   |    rd   |    shamt  |  funct
+            6 bits    5 bits    5 bits     5 bits    5 bits      6 bits
+
+            op: operation code (opcode)                 ------> used to determine which format is using, always do this first
+            rs: first source register number
+            rt: sceond source register number
+            rd: destination register number
+            shamt: shift amount (00000 for now)
+            funct: function code
+
+
+        >> Verilog
+            
+            + Used to model hardware
+
+            + Can specify registers, wires, gates, clock, etc
+
+            + Can test the logic before you "build"
+
+
+        >> ex.
+
+            hex code (instruction): 02324020 <base 16>
+
+                        0    2    3    2    4    0    2    0
+                        0000 0010 0011 0010 0100 0000 0010 0000
+                        -------++++++-------++++++------+++++++ 
+            binary =    opcode   17    18      8     0      32
+
+                                 rs    rt      rd    0      (look it up code instruction set, use hex code for function reference, here is 20 <base 16>)
+                                                            rs, rt, rd are referenced by decimal number
+
+                        R format: add $t0, $s1, $s2
+
+
+
+
+        >> I format (refer to green sheet & PPT)
+            
+
+
+        >> Questions
+
+
+           • how to determine which format it is based on opcode
+                >> R format: 000000
+                >> I format: 001000?
+                >> J
+
+
+
+
+# Datapath
+
+
+    >> PC (Program Counter)
+
+        + it goes through instruction location/address one by one sequentially
+
+        + that's why it has a operation of adding 4 at the begining (adding 4 move to next address in memory)
+
+        + such each time adding 4 is a convention for next move
+
+        + after loading the next address, find the commands in there
+
+
+    >> Instruction Memory
+
+        + read the instruction address, and decode it
+
+        + give the instruction out
+
+        + determine what to do for the next register
+
+
+    >> register table
+
+        + arithmetic operation usually goes to read register first
+            • the contents at the address in RAM is sent out as Read Data
+
+        + load word
+            • loading value to memory from register table
+            • go to Write register
+            • finally pass to Data memory
+            • output of Data memory is switched back to the write data(input) of the register set by the write register
+
+    
+    >> Sign-extend
+    
+
+
+    >> Mux
+
+        + output of Data memory is switched back to the write data(input) of the register set
+
+
+
+    >> Branch Instruction?
+
+
+
+    >> ALU (actually many operation will go through ALU)
+       -p64-10
+        
+        + Load/Store: F = add
+        + Branch:     F = subtract
+        + R-type:     F depends on funct field
+
+        --------------------------------
+        ALU control     :       Function
+        0000                    AND
+        0001                    OR
+        0010                    add
+        0110                    subtract
+        0111                    set-on-less-than
+        1100                    NOR
+
+
+
+
+# Clock (keep the pace)
+
+    >> Frequency = 1/TimePeriod
+        + 1 cycle per second = Hertz
+
+    >> to run computer faster
+        + reduce the TimePeriod = Increase the Freq
+
+
+    >> There is a lot more than just CPU speed(frequency) that affects performance
+
+        + clock design
+            •
+            •
+            •
+
+        + why having clock?
+            • want predictable values
+
+
+
+
+# Performance
+
+    >> Von Neumann Bottleneck
+        + A machine will run only as fast as the slowest operation 
+
+    
+    >> Issue
+        + Longest delay determines clock period 
+            • critical path: load instruction
+            • instruction memory -> register file -> ALU -> data memory -> register file
+
+        + no feasible to vary period for different instructions
+
+        + violates design principle 
+
+    >> pipeline(ing)
+
+        + improve performance
+
+        + pipelined laundry: overloapping execution - parallelism
+            (refer to p75-9 on the PPT)
+
+
+        + MIPS pipeline
+
+    >> Hazard
+
+        + Structure hazards
+            • a required resource is busy
+
+        + Data hazard
+            • need to wait for previous instruction to complete its data read/write
+
+        + Control hazard
+            • deciding on control action depends on previous instruction
+
+
+
+    >> summary
+        
+        + Pipelining improves performance by increasing instruction throughput(吞吐量)
+            • executing multiple instructions in parallel
+            • each instruction has the same latency
+
+        + Subject to hazards
+            • Structure
+            • data
+            • control
+
+        + Instruction set design affects complexity of pipeline implementation
+            
+
+
+
+# Still want to go faster (Components Affecting Performance)
+
+    >> Limits of single Processor
+        + more CPUs (x)
+        + many reason for not working out, for example, no way to use all the CPUs
+
+    >> Largest Reason for Multi-processor design failure
+        
+        + Applications
+            • application were traditionally written for serial computation
+
+        + Compiler to split code automatically, which is still not available
+            • Software engineers still specify separable 'threads'
+
+        + Operating System control
+            • having a Ferrari...without a steering wheel
+
+
+    >> cache memory 
+        
+        + inter-station that keep the history of virtual -> physical address look-up record, so that next time looking for same address mapping is faster
+
+
+
+    
+    >> virtual memory (!)
+
+        <1> When program is running, they reside in memory and occupy certain amount of memory
+        <2> programm itself(as if they could think), think it is the only one running on memory --> have a tendency to use up certain amount of memory
+        <3> Every program CANNOT have all memory, which itself may be limited
+        <4> how can program 'share' without knowing it is sharing
+
+
+    >> Memory Management Unit (MMU)
+
+        < 1 >. metaphor: at first, program look its spot in the physical memory address itself, it doesn't how to effectively manage its spot, so does other program
+        
+
+        < 2 >. MMU is the door keeper, it arranges all programs to make use of all physical memory address
+
+
+        < 3 >. they can't communicate like human, program doesn't aware the existence of MMU or the remaining space left, they just find continguous spots and sit in
+
+               + when program suit themselves in the memory address, order exist.
+               + some finsih runing faster, some slower
+               + when one is finish, it leaves, and empty out the space for another program
+               + but other program might have size little smaller, but necessary fill in the whole empty, then there will be a gap left out
+               + this gap is small that no new program has this size could fit in, but current running program is no using it as well
+
+               ------> memory fragmentation <-------
+
+
+        < 4 >. virtual address is created, here the word "virtual" holds its meaning just in terms of programs. To programs, those address is virtual, but they don't know
+
+        
+        < 5 >. program find the assume they find the continguous spots and suit in, but in reality those space might map separately to physical address by MMU
+
+
+        < 6 >. there are different ways of managing space or slice the space, that is up to MMU
+
+
+        < 7 >. when many programs is running together, there is a page table 
+
+                + 4k for each page size
+                + think of that each page contains list of mapping
+                + and right now you have a book of page
+
+                [!]: if some mapping is in the middle of the page, a way of mapping is to map the first 4k of program to the actual physical address, and let the rest map to the middle of the page
+
+
+        + converts (mapping) requested address to a real, physical address
+        |
+        V
+        + so that every program 'thinks' it starts at address zero, and owns all the memory
+        |
+        V
+        + The MMU keeps a table to keep track of the proper locations
+
+        [ ! ]: 
+        1. therefore not contiguous blocks is required
+        2. can handle spitting program #1s memory over several areas
+        3. like a sandwiches style
+
+
+  
+
+
+
+
+
+        
+
+
+
+
 
