@@ -838,13 +838,27 @@
 
 
         # accessing Array Elements in RAM
-        -- converting A[i] to Assembly --
+        -------------------------- converting A[i] to Assembly ---------------------------
         ex).
+        
+        myArray: .space 12
+        add $t0, $t0, 0     # index value starts from 0
+
+        # you could set any number, here we set $s0 = 4
+        addi $s0, $zero, 4 
+
         >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
         [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
 
-        >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
+        >> lw $t6, myArray($zero)  # Load content of (nyArray at index 0) into $t6, here you could use any index
+                                       but have to be in offset format
         [!]: right to left
+
+
+        # offset
+            >> just a different name of register( $t0 is an offset )
+
+        -------------------------- converting A[i] to Assembly ---------------------------
 
 
 
@@ -888,6 +902,8 @@
         # practice Fibonacci numbers into an array
         ==========================================
 
+   
+                
 
 
 
@@ -899,28 +915,35 @@
 
     <4> Procedure Call (to be continue)
         
-        >> jal proceduralName # jump and link
+        >> jal proceduralName # jump and link: # meaning before we jump to the function or label,
+                                               # we store the address we are working on right now to some place
 
         proceduralName(ex. display):
         ..........
 
 
-        >> ja $ra   # jump return address (back to the calling method)
+        >> ja $ra                              # jump return address we previously store (back to the calling method)
 
         when meet jal, store the address or the work here, and jump to where the proceduralName at
         and excecute the code inside the proceduralName, 
         then jump back to where jal at
 
 
+        >> it's achieved by stack pointer ($sp)
 
-    <5> *leaf Procedure (function)
-        
-        pointer
 
-        >> stack pointer ($sp)
+
+    <5> leaf Procedure (function)
+
+
+        >> normal program running, and use jal to call some procedure(function), 
+           after executing those funciton, and jump back to where we started the jump
+           doesn't call any other procedures
 
 
     <6> non-leaf procedure (function calling function, recursively)
+
+        >> procedure calls procedures (nested functions)
 
 
 
@@ -961,6 +984,31 @@
         rd: destination register number
         shamt: shift amount (00000 for now)
         funct: function code
+
+
+    >> I format 
+       |  op    |    rs   |    rt   |    constant or address      |
+        6 bits    5 bits    5 bits              16 bits
+
+        + rt: destination of source register number
+        + constant: -2^15 to 2^15 - 1
+        + address: offset added to base address in rs
+
+        [ ! ]: I format does not have function section, so refer to green sheet based on opcode 
+        [ ex ]: 0x2150001e
+                0010 0001 0101 0000 0000 0000 0001 1110
+                -------++++++-------+++++++++++++++++++
+                opcode   rs     rt      immediate
+                R[rt] = R[rs] + immediate
+                addi $s0, $t2, 30
+
+
+    >> J format
+       |  op    |    Target address = current + (# instruction from current * 4)      |
+        6 bits                              26 bits
+
+        + check opcode as well
+
 
 
     >> Verilog
@@ -1094,7 +1142,10 @@
 
     >> Mux
 
-        + output of Data memory is switched back to the write data(input) of the register set
+        + so you have different line (track) connect together, let's say three path, which one goes through this time? 
+
+
+            Multiplexers decide => output of Data memory is switched back to the write data(input) of the register set
 
 
 
@@ -1125,6 +1176,28 @@
 
 
     >> more example
+        
+        <1>. lw $t2, 12($s5)
+
+             what does 12 do here, we usually have 0 for loading value base on address, does it mean times 5?
+
+        <2>. sw $t2, 24($t5)
+            
+             #store #t2 out to RAM at (24 + $s5), does lw do the same?
+
+        <3>. add/addi instruction 
+            
+             # usually they don't go through memory, because they usually store back to register
+
+        <4>. Branch
+
+            what is $1, $18?
+            what is 3?
+            how to understand the whole datapath
+
+
+
+        <5>. ALU seems always required
 
 
 
