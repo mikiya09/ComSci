@@ -44,7 +44,8 @@
       [ex.] 
       1111 = 8+4+2+1 = 15
       [reason.]
-      the reason why you need the minus one is because the calculation start at 2^0, so when you 4 digits, n = 4, then you are calculating only up to 2^3
+      the reason why you need the minus one is because the calculation start at 2^0, 
+      so when you 4 digits, n = 4, then you are calculating only up to 2^3
 
 
     >> signed 
@@ -59,18 +60,20 @@
     >> normal process of calcualting two's complement
       step 1. reverse all 0->1 or 1->0
       step 2. plus 1 on binary scale
-      reminder. when you use shortcut, you will find sometime there's not 1 for you to flip or when you come across 1 is already the end, so use the normal process
+      reminder. when you use shortcut, 
+      you will find sometime there's not 1 for you to flip or when you come across 1 is already the end, so use the normal process
 
 
 
 # Two's complement
     >> occur when number need to be separated by positive and negative (signed number)
-    >> A signed number representation where a leading 0 indicates positive number and a leading 1 indicates a negative number.
+    >> signed number representation where a leading 0 indicates positive number, a leading 1 indicates a negative number.
     : how to calcualte?
       + The complement of a value is obtained by complementing each bit(0 -> 1 or i -> 0), and then adding one to the result 
 
     [!]
-    >> All computers use two's complement. sign and magnitude representation was tried in early computers, but was difficult to implement efficiently in hardware
+    >> All computers use two's complement. sign and magnitude representation was tried in early computers, 
+       but was difficult to implement efficiently in hardware
     >> and the existing of both positive and negative 0 is problematic
 
 
@@ -79,14 +82,18 @@
     1000 0000 0000 0000 0000 0000 0000 0000 = -2,147,483,648
 
     [explanation]
-    The leftmost bit is multiplied by -2^31, then added with the remaining bits that are multiplied by those bits' usual positive base values. 
+    The leftmost bit is multiplied by -2^31, 
+    then added with the remaining bits that are multiplied by those bits' usual positive base values. 
     Because those remaining bits are all 0's, the base ten value is just -2,147,483,648 + 0 = -2,147,483,648.
 
     [!]
-    In the two's complement representation, the magnitude of the largest negative value is one greater than the magnitude of the largest positive number
+    In the two's complement representation, 
+    the magnitude of the largest negative value is one greater than the magnitude of the largest positive number
+
     [ex.]
     for an 8-bit two's complement representation
-    >> the most negative value is -128(10000000)    --> all number after leftmost one, follows the normal converation, if (signed number 10000001), then result is -127
+    >> the most negative value is -128(10000000)    --> all number after leftmost one, follows the normal converation, 
+       if (signed number 10000001), then result is -127
     >> the most positive value is 127(01111111)
     >> leftmost is used for representing positive and negative, as well as magnitude 
 
@@ -131,7 +138,8 @@
      [1]0000 1111 1111 1111 1111 1111 0000 0000     (268,435,200)
 
         [!]: overflow occurs when the numbers' sign bits match, but yield a sum with a different sign bit
-        here we have two negative binary addition, so an negative result is expected, but the numbers are represented as 32-bit value the carry bit is lost and the result appears positive 
+        here we have two negative binary addition, so an negative result is expected, but the numbers are represented 
+        as 32-bit value the carry bit is lost and the result appears positive 
 
 
 
@@ -153,13 +161,15 @@
       -----------------------------------------
         0110 0000 0000 0000 0000 0000 0000 0000
 
-        [!]: not overflow, A positive number is being added to a negative number of a smaller magnitude, therefore overflow does not occur 
+        [!]: not overflow, A positive number is being added to a negative number of a smaller magnitude, 
+             therefore overflow does not occur 
         [!]: It seems to have a theroemoe, that as long as positive number add negative number, not overflow will occur
 
 
 
     >> Shortcut to negate a two's complement binary number
-       - starting from the rightmost number, looping from it until you see the first 1: the first 1 stays the same, and flip the numbers after first 1 to their complement
+       - starting from the rightmost number, looping from it until you see the first 1: the first 1 stays the same,
+         and flip the numbers after first 1 to their complement
 
       [!]: 3(10) = 00000011(2) 
       [!]: two's complement = 11111101
@@ -187,7 +197,8 @@
 
     [practice]
     1011 + 1110 overflow? 
-    no, because [1]1001, leftmost 1 will automactically removed, and left with 1001, which is negative. 1000 is -8, +1 at the rightmost, so -7 correct
+    no, because [1]1001, leftmost 1 will automactically removed, and left with 1001,
+    which is negative. 1000 is -8, +1 at the rightmost, so -7 correct
 
 
 
@@ -320,7 +331,7 @@
 
 
 
-# ========================================
+# =============================================
 
 
 
@@ -471,74 +482,79 @@
 # MARS: The MIPS Simulator
 
 
-        >> MARS (MIPS Assembler and Runtime Simulator)
+    >> MARS (MIPS Assembler and Runtime Simulator)
 
-            + allow us to run machine code on laptop
+        + allow us to run machine code on laptop
 
-            + component
-                
-                <1> register - fost storage in CPU chips
+        + component
+            
+            <1> register - fost storage in CPU chips
 
-                    .. list of $v0 command ..
-
-
-                <2> MIPS Memory Segments (2 main part)
-        
-                    .data   # is comment
-                            # .data is where variables are stored, variable declaration
-                            # they are store in RAM, not registar (outside of CPU)
-
-                    .text   # where your code resides
-                            # unlike C/C++, the first line is the first to execute
+                .. list of $v0 command ..
 
 
+            <2> MIPS Memory Segments (2 main part)
+    
+                .data   # is comment
+                        # .data is where variables are stored, variable declaration
+                        # they are store in RAM, not registar (outside of CPU)
 
-                <3>
-                =================================== example =====================================
-
-                        -----------------------------------------------------------------
-                        |                                                               |
-                        |   int:            it takes 4 bytes to hold a 32 bit integer   |
-                        |   char/string:    8 bits = 1 byte = 1 ASCII charater          |   --> refer to Memory model: MIPS memory is an array of 2^32 bytes (p45-8)
-                        |                                                               |       1001008 | 1001009 | 100100a | 100100b ... | 100100f
-                        |   - each charater has a unique address -                      |           H        e          l        l    ...      d
-                        |                                                               |
-                        -----------------------------------------------------------------    
-
-                .data   # declare your variables in RAM here
-
-                        num1: .word 7   # int num1 = 7
-                        num2: .word 10  
-
-                        num3: .word 0x1a2b3c4d  # valid, number in hex
-                        num4: .word 012         # valid, number in Octal(starts with 0)
-
-                        myString: .asciiz "Hello World\n" 
-                        
-
-
-                .text 
-                        lw $t0, num1    # load from RAM to registar(CPU)
-                        lw $t1, num1
-                        add $t2, $t0, $t1   # add two registers
-
-                        li $v0, 1       # 1 is for int
-                        syscall         # execute command
+                .text   # where your code resides
+                        # unlike C/C++, the first line is the first to execute
 
 
 
+            <3>
+            =================================== example =====================================
 
-                <4> RAT: Register Allocation Table
+                    -----------------------------------------------------------------
+                    |                                                               |
+                    |   int:            it takes 4 bytes to hold a 32 bit integer   |
+                    |   char/string:    8 bits = 1 byte = 1 ASCII charater          |   
+                    |                                                               |       
+                    |   - each charater has a unique address -                      |           
+                    |                                                               |
+                    -----------------------------------------------------------------    
+                    |
+                    --> refer to Memory model: MIPS memory is an array of 2^32 bytes (p45-8)
+                        1001008 | 1001009 | 100100a | 100100b ... | 100100f
+                            H        e          l        l    ...      d
+
+            ============================================
+
+            .data   # declare your variables in RAM here
+
+                    num1: .word 7   # int num1 = 7
+                    num2: .word 10  
+
+                    num3: .word 0x1a2b3c4d  # valid, number in hex
+                    num4: .word 012         # valid, number in Octal(starts with 0)
+
+                    myString: .asciiz "Hello World\n" 
                     
-                    • shows where you put your variables:
 
-                                    RAT
-                                    ---
-                    int a;          $s1 = a
-                    int b;          $s2 = b
-                    int c;          $s3 = c
 
-                =================================================================================
+            .text 
+                    lw $t0, num1    # load from RAM to registar(CPU)
+                    lw $t1, num1
+                    add $t2, $t0, $t1   # add two registers
+
+                    li $v0, 1       # 1 is for int
+                    syscall         # execute command
+
+
+
+
+            <4> RAT: Register Allocation Table
+                
+                • shows where you put your variables:
+
+                                RAT
+                                ---
+                int a;          $s1 = a
+                int b;          $s2 = b
+                int c;          $s3 = c
+
 
 
 
@@ -700,8 +716,8 @@
         
                 =====================================
                 addi $s0, $zero, 12
-                sll $t0, $s0, 2         # s0 * 2 * 2 (based on explanation below, shift left one position make it two times greater, 
-                                                      shift two position therefore 4 times greater, because of sll twice)
+                sll $t0, $s0, 2        # s0*2 *2 (explanation below, shift left one position make it 2 times greater, 
+                                                  shift two position therefore 4 times greater, because of sll twice)
                 add $a0, $zero, $t0
 
                 li $v0, 1
@@ -864,7 +880,7 @@
               op    |    rs   |    rt   |    rd   |    shamt  |  funct
             6 bits    5 bits    5 bits     5 bits    5 bits      6 bits
 
-            op: operation code (opcode)                 ------> used to determine which format is using, always do this first
+            op: operation code (opcode)            ------> used to determine which format is using, always do this first
             rs: first source register number
             rt: sceond source register number
             rd: destination register number
@@ -890,8 +906,9 @@
                         -------++++++-------++++++------+++++++ 
             decimal:    opcode   17    18      8     0      32      ==> use them to refer the register in the green sheet
 
-                                 rs    rt      rd    0      (look it up code instruction set, use hex code for function reference, here is 20 <base 16>)
-                                                            rs, rt, rd are referenced by decimal number
+                                 rs    rt      rd    0      (look it up code instruction set, 
+                                                             use hex code for function reference, here is 20 <base 16>)
+                                                             rs, rt, rd are referenced by decimal number
 
                         R format: add $t0, $s1, $s2
 
@@ -1077,7 +1094,8 @@
 
     >> cache memory 
         
-        + inter-station that keep the history of virtual -> physical address look-up record, so that next time looking for same address mapping is faster
+        + inter-station that keep the history of virtual -> physical address look-up record, 
+          so that next time looking for same address mapping is faster
 
 
 
@@ -1085,34 +1103,41 @@
     >> virtual memory (!)
 
         <1> When program is running, they reside in memory and occupy certain amount of memory
-        <2> programm itself(as if they could think), think it is the only one running on memory --> have a tendency to use up certain amount of memory
+        <2> programm itself(as if they could think), think it is the only one running on memory 
+            --> have a tendency to use up certain amount of memory
         <3> Every program CANNOT have all memory, which itself may be limited
         <4> how can program 'share' without knowing it is sharing
 
 
     >> Memory Management Unit (MMU)
 
-        < 1 >. metaphor: at first, program look its spot in the physical memory address itself, it doesn't how to effectively manage its spot, so does other program
+        < 1 >. metaphor: at first, program look its spot in the physical memory address itself, 
+               it doesn't how to effectively manage its spot, so does other program
         
 
         < 2 >. MMU is the door keeper, it arranges all programs to make use of all physical memory address
 
 
-        < 3 >. they can't communicate like human, program doesn't aware the existence of MMU or the remaining space left, they just find continguous spots and sit in
+        < 3 >. they can't communicate like human, program doesn't aware the existence of MMU or the remaining space left, 
+               they just find continguous spots and sit in
 
                + when program suit themselves in the memory address, order exist.
                + some finsih runing faster, some slower
                + when one is finish, it leaves, and empty out the space for another program
-               + but other program might have size little smaller, but necessary fill in the whole empty, then there will be a gap left out
-               + this gap is small that no new program has this size could fit in, but current running program is no using it as well
+               + but other program might have size little smaller, but necessary fill in the whole empty, 
+                 then there will be a gap left out
+               + this gap is small that no new program has this size could fit in, 
+                 but current running program is no using it as well
 
                ------> memory fragmentation <-------
 
 
-        < 4 >. virtual address is created, here the word "virtual" holds its meaning just in terms of programs. To programs, those address is virtual, but they don't know
+        < 4 >. virtual address is created, here the word "virtual" holds its meaning just in terms of programs. To programs, 
+               those address is virtual, but they don't know
 
         
-        < 5 >. program find the assume they find the continguous spots and suit in, but in reality those space might map separately to physical address by MMU
+        < 5 >. program find the assume they find the continguous spots and suit in, 
+               but in reality those space might map separately to physical address by MMU
 
 
         < 6 >. there are different ways of managing space or slice the space, that is up to MMU
@@ -1124,7 +1149,9 @@
                 + think of that each page contains list of mapping
                 + and right now you have a book of page
 
-                [!]: if some mapping is in the middle of the page, a way of mapping is to map the first 4k of program to the actual physical address, and let the rest map to the middle of the page
+                [!]: if some mapping is in the middle of the page, 
+                     a way of mapping is to map the first 4k of program to the actual physical address, 
+                     and let the rest map to the middle of the page
 
 
         + converts (mapping) requested address to a real, physical address
