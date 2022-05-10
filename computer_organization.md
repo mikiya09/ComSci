@@ -320,148 +320,150 @@
 
 
 
-
+# ====================================================================================================
 
 
 
 # Computer Architecture
         
-        >> concepts.
-            
-            + logical description of its components and basic operations
-
-            + in pure assembly language, one assembly 'instruction' corresponds to one basic operation of the processor
-
-            + the architecture is visiable in every instruction of the program
-
-
-        >> Processor Architecture
+    >> concepts.
         
-            [ 1 ]: describe basic components and basic operations
+        + logical description of its components and basic operations
 
-            [ 2 ]: each processor 
-                    + has its own architecture
-                    + has its own assembly language
+        + in pure assembly language, one assembly 'instruction' corresponds to 
+          one basic operation of the processor
+
+        + the architecture is visiable in every instruction of the program
 
 
-            [ ex ]:
-                    + Intel i5
-                    + AMD Ryzen
-                    + Apple M1
+    >> Processor Architecture
+    
+        [ 1 ]: describe basic components and basic operations
+
+        [ 2 ]: each processor 
+                + has its own architecture
+                + has its own assembly language
+
+
+        [ ex ]:
+                + Intel i5
+                + AMD Ryzen
+                + Apple M1
 
 
 
 
 # MIPS
 
-        >> compare to C
-                C: is mostly independent of the processor it runs on the compiler that builds code specific to a processor
-        [ ! ]   A: is written to control a specific processor
-                    + human readable
-                    + generates binary codes for processor and its architecture
+    >> MIPS comparation to C
+            C: mostly independent of the processor, runs on the compiler that builds code specific to a processor
+    [ ! ]   A: is written to control a specific processor
+                + human readable
+                + generates binary codes for processor and its architecture
 
 
-        >> MIPS
+    >> MIPS
 
-            [ 1 ]: MIPS processor
-                    + Reduced Instruction Set Computer(RISC), so firstly, it's a computer
-                        • microprocessor designed to perform a smaller number computer instructions so it can operate at a higher speed
-                        • Simpler, Less Circuitry, Less expensive
-                    
-                    + older computer is the opposite
-                        • more complex, more instruction, more cost
-
-
-                    + the concept of MIPS assembly are transferable to other processors
-
-
-                    [ex]: PS4, Tesla Model 4
-
-
-
-            [ 2 ]: MIPS Machine Instruction
-
-                    + basic machine circle
-                        1. fetch the next instruction from memory
-                        2. increment the program counter (next instruction) = 应该是计数器一样的东西，program counter 记录着现在到了哪个step
-                        3. execute the instruction
-            
-
-                    + machine code                                  :     assembly code
-                        0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
-                        0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
-                        0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
-                        0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
-                        0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
-            
-
-                    + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
-
-
-            
-            [ 3 ]: MIPS basic structure
-
-                    + Von Neumann Architecture
-
-                        <1>. Memory holds data AND instructions
-                        <2>. instructions execute one at a time
-                        <3>. Main components: Input, CPU, Memory, Output
-                        for figure: p22-8
-
-                        <4>. Von Neumann bottleneck
-                            - the idea that computer system throughput is limited,
-                              due to the relative ability of processors compared to top rates of data transfer.  
-                              According to this description of computer architecture, 
-                              a processor is idle(闲) for a certain amount of time while memory is accessed.
-
-
-
-
-                    + MIPS basics 
-                                                            ------------------------------------------------------
-                                                            |                                                    |
-                                                            |    --------------------------------------------    |
-                                                            |    |                                          |    |
-                                                            |    |                  CPU                     |    |
-                                                            |    |  (control unit + arithmetic/logic unit)  |    |
-                                                            |    |                                          |    |
-                                        Input Device --->   |    |       ^                       |          |    |   ---> Output device
-                                                            |    --------|-----------------------|-----------    |
-                                                            |    |       |                       V          |    |
-                                                            |    |               Memory Unit                |    |
-                                                            |    |                                          |    |
-                                                            |    |                                          |    |
-                                                            |    |------------------------------------------|    |           
-                                                            |                                                    |
-                                                            |----------------------------------------------------|    
-                                                            
-                                                                (reigstar is in CPU, RAM is in memory unit) 
-
-
-                    + Memory Model
-                        
-                        Data:
-                            - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
-                        
-                        Operation
-                        
-                            * Load: copy from address in memory to register inside the processor
-
-                            * Store: copy from register to memory at a designated address
+        [ 1 ]: MIPS processor
+                + Reduced Instruction Set Computer(RISC), so firstly, it's a computer
+                    • microprocessor designed to perform a smaller number computer instructions 
+                      so it can operate at a higher speed
+                    • Simpler, Less Circuitry, Less expensive
                 
+                + older computer is the opposite
+                    • more complex, more instruction, more cost
 
 
-                    + MIPS & Standard Computer Architecture 
-
-                        
-                            > hardware connected on a PCI bus to transmit data
-                            ===================================================================
-
-                            Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+                + the concept of MIPS assembly are transferable to other processors
 
 
-                                                                                       <-- slow
-                            ----------------------------- Bus ----------------------------------
+                [ex]: PS4, Tesla Model 4
+
+
+
+        [ 2 ]: MIPS Machine Instruction
+
+                + basic machine circle
+                    1. fetch the next instruction from memory
+                    2. increment the program counter (next instruction) = refer to below definition
+                    3. execute the instruction
+        
+
+                + machine code                                  :     assembly code
+                    0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
+                    0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
+                    0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
+                    0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
+                    0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
+        
+
+                + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
+
+
+        
+        [ 3 ]: MIPS basic structure
+
+                + Von Neumann Architecture
+
+                    <1>. Memory holds data AND instructions
+                    <2>. instructions execute one at a time
+                    <3>. Main components: Input, CPU, Memory, Output
+                    for figure: p22-8
+
+                    <4>. Von Neumann bottleneck
+                        - the idea that computer system throughput is limited,
+                          due to the relative ability of processors compared to top rates of data transfer.  
+                          According to this description of computer architecture, 
+                          a processor is idle(闲) for a certain amount of time while memory is accessed.
+
+
+
+
+                + MIPS basics 
+                                                        ------------------------------------------------------
+                                                        |                                                    |
+                                                        |    --------------------------------------------    |
+                                                        |    |                                          |    |
+                                                        |    |                  CPU                     |    |
+                                                        |    |  (control unit + arithmetic/logic unit)  |    |
+                                                        |    |                                          |    |
+                                    Input Device --->   |    |       ^                       |          |    |   ---> Output device
+                                                        |    --------|-----------------------|-----------    |
+                                                        |    |       |                       V          |    |
+                                                        |    |               Memory Unit                |    |
+                                                        |    |                                          |    |
+                                                        |    |                                          |    |
+                                                        |    |------------------------------------------|    |           
+                                                        |                                                    |
+                                                        |----------------------------------------------------|    
+                                                        
+                                                            (reigstar is in CPU, RAM is in memory unit) 
+
+
+                + Memory Model
+                    
+                    Data:
+                        - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
+                    
+                    Operation
+                    
+                        * Load: copy from address in memory to register inside the processor
+
+                        * Store: copy from register to memory at a designated address
+            
+
+
+                + MIPS & Standard Computer Architecture 
+
+                    
+                        > hardware connected on a PCI bus to transmit data
+                        ===================================================================
+
+                        Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+
+
+                                                                                   <-- slow
+                        ----------------------------- Bus ----------------------------------
 
 
 
@@ -537,6 +539,32 @@
                     int c;          $s3 = c
 
                 =================================================================================
+
+
+
+
+
+# registers name
+        
+        >> $v0 and $v1: for Return values from a function 
+
+
+        >> $a0 to $a3: for Argument (Parameters)
+
+
+        >> $t0 to $t7: temporary variables (inside function)
+
+
+        >> $s0 to $s7: saved variables (across functions)
+
+
+        >> $sp: Stack pointer
+
+
+        >> $pc: Program Counter - shows location in program
+
+
+
 
 
 # MARS operation
@@ -672,7 +700,8 @@
         
                 =====================================
                 addi $s0, $zero, 12
-                sll $t0, $s0, 2         # s0 * 2 * 2 (based on explanation below, shift left one position make it two times greater, shift two position therefore 4 times greater)
+                sll $t0, $s0, 2         # s0 * 2 * 2 (based on explanation below, shift left one position make it two times greater, 
+                                                      shift two position therefore 4 times greater, because of sll twice)
                 add $a0, $zero, $t0
 
                 li $v0, 1
@@ -753,6 +782,7 @@
             >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
 
+            # accessing Array Elements in RAM
             -- converting A[i] to Assembly --
             ex).
             >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
@@ -806,11 +836,6 @@
 
 
 
-# register holder meaning (green sheet)
-        
-        >> $a0
-        >> ....
-
 
 
 
@@ -861,9 +886,9 @@
             hex code (instruction): 02324020 <base 16>
 
                         0    2    3    2    4    0    2    0
-                        0000 0010 0011 0010 0100 0000 0010 0000
+            binary:     0000 0010 0011 0010 0100 0000 0010 0000
                         -------++++++-------++++++------+++++++ 
-            binary =    opcode   17    18      8     0      32
+            decimal:    opcode   17    18      8     0      32      ==> use them to refer the register in the green sheet
 
                                  rs    rt      rd    0      (look it up code instruction set, use hex code for function reference, here is 20 <base 16>)
                                                             rs, rt, rd are referenced by decimal number
