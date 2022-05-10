@@ -431,51 +431,51 @@
 
 
 
-            + MIPS basics 
-                                        ------------------------------------------------------
-                                        |                                                    |
-                                        |    --------------------------------------------    |
-                                        |    |                                          |    |
-                                        |    |                  CPU                     |    |
-                                        |    |  (control unit + arithmetic/logic unit)  |    |
-                                        |    |                                          |    |
-                    Input Device --->   |    |       ^                       |          |    |   ---> Output device
-                                        |    --------|-----------------------|-----------    |
-                                        |    |       |                       V          |    |
-                                        |    |               Memory Unit                |    |
-                                        |    |                                          |    |
-                                        |    |                                          |    |
-                                        |    |------------------------------------------|    |           
-                                        |                                                    |
-                                        |----------------------------------------------------|    
-                                        
-                                            (reigstar is in CPU, RAM is in memory unit) 
+        + MIPS basics 
+                                    ------------------------------------------------------
+                                    |                                                    |
+                                    |    --------------------------------------------    |
+                                    |    |                                          |    |
+                                    |    |                  CPU                     |    |
+                                    |    |  (control unit + arithmetic/logic unit)  |    |
+                                    |    |                                          |    |
+                Input Device --->   |    |       ^                       |          |    |   ---> Output device
+                                    |    --------|-----------------------|-----------    |
+                                    |    |       |                       V          |    |
+                                    |    |               Memory Unit                |    |
+                                    |    |                                          |    |
+                                    |    |                                          |    |
+                                    |    |------------------------------------------|    |           
+                                    |                                                    |
+                                    |----------------------------------------------------|    
+                                    
+                                        (reigstar is in CPU, RAM is in memory unit) 
 
 
-            + Memory Model
-                
-                Data:
-                    - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
-                
-                Operation
-                
-                    * Load: copy from address in memory to register inside the processor
+        + Memory Model
+            
+            Data:
+                - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
+            
+            Operation
+            
+                * Load: copy from address in memory to register inside the processor
 
-                    * Store: copy from register to memory at a designated address
-        
-
-
-            + MIPS & Standard Computer Architecture 
-
-                
-                    > hardware connected on a PCI bus to transmit data
-                    ===================================================================
-
-                    Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+                * Store: copy from register to memory at a designated address
+    
 
 
-                                                                               <-- slow
-                    ----------------------------- Bus ----------------------------------
+        + MIPS & Standard Computer Architecture 
+
+            
+                > hardware connected on a PCI bus to transmit data
+                ===================================================================
+
+                Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+
+
+                                                                           <-- slow
+                ----------------------------- Bus ----------------------------------
 
 
 
