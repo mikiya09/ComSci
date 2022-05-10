@@ -1047,14 +1047,14 @@
 
        • how to determine which format it is based on opcode
             >> R format: 000000
-            >> I format: 001000?
-            >> J
+            >> I format: refer to opcode after decoded
+            >> J format: refer opcode after decoded
 
 
     >> more examples
 
         [ 1 ]: 0x00085880
-                - R[rd] = R[rt] << shamt (with shamt equal to 00010, which is 2)
+                - R[rd] = R[rt] << shamt (with shamt equal to 00010, which is 2, the distance need for shifting)
 
                 - the meaning of x = y << 2 (C++)
                     > y * 2 * 2 and then assign the value in y to x
