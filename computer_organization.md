@@ -69,7 +69,8 @@
     >> occur when number need to be separated by positive and negative (signed number)
     >> signed number representation where a leading 0 indicates positive number, a leading 1 indicates a negative number.
     : how to calcualte?
-      + The complement of a value is obtained by complementing each bit(0 -> 1 or i -> 0), and then adding one to the result 
+      + The complement of a value is obtained by complementing each bit(0 -> 1 or i -> 0), 
+        and then adding one to the result 
 
     [!]
     >> All computers use two's complement. sign and magnitude representation was tried in early computers, 
@@ -118,7 +119,7 @@
       ----    ----
         2      12
       
-      <in hardware perspective, it's overflow, only number within limitation is taken, meaning i is ignore, so same result>
+    <in hardware perspective, it's overflow, only number within limitation is taken, meaning i is ignore, so same result>
 
     [!] in base 10, what is the complement of 33? --> 100-33=67
 
@@ -331,7 +332,7 @@
 
 
 
-# =============================================
+# ================================================
 
 
 
@@ -562,22 +563,29 @@
 
 # registers name
         
-        >> $v0 and $v1: for Return values from a function 
+    >> $v0 and $v1: for Return values from a function, 
+       - not an execute command, only store instruction
 
 
-        >> $a0 to $a3: for Argument (Parameters)
+    >> syscall: a command that does whatever $v0 indicates
 
 
-        >> $t0 to $t7: temporary variables (inside function)
+    >> $a0 to $a3: for Argument (Parameters)
+       - whatever you want to print, you need to finally store in some $a0..3
 
 
-        >> $s0 to $s7: saved variables (across functions)
+    >> $t0 to $t7: temporary variables (inside function)
 
 
-        >> $sp: Stack pointer
+    >> $s0 to $s7: saved variables (across functions)
 
 
-        >> $pc: Program Counter - shows location in program
+    >> $sp: Stack pointer
+
+
+    >> $pc: Program Counter - shows location in program
+
+
 
 
 
@@ -585,267 +593,292 @@
 
 # MARS operation
             
-            [ 1 ] add / addi
+    [ 1 ] add / addi
 
-                  + add
-                        • add = Verilog R[rd] = R[rs] + R[rt]
-                            - R[] as an array of register values
-                            - rd, rs, rt as index value
-                        • add two registers and store stores in a register
-                            add $t3, $t1, $t2   # t3 = t2 + t1 
-                  + addi
-                        • addi = Verilog R[rt] = R[rs] + SignImm
-                            - Immediate means a constant number
-                            - addi $t1, $t2, 5  # t1 = t2 + 5
-                
+          + add
+                • add = Verilog R[rd] = R[rs] + R[rt]
+                    - R[] as an array of register values
+                    - rd, rs, rt as index value
+                • add two registers and store stores in a register
+                    add $t3, $t1, $t2   # t3 = t2 + t1 
+          + addi
+                • addi = Verilog R[rt] = R[rs] + SignImm
+                    - Immediate means a constant number
+                    - addi $t1, $t2, 5  # t1 = t2 + 5
+        
 
-            [ 2 ] Labels (show later in the example)
+    [ 2 ] Labels (show later in the example)
 
-                + you can any self-defined label
-
-
-            [ 3 ] Branch (if and while)
+        + you can any self-defined label
 
 
-                + fastest (takes 1 instruction cycle)
-                    
-                    • beq (branch equal to)
-                    • bne (branch not equal to)
-
-                    • j (jump to)
-
-                + Pseudo-Instruction (takes 2 instruction)
-
-                    • bge (branch greater and equal than)
-                    • bgt (branch greater than)
-
-                    • bls (branch less and equal to)
-                    • blt (branch less than)
+    [ 3 ] Branch (if and while)
 
 
+        + fastest (takes 1 instruction cycle)
+            
+            • beq (branch equal to)
+            • bne (branch not equal to)
 
-                + ex
-                =========== while ==========
-                C++
+            • j (jump to)
 
-                int a=1;                        addi $s1, $zero, 1
-                int b=5;                        addi $s2, $zero, 5
-                int c=0;                        addi $s3, $zero, 0
-                while (a<b)
-                {                   whileloop:  beq $s1, $s2, endwhile      # check if $s1 and $s2 is equal, if yes, go to endwhile label
-                    c++;                        addi $s3, $s3, 1            # if no, execute line by line, that's assembly works
-                    b++;                        addi $s1, $s1, 1
-                }                               j whileloop                 # reach here, jump to whileloop label section
-                                    
-                cout << c;          endwhile:
+        + Pseudo-Instruction (takes 2 instruction)
 
+            • bge (branch greater and equal than)
+            • bgt (branch greater than)
 
-                ============= if ===========
-                int a=1;                    addi $s1, $zero, 1
-                int b=5;                    addi $s2, $zero, 5
-                int c=0;                    addi $s3, $zero, 0
-                if (a < b)
-                {                           bge $s1, $s2, else1
-                    c = 12;                 addi $s3, $zero, 12
-                }                           j printArea
-                else                 
-                    c = 42;          else1: addi $s3, $zero, 42
-                                 printArea: 
-                cout << c;
+            • bls (branch less and equal to)
+            • blt (branch less than)
 
 
 
-                ============= print ==============
-                .data
-                        myNum: .word 9
+        + ex
+        =========== while ==========
+        C++
 
-                .text
-                        li $v0, 1       # printing setup, 1 for print int
-                        la $a0, myNum   # load myNum to a0
-                        syscall         # execute
+        int a=1;                        addi $s1, $zero, 1
+        int b=5;                        addi $s2, $zero, 5
+        int c=0;                        addi $s3, $zero, 0
+        while (a<b)
+        {                   whileloop:  beq $s1, $s2, endwhile      # check if $s1 and $s2 is equal, if yes, go to endwhile label
+            c++;                        addi $s3, $s3, 1            # if no, execute line by line, that's assembly works
+            b++;                        addi $s1, $s1, 1
+        }                               j whileloop                 # reach here, jump to whileloop label section
+                            
+        cout << c;          endwhile:
 
 
-                ============= exit politely ============
-                li $v0, 10
-                syscall
+        ============= if ===========
+        int a=1;                    addi $s1, $zero, 1
+        int b=5;                    addi $s2, $zero, 5
+        int c=0;                    addi $s3, $zero, 0
+        if (a < b)
+        {                           bge $s1, $s2, else1
+            c = 12;                 addi $s3, $zero, 12
+        }                           j printArea
+        else                 
+            c = 42;          else1: addi $s3, $zero, 42
+                         printArea: 
+        cout << c;
+
+
+
+        ============= print ==============
+        .data
+                myNum: .word 9
+
+        .text
+                li $v0, 1       # printing setup, 1 for print int
+                la $a0, myNum   # load myNum to a0
+                syscall         # execute
+
+
+        ============= exit politely ============
+        li $v0, 10
+        syscall
 
 
 
 
 # MARS operation 2
 
-        <1> subtract (two ways)
-            
-            + sub $a0, $s0, $s1
-            
-            + sub $t0, $s0, $s1
-              move $a0, $t0         # move means only different registar is design for different stuff
-                                    # check what's the meaning of $a0
-
-            
-        <2> multiply <3 ways> 
-
-            + mul (3 arguments)
-                
-                =====================================
-                addi $s0, $zero, 15     # s0 = 0 + 15
-                addi $s1, $zero, 4      # s1 = 0 + 4
-                mul $t0, $s0, $s1       # t0 = s0 * s1
-
-                li $v0, 1
-                add $a0, $zero, $t0
-                syscall
-
-
-            + mult: (2 arguments) - rarely use
-
-                =====================================
-                addi $t0, $zero, 2000       # t0 = 2000
-                addi $t1, $zero, 10         # t1 = 10
-                mult $t0, $t1               # t0 * t1
-
-                # result goes into h1 and lo, similar to division
-                mflo $s0
-                add $a0, $zero, $s0
-
-                li $v0, 1       # setting to 1 for printing integer
-                syscall
-
-
-            + sll: (shift left logical)
+    <1> subtract (two ways)
         
-                =====================================
-                addi $s0, $zero, 12
-                sll $t0, $s0, 2        # s0*2 *2 (explanation below, shift left one position make it 2 times greater, 
-                                                  shift two position therefore 4 times greater, because of sll twice)
-                add $a0, $zero, $t0
-
-                li $v0, 1
-                syscall
-
-
-                < understanding shift left logical >
-                -----------------------------------------------------------------------------------------------
-                | before: 0110 0001 = 97(base 10)                                                             |
-                |               <- move a bit left by one,                                                    |
-                |                 low-order bit is replaced by a zero bit and the high-order bit is discarded |
-                |                                                                                             |
-                | after:  1100 0010 = 194(base 10)                                                            |
-                |                                                                                             |
-                | 97 * 2 = 194                                                                                |
-                -----------------------------------------------------------------------------------------------
+        + sub $a0, $s0, $s1
+        
+        + sub $t0, $s0, $s1
+          move $a0, $t0         # move means only different registar is design for different stuff
+                                # check what's the meaning of $a0
 
         
+    <2> multiply <3 ways> 
 
-        <3> Division
-            # only take two arguments after the operator
-            < 3 arguments >
-            >> div $s0, $t0, $t1                            # s0 = t0/t1
-            >> div $s0, $t1, 10                             # s0 = t1/10
+        + mul (3 arguments)
+            
+            =====================================
+            addi $s0, $zero, 15     # s0 = 0 + 15
+            addi $s1, $zero, 4      # s1 = 0 + 4
+            mul $t0, $s0, $s1       # t0 = s0 * s1
 
-            < 2 arguments >
-            # and quotient goes to lo
-            # while remaindar goes to hi in the registar
-            >> div $t0, $t1                                 # t0 = t0/t1
-            >> mflo $s0     # quotient
-            >> mfhi $s1     # remaindar
+            li $v0, 1
+            add $a0, $zero, $t0
+            syscall
 
 
-        <4> divide power
+        + mult: (2 arguments) - rarely use
+
+            =====================================
+            addi $t0, $zero, 2000       # t0 = 2000
+            addi $t1, $zero, 10         # t1 = 10
+            mult $t0, $t1               # t0 * t1
+
+            # result goes into h1 and lo, similar to division
+            mflo $s0
+            add $a0, $zero, $s0
+
+            li $v0, 1       # setting to 1 for printing integer
+            syscall
+
+
+        + sll: (shift left logical)
+    
+            =====================================
+            addi $s0, $zero, 12
+            sll $t0, $s0, 2        # s0*2 *2 (explanation below, shift left one position make it 2 times greater, 
+                                              shift two position therefore 4 times greater, because of sll twice)
+            add $a0, $zero, $t0
+
+            li $v0, 1
+            syscall
+
+
+            < understanding shift left logical >
+            -----------------------------------------------------------------------------------------------
+            | before: 0110 0001 = 97(base 10)                                                             |
+            |               <- move a bit left by one,                                                    |
+            |                 low-order bit is replaced by a zero bit and the high-order bit is discarded |
+            |                                                                                             |
+            | after:  1100 0010 = 194(base 10)                                                            |
+            |                                                                                             |
+            | 97 * 2 = 194                                                                                |
+            -----------------------------------------------------------------------------------------------
+
+        
+
+    <3> Division
+        # only take two arguments after the operator
+        < 3 arguments >
+        >> div $s0, $t0, $t1                            # s0 = t0/t1
+        >> div $s0, $t1, 10                             # s0 = t1/10
+
+        < 2 arguments >
+        # and quotient goes to lo
+        # while remaindar goes to hi in the registar
+        >> div $t0, $t1                                 # t0 = t0/t1
+        >> mflo $s0     # quotient
+        >> mfhi $s1     # remaindar
+
+
+    <4> divide power
 
 
 
 
 # MARS operation 3
 
-        <1> Float & Double
-            + same idea as in C++, double type could hold more bits
+    <1> Float & Double
+        + same idea as in C++, double type could hold more bits
 
-            PI: .float 3.141593                 # only 6 digits
-            PIDouble: .double 3.1415926535      # more digits
+        PI: .float 3.141593                 # only 6 digits
+        PIDouble: .double 3.1415926535      # more digits
 
-            li $v0, 2           # 2 is for float
-            lwc1 $f12, PI       # load WORD into coprocessor 1 (location for float & double)
+        li $v0, 2           # 2 is for float
+        lwc1 $f12, PI       # load WORD into coprocessor 1 (location for float & double)
 
-            ldc1 $f2, PIDouble # load DOUBLE into coprocessor 1, at reg f2
-            ldc1 $f4, PIDouble # another copy       # double take up the space of 2 registers (because 64 bits)
+        ldc1 $f2, PIDouble # load DOUBLE into coprocessor 1, at reg f2
+        ldc1 $f4, PIDouble # another copy       # double take up the space of 2 registers (because 64 bits)
 
-            add.d $f12, $f2, $f4
-            li $v0, 3               # 3 is for double 
-            syscall 
-
-
-
-        <2> Load & Store word
+        add.d $f12, $f2, $f4
+        li $v0, 3               # 3 is for double 
+        syscall 
 
 
-        <3!> Array (special attention)
 
-            -- basic --
-            # Allocate space for the array --> int myArray[3];
-            >> myArray:    .space 12 # bytes (reserve for 3 ints: 4 bytes each)
-            
+    <2> Load & Store word
+
+
+    <3!> Array (special attention)
+
+        -- basic --
+        # Allocate space for the array --> int myArray[3];
+        >> myArray:    .space 12 # bytes (reserve for 3 ints: 4 bytes each)
         
-            # Initialized array --> int intArray[] = {10, 20, 30, 40, 50};
-            >> intArray:   .word    10, 20, 30, 40, 50
+    
+        # Initialized array --> int intArray[] = {10, 20, 30, 40, 50};
+        >> intArray:   .word    10, 20, 30, 40, 50
 
 
-            # Preload with the same value int SameValArray[5] = {[0...4] = 1}; 
-            >> SameValArray:    .word   1:5
+        # Preload with the same value int SameValArray[5] = {[0...4] = 1}; 
+        >> SameValArray:    .word   1:5
 
 
-            # most straightforward way
-            >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
+        # most straightforward way
+        >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
 
-            # accessing Array Elements in RAM
-            -- converting A[i] to Assembly --
-            ex).
-            >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
-            [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
+        # accessing Array Elements in RAM
+        -- converting A[i] to Assembly --
+        ex).
+        >> sw $s0, myArray($t0)    # store s0 into myArray + offset stored in $t0(number/index)
+        [IMPORTANT!]: for sw, left assigns to right side = (whatever value in $s0 goes into myArray at $t0)
 
-            >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
-            [!]: right to left
-
-
-            ??????????????????
-            -- loop --
-            should figure what's going on for the first looping example(while version)
-            ! la command(it's was used for storing the address of a array once in the example, what is it really mean)
-            la $t3, list, is this a special character only used for uploading address? or it has other usage
-            li $t2, 6
-
-            sll $t2, $t2, 2 
-            
-            for loop version
+        >> lw $t6, myArray($t1)    # Load content of (myArray + offset $t1) into $t6
+        [!]: right to left
 
 
 
+        # Loop Array
+        =============================================================
+        .data                           # declare storage to RAM
+                size: .word 10
+                list: .word 3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
-        <4> Procedure Call (to be continue)
-            
-            >> jal proceduralName # jump and link
+        .text
+                li $t0, 0               # load immediate (specific for loading int)
+                                        # 16 bits sign-extended
+                                        # unsigned 16 bits 
+                                        # 32 bits 
+                lw $t1, size            # load word
+                la $t2, list            # load address
+                                        # they are all loading stuff from memory(RAM) to register table
+        
+        forlopp:
+                bge $t0, $t1, exit      # for (int i=0; i<size; i++)
+                lw $t3, 0($t2)          # get value from address, t2 is an address, 
+                                        # first element's address in the array,
+                                        # load it to register so that get corresponding int value
 
-            proceduralName(ex. display):
-            ..........
+                li $v0, 1               # {
+                add $a0, $t3, $zero     #     cout << list[i]
+                syscall                 # }
+
+                addi $t2, $t2, 4        # go the next position in address
+                addi $t0, $t0, 1        # increment counter variable for comparaison requirement
+                j foorloop
+
+        exit:
+                li $v0, 10              # polite exit
+                syscall
+
+        =============================================================
 
 
-            >> ja $ra   # jump return address (back to the calling method)
-
-            when meet jal, store the address or the work here, and jump to where the proceduralName at
-            and excecute the code inside the proceduralName, 
-            then jump back to where jal at
 
 
+    <4> Procedure Call (to be continue)
+        
+        >> jal proceduralName # jump and link
 
-        <5> leaf Procedure (function)
-            
-            pointer
-
-            >> stack pointer ($sp)
+        proceduralName(ex. display):
+        ..........
 
 
-        <6> non-leaf procedure (function calling function, recursively)
+        >> ja $ra   # jump return address (back to the calling method)
+
+        when meet jal, store the address or the work here, and jump to where the proceduralName at
+        and excecute the code inside the proceduralName, 
+        then jump back to where jal at
+
+
+
+    <5> *leaf Procedure (function)
+        
+        pointer
+
+        >> stack pointer ($sp)
+
+
+    <6> non-leaf procedure (function calling function, recursively)
 
 
 
@@ -860,72 +893,72 @@
 # Decoding Instructions
 
 
-        >> general steps
+    >> general steps
 
-            <1> Pull first 6 bits (on left) out
+        <1> Pull first 6 bits (on left) out
 
-            <2> Decode to find instruction
+        <2> Decode to find instruction
 
-            <3> Read the format (R, I, J)
+        <3> Read the format (R, I, J)
 
-            <4> Read the instruction format and Verilog to get the answer syntax
+        <4> Read the instruction format and Verilog to get the answer syntax
 
-            <5> Decode the rest of the instruction to get rs, rt, etc
-
-
-
-
-        >> R format (for detail refer Green Sheet)
-
-              op    |    rs   |    rt   |    rd   |    shamt  |  funct
-            6 bits    5 bits    5 bits     5 bits    5 bits      6 bits
-
-            op: operation code (opcode)            ------> used to determine which format is using, always do this first
-            rs: first source register number
-            rt: sceond source register number
-            rd: destination register number
-            shamt: shift amount (00000 for now)
-            funct: function code
-
-
-        >> Verilog
-            
-            + Used to model hardware
-
-            + Can specify registers, wires, gates, clock, etc
-
-            + Can test the logic before you "build"
-
-
-        >> ex.
-
-            hex code (instruction): 02324020 <base 16>
-
-                        0    2    3    2    4    0    2    0
-            binary:     0000 0010 0011 0010 0100 0000 0010 0000
-                        -------++++++-------++++++------+++++++ 
-            decimal:    opcode   17    18      8     0      32      ==> use them to refer the register in the green sheet
-
-                                 rs    rt      rd    0      (look it up code instruction set, 
-                                                             use hex code for function reference, here is 20 <base 16>)
-                                                             rs, rt, rd are referenced by decimal number
-
-                        R format: add $t0, $s1, $s2
+        <5> Decode the rest of the instruction to get rs, rt, etc
 
 
 
 
-        >> I format (refer to green sheet & PPT)
-            
+    >> R format (for detail refer Green Sheet)
+
+          op    |    rs   |    rt   |    rd   |    shamt  |  funct
+        6 bits    5 bits    5 bits     5 bits    5 bits      6 bits
+
+        op: operation code (opcode)            ------> used to determine which format is using, always do this first
+        rs: first source register number
+        rt: sceond source register number
+        rd: destination register number
+        shamt: shift amount (00000 for now)
+        funct: function code
 
 
-        >> Questions
+    >> Verilog
+        
+        + Used to model hardware
+
+        + Can specify registers, wires, gates, clock, etc
+
+        + Can test the logic before you "build"
 
 
-           • how to determine which format it is based on opcode
-                >> R format: 000000
-                >> I format: 001000?
-                >> J
+    >> ex.
+
+        hex code (instruction): 02324020 <base 16>
+
+                    0    2    3    2    4    0    2    0
+        binary:     0000 0010 0011 0010 0100 0000 0010 0000
+                    -------++++++-------++++++------+++++++ 
+        decimal:    opcode   17    18      8     0      32      ==> use them to refer the register in the green sheet
+
+                             rs    rt      rd    0      (look it up code instruction set, 
+                                                         use hex code for function reference, here is 20 <base 16>)
+                                                         rs, rt, rd are referenced by decimal number
+
+                    R format: add $t0, $s1, $s2
+
+
+
+
+    >> I format (refer to green sheet & PPT)
+        
+
+
+    >> Questions
+
+
+       • how to determine which format it is based on opcode
+            >> R format: 000000
+            >> I format: 001000?
+            >> J
 
 
 
