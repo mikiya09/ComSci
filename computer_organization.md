@@ -395,21 +395,21 @@
 
     [ 2 ]: MIPS Machine Instruction
 
-            + basic machine circle
-                1. fetch the next instruction from memory
-                2. increment the program counter (next instruction) = refer to below definition
-                3. execute the instruction
-    
+        + basic machine circle
+            1. fetch the next instruction from memory
+            2. increment the program counter (next instruction) = refer to register name
+            3. execute the instruction
 
-            + machine code                                  :     assembly code
-                0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
-                0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
-                0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
-                0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
-                0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
-    
 
-            + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
+        + machine code                                  :     assembly code
+            0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
+            0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
+            0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
+            0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
+            0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
+
+
+        + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
 
 
     
@@ -455,7 +455,7 @@
         + Memory Model
             
             Data:
-                - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
+                - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address(8 hex = 32 bits(binary)          
             
             Operation
             
@@ -646,6 +646,7 @@
         }                               j whileloop                 # reach here, jump to whileloop label section
                             
         cout << c;          endwhile:
+                                        .....
 
 
         ============= if ===========
@@ -802,7 +803,7 @@
         >> SameValArray:    .word   1:5
 
 
-        # most straightforward way
+        #  second method is the most straightforward way
         >> list:    .word   3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
 
@@ -824,7 +825,7 @@
                 list: .word 3, 0, 1, 2, 6, -2, 4, 7, 3, 7
 
         .text
-                li $t0, 0               # load immediate (specific for loading int)
+                li $t0, 0               # load immediate (specific for loading int, that represent certain behavior)
                                         # 16 bits sign-extended
                                         # unsigned 16 bits 
                                         # 32 bits 
@@ -901,7 +902,7 @@
 
         <3> Read the format (R, I, J)
 
-        <4> Read the instruction format and Verilog to get the answer syntax
+        <4> Read the instruction format and Verilog to get the answer syntax (find function first, last 6 bits)
 
         <5> Decode the rest of the instruction to get rs, rt, etc
 
@@ -959,6 +960,15 @@
             >> R format: 000000
             >> I format: 001000?
             >> J
+
+
+    >> more examples
+
+        [ 1 ]: 0x00085880
+                - R[rd] = R[rt] << shamt (with shamt equal to 00010, which is 2)
+
+                - the meaning of x = y << 2 (C++)
+                    > y * 2 * 2 and then assign the value in y to x
 
 
 
