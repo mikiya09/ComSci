@@ -449,7 +449,7 @@
                                     |                                                    |
                                     |----------------------------------------------------|    
                                     
-                                        (reigstar is in CPU, RAM is in memory unit) 
+                        < reigstar is in CPU(32 general registers, each hold 32 bits), RAM is in memory unit > 
 
 
         + Memory Model
@@ -462,7 +462,21 @@
                 * Load: copy from address in memory to register inside the processor
 
                 * Store: copy from register to memory at a designated address
-    
+
+
+        + Memory layout
+
+        -----------------------------
+        |    Stack Segment:         |        stack: automatic storage -> local variable
+        |        |                  |       
+        |     (dynamic)             |        dynamic data: heap (new operator in C++) 
+        |    Data segment: heap     |   
+        |     (static)              |        static data: global variable (constant arrays and strings) 
+        |        |                  |                     $gp: initialized to address allowing +- offsets into segement 
+        |    Text segment (code)    |        text: program code
+        |                           |
+        -----------------------------
+
 
 
         + MIPS & Standard Computer Architecture 
@@ -786,6 +800,22 @@
 
 
     <2> Load & Store word
+        
+        + load value based on address from memory
+
+            >> la $t0, list         # $t0 store address here
+            >> lw $t1, 0($t0)
+
+
+        + load value into memory
+
+            .data 
+                    myInt: .word 12     # initialized as 12
+                    newInt: .word       # no initialized
+            .text
+                    lw $t0, myInt       # load value from memory    (right -> left)
+                    mul $t1, $t0, $t0   # square it
+                    sw $t1, newInt      # store it back to RAM      (left -> right)
 
 
     <3!> Array (special attention)
@@ -853,6 +883,17 @@
 
         =============================================================
 
+
+
+        # practice Fibonacci numbers into an array
+        ==========================================
+
+
+
+
+
+        ==========================================
+        
 
 
 
@@ -970,10 +1011,49 @@
                 - the meaning of x = y << 2 (C++)
                     > y * 2 * 2 and then assign the value in y to x
 
+        [ 2 ]: branching address
+
+
+
+        [ 3 ]: jump
+
 
 
 
 # Datapath
+
+
+    >> ISA (instruction set architecture)
+
+        + A well-defined hardware/software interface
+
+       <!> The sequenital Model
+            ! basic features
+                • The program counter(PC)
+                • Defines execution order of instruction
+                • named storage (variables in memory)
+
+            ! steps
+
+                -----------------
+                |               |
+                v               |
+            ----------------    |
+            | Fetch PC     |    |
+            ----------------    |
+            | Decode       |    |
+            ----------------    |
+            | Read Inputs  |    |
+            ----------------    |  
+            | Execute      |    |
+            ----------------    |   
+            | Write Output |    |   
+            ----------------    |   
+            | Next PC      |    |
+            ----------------    |
+                |               |
+                -----------------
+
 
 
     >> PC (Program Counter)
@@ -1025,9 +1105,10 @@
     >> ALU (actually many operation will go through ALU)
        -p64-10
         
-        + Load/Store: F = add
+        + Load/Store: F = add 
         + Branch:     F = subtract
         + R-type:     F depends on funct field
+    
 
         --------------------------------
         ALU control     :       Function
@@ -1037,6 +1118,13 @@
         0110                    subtract
         0111                    set-on-less-than
         1100                    NOR
+
+
+
+    >> mnemonic ?
+
+
+    >> more example
 
 
 
