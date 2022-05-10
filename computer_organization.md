@@ -320,7 +320,7 @@
 
 
 
-# ====================================================================================================
+# ========================================
 
 
 
@@ -364,106 +364,106 @@
 
     >> MIPS
 
-        [ 1 ]: MIPS processor
-                + Reduced Instruction Set Computer(RISC), so firstly, it's a computer
-                    • microprocessor designed to perform a smaller number computer instructions 
-                      so it can operate at a higher speed
-                    • Simpler, Less Circuitry, Less expensive
-                
-                + older computer is the opposite
-                    • more complex, more instruction, more cost
-
-
-                + the concept of MIPS assembly are transferable to other processors
-
-
-                [ex]: PS4, Tesla Model 4
-
-
-
-        [ 2 ]: MIPS Machine Instruction
-
-                + basic machine circle
-                    1. fetch the next instruction from memory
-                    2. increment the program counter (next instruction) = refer to below definition
-                    3. execute the instruction
-        
-
-                + machine code                                  :     assembly code
-                    0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
-                    0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
-                    0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
-                    0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
-                    0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
-        
-
-                + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
-
-
-        
-        [ 3 ]: MIPS basic structure
-
-                + Von Neumann Architecture
-
-                    <1>. Memory holds data AND instructions
-                    <2>. instructions execute one at a time
-                    <3>. Main components: Input, CPU, Memory, Output
-                    for figure: p22-8
-
-                    <4>. Von Neumann bottleneck
-                        - the idea that computer system throughput is limited,
-                          due to the relative ability of processors compared to top rates of data transfer.  
-                          According to this description of computer architecture, 
-                          a processor is idle(闲) for a certain amount of time while memory is accessed.
-
-
-
-
-                + MIPS basics 
-                                                        ------------------------------------------------------
-                                                        |                                                    |
-                                                        |    --------------------------------------------    |
-                                                        |    |                                          |    |
-                                                        |    |                  CPU                     |    |
-                                                        |    |  (control unit + arithmetic/logic unit)  |    |
-                                                        |    |                                          |    |
-                                    Input Device --->   |    |       ^                       |          |    |   ---> Output device
-                                                        |    --------|-----------------------|-----------    |
-                                                        |    |       |                       V          |    |
-                                                        |    |               Memory Unit                |    |
-                                                        |    |                                          |    |
-                                                        |    |                                          |    |
-                                                        |    |------------------------------------------|    |           
-                                                        |                                                    |
-                                                        |----------------------------------------------------|    
-                                                        
-                                                            (reigstar is in CPU, RAM is in memory unit) 
-
-
-                + Memory Model
-                    
-                    Data:
-                        - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
-                    
-                    Operation
-                    
-                        * Load: copy from address in memory to register inside the processor
-
-                        * Store: copy from register to memory at a designated address
+    [ 1 ]: MIPS processor
+            + Reduced Instruction Set Computer(RISC), so firstly, it's a computer
+                • microprocessor designed to perform a smaller number computer instructions 
+                  so it can operate at a higher speed
+                • Simpler, Less Circuitry, Less expensive
             
+            + older computer is the opposite
+                • more complex, more instruction, more cost
 
 
-                + MIPS & Standard Computer Architecture 
-
-                    
-                        > hardware connected on a PCI bus to transmit data
-                        ===================================================================
-
-                        Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+            + the concept of MIPS assembly are transferable to other processors
 
 
-                                                                                   <-- slow
-                        ----------------------------- Bus ----------------------------------
+            [ex]: PS4, Tesla Model 4
+
+
+
+    [ 2 ]: MIPS Machine Instruction
+
+            + basic machine circle
+                1. fetch the next instruction from memory
+                2. increment the program counter (next instruction) = refer to below definition
+                3. execute the instruction
+    
+
+            + machine code                                  :     assembly code
+                0011 0100 0000 0001 0000 0000 0000 1001             ori  $1, $0, 9
+                0000 0000 0100 0001 0000 0000 0001 1000             mult $2, $1
+                0000 0000 0000 0000 0100 0000 0001 0010             mflo $8 
+                0011 0100 0000 0001 0000 0000 0000 0101             ori  $1, $0, 5
+                0000 0001 0000 0001 0000 0000 0001 1010             div  $8, $1
+    
+
+            + understand as some machine runs your machine code instruction, and tell the actual machine to do stuff
+
+
+    
+    [ 3 ]: MIPS basic structure
+
+        + Von Neumann Architecture
+
+            <1>. Memory holds data AND instructions
+            <2>. instructions execute one at a time
+            <3>. Main components: Input, CPU, Memory, Output
+            for figure: p22-8
+
+            <4>. Von Neumann bottleneck
+                - the idea that computer system throughput is limited,
+                  due to the relative ability of processors compared to top rates of data transfer.  
+                  According to this description of computer architecture, 
+                  a processor is idle(闲) for a certain amount of time while memory is accessed.
+
+
+
+
+            + MIPS basics 
+                                        ------------------------------------------------------
+                                        |                                                    |
+                                        |    --------------------------------------------    |
+                                        |    |                                          |    |
+                                        |    |                  CPU                     |    |
+                                        |    |  (control unit + arithmetic/logic unit)  |    |
+                                        |    |                                          |    |
+                    Input Device --->   |    |       ^                       |          |    |   ---> Output device
+                                        |    --------|-----------------------|-----------    |
+                                        |    |       |                       V          |    |
+                                        |    |               Memory Unit                |    |
+                                        |    |                                          |    |
+                                        |    |                                          |    |
+                                        |    |------------------------------------------|    |           
+                                        |                                                    |
+                                        |----------------------------------------------------|    
+                                        
+                                            (reigstar is in CPU, RAM is in memory unit) 
+
+
+            + Memory Model
+                
+                Data:
+                    - MIPS memory is an array of 2^32 bytes, each bytes has a 32-bits address          
+                
+                Operation
+                
+                    * Load: copy from address in memory to register inside the processor
+
+                    * Store: copy from register to memory at a designated address
+        
+
+
+            + MIPS & Standard Computer Architecture 
+
+                
+                    > hardware connected on a PCI bus to transmit data
+                    ===================================================================
+
+                    Hard Disk      Main Memory       Processor     Monitor     Keyboard 
+
+
+                                                                               <-- slow
+                    ----------------------------- Bus ----------------------------------
 
 
 
