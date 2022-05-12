@@ -530,88 +530,88 @@
 
 
     [ ex ]:
-            ---------------------------------------------------------------------------------------------------------------------
-            |    # .h file                              |       # .h file                                                       |
-            |    #ifndef SPECIES_H                      |       #idndef HUMAN_H                                                 |
-            |    #define SPECIES_H                      |       #define HUMAN_H                                                 |
-            |                                           |                                                                       |
-            |    #include <iostream>                    |       #include "Species.h"                                            |
-            |    using namespace std;                   |       #include <string>                                               |
-            |                                           |                                                                       |
-            |                                           |       // remember the colon, and the public keyword for base class    |
-            |    class Species {                        |       class Human : public Species {                                  |
-            |    public:                                |       public:                                                         |
-            |        // default constructor             |                                                                       |
-            |        Species();                         |           // derived class default constructor                        |
-            |                                           |           Human();                                                    |
-            |        // customed constructor            |                                                                       |
-            |        Species(int type, int stage);      |           // custom constructor                                       |
-            |                                           |           Human(string sName);                                        |
-            |        // print type - for redefinition   |                                                                       |
-            |        void printType(Species s);         |           // getter                                                   |
-            |                                           |           string getName();                                           |
-            |        // getter                          |                                                                       |
-            |        int getType();                     |           // redefintion                                              |
-            |        int getStage();                    |           void printType(Species s);                                  |
-            |                                           |                                                                       |
-            |        // virtual is under public         |           // virtual function from base class                         |
-            |        virtual void eat();                |           // no need virtual keyword here again, but better have it   |
-            |                                           |           virtual eat();                                              |
-            |    private:                               |                                                                       |
-            |        int type;                          |       private:                                                        |
-            |        int stage;                         |           string name;                                                |
-            |                                           |       };                                                              |
-            |    protected:                             |                                                                       |
-            |        bool existence;                    |       #endif                                                          |
-            |    };                                     |                                                                       |
-            |                                           |                                                                       |
-            ---------------------------------------------------------------------------------------------------------------------
-            |    # .cpp file                                    |       # .cpp file                                             |
-            |    #include "Species.h"                           |                                                               |
-            |    Species::Species() : type(0), stage(0)         |       #include "Human.h"                                      |
-            |    {                                              |                                                               |
-            |        //                                         |                                                               |
-            |    }                                              |       // constructor is not inherited                         |
-            |                                                   |       // overload it in the inherited class                   |
-            |                                                   |       // remmeber to include base class after colon           |
-            |    Species::Species(int type, int stage)          |       Human::Human() : Species(), name("human")               |
-            |    {                                              |       {                                                       |
-            |        if (type >= 0) {                           |           // default constructor                              |
-            |            this->type = type;                     |       }                                                       |
-            |        }                                          |                                                               |
-            |                                                   |       // customed constructor                                 |
-            |        this->stage = stage;                       |       Human::Human(string sName) : Species(3, 5)              |
-            |    }                                              |       {                                                       |
-            |                                                   |           name = sName;                                       |
-            |    // testing for redefinition                    |       }                                                       |
-            |    // takes same paraemter list                   |                                                               |
-            |    void Species::printType(Species s)             |                                                               |
-            |    {                                              |       // getter                                               |
-            |        cout << "TYPE: " << s.type                 |       string Human::getName()                                 |
-            |             << " STAGE: " << s.stage << endl;     |       {                                                       |
-            |    }                                              |           return name;                                        |
-            |                                                   |       }                                                       |
-            |                                                   |                                                               |
-            |    // getter                                      |       // redefintion of printType                             |
-            |    int Species::getType()                         |       void Human::printType(Species s)                        |
-            |    {                                              |       {                                                       |
-            |        return type;                               |           cout << "TYPE: " << s.getType()                     |
-            |    }                                              |               << "STAGE: " << s.getStage()                    |
-            |                                                   |               << "NAME: " << name                             |
-            |                                                   |               << "EXISTENCE:" << existence << endl;           |
-            |    int Species::getStage()                        |       }                                                       |
-            |    {                                              |                                                               |
-            |        return stage;                              |                                                               |
-            |    }                                              |       // virutal function                                     |
-            |                                                   |       void Human::eat()                                       |
-            |                                                   |       {                                                       |
-            |    // implementation of virtual function          |           cout << "eat fast food" << endl;                    |
-            |    // you don't need the keyword virtual here     |       }                                                       |
-            |    void Species::eat()                            |                                                               |
-            |    {                                              |                                                               |
-            |        cout << "possibly eat anything" << endl;   |                                                               |
-            |    }                                              |                                                               |
-            ---------------------------------------------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------------------------------------
+            |    # .h file                              |       # .h file                                              |
+            |    #ifndef SPECIES_H                      |       #idndef HUMAN_H                                        |
+            |    #define SPECIES_H                      |       #define HUMAN_H                                        |
+            |                                           |                                                              |
+            |    #include <iostream>                    |       #include "Species.h"                                   |
+            |    using namespace std;                   |       #include <string>                                      |
+            |                                           |                                                              |
+            |                                           |       // remember colon and public keyword for base class    |
+            |    class Species {                        |       class Human : public Species {                         |
+            |    public:                                |       public:                                                |
+            |        // default constructor             |                                                              |
+            |        Species();                         |           // derived class default constructor               |
+            |                                           |           Human();                                           |
+            |        // customed constructor            |                                                              |
+            |        Species(int type, int stage);      |           // custom constructor                              |
+            |                                           |           Human(string sName);                               |
+            |        // print type - for redefinition   |                                                              |
+            |        void printType(Species s);         |           // getter                                          |
+            |                                           |           string getName();                                  |
+            |        // getter                          |                                                              |
+            |        int getType();                     |           // redefintion                                     |
+            |        int getStage();                    |           void printType(Species s);                         |
+            |                                           |                                                              |
+            |        // virtual is under public         |           // virtual function from base class                |
+            |        virtual void eat();                |           // no need virtual keyword here again              |
+            |                                           |           // but better to have it here for clarity          |                                    
+            |    private:                               |           virtual void eat();                                |
+            |        int type;                          |                                                              |
+            |        int stage;                         |       private:                                               |
+            |                                           |           string name;                                       |
+            |    protected:                             |       };                                                     |
+            |        bool existence;                    |                                                              |
+            |    };                                     |       #endif                                                 |
+            |                                           |                                                              |
+            ------------------------------------------------------------------------------------------------------------
+            |    # .cpp file                                    |       # .cpp file                                    |
+            |    #include "Species.h"                           |                                                      |
+            |    Species::Species() : type(0), stage(0)         |       #include "Human.h"                             |
+            |    {                                              |                                                      |
+            |        //                                         |                                                      |
+            |    }                                              |       // constructor is not inherited                |
+            |                                                   |       // overload it in the inherited class          |
+            |                                                   |       // remmeber to include base class after colon  |
+            |    Species::Species(int type, int stage)          |       Human::Human() : Species(), name("human")      |
+            |    {                                              |       {                                              |
+            |        if (type >= 0) {                           |           // default constructor                     |
+            |            this->type = type;                     |       }                                              |
+            |        }                                          |                                                      |
+            |                                                   |       // customed constructor                        |
+            |        this->stage = stage;                       |       Human::Human(string sName) : Species(3, 5)     |
+            |    }                                              |       {                                              |
+            |                                                   |           name = sName;                              |
+            |    // testing for redefinition                    |       }                                              |
+            |    // takes same paraemter list                   |                                                      |
+            |    void Species::printType(Species s)             |                                                      |
+            |    {                                              |       // getter                                      |
+            |        cout << "TYPE: " << s.type                 |       string Human::getName()                        |
+            |             << " STAGE: " << s.stage << endl;     |       {                                              |
+            |    }                                              |           return name;                               |
+            |                                                   |       }                                              |
+            |                                                   |                                                      |
+            |    // getter                                      |       // redefintion of printType                    |
+            |    int Species::getType()                         |       void Human::printType(Species s)               |
+            |    {                                              |       {                                              |
+            |        return type;                               |           cout << "TYPE: " << s.getType()            |
+            |    }                                              |               << "STAGE: " << s.getStage()           |
+            |                                                   |               << "NAME: " << name                    |
+            |                                                   |               << "EXISTENCE:" << existence << endl;  |
+            |    int Species::getStage()                        |       }                                              |
+            |    {                                              |                                                      |
+            |        return stage;                              |                                                      |
+            |    }                                              |       // virutal function                            |
+            |                                                   |       void Human::eat()                              |
+            |                                                   |       {                                              |
+            |    // implementation of virtual function          |           cout << "eat fast food" << endl;           |
+            |    // you don't need the keyword virtual here     |       }                                              |
+            |    void Species::eat()                            |                                                      |
+            |    {                                              |                                                      |
+            |        cout << "possibly eat anything" << endl;   |                                                      |
+            |    }                                              |                                                      |
+            ------------------------------------------------------------------------------------------------------------
 
 
 
