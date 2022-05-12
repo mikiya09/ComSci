@@ -209,6 +209,10 @@
                     > ex.
                     -----------------------------------------------------------------
                     |    // .header file                                            |
+                    |                                                               |
+                    |    #ifndef TEST_H                                             |
+                    |    #define TEST_H                                             |
+                    |                                                               |
                     |    #include <iostream>                                        |
                     |    using namespace std;                                       |
                     |                                                               |
@@ -233,6 +237,9 @@
                     |        int numerator;                                         |
                     |        int denominator;                                       |
                     |    };                                                         |
+                    |                                                               |
+                    |    #endif                                                     |
+                    |                                                               |
                     |    // remember that at the end of class you need semi-colon   |
                     -------------------------------------------------------------------------
                     |    // .cpp file                                                       |
@@ -256,7 +263,7 @@
                     |        // you could do the current version                            |   
                     |        // you could also initialize one private variable              |   
                     |        // and set the other inside constructor                        |       
-                    |        // not restriction,                                            |
+                    |        // not restriction, you will assign value if don't specify     |
                     |        // you can do initialize whatever many private var you want    |
                     |    }                                                                  |
                     |                                                                       |
@@ -302,19 +309,17 @@
 
                     > make all member variables private
 
-                + protected: children or derived classes could access directly without member function only for derived class
+                + protected: derived classes could access directly without member function only for derived class
 
 
         < 3 >. properties
 
                 + black box analogy: one should know what it does without need to know how it does it
 
-                + procedural abstraction:
+                + procedural abstraction (why do we need qualifiers?)
 
-                    > why do we need qualifiers?
-
-                        hide something from users, so that they don't need to worry about implement some method in the class
-                        they just need to use method, and they can use them across several programs
+                    • hide info from users, so that they don't need to worry about implement some method in the class
+                    • they just need to use method, and they can use them across several programs
 
 
         < 4 >. constructor (for instantiate 实例化)
@@ -327,11 +332,14 @@
                 > constructor must have the same name as the class it is used in
                 > constructor definition cannot return a value, and no return type is given - not even void
 
-                ------------------------------
-                # default: constructor that can be called with no arguments, it will be called by default if you don't specify it
-                # one argument
-                # two arguments
-                ------------------------------
+                ---------------------------------------------------------------------
+                |    // default: constructor that can be called with no arguments   |
+                |    // it will be called by default if you don't specify it        |
+                |    // one argument                                                |
+                |    // two arguments                                               |
+                |                                                                   |
+                |    < refer to example in section 1 >                              |
+                ---------------------------------------------------------------------
 
 
 
@@ -383,6 +391,7 @@
                 | # define NAMEOFCLASS_H                  |
                 |                                         |
                 | < the rest of the your code goes here > |
+                | < refer to CLASS section example 1 >    |
                 |                                         |
                 | # endif                                 |
                 -------------------------------------------
