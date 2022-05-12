@@ -561,7 +561,7 @@
             |                                           |                                                              |
             |        // virtual is under public         |           // virtual function from base class                |
             |        virtual void eat();                |           // no need virtual keyword here again              |
-            |                                           |           // but better to have it here for clarity          | 
+            |                                           |           // but better to have it here for clarity          |
             |    private:                               |           virtual void eat();                                |
             |        int type;                          |                                                              |
             |        int stage;                         |       private:                                               |
