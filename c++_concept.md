@@ -207,17 +207,91 @@
                     
                     > scope resolution operator(::)
                     > ex.
-                    --------------------------
-                    # setter
+                    -----------------------------------------------------------------
+                    |    // .header file                                            |
+                    |    #include <iostream>                                        |
+                    |    using namespace std;                                       |
+                    |                                                               |
+                    |                                                               |
+                    |    class Test {                                               |
+                    |    public:                                                    |
+                    |                                                               |
+                    |        // default constructor: same name with class           |
+                    |        Test();                                                |
+                    |        // custom constructor                                  |
+                    |        Test(int n);                                           |
+                    |                                                               |   
+                    |        // getter                                              |
+                    |        void getNumerator();                                   |
+                    |        void getDenominator();                                 |
+                    |                                                               |
+                    |        // setter                                              |
+                    |        void setNumerator();                                   |
+                    |        void setDenominator();                                 |
+                    |                                                               |
+                    |    private:                                                   |
+                    |        int numerator;                                         |
+                    |        int denominator;                                       |
+                    |    };                                                         |
+                    |    // remember that at the end of class you need semi-colon   |
+                    -------------------------------------------------------------------------
+                    |    // .cpp file                                                       |
+                    |    #include "Test.h"                                                  |
+                    |                                                                       |
+                    |    Test::Test() : numerator(0), denominator(1)                        |
+                    |    {                                                                  |
+                    |        // default constructor                                         |
+                    |        // you don't need to give it a default value                   |
+                    |        // because default constructor will be called automatically    |
+                    |        // but if you want to give a default value                     |
+                    |        // you have do it like this                                    |
+                    |        // Class::Class() : x(), y()                                   |
+                    |        // remember the colon                                          |
+                    |    }                                                                  |
+                    |                                                                       |
+                    |                                                                       |
+                    |    Test::Test(int n) : numerator(n), denominator(2)                   |
+                    |    {                                                                  |
+                    |        // there are many ways to do this                              |
+                    |        // you could do the current version                            |   
+                    |        // you could also initialize one private variable              |   
+                    |        // and set the other inside constructor                        |       
+                    |        // not restriction,                                            |
+                    |        // you can do initialize whatever many private var you want    |
+                    |    }                                                                  |
+                    |                                                                       |
+                    |                                                                       |
+                    |    void Test::getNumerator()                                          |
+                    |    {                                                                  |
+                    |        cout << numerator << endl;                                     |
+                    |    }                                                                  |
+                    |                                                                       |
+                    |                                                                       |
+                    |                                                                       |
+                    |    void Test::getDenominator()                                        |
+                    |    {                                                                  |
+                    |        cout << denominator << endl;                                   |
+                    |    }                                                                  |   
+                    -------------------------------------------------------------------------
+                    |    // main.cpp                |
+                    |    #include "Test.h"          |
+                    |                               |
+                    |    int main() {               |
+                    |                               |
+                    |        Test t;                |
+                    |        Test t2(3);            |
+                    |                               |
+                    |        t.getNumerator();      |
+                    |        t.getDenominator();    |
+                    |                               |
+                    |        t2.getNumerator();     |
+                    |        t2.getDenominator();   |
+                    |                               |
+                    |        return 0;              |
+                    |                               |
+                    |    }                          |
+                    ---------------------------------
 
-
-
-
-                    # getter
-
-
-
-                    --------------------------
 
 
         < 2 >. qualifier
