@@ -428,9 +428,9 @@
         >> define derived class
 
             ex.
-            -----------------------
-            # class BASECLASS : public DERIVEDCLASS 
-            -----------------------
+            ----------------------------------------
+            // class BASECLASS : public DERIVEDCLASS 
+            ----------------------------------------
 
 
             + Properties
@@ -502,7 +502,7 @@
             |                  |
             | }                |
             --------------------
-            [ verify if derived class could access it with . operator ]
+            [ you could accees to members under protected: ]
 
 
 
@@ -518,8 +518,9 @@
             + and write the new details in it
 
             ex.
-            ---------------------------
-            ---------------------------
+            -------------------------
+            // refer to example below
+            -------------------------
 
 
         >> overloading
@@ -664,14 +665,15 @@
 
         + for example, 
 
-            -----
-            | <1>. you have a class named people in the school
-            | <2>. you have derived classes students, teachers, director, etc
-            | <3>. they all could have a method call goToWork(), but it's not necessary that we need to define them everytime in each child class
-            | <4>. a good way is it only defined in the base class, and every child can call goToWork()
-            | <5>. when different classes call goToWork(), they behave differently
-            | <6>. teacher go to teach, student go to study, ...etc
-            ----
+            ---------------------------------------------------------------------------------------------
+            | <1>. you have a class named people in the school                                          |
+            | <2>. you have derived classes students, teachers, director, etc                           |
+            | <3>. they all could have a method call goToWork()                                         |
+            |      but it's not necessary that we need to define them everytime in each child class     |
+            | <4>. a good way is it only defined in the base class, and every child can call goToWork() |
+            | <5>. when different classes call goToWork(), they behave differently                      |
+            | <6>. teacher go to teach, student go to study, ...etc                                     |
+            ---------------------------------------------------------------------------------------------
 
 
     [ virtual function ]:
@@ -682,13 +684,16 @@
 
             • [place virtual keyword in base class definition, not implementation]
                 
-                - this tells the compiler to wait until runtime to determine the implemetation of the function, based on the object that calls it
+                - this tells the compiler to wait until runtime to determine the implemetation of the function,
+                  based on the object that calls it
 
-                - if there is a derived class with a redefined version of the function, it will use that version instead of the original
+                - if there is a derived class with a redefined version of the function,
+                  it will use that version instead of the original
 
         ex.
-        ------------------------
-        ------------------------
+        -------------------------------------
+        // refer to above inheritance example
+        -------------------------------------
 
 
         + why not make all functions virtual? - Efficiency
@@ -705,35 +710,35 @@
                  vSpecies could no access to the member in Human class, because Species type doesn't have that
 
                 ex.
-                --------------------------
-
-                vHuman.name = "human";
-                // extend type
-                vSpecies = vHuman;
-                // assume string name is a public variable
-                // cannot do this: vSpecies.name
-
-                --------------------------
+                -------------------------------------------------
+                |                                               |
+                |   vHuman.name = "human";                      |
+                |   // extend type                              |
+                |   vSpecies = vHuman;                          |
+                |   // assume string name is a public variable  |
+                |   // cannot do this: vSpecies.name            |
+                |                                               |
+                -------------------------------------------------
 
 
 
             <3>. to overcome this, use pointer: treat Speices as Human, refering to the following example
 
                 ex.
-                --------------------------
-
-                Species* pS;
-                Human* pH;
-
-                // use -> instread of dot(.) for accessing all members
-                pH = new Human;
-                pH->name = "Human";
-                pH->printType();
-                
-                pS = pH;
-                pS->printType()  // here we are using the overidden function in Human class
-
-                --------------------------
+                ------------------------------------------------------------------------------------
+                |                                                                                  |
+                |   Species* pS;                                                                   |
+                |   Human* pH;                                                                     |
+                |                                                                                  |   
+                |   // use -> instread of dot(.) for accessing all members                         |
+                |   pH = new Human;                                                                |
+                |   pH->name = "Human";                                                            |
+                |   pH->printType();                                                               |
+                |                                                                                  |
+                |   pS = pH;                                                                       |
+                |   pS->printType()  // here we are using the overidden function in Human class    |
+                |                                                                                  |
+                ------------------------------------------------------------------------------------
 
 
     [ pitfalls ]:
@@ -741,13 +746,13 @@
             >> you won't be able to access non-virtual data without using virutal function
 
                 ex.
-                --------------------------
-                
-                pS->name;   // won't work
-
-                pS->printType();    // work
-
-                --------------------------
+                -------------------------------------
+                |                                   |
+                |   pS->name;   // won't work       |
+                |                                   |
+                |   pS->printType();    // work     |
+                |                                   |
+                -------------------------------------
 
 
 
