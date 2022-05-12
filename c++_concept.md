@@ -437,7 +437,7 @@
 
             < 1 >. a derived class has access to all of the member functions/variables of the base class plus its own members
 
-            < 2 >. for exmaple, passing a parameters required by base class, and this parameter could also be passed to its derived class
+            < 2 >. ex. passing a parameters required by base class. This parameter could also be passed to its derived class
 
                ------------------               ---------------
                | derived class  |  -- is a -->  | base class  |
@@ -460,22 +460,24 @@
             < 4 >. top down order (declaration order)
 
                     • when an object of derived class is created, its constructor will be called
-                    • in this process, the base class's constructor will be called first, and then its children's, then its grandchildren's
+                    • in this process, the base class's constructor will be called first, and then its children's
+                      then its grandchildren's
 
 
             < 5 >. this (pointer)
 
-            -----------------------------------------------------------------------------------------------------------------------------------------
-            | when use in the a class constructor, or other places in class, you are pointing to the instance of this class.                        |
-            |                                                                                                                                       |
-            | so to say, you have a paramter named "x", and you also have a member variable named "x" as well                                       |
-            |                                                                                                                                       |
-            | when you takes the parameter in, and you have to remove confusion so that member variable is member variables, parameter is paremeter |
-            |                                                                                                                                       |
-            | this->x = x: assigning the parameter x to the member variables x of this class                                                        |
-            |                                                                                                                                       |
-            | basically, it is just pointer pointing to some class, so we can correctly refers it                                                   |
-            -----------------------------------------------------------------------------------------------------------------------------------------
+            -----------------------------------------------------------------------------------------------------------------
+            | when use in the a class constructor, or other places in class, you are pointing to the instance of the class  |
+            |                                                                                                               |
+            | so to say, you have a paramter named "x", and you also have a member variable named "x" as well               |
+            |                                                                                                               |
+            | when you takes the parameter in, and you have to remove confusion so that member variable is member variables |
+            | parameter is paremeter                                                                                        |
+            |                                                                                                               |
+            | this->x = x: assigning the parameter x to the member variables x of this class                                |
+            |                                                                                                               |
+            | basically, it is just pointer pointing to some class, so we can correctly refers it                           |
+            -----------------------------------------------------------------------------------------------------------------
 
 
         >> Protect Qualifier (inheritance pitfalls)
@@ -525,13 +527,14 @@
 
             + redefined function has the same number and types of parameter as the original function
 
-            + in other words, overloaded functions have different "signatures" compare to the original class, while redefined functions has the same
+            + in other words, overloaded functions have different "signatures" compare to the original class
+              while redefined functions has the same
 
 
 
     [ ex ]:
             ------------------------------------------------------------------------------------------------------------
-            |    # .h file                              |       # .h file                                              |
+            |    // .h file                             |       // .h file                                             |
             |    #ifndef SPECIES_H                      |       #idndef HUMAN_H                                        |
             |    #define SPECIES_H                      |       #define HUMAN_H                                        |
             |                                           |                                                              |
@@ -564,9 +567,10 @@
             |    protected:                             |       };                                                     |
             |        bool existence;                    |                                                              |
             |    };                                     |       #endif                                                 |
+            |    #endif                                 |                                                              |
             |                                           |                                                              |
             ------------------------------------------------------------------------------------------------------------
-            |    # .cpp file                                    |       # .cpp file                                    |
+            |    // .cpp file                                   |       // .cpp file                                   |
             |    #include "Species.h"                           |                                                      |
             |    Species::Species() : type(0), stage(0)         |       #include "Human.h"                             |
             |    {                                              |                                                      |
@@ -611,15 +615,40 @@
             |    {                                              |                                                      |
             |        cout << "possibly eat anything" << endl;   |                                                      |
             |    }                                              |                                                      |
+            |                                                   |                                                      |
             ------------------------------------------------------------------------------------------------------------
-
-
-
-#endif
-
-
-
-
+            |                                       |
+            |   // main.cpp                         |
+            |                                       |
+            |   #include "Species.h"                |
+            |   #include "Human.h"                  |
+            |                                       |
+            |   int main() {                        |
+            |                                       |
+            |       Species s;                      |
+            |       s.printType(s);                 |
+            |                                       |
+            |       // virtual                      |
+            |       s.eat();                        |
+            |       cout << "=========" << endl;    |
+            |                                       |
+            |       Human h, h2("bird");            |
+            |       cout << h2.getName() << endl;   |
+            |                                       |
+            |       // call parent's function       |
+            |       cout << h2.getType() << endl;   |
+            |       cout << h2.getStage() << endl;  |
+            |                                       |
+            |       // predefintion                 |
+            |       h2.printType(s);                |   
+            |                                       |
+            |       // virtual                      |
+            |       h2.eat();                       |  
+            |                                       |
+            |       return 0;                       |
+            |   }                                   |
+            |                                       |
+            -----------------------------------------
 
 
 # Polymorphism
