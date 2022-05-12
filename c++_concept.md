@@ -762,7 +762,7 @@
 
     >> not a member of class
 
-    [ use case ]:
+    [ Properties ]:
 
         <1>. remove messy as much as possible
 
@@ -770,24 +770,25 @@
 
                 d1.equal(d2), d2.equal(d1) -- it's correct but also messy
 
-                ---------------------------------------------------------
-                // original
-                bool equal(Date date1, Date date2) 
-                {
-                    return (date1.getMonth() == date2.getMonth() && date1.getDay() == date2.getDay());
-                }
-
-                // friend
-                friend bool equal(Date date1, Date date2)
-                {
-                    return (date1.month == date2.month && date1.day == date2.day);
-                }
-                ---------------------------------------------------------
+                -------------------------------------------------------------------------------------------------
+                |    // original                                                                                |
+                |    bool equal(Date date1, Date date2)                                                         |
+                |    {                                                                                          |
+                |        return (date1.getMonth() == date2.getMonth() && date1.getDay() == date2.getDay());     |
+                |    }                                                                                          |
+                |                                                                                               |
+                |    // friend                                                                                  |
+                |    friend bool equal(Date date1, Date date2)                                                  |
+                |    {                                                                                          |
+                |        return (date1.month == date2.month && date1.day == date2.day);                         |
+                |    }                                                                                          |
+                -------------------------------------------------------------------------------------------------
 
         <2>. friend function is NOT a member function, but have access to private members like actualy member function
 
 
-        <3>. in most situation, the only reason to make a function a friend is to make the function definition simpler and more efficient
+        <3>. in most situation, 
+             the only reason to make a function a friend is to make the function definition simpler and more efficient
 
         
         <4>. Rule of Thumb
@@ -804,54 +805,59 @@
 
     [ overload (binary) operator ]:
 
-            <1>. if we have a function that overlaps with how the operator works, then overloading the operator is a matter of changing some syntax
+        <1>. if we have a function that overlaps with how the operator works, 
+             then overloading the operator is a matter of changing some syntax
 
-                [!] add --> operator +
-                [!] equal --> operator ==
+            [!] add --> operator +
+            [!] equal --> operator ==
 
-            <2>. usually used with friend function, but there's exception 
+        <2>. usually used with friend function, but there's exception 
+
             ex.
             ------------------------------
             ------------------------------
 
 
-            <3>. rules
+        <3>. rules
 
-                    + when you overloaded an operator, at least one argument of the resulting overloaded operator must be of a class type (have include one class type)
+            + when you overloaded an operator
+            + at least one argument of the resulting overloaded operator must be of a class type
+                
+            + overload operator can be, but does not have to be friend of a class.
+            + It can ALSO be a member of the class or an ordinary(nonfriend) function
 
-                    + overload operator can be, but does not have to be friend of a class. It can ALSO be a member of the class or an ordinary(nonfriend) function
-
-                    ex.
-                    ------------------------------------------------------------------------------
-                    |                                                                            |
-                    | friendfriend Money operator +(const Money& amount1, const Money& amount2); |
-                    |                                                                            |
-                    |                               |                                            |
-                    |                               |                                            |
-                    |                               V                                            |
-                    |                                                                            |
-                    |               Money operator +(const Money& amount2);                      |  => at least one argument is a class type
-                    |                                                                            |
-                    ------------------------------------------------------------------------------
-
-
-                    + you can only overload existing operators
-
-                    + you cannot change the arity(稀有度) of an operator -> a unary operator cannot used as a binary operator and vice versa
+            ex.
+            ------------------------------------------------------------------------------
+            |                                                                            |
+            | friendfriend Money operator +(const Money& amount1, const Money& amount2); |
+            |                                                                            |
+            |                               |                                            |
+            |                               |                                            |
+            |                               V                                            |
+            |                                                                            |
+            |               Money operator +(const Money& amount2);         => at least one argument is a class type
+            |                                                                            |
+            ------------------------------------------------------------------------------
 
 
-            <4>. operators that could or could not be overloaded
+            + you can only overload existing operators
 
-                    + yes: 
+            + you cannot change the arity(稀有度) of an operator
+              -> a unary operator cannot used as a binary operator and vice versa
 
-                    + no: (.) (::) (.*) (?:)
 
-                    + must be member function: ([]) (=) (()) (->)
+        <4>. operators that could or could not be overloaded
 
-                    + must be friend function: (>>) (<<)
+            + yes: 
 
-            
-            <5>. assignment operator (=)
+            + no: (.) (::) (.*) (?:)
+
+            + must be member function: ([]) (=) (()) (->)
+
+            + must be friend function: (>>) (<<)
+
+        
+        <5>. assignment operator (=)
 
 
 
@@ -863,18 +869,190 @@
     [ overload unary operator ]:
 
         + ex.
-        -------------------------
-        -------------------------
+        ------------------------------
+        refer to the following example
+        ------------------------------
 
 
 
     [ overloading << and >> ]:
 
         + ex.
-        -------------------------
-        -------------------------
+        ------------------------------
+        refer to the following example
+        ------------------------------
 
 
+    [ ex ].
+    -------------------------------------------------------------------------------------
+    |   // .h                                                                           |
+    |                                                                                   |
+    |   #ifndef OPERATION_H                                                             |
+    |   #define OPERATION_H                                                             |
+    |                                                                                   |
+    |   #include <iostream>                                                             |
+    |   using namespace std;                                                            |
+    |                                                                                   |
+    |                                                                                   |
+    |   class Operation {                                                               |
+    |   public:                                                                         |
+    |                                                                                   |
+    |       // default constructor                                                      |
+    |       Operation();                                                                |
+    |                                                                                   |
+    |       // custom constructor                                                       |
+    |       Operation(int count);                                                       |
+    |                                                                                   |
+    |       // getter                                                                   |
+    |       int getCount();                                                             |
+    |                                                                                   |
+    |       // (no overload):                                                           |
+    |       // friend Operation add(const Operation& o1, const Operation& o2);          |   
+    |       friend Operation operator +(const Operation& o1, const Operation& o2);      |
+    |                                                                                   |
+    |       friend Operation operator /(const Operation& o1, const Operation& o2);      |
+    |                                                                                   |
+    |       // unary overload                                                           |
+    |       friend Operation operator -(const Operation& o);                            |
+    |                                                                                   |
+    |       friend bool operator >(const Operation& o1, const Operation& o2);           |
+    |                                                                                   |
+    |       // insertion                                                                |
+    |       friend istream& operator >>(istream& ins, Operation& o);                    |
+    |                                                                                   |
+    |       // extraction, have here because output cannot be modified                  |
+    |        friend ostream& operator <<(ostream& outs, const Operation& o);            |
+    |                                                                                   |
+    |   private:                                                                        |
+    |       int count;                                                                  |
+    |   };                                                                              |
+    |                                                                                   |
+    |   #endif                                                                          |
+    |                                                                                   |
+    -----------------------------------------------------------------------------------------------------------------
+    |   // .cpp                                    |   // main.cpp                                                  |
+    |                                              |                                                                |   
+    |   #include "Operation.h"                     |   int main() {                                                 |
+    |                                              |                                                                |  
+    |   Operation::Operation() : count(1)          |       Operation o1, o2(14), o3;                                |
+    |   {                                          |       o3 = o1 + o2;                                            |
+    |       // default constructor                 |       Operation o4 = o1 - o2;                                  |
+    |   }                                          |                                                                |   
+    |                                              |       // ==== not overload << and >> =====                     |
+    |   Operation::Operation(int newCount)         |       // cout << o3.getCount() << endl;                        |
+    |   {                                          |       // cout << o4.getCount() << endl;                        |
+    |       // custom constructor                  |       // cout << -o4.getCount() << endl;                       |
+    |       count = newCount;                      |       // cout << ( o3.getCount() > o4.getCount() ) << endl;    |
+    |   }                                          |                                                                |
+    |                                              |                                                                |
+    |   // getter                                  |       Operation o5, o6;                                        |
+    |   int Operation::getCount()                  |       cout << "Enter for o5: ";                                |
+    |   {                                          |       cin >> o5;                                               |
+    |       return count;                          |                                                                |
+    |   }                                          |       cout << "Enter for o6: ";                                |
+    |                                              |       cin >> o6;                                               |
+    |                                              |                                                                |
+    |   // unary overload                          |       cout << "o5: " << o5 << endl;                            |
+    |   Operation operator -(const Operation& o)   |       cout << "o6: " << o6 << endl;                            |
+    |   {                                          |                                                                |
+    |       Operation temp;                        |                                                                |
+    |                                              ------------------------------------------------------------------
+    |       temp.count = -o.count;                                      |
+    |       return temp;                                                |
+    |   }                                                               |
+    |                                                                   |
+    |   bool operator >(const Operation& o1, const Operation& o2)       |
+    |   {                                                               |
+    |       return o1.count > o2.count;                                 |
+    |   }                                                               |
+    |                                                                   |
+    |                                                                   |
+    |   // friend function, overloading addition operator               |
+    |   // return Operation class object                                |
+    |   Operation operator +(const Operation& o1, const Operation& o2)  |
+    |   {                                                               |
+    |       Operation temp;                                             |
+    |                                                                   |
+    |       temp.count = o1.count + o2.count;                           |
+    |       return temp;                                                |
+    |   }                                                               |
+    |                                                                   |
+    |                                                                   |
+    |   // overload division                                            |
+    |   // since I declare temp as int,                                 |
+    |   // therefore if fraction gets, 0 might be expected              |
+    |   Operation operator /(const Operation& o1, const Operation& o2)  |
+    |   {                                                               |
+    |       Operation temp;                                             |
+    |                                                                   |
+    |       temp.count = o1.count / o2.count;                           |
+    |       return temp;                                                |
+    |   }                                                               |
+    |                                                                   |
+    |                                                                   |
+    |   // insertion operator overload                                  |
+    |   istream& operator >>(istream& ins, Operation& o)                |
+    |   {                                                               |
+    |       int temp;                                                   |
+    |       ins >> temp;                                                |
+    |                                                                   |
+    |       if(temp < 5) {                                              |
+    |           o.count = temp + 5;                                     |
+    |       }                                                           |
+    |       else                                                        |
+    |       {                                                           |
+    |       o.count = temp - 5;                                         |
+    |       }                                                           |
+    |                                                                   |   
+    |       return ins;                                                 |
+    |   }                                                               |
+    |                                                                   |
+    |                                                                   |
+    |   // extraction operator overload                                 |
+    |   ostream& operator <<(ostream& outs, const Operation& o)         |
+    |   {                                                               |
+    |       outs << o.count;                                            |
+    |                                                                   |
+    |       return outs;                                                |
+    |   }                                                               |
+    |                                                                   |
+    ---------------------------------------------------------------------
+
+
+
+
+
+# I/O stream
+
+    [ concept ]:
+
+        -----------------------
+        #include <iostream>     // iostream is a class, you include it
+
+        + this class has two derived class: istream and ostream
+        + each of derived class has its own instance
+
+        >> cout
+
+            • cout is a built-in instance of ostream class
+            • << insertion operator only works with ostream object, so that's why only "cout <<" can print
+
+        >> cin
+            
+            • same for cin, cin is an instance of istream
+            • therefore only "cin >>" can take input
+
+    [ istream ]:
+        
+        friend istream& opeator >>(istream& ins, Operation& o);
+        <1>. ins pass by reference as an istream type
+        <2>. therefore we can declaring ins is also an istream data type, then we can use >> to it
+        <3>. and we need pass by refernece for return type
+             because the object we are returning is also pass in by reference - istream& -
+
+    [ ostream ]:
+
+        same with explanation above
 
 
 
