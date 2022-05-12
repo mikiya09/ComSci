@@ -168,100 +168,630 @@
 
 
 
-# Class
 
-    >> public 
 
-    >> private
-    [!]. private variable could only be accessed by member function inside this class
-
-    >> void output() const;
-      [ ]: this is just to ensure if any variable inside this class is a const, and you can still able to print out it
-      [ ]: because you are set the const variable to be passed in the first place
+# ================================================================
 
 
 
-# Constructor
+
+# Struct 
+
+    >> it's like class, but everything is public by default
+
+
+
+
+# CLASS
+
+
+    [ Definition ]: a data type whose variables are objects, which themselves are variables with member functions and data values
+                    -----------       ---------------------                       -------------------------------     -----------
+
+                    ->[ create data type that has method to do stuff ]
+
+
+
+    >> ELements:
+
+        < 1 >. member function
+
+                
+                + everything is private by default if no label(qualifier) provided
+                
+
+                + setter/getter: member functions that could access to private member of the class
+
+
+                + know how to define a classes and member function
+                    
+                    > scope resolution operator(::)
+                    > ex.
+                    --------------------------
+                    # setter
+
+
+
+
+                    # getter
+
+
+
+                    --------------------------
+
+
+        < 2 >. qualifier
+
+                + public: all member functions and variable under have no access restrictions
+
+                + private: everything under cannot be directly accessed by the program (only by public member functions)
+
+                    > make all member variables private
+
+                + protected: children or derived classes could access directly without member function only for derived class
+
+
+        < 3 >. properties
+
+                + black box analogy: one should know what it does without need to know how it does it
+
+                + procedural abstraction:
+
+                    > why do we need qualifiers?
+
+                        hide something from users, so that they don't need to worry about implement some method in the class
+                        they just need to use method, and they can use them across several programs
+
+
+        < 4 >. constructor (for instantiate 实例化)
+
+                + initialize "member variables" when declaring an object
+
+                + constructor is automatically called when an object of that class is declared
+
+                [ ! ]:
+                > constructor must have the same name as the class it is used in
+                > constructor definition cannot return a value, and no return type is given - not even void
+
+                ------------------------------
+                # default: constructor that can be called with no arguments, it will be called by default if you don't specify it
+                # one argument
+                # two arguments
+                ------------------------------
+
+
+
+
+# Abstract Data Type (ADT)
+
+    [ Concept ]: for procedural abstraction, accessing self-defined data type with class from other programs.
+                     ----------------------            -----------------------------------------------------
+
+               >> Benefit
+
+                    <1>. can change the implementation of your class without changing the other parts of the program
+                    <2>. divide work 
+                    <3>. subdivide, make class independent of the program, making the program that uses the class
+
+
+
+    [ Interface & Implementation ]:
+
+                >> Interface: (tells you how to use an ADT)
+
+                    • public/private member functions/variable + comments that tell you how to use them
+                    • should only tell people how to use it, no mention of implementation
+                    
+                    [ .h file ] 
+
+
+                >> Implementation: (tell you how the ADT is realized in C++ code)
+                    
+                    • definition of public and private members functions
+                    • details of functions
+
+                    [ .cpp file ] 
+                    
+
+
+    [ Include Guards ]
+
+                >> include "interface.h"
+
+                    + require line for .cpp file 
+                    + because of include refering, multiple files can contain the defintions more then once
+                    + could possibly cause compilation errors
+
+            
+                >> ex.
+                -------------------------------------------
+                | # ifndef NAMEOFCLASS_H                  |
+                | # define NAMEOFCLASS_H                  |
+                |                                         |
+                | < the rest of the your code goes here > |
+                |                                         |
+                | # endif                                 |
+                -------------------------------------------
+
+
+
+# Inheritance
+
+
+    [ Derived Class ]:
+
+        >> base class --> originally starting class
+
+        >> derived class --> inherited properties/function from base class
+
+            + representation
+
+                   -----------
+                   | Species |
+                   -----------
+                    /       \
+                   /         \
+               --------    ----------
+               | Male |    | Female |
+               --------    ----------
+                  |            |
+               --------    ----------
+               | Man  |    | Woman  |
+               --------    ----------
+
+        
+        >> define derived class
+
+            ex.
+            -----------------------
+            # class BASECLASS : public DERIVEDCLASS 
+            -----------------------
+
+
+            + Properties
+
+            < 1 >. a derived class has access to all of the member functions/variables of the base class plus its own members
+
+            < 2 >. for exmaple, passing a parameters required by base class, and this parameter could also be passed to its derived class
+
+               ------------------               ---------------
+               | derived class  |  -- is a -->  | base class  |
+               ------------------               ---------------
+
+               ------------------                 ---------------
+               | derived class  |  <-- is not --  | base class  |
+               ------------------                 ---------------
+
+
+
+            < 3 >. constructor is not inherited
+
+                    • invoke a constructor of the base class within defintion of a derived class
+                    -----------------------------------------------
+                    # overload the constructor in the derived class
+
+                    -----------------------------------------------
+
+            < 4 >. top down order (declaration order)
+
+                    • when an object of derived class is created, its constructor will be called
+                    • in this process, the base class's constructor will be called first, and then its children's, then its grandchildren's
+
+
+            < 5 >. this (pointer)
+
+            -----------------------------------------------------------------------------------------------------------------------------------------
+            | when use in the a class constructor, or other places in class, you are pointing to the instance of this class.                        |
+            |                                                                                                                                       |
+            | so to say, you have a paramter named "x", and you also have a member variable named "x" as well                                       |
+            |                                                                                                                                       |
+            | when you takes the parameter in, and you have to remove confusion so that member variable is member variables, parameter is paremeter |
+            |                                                                                                                                       |
+            | this->x = x: assigning the parameter x to the member variables x of this class                                                        |
+            |                                                                                                                                       |
+            | basically, it is just pointer pointing to some class, so we can correctly refers it                                                   |
+            -----------------------------------------------------------------------------------------------------------------------------------------
+
+
+        >> Protect Qualifier (inheritance pitfalls)
+
+            + derived class have all access to public members of base class
+            - not direct access to private members
+            - private member not inherited
+            + declare protected label
+
+            ex.
+            --------------------
+            | class BASECLASS  |
+            | {                |
+            |                  |
+            | public:          |
+            |    // functions  |
+            | protected:       |
+            |    double xxxxx; |
+            |    double yyyyy; |
+            |    double zzzzz; |
+            |                  |
+            | }                |
+            --------------------
+            [ verify if derived class could access it with . operator ]
+
+
+
+    [ Redefintion & Overloading ]:
+
+
+        >> redefinition 
+
+            + a derived class needs to implement an inherited member function differently than that in the base class
+
+            + refined-function should have the same function name & parameter list
+
+            + and write the new details in it
+
+            ex.
+            ---------------------------
+            ---------------------------
+
+
+        >> overloading
+
+            + overloaded function share the same name but have different parameter list
+
+            + redefined function has the same number and types of parameter as the original function
+
+            + in other words, overloaded functions have different "signatures" compare to the original class, while redefined functions has the same
+
+
+
+
+
+
+
+
+# Polymorphism
+
+
+    >> The ability to associate multiple meanings to one function name by means of late binding
+
+
+    [ late binding ]: 后期绑定
+
+        + definition --> associated it later in the time
+
+        + for example, 
+
+            -----
+            | <1>. you have a class named people in the school
+            | <2>. you have derived classes students, teachers, director, etc
+            | <3>. they all could have a method call goToWork(), but it's not necessary that we need to define them everytime in each child class
+            | <4>. a good way is it only defined in the base class, and every child can call goToWork()
+            | <5>. when different classes call goToWork(), they behave differently
+            | <6>. teacher go to teach, student go to study, ...etc
+            ----
+
+
+    [ virtual function ]:
+
+        + we can achieve that by making the "goToWork()" function virtual 
+
+        + late (dynamic) binding <官方定义>
+
+            • [place virtual keyword in base class definition, not implementation]
+                
+                - this tells the compiler to wait until runtime to determine the implemetation of the function, based on the object that calls it
+
+                - if there is a derived class with a redefined version of the function, it will use that version instead of the original
+
+        ex.
+        ------------------------
+        ------------------------
+
+
+        + why not make all functions virtual? - Efficiency
+
+            - The compiler and run-time environment need to do more work to handle virtual function. 
+            - using keyword virtual only when necessary
+
+
+        + slicing problem
+
+        ex.
+        --------------------------
+        --------------------------
+
+    [ pitfalls ]:
+
+
+
+
+
+
+# Friend Function
+
+    >> not a member of class
+
+    [ use case ]:
+
+        <1>. remove messy as much as possible
+
+            ex. if you are write a date class, and comparing two objects of date, you will end up like this
+
+                d1.equal(d2), d2.equal(d1) -- it's correct but also messy
+
+                ---------------------------------------------------------
+                // original
+                bool equal(Date date1, Date date2) 
+                {
+                    return (date1.getMonth() == date2.getMonth() && date1.getDay() == date2.getDay());
+                }
+
+                // friend
+                friend bool equal(Date date1, Date date2)
+                {
+                    return (date1.month == date2.month && date1.day == date2.day);
+                }
+                ---------------------------------------------------------
+
+        <2>. friend function is NOT a member function, but have access to private members like actualy member function
+
+
+        <3>. in most situation, the only reason to make a function a friend is to make the function definition simpler and more efficient
+
+        
+        <4>. Rule of Thumb
+                
+                + use member function if the task being performed invluves only one object(one instance of class)
+
+                + use non-member/friend function if the task being performed involves more than one object
+                
+
     
-    [+] a special method that is called when a class is instantiated(实例化) into an object
-    [.] could either be implicit or explicit
 
-    < pay attention >
-    [+] constructor has the exactly same name as the class
-    [+] has no return and return type in the prefix
-
-    <ex.>
-    Class User {
-        public: 
-        User(string firstName, string lastName)
-        {
-          first_name = firstName;
-          last_name = lastName;
-          ...
-        }
-        ...
-        private: ...
-      } 
-
-    user1("Bruce", "Wayne"); 
+# Overloading Operators
 
 
-# Abstract Data Type
-    
-    [!]: think of it as if you know nothing about programming, you just know how to click button
-    [!]: you can still interact with programs because of some frontend development work has been done by someone
+    [ overload (binary) operator ]:
 
-    [+]: abstract data type (ADT) is the same concept -> you write declaration and implement in a separate file, 
-         programmers who need your class just need to know the method you have described in the .h (header file), no need for details
+            <1>. if we have a function that overlaps with how the operator works, then overloading the operator is a matter of changing some syntax
 
+                [!] add --> operator +
+                [!] equal --> operator ==
 
-    < basic rule when making ADT >
-    [1]. make all the mmeber variables private members of the class 
-    [2]. make each of the basic operations that the programmer needs a public member function of the class,
-         and fully specify how to use each such member functions
-    [3]. make any helping functions private member function
+            <2>. usually used with friend function, but there's exception 
+            ex.
+            ------------------------------
+            ------------------------------
 
 
+            <3>. rules
+
+                    + when you overloaded an operator, at least one argument of the resulting overloaded operator must be of a class type (have include one class type)
+
+                    + overload operator can be, but does not have to be friend of a class. It can ALSO be a member of the class or an ordinary(nonfriend) function
+
+                    ex.
+                    ------------------------------------------------------------------------------
+                    |                                                                            |
+                    | friendfriend Money operator +(const Money& amount1, const Money& amount2); |
+                    |                                                                            |
+                    |                               |                                            |
+                    |                               |                                            |
+                    |                               V                                            |
+                    |                                                                            |
+                    |               Money operator +(const Money& amount2);                      |  => at least one argument is a class type
+                    |                                                                            |
+                    ------------------------------------------------------------------------------
 
 
-# Qualifier 
+                    + you can only overload existing operators
 
-    [+] public
+                    + you cannot change the arity(稀有度) of an operator -> a unary operator cannot used as a binary operator and vice versa
 
-    [+] private
 
-    [+] protected
-      >> anything under the protected qualifier can be accessed by name in a derived class but not anywhere else.
-      >> so only accesseible in derived classes?
+            <4>. operators that could or could not be overloaded
 
-      [ex.]
-      
-      class xxx : public yyy
-      {
-          public:
-          ...
-          private: 
-          ...
-          protected: 
-            double fraction(double percent);
-      }
+                    + yes: 
 
-      [declaration]
-      double xxx:fraction(double percent)
-      {
-          return percent/100.0;
-      }
+                    + no: (.) (::) (.*) (?:)
+
+                    + must be member function: ([]) (=) (()) (->)
+
+                    + must be friend function: (>>) (<<)
+
+            
+            <5>. assignment operator (=)
 
 
 
-# Inheritance & Polymorphism
+    [ automatic type conversion ]:
 
-    [+]: when compiling the program, remember to include all .cpp file that are related, place the driver.cpp at first
-    [+]: that's saying, when compile a derived children class, you have to include at least three files
-         1. driver.cpp
-         2. child.cpp
-         3. parent.cpp
+        //
+
+
+    [ overload unary operator ]:
+
+        + ex.
+        -------------------------
+        -------------------------
+
+
+
+    [ overloading << and >> ]:
+
+        + ex.
+        -------------------------
+        -------------------------
+
+
+
+
+
+# Dynamic Arrays with Class
+
+
+    [ arrays of class ]:
+
+            <1>. Arrays of Classes
+            <2>. Arrays as member variables
+
+            + The base type of an array may be any type, so struct/class/ADTs are absolutely fine 
+            --------------------------------------------
+            |   Money amount[10];                      |
+            |                                          |
+            |   for (int i=0; i < 10; i++)             |
+            |   {                                      |
+            |       cin >> amount[i];                  |
+            |       cout << amount[i] << endl;         |
+            |   }                                      |
+            |                                          |
+            |   double cash = amount[3].getValue();    |
+            --------------------------------------------
+
+
+    [ dynamic arrays in class ]:
+
+            >> big three
+
+                <1>. Destructor
+
+                        + because dynamically allocated memory needed to delete after using it(occupy space in heap)
+                        + but they are like private member, cannot be call delete directly
+                        + therefore need declare a destructor for handling that
+
+                        ex. 
+                        ------------
+                        className::~className()
+                        {
+                            delete [] value;
+                        }
+
+
+                <2>. copy constructor (deep copy)
+
+                        + when we have derived class, and at the same time we have dynamic array
+                        + we could run into situation when passing dynamic array into two different function at the same time, (function calling function)
+                        + then 2 pointer pointing to the same address
+                        + if one of the pointer is finished using, and call destructor, and then the other pointer will also pointing to nothing
+                        + therefore we need copy constructor to make a exact same copy of the things we are working on, and changing one will not affect the other -- deep copy
+
+
+                        ex.
+                        ------------
+                        ------------
+
+
+                <3>. Overloading Assignment(=) Operator
+
+                        + the copy constructor is not automatically called when using assignment operator (=)
+                        + so we need to overload that, and make it called the copy constructor
+
+
+                        ex.
+                        -----------
+                        -----------
+
+
+            >> Functions Provided In Every Class
+
+                • (copy) assignment operator (=)
+                • Default constructor
+                • Copy Constructor
+                • Destructor
+
+                [ if you want any of the advanced behaviors specified in this section, you will need to explicitly define them youself ]
+
+
+
+            >> Destructor are called in bottom-up order, the reverse order of constructor => first the derived class destructor, and then the base class
+
+
  
+
+# Templates
+
+    >> making a C++ function a template can let it apply to variables of all types
+
+
+
+    [ HOW ]:
+
+            + 
+            ----------------
+            template<class T>
+                      |    |
+                      |    |
+                      |    |
+        refers to type;   Type Parameter: used within
+        can substitute    the function body; is 
+        with typename     replaced by supplied type
+
+
+            ex: start with a function, and then turn it into template
+            ---------------------------------------------------------
+            // start
+            void swapValues(int& variable1, int& variable2);
+
+            {
+                int temp;
+                temp = variable1;
+                variable1 = variable2;
+                variable2 = temp;
+            }
+            ---------------------------------------------------------
+            // turn
+            template<class T>                               // added
+            void swapValues(T& variable1, T& variable2)
+            {
+                T temp;
+                temp = variables1;
+                variable1 = variable2;
+                variable2 = temp;
+            }
+
+            ---------------------------
+            // in main
+            int main()
+            {
+                int num_a = 5, num_b = 3;
+                char letter_a = 'a', letter_b = 'b';
+
+                swapValues(num_a, num_b);
+                swapValues(letter_a, letter_b);
+            }
+            ---------------------------
+
+
+    [ Expand ]:
+
+            >> you may have function template with multiple type parameters, and just specify both in your template prefix
+
+                + template<class T1, class T2>
+
+
+            >> template can still non-template types
+            
+                + template<class T>
+                  void showStuff(int stuff1, T stuff2, T stuff3);
+
+
+
+    [ pay attention ];
+
+            <1>. function template definitions can be placed in one file and included in another file with #include (just like class)
+
+            <2>. some compiler do not support
+
+            <3>. can't use swapValue with a class that does not have a working or proper assignment operator
+
+            <4>. can't pass in any arrays to swapValues, since assignment does not work with array types
+
+
+
+    [ ex ]:
+
+
+
 
 
 # I/O 
@@ -431,37 +961,8 @@
     more on => [https://www.youtube.com/watch?v=Z_hPJ_EhceI]
 
 
-# virtual 
-    >> late binding
 
 
-    >> slicing problem
-
-
-# Friend Function
-    >> private variable data needed to be accessed directly without using the object of that class
-        => it's your friend, so it can access to your private variable
-
-    [ex.]
-    friend bool equal (birthDate d1, brithDate d2) {...}
-
-
-
-
-# overriding & overloading
-
-    >> creating multiple version of a same function
-
-    [!] return type is not part of the function, therefore changing the return type does not make overloading ok
-      int do_stuff(int) {..}
-      void do_stiff(int) {..}
-      --------------------
-      the above thing will mess up, you have to make the signature different
-
-
-# overloading operator
-    [+] add => operator +
-    [+] equal => operator ==
 
 
 
@@ -477,3 +978,162 @@
        2. if not, it will llook to see if there is a single-argument constructor that can use the other argument so that we can get Money + Money
           - as long as we have constructor that take int variable (25) to build a Money object
 
+
+
+
+
+
+# 
+
+    >> code analysis, trace output, more  short answer, multiple choices then midterm
+
+    >> getter, accessor, debug error, true/false, t/f and single sentence explanation
+
+    >> inhertiance, ploymorsphism, friend function, template, 
+
+    >> focus on back half of the class, object oriented programming
+
+    >> classes (don't worry about struct, just look through structs on PPT)
+
+    >> define member function, how to write, how to use, how is the general format of classes
+
+    >> scope resolution
+
+    >> creating object, dot operator
+
+    >> why do we need public and private members, hide something from the users, so they don't need to worry about that, let only developer do that, so when people use it they could focus more on the class itself
+       : do you need to know how .length() is implement? No, you just need to know how to use it 
+
+    >> public & private members
+
+    >> accessor and mutator, get private member out of the function, know to write individual getter
+
+    >> constructor, initialize object; default and custom constructor, give it default value in .cpp declaration 
+
+    >> abstract data, how to implement, .h .cpp, why do we need that?
+
+    >> know how to use include guard
+        #ifndef <NAMEOFCLASS>_H:
+        #define <NAMEOFCLASS>_H:
+
+        < the rest of your code goes here >
+
+        # endif
+
+    >> inheritance basics, 
+
+        BankAccount
+
+        Checking Account Savings Account
+
+        children could have their own method, but they are still BackAccount, they could use all the method their parent class has
+
+        + how to write derived class
+        + overload the constructor in derived class
+        + call constructor, top-down calling order for calling constructor when creating an object (p10 inheritance PPT)
+
+
+    >> this pointer
+
+        when use in the a class constructor, or other places in class, you are pointing to the instance of this class.
+
+        so to say, you have a paramter named "x", and you also have a member variable named "x" as well
+
+        when you takes the parameter in, and you have remove confusion so that member variable is member variables, parameter is paremeter
+
+        this->x = x: assigning the parameter x to the member variables x of this class
+
+        basically, it is just pointer pointing to some class, so we can correctly refers it
+
+
+    >> derived class could have access to all the public function in the base account
+
+        you can pass parameter to test checking account is bankaccount or not, parameter bankaccount can take, it's derived class checking account could also take
+
+
+    >> access private only with function call them or getter/setting
+
+        protected qualifier: our children could accessing member under directly without setter/getter
+
+        public qualifier: everyone could access to things under
+
+        private qualifier: not one can access to things under expect setter/getter
+
+
+    >> redefinition of a member function
+
+        new function for derived class
+
+        but you can also parent with scope resolution 
+
+
+    >> the difference between Function redefining and overloading
+
+
+    >> late binding (polymorphism): virtual function
+
+
+    >> friends function
+
+        An equality functions
+
+        const Parameter Modifier
+        
+
+    >> overload operator
+
+        programming proportion, there will be at least one ask you to implement operator overloading
+
+        add +
+        sub -
+        ...
+
+        remember which can be overloaded, which cannot
+        you cannot make new operator
+        some details and requirement, some must be friend, some must be member, sort of that
+
+        at least one parameter needs to be class object when doing operator overloading
+
+        
+        insertion operator
+        extraction operator
+
+            return ostream / istream
+
+
+    >> when to use which? member or friend
+
+        when handling only one input/class object, you can use member
+
+        when handling more than one input(class object), you better using friend
+
+
+    >> arrays in classes
+
+        array pointer inside the class, dynamic memory in class
+
+        big three: 
+            1. copy constructor(deep copy: changing won't affecting the other)
+            2. destructor delete dynmaic memory (bottom-up)
+            3. overloading the assignment operator
+
+        at least understand how to do big three in programming, at least you have some reference in the final for programming part
+
+
+
+    >> knowing how to do template function
+
+        know the syntax
+
+        how to turn a regular function to a template
+
+
+
+
+    >> scratch paper
+
+    >> partial credit
+
+    >> programming part - three questions, complete three 
+
+    >> operator overloading, how to compile file like .cpp .h, how to write them in correct format inside 
