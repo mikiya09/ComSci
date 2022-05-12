@@ -435,9 +435,10 @@
 
             + Properties
 
-            < 1 >. a derived class has access to all of the member functions/variables of the base class plus its own members
+            < 1 >. a derived class has access to all of the member funct/var of the base class plus its own members
 
-            < 2 >. ex. passing a parameters required by base class. This parameter could also be passed to its derived class
+            < 2 >. passing a parameters required by base class, 
+                   this parameter could also be passed to its derived class for testing
 
                ------------------               ---------------
                | derived class  |  -- is a -->  | base class  |
@@ -466,18 +467,18 @@
 
             < 5 >. this (pointer)
 
-            -----------------------------------------------------------------------------------------------------------------
-            | when use in the a class constructor, or other places in class, you are pointing to the instance of the class  |
-            |                                                                                                               |
-            | so to say, you have a paramter named "x", and you also have a member variable named "x" as well               |
-            |                                                                                                               |
-            | when you takes the parameter in, and you have to remove confusion so that member variable is member variables |
-            | parameter is paremeter                                                                                        |
-            |                                                                                                               |
-            | this->x = x: assigning the parameter x to the member variables x of this class                                |
-            |                                                                                                               |
-            | basically, it is just pointer pointing to some class, so we can correctly refers it                           |
-            -----------------------------------------------------------------------------------------------------------------
+            ---------------------------------------------------------------------------------------------------------
+            | when use in the constructor, or other places in class, you are pointing to the instance of the class  |
+            |                                                                                                       |
+            | so to say, you have a paramter named "x", and you also have a member variable named "x" as well       |
+            |                                                                                                       |
+            | when you takes the parameter in                                                                       |
+            | and you have to remove confusion so that member variable is member variables, parameter is paremeter  |
+            |                                                                                                       |
+            | this->x = x: assigning the parameter x to the member variables x of this class                        |
+            |                                                                                                       |
+            | basically, it is just pointer pointing to some class, so we can correctly refers it                   |
+            ---------------------------------------------------------------------------------------------------------
 
 
         >> Protect Qualifier (inheritance pitfalls)
