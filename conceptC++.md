@@ -300,7 +300,7 @@
     |                                                                                               |
     |                                                                                               |
     |   // intended to create multiple copies of the static variable i for multiple objects         |
-    |   // but nothing happnen                                                                      |
+    |   // but nothing happnen, you will find unreferneced error                                    |
     |   int main()                                                                                  |
     |   {                                                                                           |
     |     Demo obj1;                                                                                |
@@ -490,7 +490,9 @@
 
                     > make all member variables private
 
-                + protected: derived classes could access directly without member function only for derived class
+                + protected: derived classes could access directly without member function
+
+                    > only for us and our children
 
 
         < 3 >. properties
@@ -1568,7 +1570,7 @@
     |       if (newLength > maxLength)                                                          |
     |       {                                                                                   |
     |           // in our case we have private pointer of an array                              |
-    |           // if the size is not match with the right side                                 |
+    |           // if the size is not match with the right side (for assigning right to left)   |
     |           // set the rightSide's length as the one                                        |
     |           // and then the same procedure                                                  |
     |           delete [] value;                                                                |
