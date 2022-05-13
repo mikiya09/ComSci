@@ -150,7 +150,7 @@
     ---------------------------------------------------------------------------------
 
 
-# dynamic array
+# Dynamic Array
     
     [ what is this? ]:
 
@@ -196,7 +196,7 @@
                      but memory still there didn't get deleted --> causing memory leak
 
 
-# getline
+# Getline
 
         >> read the whole line, ignore the space in the user input 
 
@@ -240,11 +240,9 @@
 
 
 
-# ================================================
 
 
-
-# static
+# Static
 
     [ Properties ]:
 
@@ -363,7 +361,7 @@
 
 
 
-# CLASS
+# Class
 
 
     [ Def ]: a data type whose variables are objects, themselves are variables with member functions and data values
@@ -1172,7 +1170,7 @@
     |   // unary overload                          |       cout << "o5: " << o5 << endl;                            |
     |   Operation operator -(const Operation& o)   |       cout << "o6: " << o6 << endl;                            |
     |   {                                          |                                                                |
-    |       Operation temp;                        |                                                                |
+    |       Operation temp;                        |       }                                                        |
     |                                              ------------------------------------------------------------------
     |       temp.count = -o.count;                                      |
     |       return temp;                                                |
