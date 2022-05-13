@@ -7,160 +7,230 @@
 
 # Call by Value
     >> meaning: execute lines of code or function interact with values (variables)
-    [!] everytime a value gets called, a copy of that value is created, ex). 
+    [!] everytime a value gets called, a copy of that value is created
 
-    void Demo(int i) 
-    {
-      i ++;
-    }
-
-    int main()
-    {
-      int NUM = 5;
-      Demo(NUM);
-      cout << NUM << endl;
-    }
-
-    NUM won't change, because Demo function make a copy of NUM represented as i inside the function, when leaving the function, the copy is gone
-    so NUM in main function won't change, still print out 5
+    ex.
+    -----------------------------
+    |                           |
+    |   void Demo(int i)        |
+    |   {                       |
+    |     i ++;                 |
+    |   }                       |
+    |                           |
+    |   int main()              |
+    |   {                       |
+    |     int NUM = 5;          |
+    |     Demo(NUM);            |
+    |     cout << NUM << endl;  |
+    |   }                       |
+    |                           |
+    -----------------------------
+    // NUM won't change, because Demo function make a copy of NUM represented as i inside the function
+    // when leaving the function, the copy is gone
+    // so NUM in main function won't change, still print out 5
 
     =============================
-    [!]: when program gets larger, function gets more complex, lots of copies will be made, and thus take out lots of memory, and slow down the program
+    [!]: when program gets larger, function gets more complex, 
+         lots of copies will be made, and thus take out lots of memory, and slow down the program
 
 
 
 # Reference
 
-    => when a value is stored in memory, two things is created
-       [1]. the value itself that stored in the memory
-       [2]. and its address
-       these two are together
+    [ some concept ]:
+
+        >> when a value is stored in memory, two things is created
+           <1>. the value itself that stored in the memory
+           <2>. and its address
+           these two are together
  
-    => &: reference operator
-    => &a: the address of a
-    => [ex]
+        >> &: reference operator
+        
+        >> &a: the address of a
+        
+        ex.
+        ---------------------------------------------------------
+        |                                                       |
+        |   int a = 5;                                          |
+        |   int& ref = a;                                       |
+        |                                                       |
+        |   cout << a << &a << ref << endl;                     |
+        |                                                       |
+        |   // we will get 5 for a                              |
+        |   // a series of numbers for &a as the address of a   |   
+        |   // get 5 for ref                                    |
+        |                                                       |
+        ---------------------------------------------------------
 
-       int a = 5;
-       int& ref = a;
-
-       cout << a << &a << ref << endl;
-       1. we will get 5 for a,
-       2. a series of numbers for &a as the address of a
-       3. get 5 for ref
-
-    =====================================
-    => reference is just an alias for an existing variable, didn't create new thing
-
-    int& ref = a    // ref is called the reference, or the alias of a
-    &a              // &a is not called refernece, it is the address of a
 
 
-    [call by refernece]
-    when calling a function by reference, function will take variables as input, and passing their address into the function;
+    [ call by reference ]:
 
-    [!]=> noted this truth:
+        >> reference is just an alias for an existing variable, didn't create new thing
 
-          - when you are int& ref = 7, is the same as saying a = 7 
 
-          - when you call the funciton, only variable will be created in the memory, reference will not
-            it's just alias, and I think it will store at different part of the memory aside from where store variable value
+            -----------------------------------------------------------------------------
+            |   int& ref = a    // ref is called the reference, or the alias of a       |
+            |   &a              // &a is not called refernece, it is the address of a   |
+            ---------------------------------------------------------------------- ------
 
-    => dereferencing:
-       - passing the address of a variable to a function, this function then could modify the value stored on that address directlty
+
+        >> when calling a function by reference, function will take variables as input
+           and passing their address into the function;
+
+
+
+    [ pay attention ]:
+
+        + when you are int& ref = 7, is the same as saying a = 7 
+
+        + when you call the funciton, only variable will be created in the memory, reference will not
+          it's just an alias
+          and I think it will store at different part of the memory aside from where store variable value
+
+
+
+
+    [ dereferencing ]:
+
+        >> passing the address of a variable to a function
+           this function then could modify the value stored on that address directlty
 
 
 # Pointer
 
-    => pointers are variables that store the address of a value (a series of number ≈ 12?)
-       [+]. the difference compare to call by value is that it will modify the value at certain address directly
-       [+]. so not copy of the value is made, free some memory
+    [ defintion ]:
+
+        >> pointers are variables that store the address of a value (a series of number ≈ 12?)
+
+
+    [ v.s. call by value ]:
+       
+       >> the difference compare to call by value is that it will modify the value at certain address directly
+       >> so not copy of the value is made, free some memory
         
+        ex.
+        -----------------------------------------------------------------------------------------------------
+        |                                                                                                   |
+        |    int a = 5;         // int is the type, a is integer variable that store 5 right now            |
+        |   int* b = &5;        // int* is the type, b is a pointer variable that store the address of 5    |
+        |                       // because of int in the front                                              |
+        |                       // this pointer could only pointing to integer value/variable               |
+        |                                                                                                   |
+        -----------------------------------------------------------------------------------------------------
 
-    => [ex].
-        int a = 5;             - int is the type, a is integer variable that store 5 right now
-        int* b = &5;           - int* is the type, b is a pointer variable that store the address of 5, 
-                                 because of int in the front, this pointer could only pointing to integer value/variable
 
-
-    => int[] sotre in the stack memory
-       - stack memory will be deleted automatically, but heap will not as long as the program is running
-
-    => new int[] wil store in the heap memory (pointer/dynamic memory)
-       - allocate: declare a memory of space for using in heap
-       - deallocate: delete the memory in heap
+    [ memory ]:
     
-    [ex]:
-    int main() {
+        >> int[] sotre in the stack memory
+            + stack memory will be deleted automatically, but heap will not as long as the program is running
 
-      int x = 5;
-      int *y = &x;
-
-      cout << y << endl; // pointer: address
-      cout << *y << endl;// (dereferencing: going to the location/address and accessing the data store on top of it) 
-      return 0;
-    }
+    
+        >> new int[] wil store in the heap memory (pointer/dynamic memory)
+            + allocate: declare a memory of space for using in heap
+            + deallocate: delete the memory in heap
+    
+    ex.
+    ---------------------------------------------------------------------------------
+    |   int main() {                                                                |
+    |                                                                               |
+    |   int x = 5;                                                                  |
+    |   int *y = &x;                                                                |
+    |                                                                               |
+    |   // pointer: address                                                         |
+    |   cout << y << endl;                                                          |
+    |                                                                               |
+    |   // dereferencing:                                                           |
+    |   // going to the locatin/address and accessing the data store on top of it   |
+    |   cout << *y << endl;                                                         |
+    |   return 0;                                                                   |
+    |                                                                               |
+    |   }                                                                           |
+    |                                                                               |
+    ---------------------------------------------------------------------------------
 
 
 # dynamic array
-    : create temporary array in the working memory
+    
+    [ what is this? ]:
 
-    int main() {
+            >> create temporary array in the working memory
 
-      int size;
-      cout << "Size: ";
-      cin >> size;
-      int *myArray = new int[size];
 
-      for (int i=0; i < size; i++) {
-        cout << "Array[" << i << "] ";
-        cin >> *(myArray+i);
-      }
+    ex.
+    -------------------------------------------------------------------------------------
+    |                                                                                   |
+    |   int main() {                                                                    |
+    |                                                                                   |
+    |     int size;                                                                     |
+    |     cout << "Size: ";                                                             |
+    |     cin >> size;                                                                  |
+    |     int *myArray = new int[size];                                                 |
+    |                                                                                   |
+    |     for (int i=0; i < size; i++) {                                                |
+    |       cout << "Array[" << i << "] ";                                              |
+    |       cin >> *(myArray+i);                                                        |
+    |     }                                                                             |
+    |                                                                                   |
+    |     for (int i = 0; i < size; i++) {                                              |
+    |       // cout << myArray[i] << " ";                                               |
+    |       cout << *(myArray+i);                                                       |
+    |     }                                                                             |
+    |     cout << endl;                                                                 |
+    |                                                                                   |
+    |     // deallocated:          delete the dynamic array after using it              |
+    |     delete[]myArray;      // delete the value store in the allocate memory space  |   
+    |     myArray = NULL;       //  delete the pointer, so myArray pointing to nothing  |
+    |                                                                                   |
+    |     return 0;                                                                     |
+    |   }                                                                               |
+    |                                                                                   |
+    -------------------------------------------------------------------------------------
 
-      for (int i = 0; i < size; i++) {
-        // cout << myArray[i] << " ";
-        cout << *(myArray+i);
-      }
-      cout << endl;
+    [ memory leak ]:
 
-      // deallocated, delete the dynamic array after using it
-      delete[]myArray; // delete the value store in the allocate memory space 
-      myArray = NULL; //  delete the pointer, so myArray pointing to nothing
-
-      return 0;
-    } 
-
-    => Memory leak
-      - 1. y = NULL: means to make pointer not pointing to anything
-      - 2. delete[]x: means to delete the memory in the location
-      - do 2 first, don't do 1 before 2; because that cause pointer pointing to nowhere, but memory still there didn't get deleted --> causing memory leak
+            >> Memory leak
+                <1>. y = NULL: means to make pointer not pointing to anything
+                <2>. delete[]x: means to delete the memory in the location
+                <3>. do 2 first, don't do 1 before 2; because that cause pointer pointing to nowhere
+                     but memory still there didn't get deleted --> causing memory leak
 
 
 # getline
-    :read the whole line, ignore the space in the user input 
 
-    int main() {
+        >> read the whole line, ignore the space in the user input 
 
-    string str;
-
-    cout << "Enter your name: ";
-    getline(cin, str);
-    cout << "Hello, " << str << " Welcome" << endl;
-
-    return 0;
-    }
-
+        ex.
+        ---------------------------------------------------------
+        |                                                       |
+        |   int main() {                                        |
+        |                                                       |
+        |   string str;                                         |
+        |                                                       |
+        |   cout << "Enter your name: ";                        |
+        |   getline(cin, str);                                  |
+        |   cout << "Hello, " << str << " Welcome" << endl;     |
+        |                                                       |
+        |   return 0;                                           |
+        |   }                                                   |
+        |                                                       |
+        ---------------------------------------------------------
 
 
 # Char v.s. String
 
-    [!] they are not equal
+    <1>. they are not equal
     
-    [+]: char (data type)
-        - is array type data, but store character instead of number
-        - when using operator on them, we can actually comparing the address of the first element inside the char array
-        - therefore we can only use single quote, because char can only compare with char data type
 
-    [+]: string (data type)
+    <2>. char (data type)
+            + is array type data, but store character instead of number
+            + when using operator on them,
+              we can actually comparing the address of the first element inside the char array
+            + therefore we can only use single quote, because char can only compare with char data type
+
+
+    <3>. string (data type)
+        
         * we have cstring and standard string library in C++
         - when #include <string>, we are refering the standard string library 
         - so when comparing the string object, we could use double quote
@@ -171,6 +241,117 @@
 
 
 # ================================================
+
+
+
+# static
+
+    [ Properties ]:
+
+        >> when a variable is declared as static
+           space for the static cariable is allocated once even if the function is called multiple time
+    
+    ex.
+    ---------------------------------------------------------
+    |                                                       |
+    |   void demo()                                         |
+    |   {                                                   |
+    |     static int count = 0;         // declare here     |
+    |     cout << count << " ";                             |
+    |                                                       |
+    |     count ++;                                         |
+    |   }                                                   |
+    |                                                       |
+    |   int main()                                          |
+    |   {                                                   |
+    |     for (int i=0; i < 5; i++)                         |
+    |       demo();                                         |
+    |     return 0;                                         |
+    |   }                                                   |
+    |                                                       |
+    ---------------------------------------------------------
+
+        < output >: 0 1 2 3 4 
+    
+        + here the variable count is declared as static
+        + so its value is carried through the function calls (only run once)
+        + It is not getting initilized every time the function is called.
+
+
+
+    [ static variable in class]:
+
+        >> same idea
+            + as static variable in class are initialized only once 
+            + as they are allocated space in separate staic storage so,
+            + the static variables in a class are shared by the objects. 
+
+        >> there cannot be multiple copies of sa,e static variables for different objects
+           cannot be initialized using constructors
+
+    ex.
+    -------------------------------------------------------------------------------------------------
+    |                                                                                               |
+    |   class Demo                                                                                  |
+    |   {                                                                                           |
+    |     public:                                                                                   |
+    |       static int i;                                                                           |
+    |                                                                                               |
+    |       Demo() {// do nothing};                                                                 |
+    |   };                                                                                          |
+    |                                                                                               |
+    |                                                                                               |
+    |   // intended to create multiple copies of the static variable i for multiple objects         |
+    |   // but nothing happnen                                                                      |
+    |   int main()                                                                                  |
+    |   {                                                                                           |
+    |     Demo obj1;                                                                                |
+    |     Demo obj2;                                                                                |
+    |     obj1.i = 2;                                                                               |
+    |     obj2.i = 3;                                                                               |
+    |                                                                                               |
+    |     cout << obj1.i << " " << obj2.i << endl;                                                  |
+    |   }                                                                                           |
+    |                                                                                               |
+    |                                                                                               |
+    |   // a static variable inside a class should be initialized explicitly                        |
+    |   // by the user using the class name and scope resolution operator(::) outside the class     |
+    |   // continue from above                                                                      |
+    |   int Demo::i = 1;                                                                            |
+    |                                                                                               |
+    |   int main()                                                                                  |
+    |   {                                                                                           |
+    |     Demo obj;                                                                                 |
+    |     cout << obj.i << endl;                                                                    |
+    |   }                                                                                           |
+    |                                                                                               |
+    -------------------------------------------------------------------------------------------------
+
+
+
+    [ static function in class]:
+
+        >>  same idea of static variables in a class
+            + the main idea is that it static function could be called without the existence of class object 
+
+    ex.
+    ---------------------------------
+    |                               |
+    |   class Demo                  |
+    |   {                           |
+    |   public:                     |
+    |       static void printMsg()  |
+    |       {                       |
+    |           cout << "Welcome";  |
+    |       }                       |
+    |   };                          |
+    |                               |
+    |   int main()                  |
+    |   {                           |
+    |       Demo::printMsg();       |
+    |   }                           |
+    |                               |
+    ---------------------------------
 
 
 
@@ -653,6 +834,42 @@
             -----------------------------------------
 
 
+
+
+# this
+
+
+    [ what is that ]:
+
+            >> is a class type pointer
+                + Demo* d = this;
+
+    ex.
+    -------------------------------------------------------------------------------------
+    |                                                                                   |
+    |   class Demo                                                                      |
+    |   {                                                                               |
+    |       int x, y;                                                                   |
+    |                                                                                   |
+    |       Demo(int x, int y)                                                          |
+    |       {                                                                           |
+    |           this->x = x;      // it's the same as dereferencing: (*this).x = x;     |
+    |       }                                                                           |
+    |   }                                                                               |
+    |                                                                                   |
+    -------------------------------------------------------------------------------------
+
+    => the first x is the member variable of the class, the second x is the variable that Demo constructor will take in
+
+    more on => [https://www.youtube.com/watch?v=Z_hPJ_EhceI]
+
+
+
+
+
+
+
+
 # Polymorphism
 
 
@@ -1056,6 +1273,69 @@
 
 
 
+    [ formatting ]:
+
+    ex.
+    ---------------------------------------------------------
+    |                                                       |
+    |   void BankAccount::output(ostream& outs) const       |
+    |   {                                                   |
+    |       outs.setf(ios::fixed);                          |
+    |       outs.setf(ios::showpoint);                      |
+    |       outs.precision(2);                              |
+    |       outs << "Print Balance: &" << balance << endl;  |
+    |   }                                                   |
+    |                                                       |
+    ---------------------------------------------------------
+    // when you call this function
+    // the input needed to pass to the function is "cout" --> like this backaccount.output(cout);
+
+
+
+
+# Const (parameter modifier)
+
+    [ at Front ]:
+
+        >> produce error when you attempt to change the parameter
+            + remember that when call by value is used, a copy of the variable will be made
+            + and as the program grow later, calculation becomes complex, copies increase 
+            + which will take out memory and will slow down the program
+
+    
+        // here we don't want amount1 and amount2 to change, these two are class objects
+        >> Money add(const Money& amount1, const Money& amount2);
+    
+
+    [ At the End ]:
+
+        >> void output(ostream& outs) const;
+            + this means that, if we have class object m1(from Money class), and we use m1.output(). 
+            + The const in the end of output function means that this function will not modify m1
+            + for example, there will be private data that is associated with m1, and we don't want them to change
+    
+            => so it becomes a read-only function
+
+
+    ex.
+    -----------------------------------------------------------------------------------------------------
+    |                                                                                                   |
+    |   const int MAX_NUM = 90;                                                                         |
+    |                                                                                                   |
+    |   const int* a = new int;     // cannot change the content(address) of that pointer pointing to   |
+    |   no: *a = 2                                                                                      |
+    |   yes: a = 2                  // making the pointer pointing to something else                    |
+    |                               // although it's possible but 2 as address is not valid             |                
+    |                                                                                                   |
+    |   int* const a = new int;     // can change the content(address)                                  |
+    |                               // but cannot change the value that pointer pointing to             |
+    |   // yes: *a = 2                                                                                  |
+    |   // no:  a = &MAX_NUM                                                                            |
+    |                                                                                                   |
+    -----------------------------------------------------------------------------------------------------
+
+
+
 # Dynamic Arrays with Class
 
 
@@ -1098,12 +1378,34 @@
 
                 <2>. copy constructor (deep copy)
 
-                        + when we have derived class, and at the same time we have dynamic array
-                        + we could run into situation when passing dynamic array into two different function at the same time, (function calling function)
-                        + then 2 pointer pointing to the same address
-                        + if one of the pointer is finished using, and call destructor, and then the other pointer will also pointing to nothing
-                        + therefore we need copy constructor to make a exact same copy of the things we are working on, and changing one will not affect the other -- deep copy
+                        + why we need copy constructor?
+                        ---------------------------------------------------------------------------------
+                        |                                                                               |
+                        |   when we have derived class, and at the same time we have dynamic array      |
+                        |   we could run into situation                                                 |
+                        |   when passing dynamic array into two different function at the same time     |
+                        |   such as function calling function                                           |
+                        |                                                                               |
+                        |--------------------------------------------------------------------------------
+                        |                                                                               |
+                        |   then 2 pointer pointing to the same address                                 |
+                        |   if one of the pointer is finished using, and call destructor                |
+                        |   and then the other pointer will also pointing to nothing                    |
+                        |   therefore we need copy constructor to make a exact same copy of the things  |
+                        |   we are working on, and changing one will not affect the other -- deep copy  |
+                        |                                                                               |
+                        ---------------------------------------------------------------------------------
 
+
+                        + In circumstances that it will automatically be call 
+                            
+                            <1>. When a class object is declared and is initialized by another 
+                                 object of the same type
+
+                            <2>. when a function returns a value of the class type
+
+                            <3>. whenever an argument of the class tyep is "plugged in" for 
+                                 a call-by-value parameter
 
                         ex.
                         ------------
@@ -1128,11 +1430,163 @@
                 • Copy Constructor
                 • Destructor
 
-                [ if you want any of the advanced behaviors specified in this section, you will need to explicitly define them youself ]
+                [ if you want any of the advanced behaviors specified in this section 
+                                      you will need to explicitly define them youself ]
 
 
 
-            >> Destructor are called in bottom-up order, the reverse order of constructor => first the derived class destructor, and then the base class
+            >> Destructor are called in bottom-up order
+               the reverse order of constructor => first the derived class destructor, and then the base class
+
+
+    [ ex ].
+    -------------------------------------------------------------------------------------
+    |   // .h                                                                           |
+    |                                                                                   |
+    |   #ifndef STRINGVAR_H                                                             |
+    |   #define STRINGVAR_H                                                             |
+    |                                                                                   |
+    |                                                                                   |
+    |   #include <iostream>                                                             |
+    |   using namespace std;                                                            |
+    |                                                                                   |
+    |                                                                                   |
+    |   class StringVar {                                                               |
+    |   public:                                                                         |
+    |                                                                                   |
+    |       // default constructor                                                      |
+    |       StringVar();                                                                |
+    |                                                                                   |
+    |       StringVar(int size);                                                        |
+    |                                                                                   |
+    |       StringVar(const char a[]);                                                  |
+    |                                                                                   |
+    |       // copy constructor                                                         |
+    |       StringVar(const StringVar& stringObject);                                   |
+    |                                                                                   |
+    |       // Destructor                                                               |
+    |       ~StringVar();                                                               |
+    |                                                                                   |
+    |       // length of the current string value                                       |
+    |       int length() const;                                                         |
+    |                                                                                   |
+    |       // take string input                                                        |
+    |       void inputLine(istream& ins);                                               |
+    |                                                                                   |
+    |       // overload insertion operator with friend function                         |
+    |       friend ostream& operator <<(ostream& outs, const StringVar& theString);     |
+    |                                                                                   |
+    |       // assignment operator overload                                             |
+    |       void operator =(const StringVar& rightSide);                                |
+    |                                                                                   |
+    |   private:                                                                        |
+    |       char* value;                                                                |
+    |       int maxLength;                                                              |
+    |                                                                                   |
+    |   };                                                                              |
+    |                                                                                   |
+    |   #endif                                                                          |
+    |                                                                                   |
+    ---------------------------------------------------------------------------------------------
+    |                                                                                           |
+    |   // .cpp                                                                                 |
+    |                                                                                           |
+    |    #include "stringVar.h"                                                                 |
+    |    #include <cstdlib>                                                                     |
+    |    #include <cstddef>                                                                     |
+    |    #include <cstring>                                                                     |
+    |                                                                                           |
+    |   // default constructor                                                                  |
+    |   StringVar::StringVar() : maxLength(100)                                                 |
+    |   {                                                                                       |
+    |       // value is a pointer                                                               |
+    |       value = new char[maxLength + 1];                                                    |
+    |       // +1 because char array will need to add null value '/0' in the array              |
+    |       // +1 so that we can have our string in full size                                   |
+    |       value[0] = '\0';                                                                    |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |   
+    |   // custom constructor                                                                   |
+    |   StringVar::StringVar(int size) : maxLength(size)                                        |
+    |   {                                                                                       |
+    |       value = new char[maxLength + 1];    // +1 for '\0'                                  |
+    |       value[0] = '\0';                                                                    |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   StringVar::StringVar(const char a[]) : maxLength(strlen(a))                             |
+    |   {                                                                                       |
+    |       value = new char[maxLength + 1];                                                    |
+    |       strcpy(value, a);                   // copy the value from a[] to value             |
+    |   }                                                                                       |
+    |                                                                                           |
+    |   // copy constructor                                                                     |
+    |   // it just a copy of result that originally a constructor will do                       |
+    |   // so it's still a constructor, don't return any value                                  |
+    |   StringVar::StringVar(const StringVar& stringObject) : maxLength(stringObject.length())  |
+    |   {                                                                                       |
+    |       value = new char[maxLength + 1];    // +1 for '\0'                                  |
+    |       strcpy(value, stringObject.value);  // you are doing a deep copy                    |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   // destructor                                                                           |
+    |   StringVar::~StringVar()                                                                 |
+    |   {                                                                                       |   
+    |       delete [] value;                                                                    |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   // return size of cstring                                                               |
+    |   int StringVar::length() const                                                           |
+    |   {                                                                                       |
+    |       return strlen(value);                                                               |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   // use iostream                                                                         |
+    |   void StringVar::inputLine(istream& ins)                                                 |
+    |   {                                                                                       |
+    |       ins.getline(value, maxLength + 1);                                                  |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   // insertion operator overloading                                                       |
+    |   ostream& operator <<(ostream& outs, const StringVar& theString)                         |
+    |   {                                                                                       |
+    |       outs << theString.value;                                                            |
+    |       return outs;                                                                        |
+    |   }                                                                                       |
+    |                                                                                           |
+    |                                                                                           |
+    |   // assignment operator overloading                                                      |
+    |   // goal: is to implement copy constructor mannully                                      |
+    |   // because assignment operatpr won't do that                                            |
+    |   void StringVar::operator =(const StringVar& rightSide)                                  |
+    |   {                                                                                       |
+    |       // make should the private value are set correctly                                  |
+    |       int newLength = strlen(rightSide.value);                                            |
+    |       if (newLength > maxLength)                                                          |
+    |       {                                                                                   |
+    |           // in our case we have private pointer of an array                              |
+    |           // if the size is not match with the right side                                 |
+    |           // set the rightSide's length as the one                                        |
+    |           // and then the same procedure                                                  |
+    |           delete [] value;                                                                |
+    |           maxLength = newLength;                                                          |
+    |           value = new char[maxLength + 1];                                                |
+    |       }                                                                                   |
+    |       // here is just a different of copying all elements                                 |
+    |       for (int i=0; i < newLength; i++) {                                                 |
+    |           value[i] = rightSide.value[i];                                                  |
+    |       value[newLength] = '\0';                                                            |
+    |       }                                                                                   |
+    |   }                                                                                       |
+    |                                                                                           |
+    ---------------------------------------------------------------------------------------------
+
+
 
 
  
@@ -1193,7 +1647,8 @@
 
     [ Expand ]:
 
-            >> you may have function template with multiple type parameters, and just specify both in your template prefix
+            >> you may have function template with multiple type parameters, 
+               and just specify both in your template prefix
 
                 + template<class T1, class T2>
 
@@ -1207,7 +1662,8 @@
 
     [ pay attention ];
 
-            <1>. function template definitions can be placed in one file and included in another file with #include (just like class)
+            <1>. function template definitions can be placed in one file and included in another file with #include
+                 (just like class)
 
             <2>. some compiler do not support
 
@@ -1223,346 +1679,29 @@
 
 
 
-# I/O 
-
-    >> istream and ostream (formatting)
-
-    ===================================
-    [ex.]
-
-    void BankAccount::output(ostream& outs) const 
-    {
-        outs.setf(ios::fixed);
-        outs.setf(ios::showpoint);
-        outs.precision(2);
-        outs << "Print Balance: &" << balance << endl;
-    }
-    [+]: when you call this function, the input needed to pass to the function is "cout" --> like this backaccount.output(cout);
-         "cout is also a object, think of like that"
-
-
-    ===================================
-    [ex.]
-    void BankAccount::input(istream& ins)
-    {
-        ins >> balance;
-    }
-
-    [+]: when calling it --> bankaccount.input(cin);
-         - in terminal, you will automatically be prompt to enter something 
-
-
-# const (parameter modifier)
-    [Front!] 
-    remember that when call by value is used, a copy of the variable will be made, and as the program grow later, calculation becomes complex, copies increase 
-    => which will take out memory and will slow down the program
-    => produce error when you attempt to change the parameter
-
-    >> Money add(const Money& amount1, const Money& amount2);
-    here we don't want amount1 and amount2 to change, these two are class objects
-    
-
-    [End!]
-    >> void output(ostream& outs) const;
-    => this means that, if we have class object m1(from Money class), and we use m1.output(). 
-       The const in the end of output function means that this function will not modify m1
-    => for example, there will be private data that is associated with m1, and we don't want them to change
-    
-    => so it becomes a read-only function
-
-
-    [ex]:
-    const int MAX_NUM = 90;
-
-    const int* a = new int;   // cannot change the content(address) of that pointer pointing to
-    no: *a = 2
-    yes: a = 2   // making the pointer pointing to something else, although it's possible but 2 as address is not valid
-
-
-    int* const a = new int;   // can change the content(address), but cannot change the value that pointer pointing to
-    yes: *a = 2
-    no:  a = &MAX_NUM
-
-
-# static
-    ============ ex ============
-    => static variables in a function
-       : when a variable is declared as static, space for the static cariable is allocated once even if the function is called multiple time
-    
-    void demo()
-    {
-      static int count = 0;         -------- here --------
-      cout << count << " ";
-
-      count ++;
-    }
-
-    int main() 
-    {
-      for (int i=0; i < 5; i++)
-        demo();
-      return 0;
-    }
-
-    [output]: 0 1 2 3 4 
-    here the variable count is declared as static, so its value is carried through the function calls (only run once)
-    It is not getting initilized every time the function is called.
-    ============ ex ============
-
-    -----------------------------------------------------------------------------------------------------------------------------
-
-    ============ ex ============
-    => static variables in a class
-       : same idea, as static variable in class are initialized only once as they are allocated space in separate staic storage so,
-         the static variables in a class are shared by the objects. 
-       : there cannot be multiple copies of sa,e static variables for different objects, cannot be initialized using constructors
-
-    class Demo
-    {
-      public: 
-        static int i;
-
-        Demo() {// do nothing};
-    };
-
-
-    => intended to create multiple copies of the static variable i for multiple objects, but nothing happnen
-    int main()
-    {
-      Demo obj1;
-      Demo obj2;
-      obj1.i = 2;
-      obj2.i = 3;
-
-      cout << obj1.i << " " << obj2.i << endl;
-    }
-
-    => a static variable inside a class should be initialized explicitly by the user using the class name and scope resolution operator(::) outside the class
-    [continue from above]
-    int Demo::i = 1;
-
-    int main() 
-    {
-      Demo obj;
-      cout << obj.i << endl;
-    }
-
-    ============ ex ============
-
-    -----------------------------------------------------------------------------------------------------------------------------
-
-    ============ ex ============
-    => Static functions in a class: same idea of static variables in a class
-    => the main idea is that it static function could be called without the existence of class object 
-
-    class Demo
-    {
-        public:
-          static void printMsg()
-          {
-            cout << "Welcome";
-          }
-    };
-
-    int main() 
-    {
-      Demo::printMsg();
-    }
-
-
-# this
-
-    => is a class type pointer
-    => Demo* d = this;
-
-    ========= ex ========
-    class Demo
-    {
-      int x, y;
-
-      Demo(int x, int y)
-      {
-        this->x = x;      // it's the same as dereferencing: (*this).x = x;
-      }
-    }
-    => the first x is the member variable of the class, the second x is the variable that Demo constructor will take in
-
-    more on => [https://www.youtube.com/watch?v=Z_hPJ_EhceI]
-
-
-
-
-
-
 
 # Automatic Type Conversion
-    [ex.]
     
-    Money BaseAmount(100, 60), fullAmount;
-    fullAmount = baseAmount + 25;
-    fullAmount.output(cout);
+    ex.
+    ---------------------------------------------
+    |                                           |
+    |   Money BaseAmount(100, 60), fullAmount;  |
+    |   fullAmount = baseAmount + 25;           |
+    |   fullAmount.output(cout);                |
+    |                                           |
+    ---------------------------------------------
+    [ definition ]:
 
-    => when the system sees that + expression
-       1. It first checks to see if + has been overloaded to work with the combo of variables
-       2. if not, it will llook to see if there is a single-argument constructor that can use the other argument so that we can get Money + Money
-          - as long as we have constructor that take int variable (25) to build a Money object
+            >> when the system sees that + expression
+                <1>. It first checks to see if + has been overloaded to work with the combo of variables
+                <2>. if not, 
+                     it will llook to see if there is a single-argument constructor 
+                     that can use the other argument so that we can get Money + Money
 
+                <3>. as long as we have constructor that take int variable (25) to build a Money object
 
 
 
 
 
-# 
 
-    >> code analysis, trace output, more  short answer, multiple choices then midterm
-
-    >> getter, accessor, debug error, true/false, t/f and single sentence explanation
-
-    >> inhertiance, ploymorsphism, friend function, template, 
-
-    >> focus on back half of the class, object oriented programming
-
-    >> classes (don't worry about struct, just look through structs on PPT)
-
-    >> define member function, how to write, how to use, how is the general format of classes
-
-    >> scope resolution
-
-    >> creating object, dot operator
-
-    >> why do we need public and private members, hide something from the users, so they don't need to worry about that, let only developer do that, so when people use it they could focus more on the class itself
-       : do you need to know how .length() is implement? No, you just need to know how to use it 
-
-    >> public & private members
-
-    >> accessor and mutator, get private member out of the function, know to write individual getter
-
-    >> constructor, initialize object; default and custom constructor, give it default value in .cpp declaration 
-
-    >> abstract data, how to implement, .h .cpp, why do we need that?
-
-    >> know how to use include guard
-        #ifndef <NAMEOFCLASS>_H:
-        #define <NAMEOFCLASS>_H:
-
-        < the rest of your code goes here >
-
-        # endif
-
-    >> inheritance basics, 
-
-        BankAccount
-
-        Checking Account Savings Account
-
-        children could have their own method, but they are still BackAccount, they could use all the method their parent class has
-
-        + how to write derived class
-        + overload the constructor in derived class
-        + call constructor, top-down calling order for calling constructor when creating an object (p10 inheritance PPT)
-
-
-    >> this pointer
-
-        when use in the a class constructor, or other places in class, you are pointing to the instance of this class.
-
-        so to say, you have a paramter named "x", and you also have a member variable named "x" as well
-
-        when you takes the parameter in, and you have remove confusion so that member variable is member variables, parameter is paremeter
-
-        this->x = x: assigning the parameter x to the member variables x of this class
-
-        basically, it is just pointer pointing to some class, so we can correctly refers it
-
-
-    >> derived class could have access to all the public function in the base account
-
-        you can pass parameter to test checking account is bankaccount or not, parameter bankaccount can take, it's derived class checking account could also take
-
-
-    >> access private only with function call them or getter/setting
-
-        protected qualifier: our children could accessing member under directly without setter/getter
-
-        public qualifier: everyone could access to things under
-
-        private qualifier: not one can access to things under expect setter/getter
-
-
-    >> redefinition of a member function
-
-        new function for derived class
-
-        but you can also parent with scope resolution 
-
-
-    >> the difference between Function redefining and overloading
-
-
-    >> late binding (polymorphism): virtual function
-
-
-    >> friends function
-
-        An equality functions
-
-        const Parameter Modifier
-        
-
-    >> overload operator
-
-        programming proportion, there will be at least one ask you to implement operator overloading
-
-        add +
-        sub -
-        ...
-
-        remember which can be overloaded, which cannot
-        you cannot make new operator
-        some details and requirement, some must be friend, some must be member, sort of that
-
-        at least one parameter needs to be class object when doing operator overloading
-
-        
-        insertion operator
-        extraction operator
-
-            return ostream / istream
-
-
-    >> when to use which? member or friend
-
-        when handling only one input/class object, you can use member
-
-        when handling more than one input(class object), you better using friend
-
-
-    >> arrays in classes
-
-        array pointer inside the class, dynamic memory in class
-
-        big three: 
-            1. copy constructor(deep copy: changing won't affecting the other)
-            2. destructor delete dynmaic memory (bottom-up)
-            3. overloading the assignment operator
-
-        at least understand how to do big three in programming, at least you have some reference in the final for programming part
-
-
-
-    >> knowing how to do template function
-
-        know the syntax
-
-        how to turn a regular function to a template
-
-
-
-
-    >> scratch paper
-
-    >> partial credit
-
-    >> programming part - three questions, complete three 
-
-    >> operator overloading, how to compile file like .cpp .h, how to write them in correct format inside 
