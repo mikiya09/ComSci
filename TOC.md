@@ -560,7 +560,9 @@
     ----------------------------------------------- Example -------------------------------------------------------
 
 
-    [ A(DFA) ]: A: acceptance / whether a DFA accept a langauge 
+    [ A(DFA) ]: deciable 
+
+        >> A: acceptance / whether a DFA accept a langauge 
 
         >> Theorem: A(DFA) is a decidable language
         >> Proof Idea: Present a TM M that decides A(DFA)
@@ -571,35 +573,158 @@
                 2. If the simulation ends in an accept state, then accpet; else reject
 
 
-    [ A(NFA) ]:
+    
+    [ A(NFA) ]: deciable
+        
+        >> convert NFA to DFA
+
+            + N = On input (B, w) where B is an NFA and w is a string
+                
+                1. Convert NFA B to an equivalent DFA C
+
+                2. Run TM M on input(C, w) using the theorem above
+
+                3. If M accepts, then accept; else reject
+
+            + Running TM M in step 2 means incorporating Min to the design of N as a subroutine (make NFA a string)
+                                                                                                (generate a DFA)
+
+            + use table to convert NFA to DFA (midterm last question)
+
 
         
 
-    [ E(DFA) ]:
+    [ E(DFA) ]:  deciable
 
         >> E: emptiness / whether there has string is in the DFA
 
+        >> E(DFA) = {<A> | A is a DFA and L(A) = ø} is a decidable langauge
+
+        >> A DFA accepts some string iff it is possible to reach the accept state from the start state
 
 
-    [ EQ(DFA) ]:
+                                                reachable
+                                start state ------------------> accepted state 
+
+            + T = On input(A) where A is a DFA:
+
+                1. Mark the start state of A
+
+                2. Repeat until no new starts got marked:
+
+                    3. Mark any state that has a transition coming into it from any state already marked
+
+                4. if no accept state is marked, accept(indicate empty); otherwise reject
+
+                (question) : for step 2, what if we have a path that does not reach the accept state,
+                             how do we go back? Once we go back, do we need to unmarked start state first?
+
+
+
+        
+
+    [ EQ(DFA) ]: deciable
 
         >> EQ: equivalence for DFAs
 
+        >> EQ(DFA) = { (A, B) | A and B are DFAs and L(A)=L(B) }
+
+        >> construct a DFA C from A and B, where C accepts only those strings accepted by either A or B but not both
+                                                                                            ( symmetric difference )
+            + if A and B accept the same language,
+            + then C will accept nothing and we can use the proof for E(DFA)
+
+            + F = On input(A, B) where A and B are DFAs:
+
+                1. Construct DFA C that is the symmetric difference of A and B
 
 
-    [ Regular Language under Union ]:
+                                L(C) = L(A) & L(B)' U (L(A)' & L(B))
+
+                                                
+                                            --------  --------
+                                           / /  /  /\/  /  /  \        
+                                          / /  /  // \ /  /  / \
+                               L(A) ---> / /  /  //   \  /  /  /\ <--- L(B)
+                                         \/  /  / \   / /  /  / /
+                                          \ /  /  /\ / /  /  / / 
+                                           \  /  /  /\   /  / /
+                                            \/  /  /  \ /  / /         
+                                             ------    ------
+
+                              [ the shadow part are the symmetric difference ]
+
+
+                2. Run TM T from the proof of E(DFA) on input (C)
+
+                3. If T accepts(sym.diff = ø) then accept. If T rejects then reject
 
 
 
-    [ A(CFG) ]:
+
+    [ Regular Language under Intersection ]:
+
+
+        >> for adding suppliment proof for above (DFA after intersection still DFA)
+
+
+        >> If L and M are regular languages, then so is L & M (intersect)           
+
+            + Let A and B be DFAs whose regular languages are L and M, respectively
+
+                1. construct C, the "product automation" of A and B
+
+                    (C tracks the states in A and B, just like the proof of union without using NFAs)
+                    (question) : how to proof union without NFA
+                
+                2. Make the final states of C be the pairs consisting of final states both A and B
+
+                3. chapter 4 - p13
+
+
+
+    [ A(CFG) ]: deciable
 
 
         >> A: acceptance 
 
-            + but since CFG generate string, the thought is about why it could generate a string w is in the langauge
+        >> but since CFG generate string, the thought is about why it could generate a string w is in the langauge
+
+            - wrong method
+
+              : For CFG G and string w want to determine whether G generates w. One idea is to use G to go 
+                through all derivations. This will not work, why?
+
+              => because this method at best will yield a TM that is a recognizer, not a decider.
+                 it can generate infinite strings and if w is not in the language, will neve know it
+                 ( because won't halt )
 
 
-    [ E(CFG) ]:
+    > smart way
+    ------------------------------------------------------------------------------------------------------------- 
+    |                                                                                                           |
+    |   >> For CFG G and string w want to determine whether G generates w, not told whether w is in L(G)        |
+    |                                                                                                           |
+    |       + A string w of length n will have a derivation that uses 2n-1 steps                                |
+    |           if the CFG is in Chomsky-Normal Form                                                            |
+    |                                                                                                           |
+    |           1. convert to Chomsky-Normal Form                                                               |
+    |                                                                                                           |
+    |           2. list all derivation of length 2n-1 steps. If any generates w, then accept, else reject       |
+    |                                                                                                           |
+    |           3. This is a variant of breadth first search, but instead of extended the depth 1 at a time     |
+    |              we allow it to go from 1 to 2n-1 at a time. As long as finite depth extension, we are good   |
+    |                                                                                                           |
+    -------------------------------------------------------------------------------------------------------------
+
+
+        >> keep in mind that the PDA we talk about is non-deterministic, which has more than deterministic PDA
+
+
+
+
+
+    [ E(CFG) ]: decidable
 
         >> E: emptiness 
 
@@ -610,15 +735,29 @@
             + here we check if start variable generate variables, and those variables will eventually all reach terminals
 
 
-        >> working backward
+        >> working backward (X -> YZ): 
 
+            + from YZ to X
 
-            ?
+                1. start by marking all terminal symbols
+
+                2. determine for each variable if it can generate any string of terminals and if so, mark it
+
+                3. keep working backwards so that if the right hand side(YZ) of of any rule has only marked items,
+                   then go to mark the LHS (backward)
+
+                   • for example, if X -> YZ and Y and Z are marked, then mark X
+                   
+                   • if you mark S (start variable), then done; if nothing else to mark and S not marked, reject 
+
+            
 
 
     [ EQ(CFG) ]:
 
         >> not decidable
+
+        >> can use EQ(DFA) proof because CFGs are not closed under complement and intersection
 
 
 
@@ -626,11 +765,53 @@
 
         >> decidable
 
-        >> proof ?
+        >> we want to know if A, which is CFL, is deciable
+
+            + A will have some CFG G that generates it
+
+                1. when we proved that A(CFG) is deciable, we constructed a TM S that would tell us if any CFG 
+                   accept a particular input w
+
+                2. Now we use this TM and run it on input <G, w> and if it accepts, we accept; otherwise reject
 
 
 
 # Hierarchy of Classes of Language
+
+
+
+                                                                                
+                            ----------------------------------------------------------
+                            |                                                        | 
+                            |                                                        |
+                            |     ----------------------------------------------     |
+                            |     |                                            |     |
+                            |     |                                            |     |
+                            |     |     ---------------------------------      |     |
+                            |     |     |                               |      |     |
+                            |     |     |                               |      |     |
+                            |     |     |    -----------------------    |      |     |
+                            |     |     |    |                     |    |      |     |
+                            |     |     |    |                     |    |      |     |
+                            |     |     |    |       regular       |    |      |     |
+                            |     |     |    |                     |    |      |     |
+                            |     |     |    |                     |    |      |     |
+                            |     |     |    -----------------------    |      |     |
+                            |     |     |                               |      |     |
+                            |     |     |         context-free          |      |     |
+                            |     |     |                               |      |     |
+                            |     |     ---------------------------------      |     |
+                            |     |                                            |     |
+                            |     |                 decidable                  |     |
+                            |     |                                            |     |
+                            |     ----------------------------------------------     |
+                            |                                                        |
+                            |                  Turing-recognizable                   |
+                            |                                                        |
+                            ----------------------------------------------------------
+
+
+
 
 
 
@@ -658,7 +839,7 @@
 
 # Reducibility
 
-    [ Prove Halting Problem ]: ? p48-50
+    [ Prove Halting Problem ]: ? p48-50 (question)
 
 
 
