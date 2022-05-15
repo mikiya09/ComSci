@@ -35,7 +35,8 @@
 
     [ what's for ]:
 
-        >> we want the model that is equivalent to what a real computer can do, so that we can analyze problem theoretically (on paper)
+        >> we want the model that is equivalent to what a real computer can do,
+           so that we can analyze problem theoretically (on paper)
 
             + if a problem that is not solvable with that model, so does the real computer
 
@@ -47,28 +48,29 @@
     [ elements ]:
 
 
-        + tape head = could move either left and right
+                + tape head = could move either left and right
 
-             -----------
-             | control |
-             -----------
-                  |
-                  |
-                  V
+                     -----------
+                     | control |
+                     -----------
+                          |
+                          |
+                          V
 
-                -------------------------
-        + tape  | a | b | a | b | - | - | ...
-                -------------------------
+                        -------------------------
+                + tape  | a | b | a | b | - | - | ...
+                        -------------------------
 
-            - Tape initially contains the input string and blanks everywhere else
-            - contains an infinite tape
+                    - Tape initially contains the input string and blanks everywhere else
+                    - contains an infinite tape
 
 
-        + # (blank cell)
+                + # (blank cell)
 
-            < rightmost >: if we move to the end of right (end of the input), a blank sysmbol will be added to rightmost
-            
-            < leftmost >: either stop or moving
+                    < rightmost >: if we move to the end of right (end of the input), 
+                                   a blank sysmbol will be added to rightmost
+                    
+                    < leftmost >: either stop or moving
 
 
     [ properties ]:
@@ -92,17 +94,22 @@
 
     [ formal definition ]:
 
-        < 7 tuple >
+    
+                    -------------------------------------------------------------
+                    |                                                           |
+                    |       < 7 tuple >                                         |
+                    |                                                           |
+                    |       • Q = finite set of state                           |
+                    |       • ∑ = finite set of symbols (input alphabet)        |
+                    |       • gamma = tape alphabet (all symbol on the tape)    |
+                    |       • delta = transition function                       |
+                    |       • q0 = start state                                  |
+                    |       • q(accpet) = acccpeting state                      |
+                    |       • q(reject) = rejecting state                       |
+                    |                                                           |
+                    -------------------------------------------------------------
 
-        • Q = finite set of state
-        • ∑ = finite set of symbols (input alphabet)
-        • gamma = tape alphabet (all symbol on the tape)
-        • delta = transition function 
-        • q0 = start state
-        • q(accpet) = acccpeting state
-        • q(reject) = rejecting state
-
-    ? what is accept and reject state looks like?
+                    (question) : what is accept and reject state looks like?
 
 
     [ compparison ]:
@@ -110,21 +117,26 @@
         >> DFA/NFA or PDA take input consecutively and and only move right
 
             !. will eventually go to some end of the state, either accept or reject
-            !. because we will have last input goes into the machine, and base on the last one's position to decide whether accept or reject
+            !. because we will have last input goes into the machine, 
+               and base on the last one's position to decide whether accept or reject
         
 
         >> Turing Machine have all the inputs fill in the tape first
             
             + tape head could move either right or left
             + could mark the inputs on the tape
-            + since the inputs are on the tape already, the way we analyze it is by moving the head, and so we need some specific q(accept) and q(reject) state
+            + since the inputs are on the tape already, the way we analyze it is by moving the head, 
+              and so we need some specific q(accept) and q(reject) state
 
-        < Question >
+    [ Question ]:
 
-            A finite automata will run until its input is completely processed and then it wil stop. This is not true for a Turing Machine
+            A finite automata will run until its input is completely processed and then it will stop. 
+            This is not true for a Turing Machine
 
-            : because The input is placed on the tape of the Turing machine. The Turing machine runs until either accept or reject state is entered
-              it's not like a finite finite automata which processes the input and then accpets if in an accept state or else it rejects.
+            : because The input is placed on the tape of the Turing machine. 
+              The Turing machine runs until either accept or reject state is entered
+              it's not like a finite finite automata which processes the input and then accpets 
+              if in an accept state or else it rejects.
               Thus TM does not have a notion of processing the input
 
 
@@ -155,7 +167,9 @@
             x x x 0 --      Scan right; one 0, so accept
                   •
 
-            [?] by dividing the input string into two parts, it's that similar to say non-deterministic find the middle of the string?
+            (question) : by dividing the input string into two parts, 
+                         it's that similar to say non-deterministic find the middle of the string?
+
 
         + PPT chapter-3-p16 to p16
 
@@ -167,15 +181,18 @@
             a a b b b c c c c c c 
             - + * * * • • • * * *
 
-
-            [ Transducers ]
-                
-            • Turing Machine can also generate/transduce language
-                
-                - given a^ib^i and ixj=k
-                - similar manner. For every a, you scan through the b's and for each you go to the end of the string and add c
-                - zig-zagging(之字形) a times, you can generate the appropriate number of c's
-
+            -------------------------------------------------------------------------------------------------
+            |                                                                                               |
+            |   Transducers                                                                                 |
+            |                                                                                               |
+            |   • Turing Machine can also generate/transduce language                                       |
+            |                                                                                               |
+            |       - given a^ib^i and ixj=k                                                                |
+            |       - similar manner. For every a,                                                          |
+            |         you scan through the b's and for each you go to the end of the string and add c       |
+            |       - zig-zagging(之字形) a times, you can generate the appropriate number of c's           |
+            |                                                                                               |
+            -------------------------------------------------------------------------------------------------
 
 
         + PPT chapter-3-p20
@@ -184,14 +201,19 @@
 
                E = {#x1#x2# ... # xn | each xi belongs to {0, 1}* and xi ≠ xj for each i ≠ j}
 
-            <1>. pick a mark on top of the left-most symbol. If it was a blank, accept. If it was a # comtinue; else reject
+            <1>. pick a mark on top of the left-most symbol. If it is a blank, accept. 
+                                                             If it was a # comtinue; else reject
 
             <2>. Scan right to next # and place a mark on it. If no # is encountered, we only had x1 so accept
 
             <3>. mark两个#，比较两个#右边的string
 
-            <4>. 检测步骤：先将两个已经marked的最右边那个往下一个# symbol移动（右移）；假设没有在遇到blank之前，没有遇到任何#
-                 操作步骤：再将左边那个marked往右边移动，移动到下一个#（这里就是之前右边的marked #），同时将右边的marked也往后移动一格
+            <4>. 检测步骤：先将两个已经marked的最右边那个往下一个# symbol移动（右移）；
+                 假设没有在遇到blank之前，没有遇到任何#
+                 
+                 操作步骤：再将左边那个marked往右边移动，移动到下一个#（这里就是之前右边的marked #），
+                 同时将右边的marked也往后移动一格
+                 
                  判断：如果右边没有#了，那全部的string已经比较完毕，accept
 
             <5>. go to step 3
@@ -259,24 +281,28 @@
                         |       |                       |       |
                         ---------                       ---------
 
-                <1>. the first tape HEAD pointing to b, and base on the transition it will be replaced by a, and move LEFT
-                <2>. the second tape HEAD pointing to 1, and replaced by 0, and move LEFT
-                <3>. the third tape HEAD pointing to y, replaced by x, and move RIGHT
+            <1>. the first tape HEAD pointing to b, and base on the transition it will be replaced by a, and move LEFT
+            <2>. the second tape HEAD pointing to 1, and replaced by 0, and move LEFT
+            <3>. the third tape HEAD pointing to y, replaced by x, and move RIGHT
 
 
-                total (k + 1) #
-                ------------------------------------------------------------------------------
-                | # | a | a | b | a | b | # | 1 | 0 | 1 | 1 | # | x | y | x | x | # | - | ...
-                ------------------------------------------------------------------------------
-                              •                           •           • <- virtual head (marked mechanism)
-                     ===================     ===============     ===============
-                            tape 1                tape 2              tape 3
+
+            total (k + 1) #
+            ------------------------------------------------------------------------------
+            | # | a | a | b | a | b | # | 1 | 0 | 1 | 1 | # | x | y | x | x | # | - | ...
+            ------------------------------------------------------------------------------
+                          •                           •           • <- virtual head (marked mechanism)
+                 ===================     ===============     ===============
+                        tape 1                tape 2              tape 3
 
 
-                <1>. Add "dots" to show whee Head "K" is
-                <2>. To simulate a transition from state Q, we must scan out Tape to see which symbols are under the K Tape Heads
-                <3>. Once we determin this and are ready to MAKE the transition, we must scan across the tape again to update the cells and move the dots(virtual head)
-                <4>. Whenever one head moves off the right end, we must shift our tape so we can insert a - (blank symbol)
+
+            <1>. Add "dots" to show whee Head "K" is
+            <2>. To simulate a transition from state Q, 
+                 we must scan out Tape to see which symbols are under the K Tape Heads
+            <3>. Once we determin this and are ready to MAKE the transition, 
+                 we must scan across the tape again to update the cells and move the dots(virtual head)
+            <4>. Whenever one head moves off the right end, we must shift our tape so we can insert a - (blank symbol)
             
 
 
@@ -286,8 +312,12 @@
         
             + use a breadth-first search
 
-                • depth-first search is a bad idea, it will fully explore one branch before going to the next. If that one loops forever, will never even try most branches
-                • breadth-first guarantees that all branches will be explored to any finite depth and hence will accept if any branch accepts
+                • depth-first search is a bad idea, it will fully explore one branch before going to the next. 
+                  If that one loops forever, will never even try most branches
+
+                • breadth-first guarantees that all branches will be explored to any finite depth 
+                  and hence will accept if any branch accepts
+
                 • The DTM will accept if the NTM does
 
             + like NFA, always guess the right input (assume)
@@ -362,7 +392,7 @@
 
 
         ex.
-        ---------
+        ----------------------------------------------------------------------------------------------------------
         < Let A be the language of all strings representing graphs that are connected >
         A = { <G> | G is a connceted undirected graph }
 
