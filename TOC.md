@@ -821,26 +821,275 @@
     >> prove not every turing-recognizable language is decidable
 
 
-    [ concept ]:
+    [ definition ]:
+        
+        >> check whether a program will halt or not
+
+        >> the problem to halting problem is that: it is algorithmically unsolvable
+        
 
 
+    [ ex ]:
 
-    [ A(TM) ]:
+        >> A(TM) = {(M, w) | M is a TM and M accepts w}
+
+            + A(TM) is undeciable
+
+                1. It can only be undeciable because of a loop of M on w
+    
+                2. IF we could determine if it will loop forever, then could reject, Hence A(TM) is often call the 
+                                                                                                   halting problem
+                3. this is Turing-recognizable
+
 
 
     [ Diagonalization Method ]:
+
+        >> measuring the sizes of infinite sets
+
+            + two finite/infinite sets have the same size if each element in one set can be paired with the 
+              element in the other set
+
+                => n = 2n
+
+
+            + Rational Numbers
+                
+                • let Q = {m/n: m, n belongs to N}, the set of positive Rational Numbers, N = natural num (自然数)
+
+                • Q seems larger, but they are the same according to our definition
+
+                • we should be able to find a 1:1 correspondence between Q and N
+
+                      
+                                    -------------------------------
+                                    | 1/1 | 1/2 | 1/3 | 1/4 | 1/5 |
+                                    -------------------------------
+                                    | 2/1 | 2/2 | 2/3 | 2/4 | 2/5 |
+                                    -------------------------------
+                                    | 3/1 | 3/2 | 3/3 | 3/4 | 3/5 |
+                                    -------------------------------
+                                    | 4/1 | 4/2 | 4/3 | 4/4 | 4/5 |
+                                    -------------------------------
+                                    | 5/1 | 5/2 | 5/3 | 5/4 | 5/5 |
+                                    -------------------------------
+
+
+                • bad way: going row-to-row, since first row is infinite, would never get to second row
+            
+                • good way: go diagonals order => 1/1, 2/1, 1/2, 3/1, ... 
+
+                • that is, N=1 corresponds to 1/1; N=2 conrresponds to 2/1; N=3 corresponds 1/2 etc.
+                        
 
 
     [ Pairing Set Items ]:
 
 
-    [ diagonalization proof of A(TM) ]: ? p35-41
+            + Theorem: R(real number) is Uncountable
+
+                • real number is one that has a decimal representation and R is set of Real Number
+
+                • includes those that cannot be represented with a finite number of digits (Pi or √2)
+
+                • find some X that is always not in the pairings and thus proof by contradiction
+
+
+
+                          < generate a number X, the following the the method for generating >
+                        -------------------------------------------------------------------------
+                        | n     | f(n)                                                          |
+                        |-----------------------------------------------------------------------|
+                        | 1     | 3.14159... ->(pick 1 at the first position after decimal)     |
+                        |-----------------------------------------------------------------------|
+                        | 2     | 55.5555... ->(pick 5 at second position ...)                  |
+                        |-----------------------------------------------------------------------|
+                        | 3     | 0.12345... ->(pick 3 at third ...)                            |
+                        |-----------------------------------------------------------------------|
+                        | 4     | 0.50000... ->(pick 0 at forth ...)                            |
+                        -------------------------------------------------------------------------
+
+                                                        x ≠ f(1)
+                                                        x ≠ f(2)
+                                                        x ≠ f(3)
+                                                           .
+                                                           .
+                                                           .
+                                                        x ≠ f(n)
+
+                        keep choosing the "right-downward diagonal" of digits, we are guarantee
+                        to have a value x not already in the list since it different at least
+                        one position with every other number in the list
+
+
+
+            + implication
+
+                • R is uncountable -> some languages are not deciable or even Turing-recognizable
+                                      (find x above is an algorithm and thus a language)
+                                      because there are uncountably many languages yet only countably
+                                      many Turing Machine
+
+                • each Turing Machine can recognize a single language and there are more languages than 
+                  Turing Machines, some language are not recognized by any Turing Machine
+
+
+
+                • Common Sense Explanation
+
+                    - comparing languages: a potentially infinite set of strings v.s. number of strings(1, 2, 3..)
+
+                    - each language is represented by a sequence of infinite length whereas each individual string
+                      is of finite (but unbounded) length
+
+                    - string is to Language as Natural number is to Real number
+                        
+                    < no way to find one-to-one conrrespondence between natrual and real numbers (proof above) >
+
+
+
+    [ diagonalization proof of A(TM) ]: p35-41
+
+
+            + back to ex. of proving A(TM)
+
+            + Let A(TM) = {<M, w> | M is a TM and accepts w}
+
+            + proof Technique:
+
+                • assume A(TM) is deciable and obtain a contradiction
+                • A diagonalization proof
+
+            + takes time to understand p36
+
+            + Slightly More Concrete Version (with C++)
+
+
+            ---------------------------------------------------------------------------------------------
+            |                                                                                           |
+            |   it's ok if you don't understand, just remember we cannot write a program to determine   | 
+            |   if any arbitrary program will halt or loop                                              |
+            |                                                                                           |
+            ---------------------------------------------------------------------------------------------
+
+            therefore A(TM) cannot be decided, so undecidable
+
+
+
+    [ Co-Turing Recognizable ]: p40-43 
+
+
 
 
 # Reducibility
 
-    [ Prove Halting Problem ]: ? p48-50 (question)
 
+    [ definition ]:
+
+        >> converting one problem to another such that the solution to the scond can be used to solve the first
+
+            
+            + ex:
+
+                • finding your way around NYC is reducible to the problem of finding and reading a map of NYC
+
+            + If A reduce to B
+
+                1. A can be no harder than B since the solution to B solves A
+
+                2. A could be easier ( the reduction is "inefficient" in a sense )
+
+                3. in the above ex, A is easier than B since B can solve any routing problem
+
+                    - the one on the left is inefficient
+                    - the one on the right is more powerful
+
+
+            + Practice on Reducibility
+
+                - which way is it ? 
+
+                    1. reduce DFAs to NFAs
+
+                    2. reduce NFAs to DFAs
+
+                        a). NFA can be reduced (converted) to a DFA via a set of simple steps
+                        b). NFA can not be any more powerful than a DFA, NFA could be less powerful
+                        c). wrong!
+                            because we know they have same expressive power
+                            (question) : so cannot reduce in either way?
+
+
+    [ prove languages undecidable ]:
+
+
+        + if A is reduciable to B and B is decidable
+
+            1. A is deciable (since A can only be "easier")
+
+            2. B, which is decidable, can be used to solve A
+
+
+        + if A is reducible to B and A is deciable
+
+            - can say nothing
+
+
+        + A is undeciable and reduciable to B
+
+            1. B must be undecidable (B can only be harder than A)
+
+            2. to show something undeciable, show an undecidable problem can be reduced to it.
+
+
+    
+    [ HALT(TM) is undeciable ]:
+
+
+        >> proof by contradiction, the key idea is to show that A(TM) is reduciable to HALT(TM)
+
+            1. you have a TM R that decides HALT(TM), use R to construct a TM S that deicdes A(TM)
+
+                - but we know there is no such S could decide A(TM) because possible looping
+
+                - so bad
+
+
+            2. assume that you have a TM R that decies HALT(TM), you test whether M halts on w <M, w>
+               instead of buliding a machine for testing <M, w>, testing <M, w> directly  
+
+                - we are assuming there's a decider for HALT(TM), and use it to solve A(TM)
+
+                - but as we know, not such machine, so R does not exist
+
+
+        >> Formal Proof
+
+
+            + let's assume for the purposes of obtaining a "contradiction" that TM R decides HALT(TM),
+              we construct TM S to decide A(TM), with S operating as follows:
+
+                S = "On input <M, w>, an enconding of a TM M and a string w:
+
+                    1. Run TM R on input <M, w>
+                    2. If R rejects, reject
+                    3. If R acccepts, simluate M on w until it halts
+                    4. If M has accepted, accept; if M has rejected, reject."
+
+
+                clearly, if R decides HALT(TM), then S decides A(TM). indication of reducing A(TM) to HALT(TM)
+
+
+            + the concept of A(TM) is if TM accept some input
+
+                1. so here we set operation to be "Run TM R on input <M, w>"
+
+                2. no matter what operation we set, A(TM) is proved by diagonally undeciable
+
+                3. so it will be undeciable eventually, and therefore get contradition
+
+                   HALT(TM) could not be deciable
+                
 
 
     
