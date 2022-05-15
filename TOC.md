@@ -415,25 +415,30 @@
 
         [ unsolvability ]:
 
-            >> why study this?
+            >> why study this? (because limitation of Algorithmic Solvability)
     
-                + Useful! because then can realize that searching for an algorithmic solution is a waste of time (perhaps the problem can be simplified)
+                + Useful! because then can realize that 
+                  searching for an algorithmic solution is a waste of time (perhaps the problem can be simplified)
 
                 + Gain a perspective on computability and its limits
 
 
 
+
         [ Decidable ]:
 
-            + if it is in the language, Turing machine will accept it, and if not in the language, it must reject! 
+            >> if a string is in the language, 
+               Turing machine will accept it, and if not in the language, it must reject! 
 
-                • will eventually halt, (but it's not sufficient to just say it halt on all inputs, you have to include above line) 
+            >> will eventually halt,
+               but it's not sufficient to just say it halt on all inputs, you have to include above explanation
         
              
 
+
         [ Turing recognizable ]:
 
-            < ? > we don't know whether L is Turing Recognizable in the first place, and we put L into TM
+            >> we don't know whether L(language) is Turing Recognizable in the first place, and we put L into TM
 
                 + If L is in the language: a TM accpets all strings in L
                     
@@ -449,10 +454,121 @@
 # Decidable Language
 
 
-    [ A(DFA) ]:
+    [ GOAL ]:
 
-        >> A: acceptance / whether a DFA accept a langauge
+        >> we give algorithm for testing whether a finite automata accepts a string,
+           or whether the language of a finite automata is empty, whether two FA are equivalent
 
+        
+    [ method ]:
+
+        >> we represent the problems by languages (not FAs)
+
+            + Let A(DFA) = { (B, w) | B is a DFA that accepts string w }
+
+            + The problem of testing whether a DFA B accepts a specific input w is the same as testing wehther
+              (B, w) is a member of the language A(DFA)
+
+            + showing that the language is edcidable is the same thing as showing that the computational 
+              problem is decidable
+
+
+    [ Encoding ]:
+
+
+        >> Logic
+
+            + Church Turing Thesis says TMs are basically equivalent to algorithm 
+                                              
+                                              |
+                                              |
+                                              V
+
+            + If we can build a TM to do something, we can say our computer could do the same
+
+                                              |
+                                              |
+                                              V
+
+            + if we can encode Machines(DFA, TM, etc) into string, we can then test what they can do through TM
+
+                                              |
+                                              |
+                                              V
+
+            + and then we can put the string onto the tape from some TM, and let it run for result
+
+
+        >> Terms
+
+            • <> angle brackets means encoding
+            • D means for DFA
+            • <D, w> they are both string right now
+
+
+
+        >> Example for a DFA D1
+                                              -----
+                      -----                   |   | 1
+                      |   | 0                 |   V
+                      |   V              ---------------
+                    ----------           | ----------- |            ----------
+                    |        |     1     | |         | |     0      |        |
+            ------> |   q1   | --------> | |    q2   | | ---------> |   q3   |
+                    |        |           | |         | |            |        |
+                    ----------           | ----------- |            ----------
+                                         ---------------                |
+                                                ^                       |
+                                                |           0,1         |
+                                                -------------------------
+
+
+                                                delta
+            D1 = (Q, sigma, delta, q0, F)       ---------------------------------
+                                                |       |     0     |     1     |
+                  Q = { q1, q2, q3 }            |-------|-----------|-----------|
+              sigma = { 0, 1 }                  |   q1  |     q1    |     q2    |
+              delta = ex. q1 on 0 goto q1       |       |           |           |
+                 q1 = the start state           |   q2  |     q3    |     q2    |
+                  F = { q2 }                    |       |           |           |
+                                                |   q3  |     q2    |     q2    |
+                                                ---------------------------------
+
+
+
+            + string w
+
+            + w = #Q#sigma#delta#q0#F#
+
+            + # q1,q2,q3 # 0,1 # $q1 0 q1$q2 1 q2$q3 0 q2$...$ # q1 # q2 #
+                --------   ---   -----------------------------   --   --
+                  all     sigma        delta(transition)        start  final
+                 states                                         state  state
+
+
+            + finally for a encoding "if DFA take some string w"we can write
+
+                 -----------------------------------------------------
+                 |                                                   |
+                 |   <D, w> = # Q # sigma # delta # q0 # F # w #     |
+                 |                                                   |
+                 -----------------------------------------------------
+                
+
+
+
+    ----------------------------------------------- Example -------------------------------------------------------
+
+
+    [ A(DFA) ]: A: acceptance / whether a DFA accept a langauge 
+
+        >> Theorem: A(DFA) is a decidable language
+        >> Proof Idea: Present a TM M that decides A(DFA)
+
+            + M = On input (B, w), where B is a DFA and w is a string:
+
+                1. Simulate B on input w
+                2. If the simulation ends in an accept state, then accpet; else reject
 
 
     [ A(NFA) ]:
