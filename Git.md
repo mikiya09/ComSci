@@ -58,6 +58,14 @@
     [reference]
     >> https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories
 
+
+# commit/cancel 
+
+    [cancel all commits]
+
+    >> git reset --hard HEAD~1
+
+
 # push & pull
     [!]: when you create a new repo through github, pay attention to the name you adopt ("master" -> "main") 
     >> git push -u origin master/main
