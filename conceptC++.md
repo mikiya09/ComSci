@@ -836,16 +836,13 @@
 
 
 
-# this
+# (this)
 
 
     [ what is that ]:
 
-            >> implicit pointer pointing to your data member in the class
-            >> in the ex). below, when you *this.x, you are accessing the value store in the data member x
-
-            >> is a class type pointer
-                + Demo* d = this;
+        >> implicit pointer pointing to your data member in the class
+        >> in the ex). below, when you *this.x, you are accessing the value store in the data member x
 
     ex.
     -------------------------------------------------------------------------------------
