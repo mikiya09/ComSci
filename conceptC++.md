@@ -842,6 +842,9 @@
     [ what is that ]:
 
         >> implicit pointer pointing to your data member in the class
+           • so that you can find where this class is store in the memory
+           • is the same as the "self" when you declaring classes in python
+
         >> in the ex). below, when you *this.x, you are accessing the value store in the data member x
 
     ex.
