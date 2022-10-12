@@ -1,12 +1,19 @@
 
 # Important Concept to konw in Computer Science
 
-[C++](./programing_language/conceptC++.md)
 
-    [2]. c++
+### [1]. [C++](./programming_language/conceptC++.md)
 
-    [3]. computer organization
+### [2]. [git](./fundamental/Git.md)
 
-    [4]. web development
+### [3]. [computer organization](./fundamental/Computer_Organization.md)
 
-    [5]. blockchain
+### [4]. [Theory of Computation](./fundamental/TOC.md)
+    
+### [5]. [data structure](./data_structure)
+
+### [6]. [algorithm](./algorithm)
+
+### [7]. [blockchain](./blockchain/blockchain-concept.md)
+
+### [8]. [Javascript](./programming_language/JS)
