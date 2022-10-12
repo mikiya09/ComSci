@@ -1,7 +1,7 @@
 
 # Important Concept to konw in Computer Science
 
-[C++](./programing\ language/conceptC++.md)
+[C++](./programing_language/conceptC++.md)
 
     [2]. c++
 
