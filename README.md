@@ -1,7 +1,7 @@
 
-# Understand Computer Science Concepts
+# Important Concept to konw in Computer Science
 
-    [1]. git
+[C++](./programing\ language/conceptC++.md)
 
     [2]. c++
 
