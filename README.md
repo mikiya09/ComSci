@@ -1,5 +1,5 @@
 
-# Important Concept to konw in Computer Science
+# Important Concepts to know in Computer Science
 
 
 ### [1]. [C++](./programming_language/conceptC++.md)
