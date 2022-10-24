@@ -248,7 +248,7 @@ MonthlySalesType monthSales;
    |    |   |   |   |   |   |   |   |   |   |   |   |   |          /
   ---   -------------------------------------------------        ---
 
-        | ------------------ 12 months -----------------|
+        | ----------------- 12 columns -----------------|
 ```
 ### Namespaces
 ```
@@ -552,10 +552,10 @@ void processArr(int **a)
 int main()
 {
     int **array;
-    array = new int *[10];
+    array = new int *[10];          // pay attention to how to declare below one
     for (int i=0; i<10; i++)
     {
-        array[i] = new int[10];
+        array[i] = new int[10];     // in comparison with above one
     }
     for (int i=0; i<10; i++)
     {
@@ -575,27 +575,232 @@ int main()
 
 
 # Object-Oriented Programming
+```
+• Three inter-related constructs: classess, objects and inheritance 
+  
+[1]. Objects are basic run-time entities in an object-oriented system 
+[2]. A class defines the structure of its objects 
+[3]. Classes are organized in an "is-a" hierarchy defined by inheritance
+```
 ### Abstraction 
+```
+[.h]        file -> data member and member function specification 
+[.cpp]      file -> member function implementation 
+[main.cpp]  file -> objects being used in here
+```
 ### Inheritance
+```
++ Allows programmers to create a new class that is a specialization of an existing class 
+
+    => new class is called a derived class of the existing class 
+    => the existing class is the base class of the new class
+```
 ### Polymorphism
+```
++ The ability to associate multiple meanings to one function name by means of late binding
+
++ [late binding]: associated it later in the time 
+---------------------------------------------------------------------------------------------
+| <1>. you have a class named people in the school                                          |
+| <2>. you have derived classes students, teachers, director, etc                           |
+| <3>. they all could have a method call goToWork()                                         |
+|      but it's not necessary that we need to define them everytime in each child class     |
+| <4>. a good way is it only defined in the base class, and every child can call goToWork() |
+| <5>. when different classes call goToWork(), they behave differently                      |
+| <6>. teacher go to teach, student go to study, ...etc                                     |
+---------------------------------------------------------------------------------------------
+
++ [ virtual function ]:
+
+    => we can achieve that by making the "goToWork()" function virtual 
+    => late (dynamic) binding <官方定义>
+
+    ex).
+    [ place virtual keyword in base class definition, not implementation ]
+            
+        § this tells the compiler to wait until runtime 
+          then to determine the implemetation of the function 
+          based on the object that calls it
+
+        § if there is a derived class with a redefined version of the function 
+          it will use that version instead of the original
+
+```
 ### Composition
-### Templates
+
+### *Templates
 
 # Error & Exception Management
-### Define your own exception 
+### Define your own [Exception](http://peterforgacs.github.io/2017/06/25/Custom-C-Exceptions-For-Beginners/) 
+```
+Exception is an user-defined class
+```
 ### Try/throw/catch
+```
+#include <iostream>
+using namespace std;
+ 
+class demo {
+};
+ 
+int main()
+{
+    try {
+        throw demo();
+    }
+ 
+    catch (demo d) {
+        cout << "My Exception Happens \n";
+    }
+}
+```
 ### Employ pre-defined exception classes/functions
+```
+// IsFull() in Unsorted linked-list
 
-# Algorithm Anslysis
+bool UnsortedType::IsFull() const
+// return true if there is no room for another ItemType 
+// on the free store; false otherwise 
+{
+    NodeType* location;
+    try
+    {
+        location = new NodeType;
+        delete location;
+        return false;
+    }
+    catch (std::bad_alloc exception)
+    {
+        return true;
+    }
+}
+
+```
+# Algorithm
 ```
 1. A logical sequence of discrete steps 
 2. steps that describe a complete solution to a problem
 3. computable in a finite amount of time (meaning it will terminate)
 ```
-### Comparison of algorithm
 ### Analysis of algorithm
-### Big O 
+```
+The theoretical study of design and analysis of computer algorithms, not about programming
+```
+#### • Design
+```
+[1]. design correct algorithms which minimize cost
+[2]. efficiency is the design criterion
+```
+#### • Analysis
+```
++ predict the cost of an algorithm in terms of resource and performance
+```
+#### • Basic Goals for designing
+```
+[1]. always correct
+[2]. always terminates
+[3]. always care about performance
+```
+#### • WHY?
+```
+Computers are always limited in the computational ability and memory
++ Resources are always limited
++ Efficiency is the center of algorithms
+```
+#### • Growth Rate 
+##### + Example 1 
+```
+[Question]: 
+determine whether x is one of A[1], A[2],..., A[n], and retrieve information about x.
 
+[Algorithm]: 
+go through each number in order and compare it to x 
+
+[pseudocode]:
+i = 1;
+while  (i <= n) and (A[i] != x) do
+i = i + 1;
+if (i > n) then i = 0;
+
+[related questions]:
+<1>. Number of element comparisons?     --> from 1 to n
+<2>. Worst case?                        --> n
+<3>. Best case?                         --> 1
+```
+##### + Example 2 
+```
+Square Matrix Multiplication 
+
+---             ---          ---             ---         ---             ---
+|   c11 ... c1n   |          |   a11 ... a1n   |         |   b11 ... b1n   |
+|    . .     .    |          |    . .     .    |         |    . .     .    |
+|    .   .   .    |     =    |    .   .   .    |    x    |    .   .   .    |
+|    .     . .    |          |    .     . .    |         |    .     . .    |
+|   cn1 ... cnn   |          |   an1 ... ann   |         |   bn1 ... bnn   |
+---             ---          ---             ---         ---             ---
+                                      n 
+                                      ---
+                                cij = \   aik • bkj
+                                      / 
+                                      ---
+                                      k=1 
+
+[pseudocode]:
+for i = 1 to n do 
+    for j = 1 to n do 
+    {
+        c[i, j] = 0;
+        for k = 1 to n do 
+            c[i, j] = c[i, j] + a[i, k] * b[k, j];
+    }
+
+[related questions]:
+<1>. What is the number of multiplications?     --> i * j * k = n^3
+<2>. What is the number of additions?           --> same? think that later
+```
+##### + explain
+```
+further abstraction we use in algorithm analysis is to characterize in terms of growth 
+
+[1]. Matrix multiplication time grows as n^3 
+[2]. Linear search time grows as n 
+
+[why is it important?]
+input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
+    10       | 0.00001 |   ....   |   ...   |  0.001  |  < 0.01 |   => unit: sec
+    100      | 0.0001  |   ....   |   ...   |  1 min  |    ∞    |
+    1000     | 0.001   |   ....   |   ...   |  17.64  |    ∞    |   => unit: min
+    10000    | 0.01    |   ....   |   ...   |  11.76  |    ∞    |   => unit: days
+```
+### Big O Notation 
+```
+The worst case (upper bound) of the algorithm execution time
+```
+![Big-O-Comparison](./bigO.png)
+### Comparison of algorithm
+```
+[Goal]: Compare the efficiency of different algorithm, efficiency is what matters!
+```
+#### • One problem Two Algorithm
+```
+[problem]: Calculate the sum of the integers from 1 to N, i.e. 1+2+3+...+(N-1)+N 
+
+[Alg #1]:                           --> performs N addition/assignment operations 
+sum = 0;
+for (count=1; count<=N; count++)
+     sum = sum + count;
+
+[Alg #2]:                           --> one addition, one multiplication and one division
+sum = (1+N)*(N/2);
+```
+#### • How to compare ?
+```
+[1]. Compare the actual running time on a computer 
+[2]. Compare the number instructions/statements executed
+     a). varies with languages used and programmer's style 
+     b). count the number of passes through a "critical loop" in algorithm 
+[3]. Count representative operations performed in the algorithm
+```
 # Pointers
 ### Declaration
 ### Manipulation (initialization, cope, etc)

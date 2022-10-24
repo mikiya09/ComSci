@@ -10,7 +10,7 @@
 
 ### [4]. [Theory of Computation](./fundamental/TOC.md)
     
-### [5]. [data structure](./data_structure)
+### [5]. [data structure](./data_structure/data_structure.md)
 
 ### [6]. [algorithm](./algorithm)
 
