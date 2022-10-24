@@ -802,9 +802,26 @@ sum = (1+N)*(N/2);
 [3]. Count representative operations performed in the algorithm
 ```
 # Pointers
-### Declaration
-### Manipulation (initialization, cope, etc)
+```
+A pointer variable contains the memory address of another variable 
 
+[for what]: for indirect addressing of data and for dynamic allocation of memory 
+```
+### Declaration
+```
+use an aterisk(*)
+-----------------
+int* intPointer;
+```
+### Manipulation (operation)
+```
+// ampersand(&) returns the address of a variable
+int alpha = 10;
+int* intPointer = &alpha;                       // return a address like this: 0x16ba0f49c
+
+// accessing variables value through pointer 
+*intPointer = 25;                               // alpha is now 25
+```
 # Dynamic Memory Allocation
 ### Static v.s Dynamic memory allocation 
 ### Use cases
