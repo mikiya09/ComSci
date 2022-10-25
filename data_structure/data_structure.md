@@ -1093,7 +1093,7 @@ solution. two poitners, recording previous and current Node
 <img src="./pic/putItemLinkedList1.png" width=400>
 <br>
 <br>
-<img src="./pic/putItemLinkedList2.png" width=700>
+<img src="./pic/putItemLinkedList2.png" width=400>
 <br>
 <br>
 
