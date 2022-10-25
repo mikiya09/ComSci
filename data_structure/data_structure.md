@@ -776,7 +776,7 @@ input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
 ```
 The worst case (upper bound) of the algorithm execution time
 ```
-![Big-O-Comparison](./bigO.png)
+![Big-O-Comparison](./pic/bigO.png)
 ### Comparison of algorithm
 ```
 [Goal]: Compare the efficiency of different algorithm, efficiency is what matters!
@@ -859,19 +859,19 @@ float* money = new float;
 *money = 33.46;
 float* myMoney = new float;
 ```
-<img src="./memoryLeak1.png" width=300>
+<img src="./pic/memoryLeak1.png" width=300>
 <br>
 
 ```
 •myMoney = *money;                  // set the value of myMoney = the value of money
 ```
-<img src="./memoryLeak2.png" width=300>
+<img src="./pic/memoryLeak2.png" width=300>
 <br>
 
 ```
 myMoney = money;                    // set the memory address of myMoney = money's
 ```
-<img src="./memoryLeak3.png" width=300>
+<img src="./pic/memoryLeak3.png" width=300>
 <br>
 
 ```
@@ -902,7 +902,7 @@ A collection of **nodes** that are <u>linked together</u> in a chain using **poi
 #### • Transformers (setter)
 #### • Iterator
 
-#### • Member function
+#### • Member Functions
 ##### [+] *PutItem*
 ```
 ! Order Matter, do step 4 over step 3 will cause memory leak
@@ -912,7 +912,7 @@ A collection of **nodes** that are <u>linked together</u> in a chain using **poi
 3). Set the node's next pointer to the listData, the first item in the list
 4). Set listData to point to the new node
 ```
-<img src="./putItem.png">
+<img src="./pic/putItem.png">
 
 ```
 void UnsortedType::PutItem (ItemType item)
@@ -944,7 +944,9 @@ Put into Empty list
 ```
 ##### [+] *IsFull* 
 ```
-Linked list don't have an explicit size limit, try if you can allocated new memory for space
+! Linked list don't have an explicit size space
+! try if you can allocated new memory for limit
+! btw, dynamic memory is located in the heap
 
 bool UnsortedType::IsFull() const 
 // Returns true if there is no room for another ItemType 
@@ -974,7 +976,7 @@ bool UnsortedType::IsFull() const
 4). Iteration stops when listData is NULL
 ```
 ##### [+] *GetItem*
-<img src="./getItem.png">
+<img src="./pic/getItem.png">
 
 ```
 Linear Search through the list to find the desired item
@@ -982,7 +984,7 @@ Linear Search through the list to find the desired item
 <br>
 
 ##### [+] *DeleteItem*
-<img src="./deleteItem.png">
+<img src="./pic/deleteItem.png">
 
 ```
 1). tempPtr to locate the item that need to be deleted, link it; 
@@ -992,20 +994,151 @@ Linear Search through the list to find the desired item
 <br>
 
 #### • Comparing Implementations 
-<img src="./compareTimeComplexity.png">
+<img src="./pic/compareTimeComplexity.png" width=700>
 
 ### Sorted v.s Unsorted Lists
 #### • Unsorted List
+refer to above example and all **member functions**
 #### • Sorted List
+##### [+] Logical Level (no changes)
+```
+1). Only change from unsorted list is guaranteeing list elements are sorted
+2). Order is determined by ItemType's CompareTo method 
+3). PutItem and DeleteItem pre- and post- condition: list is sorted and remains sorted
+```
+##### [+] Application Level (no changes)
+```
+1). Nothing has changed for the user, list interface is exactly the same
+2). GetNextItem will return the next item in key order
+```
+##### [+] Imlementation Level (few changes)
+```
+-----------------------------------------------------------------
+|   1). PutItem, DeleteItem: Ensure list remains Sorted <br>    |
+|   2). GetItem can be improved                                 |
+-----------------------------------------------------------------
+```
 ### Sorted List implementations
-#### • Array-based (static & dynamic) 
+#### • Array-based (static) 
 ```
 [array-based]:
 the length field must be present in order to define the extent of the list within the array
 ```
-#### • Linked list-based
-### Time Complexity/order of magnitude
+**PutItem**
+```
+(Linear Search is required)
+1). Find the space where new element should go
+2). create space for new element, by moving all subsequent elements down one space
+3). insert the element in the space
+4). increment the length by 1
+```
+<img src="./pic/arrayBased.png">
 
+**DeleteItem**
+```
+1). assume item for deletion is in the list, simple linear search find them
+2). when found, move subsequent element up one space (overwritting)
+3). decrement the length by 1
+```
+**GetItem**
+
+```
+Binary Search (more to come in the following section)
+```
+<img src="./pic/binarySearch.png">
+
+#### • Array-based (dynamic) 
+```
+few changes:
+
+1). Parameteried constructor: allows user to specify max number of items
+2). Defafult constructor: ____you_know_what_to_do_____
+3). Destructor: cleans up the memory on the heap when the rest of the list is removed
+4). store the max list size instead of using a constant: 
+    >> length == maxList;
+```
+<img src="./pic/dynamicArrayBased.png" width=500>
+
+##### [+] *Destructor*
+```
+! object is deallocated when it leavs scope, but any data it points to is not -> memory leak
+
+1). class destructor is a needed to implicitly invoked when a object leave scope
+2). ~UnsortedList() => clean up memory by deallocating all the nodes in the list
+```
+#### • Linked list-based
+```
+functions to change:
+-> GetItem()
+-> PutItem()
+-> DeleteItem()
+```
+##### [+] *GetItem*
+```
+loop through the linked list:
+if (CompareTo == Equal) { returm item };
+elif (CompareTo == Less) { cout << "Item is not in the list" << endl; };
+------------------------------------------------------------------------
+
+! Cannot use Binary Search int this case 
+1). binary search require being able to randomly access elements of the list 
+2). Linked lists can only access directly linked nodes one by one
+```
+##### [+] *PutItem*
+```
+Can't always look a head (location->next)->info, because exception will happen in the end  
+
+solution. two poitners, recording previous and current Node
+1). predLoc
+2). location 
+
+// code
+```
+<img src="./pic/putItemLinkedList1.png" width=450>
+<br>
+<br>
+<img src="./pic/putItemLinkedList2.png" width=350>
+<img src="./pic/putItemLinkedList3.png" width=400>
+<br>
+<br>
+
+##### [+] *DeleteItem*
+```
+linear way: compare against "(location->next)->info" to find the item to delete
+
+// code
+```
+<img src="./pic/delelteItemLinkedList.png" width=400>
+
+##### [+] *ResetList*
+```
+// code
+```
+### Time Complexity/order of magnitude
+<img src="./pic/sortListCompareTimeComplexity.png">
+
+```
+>> memory handle difference
+
+1). Static Array:   specify size at compile time 
+2). Dynamic Array:  sepcify size at run-time 
+3). Linked likst:   as long as computer has memory
+```
+
+### Bounded and Unbounded ADTs
+#### • Bounded 
+```
+There is a logical limit on the number of items in the structure
+----------------------------------------------------------------
+>> array-based list is bounded, but you can modify it into dynamic memory allocated version 
+>> so that storage can be expanded as long as there are space in the heap
+```
+#### • Unbounded
+```
+no logical limit on the number of items in ths structure
+---------------------------
+>> Linked list is Unbounded
+```
 # Stacks
 ### Properties
 ### Implementation 
