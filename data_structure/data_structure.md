@@ -772,7 +772,9 @@ input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
 ```
 The worst case (upper bound) of the algorithm execution time
 ```
-![Big-O-Comparison](./pic/bigO.png)
+<!-- ![Big-O-Comparison](./pic/bigO.png) -->
+<img src="./pic/bigO.png" width = 700>
+
 ### Comparison of algorithm
 ```
 [Goal]: Compare the efficiency of different algorithm, efficiency is what matters!
