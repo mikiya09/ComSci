@@ -1103,7 +1103,7 @@ linear way: compare against "(location->next)->info" to find the item to delete
 
 // code
 ```
-<img src="./pic/delelteItemLinkedList.png" width=200>
+<img src="./pic/delelteItemLinkedList.png" width=300>
 
 ##### [+] *ResetList*
 ```
