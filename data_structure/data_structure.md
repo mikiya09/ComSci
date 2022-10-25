@@ -1,8 +1,5 @@
 
 
-
-
-
 # Basic Concepts
 
 ### Software Engineering 
@@ -23,11 +20,11 @@ A disciplined approach to the design, production, and maintenance of computer pr
 
 ### Functional Decomposition v.s Object-oriented Design
 ```
-[1]. functional decomposition 
+[1] functional decomposition 
      >> breaks the program into functions 
      >> these functions form a complete solution to the problem when used together
 
-[2]. Object-oriented Design 
+[2] Object-oriented Design 
      • Divide-and-Conquer: break down the program into things instead of tasks
      • The design consists of objects, which are defined by classes
      • Objects combine data and operations
@@ -44,12 +41,12 @@ Grady Booch, "what Is and Isn't Object Oriented Design", 1989
 
 ### BUG
 ```
-[1]. Compile-Time Errors
+[1] Compile-Time Errors
      • unclean
      • syntactically incorrect
      • know your programming language, editor, etc
 
-[2]. Run-Time Errors
+[2] Run-Time Errors
      • errors occur during execution, often causing the program to crash
      • (Robustness): the ability of a program to recover from an error 
      • often found with sufficient testing
@@ -57,19 +54,19 @@ Grady Booch, "what Is and Isn't Object Oriented Design", 1989
 
 ### TEST 
 ```
-[1]. Program Verification
+[1] Program Verification
      • checking if a program fulfills specification: "Are we doing the job right?"
 
-[2]. Program Validation
+[2] Program Validation
      • checking if the program fulfills its intended purpose: "Are we doing the right job?"
 
-[3]. Precondition
+[3] Precondition
      • a condition that must be true before an operation is exexuted
 
-[4]. Postcondition
+[4] Postcondition
      • a condition that will be true after an operation completes
 
-[5]. Exceptions
+[5] Exceptions
      • allow programs to interrupt normal control flow to handle exceptional situations
      • handling them should be part of the design
 ```
@@ -119,13 +116,13 @@ specific representation to hold the data items, and implementation of operations
 
 #### • Library Example
 ```
-[1]. Application Level: Public Library that you can make the use of 
+[1] Application Level: Public Library that you can make the use of 
 
-[2]. Logical Level: 
+[2] Logical Level: 
      > domain is a collection of books; 
      > operations inclues, check book out, check book in, pay fine, reserve a book
 
-[3]. Implementation Level:
+[3] Implementation Level:
      > representation of the structure to hold "books", and the coding for operations
 ```
 
@@ -143,30 +140,30 @@ specific representation to hold the data items, and implementation of operations
 
 #### • Simple
 ```
-[1]. Integral (完整的)
+[1] Integral (完整的)
      > char
      > short
      > int 
      > long
      > enum
 
-[2]. Floating (有小数点)
+[2] Floating (有小数点)
      > float 
      > double
      > long 
      > double
 
-[3]. Address 
+[3] Address 
      > pointer 
      > reference 
 ```
 #### • Composite
 ```
-[1]. Definition 
+[1] Definition 
      : stores a collection of individual data components under *one variable name*,
        allows individual components to be accessed
 
-[2]. Type 
+[2] Type 
      > array 
      > struct 
      > union 
@@ -212,10 +209,10 @@ e.g. arrays
 ```
 typedef: 
 
-[1]. Is a reserved keyword in the programming languages C and C++
-[2]. It is used to create an additional name (alias) for another data type
-[3]. It is often used to simlify the syntax of complex data structure (struct/class)
-[4]. used to provide specific descriptive type names for integer data type of varying sizes
+[1] Is a reserved keyword in the programming languages C and C++
+[2] It is used to create an additional name (alias) for another data type
+[3] It is often used to simlify the syntax of complex data structure (struct/class)
+[4] used to provide specific descriptive type names for integer data type of varying sizes
      > int
      > double 
      > long
@@ -373,12 +370,12 @@ Base address (lowest address)
 
 ### Two-dimensional Array
 ```
-[1]. A two-dimensional array is a structured composite data type made up of a finite, 
+[1] A two-dimensional array is a structured composite data type made up of a finite, 
      fixed size collection of homogeneous elements having relative positions given 
      by a pair of indexes and to which there is direct access
 
 
-[2]. Array operation (creation, storing values, retrieving values) are performed
+[2] Array operation (creation, storing values, retrieving values) are performed
      using a declaration and a "a pair of indexes(row & column)" representing
      the component's position in each dimension
 
@@ -434,12 +431,12 @@ assume 2 bytes for type int, memory address is located with bytes
 ```
 ### Passing arrays as function parameters
 ```
-[1]. In C++, arrays are always passed by reference, 
+[1] In C++, arrays are always passed by reference, 
      and & is not used with formal parameter type
      Meaning, always pass the base address of an array to function, 
      and function can modify array
 
-[2]. protect array from unintentional changes by using "const" in formal parameter 
+[2] protect array from unintentional changes by using "const" in formal parameter 
      and function prototype
 ```
 #### • One Dimensonal Array
@@ -573,14 +570,13 @@ int main()
 }
 ```
 
-
 # Object-Oriented Programming
 ```
 • Three inter-related constructs: classess, objects and inheritance 
   
-[1]. Objects are basic run-time entities in an object-oriented system 
-[2]. A class defines the structure of its objects 
-[3]. Classes are organized in an "is-a" hierarchy defined by inheritance
+[1] Objects are basic run-time entities in an object-oriented system 
+[2] A class defines the structure of its objects 
+[3] Classes are organized in an "is-a" hierarchy defined by inheritance
 ```
 ### Abstraction 
 ```
@@ -688,8 +684,8 @@ The theoretical study of design and analysis of computer algorithms, not about p
 ```
 #### • Design
 ```
-[1]. design correct algorithms which minimize cost
-[2]. efficiency is the design criterion
+[1] design correct algorithms which minimize cost
+[2] efficiency is the design criterion
 ```
 #### • Analysis
 ```
@@ -697,9 +693,9 @@ The theoretical study of design and analysis of computer algorithms, not about p
 ```
 #### • Basic Goals for designing
 ```
-[1]. always correct
-[2]. always terminates
-[3]. always care about performance
+[1] always correct
+[2] always terminates
+[3] always care about performance
 ```
 #### • WHY?
 ```
@@ -723,9 +719,9 @@ i = i + 1;
 if (i > n) then i = 0;
 
 [related questions]:
-<1>. Number of element comparisons?     --> from 1 to n
-<2>. Worst case?                        --> n
-<3>. Best case?                         --> 1
+<1> Number of element comparisons?     --> from 1 to n
+<2> Worst case?                        --> n
+<3> Best case?                         --> 1
 ```
 ##### [+] Example 2 
 ```
@@ -755,15 +751,15 @@ for i = 1 to n do
     }
 
 [related questions]:
-<1>. What is the number of multiplications?     --> i * j * k = n^3
-<2>. What is the number of additions?           --> same? think that later
+<1> What is the number of multiplications?     --> i * j * k = n^3
+<2> What is the number of additions?           --> same? think that later
 ```
 ##### [+] explain
 ```
 further abstraction we use in algorithm analysis is to characterize in terms of growth 
 
-[1]. Matrix multiplication time grows as n^3 
-[2]. Linear search time grows as n 
+[1] Matrix multiplication time grows as n^3 
+[2] Linear search time grows as n 
 
 [why is it important?]
 input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
@@ -795,11 +791,11 @@ sum = (1+N)*(N/2);
 ```
 #### • How to compare ?
 ```
-[1]. Compare the actual running time on a computer 
-[2]. Compare the number instructions/statements executed
-     a). varies with languages used and programmer's style 
-     b). count the number of passes through a "critical loop" in algorithm 
-[3]. Count representative operations performed in the algorithm
+[1] Compare the actual running time on a computer 
+[2] Compare the number instructions/statements executed
+     a) varies with languages used and programmer's style 
+     b) count the number of passes through a "critical loop" in algorithm 
+[3] Count representative operations performed in the algorithm
 ```
 # Pointers
 ```
@@ -880,10 +876,10 @@ Since there's no way to collect the garbage, it is small memory leak
 ```
 #### • Delete Operation 
 ```
-[1]. If it is single variables 
+[1] If it is single variables 
      >> delete myMoney;              // safely clean up the memory allocated to myMoney
 
-[2]. If it is array variables
+[2] If it is array variables
      >> delete [] myArray;           // deleting array
 ```
 ### *Static v.s Dynamic arrays 
@@ -894,9 +890,9 @@ Since there's no way to collect the garbage, it is small memory leak
 A collection of **nodes** that are <u>linked together</u> in a chain using **pointers**
 #### • Node 
 ```
-[1]. basic component of a linked list, store data and a pointer to the next node
-[2]. Nodes are created when needed using dynamically allocated memory 
-[3]. The last node in the list has a NULL pointer
+[1] basic component of a linked list, store data and a pointer to the next node
+[2] Nodes are created when needed using dynamically allocated memory 
+[3] The last node in the list has a NULL pointer
 ```
 #### • Observer (getter)
 #### • Transformers (setter)
@@ -907,10 +903,10 @@ A collection of **nodes** that are <u>linked together</u> in a chain using **poi
 ```
 ! Order Matter, do step 4 over step 3 will cause memory leak
 ------------------------------------------------------------
-1). Create a new node 
-2). Set the node's info to the input data 
-3). Set the node's next pointer to the listData, the first item in the list
-4). Set listData to point to the new node
+1) Create a new node 
+2) Set the node's info to the input data 
+3) Set the node's next pointer to the listData, the first item in the list
+4) Set listData to point to the new node
 ```
 <img src="./pic/putItem.png">
 
@@ -932,15 +928,15 @@ void UnsortedType::PutItem (ItemType item)
 ```
 ```
 Put into Empty list 
-1). create new node 
-2). make new node point to NULL 
-3). make listData point to NULL 
+1) create new node 
+2) make new node point to NULL 
+3) make listData point to NULL 
 ```
 ##### [+] *Constructor*
 ```
-1). Largely unchanged
-2). Set length to 0 
-#). Set the external pointer to NULL
+1) Largely unchanged
+2) Set length to 0 
+3) Set the external pointer to NULL
 ```
 ##### [+] *IsFull* 
 ```
@@ -970,13 +966,13 @@ bool UnsortedType::IsFull() const
 100% sure this one is an iterator
 
 < delete always start from the head >
-1). makeEmpty() must deallocate each node individually in order to empty the list 
-2). This is accomplished using a while loop 
-3). Iteration starts at listData, the head of the list, and continues using listData->next 
-4). Iteration stops when listData is NULL
+1) makeEmpty() must deallocate each node individually in order to empty the list 
+2) This is accomplished using a while loop 
+3) Iteration starts at listData, the head of the list, and continues using listData->next 
+4) Iteration stops when listData is NULL
 ```
 ##### [+] *GetItem*
-<img src="./pic/getItem.png">
+<img src="./pic/getItem.png" width=500>
 
 ```
 Linear Search through the list to find the desired item
@@ -984,12 +980,12 @@ Linear Search through the list to find the desired item
 <br>
 
 ##### [+] *DeleteItem*
-<img src="./pic/deleteItem.png">
+<img src="./pic/deleteItem.png" width=500>
 
 ```
-1). tempPtr to locate the item that need to be deleted, link it; 
-2). predecessor(previous pointer) point to location->next 
-3). delete the tempPtr
+1) tempPtr to locate the item that need to be deleted, link it; 
+2) predecessor(previous pointer) point to location->next 
+3) delete the tempPtr
 ```
 <br>
 
@@ -1002,20 +998,20 @@ refer to above example and all **member functions**
 #### • Sorted List
 ##### [+] Logical Level (no changes)
 ```
-1). Only change from unsorted list is guaranteeing list elements are sorted
-2). Order is determined by ItemType's CompareTo method 
-3). PutItem and DeleteItem pre- and post- condition: list is sorted and remains sorted
+1) Only change from unsorted list is guaranteeing list elements are sorted
+2) Order is determined by ItemType's CompareTo method 
+3) PutItem and DeleteItem pre- and post- condition: list is sorted and remains sorted
 ```
 ##### [+] Application Level (no changes)
 ```
-1). Nothing has changed for the user, list interface is exactly the same
-2). GetNextItem will return the next item in key order
+1) Nothing has changed for the user, list interface is exactly the same
+2) GetNextItem will return the next item in key order
 ```
 ##### [+] Imlementation Level (few changes)
 ```
 -----------------------------------------------------------------
-|   1). PutItem, DeleteItem: Ensure list remains Sorted <br>    |
-|   2). GetItem can be improved                                 |
+|   1) PutItem, DeleteItem: Ensure list remains Sorted <br>     |
+|   2) GetItem can be improved                                  |
 -----------------------------------------------------------------
 ```
 ### Sorted List implementations
@@ -1027,18 +1023,18 @@ the length field must be present in order to define the extent of the list withi
 **PutItem**
 ```
 (Linear Search is required)
-1). Find the space where new element should go
-2). create space for new element, by moving all subsequent elements down one space
-3). insert the element in the space
-4). increment the length by 1
+1) Find the space where new element should go
+2) create space for new element, by moving all subsequent elements down one space
+3) insert the element in the space
+4) increment the length by 1
 ```
 <img src="./pic/arrayBased.png">
 
 **DeleteItem**
 ```
-1). assume item for deletion is in the list, simple linear search find them
-2). when found, move subsequent element up one space (overwritting)
-3). decrement the length by 1
+1) assume item for deletion is in the list, simple linear search find them
+2) when found, move subsequent element up one space (overwritting)
+3) decrement the length by 1
 ```
 **GetItem**
 
@@ -1051,10 +1047,10 @@ Binary Search (more to come in the following section)
 ```
 few changes:
 
-1). Parameteried constructor: allows user to specify max number of items
-2). Defafult constructor: ____you_know_what_to_do_____
-3). Destructor: cleans up the memory on the heap when the rest of the list is removed
-4). store the max list size instead of using a constant: 
+1) Parameteried constructor: allows user to specify max number of items
+2) Defafult constructor: ____you_know_what_to_do_____
+3) Destructor: cleans up the memory on the heap when the rest of the list is removed
+4) store the max list size instead of using a constant: 
     >> length == maxList;
 ```
 <img src="./pic/dynamicArrayBased.png" width=500>
@@ -1063,8 +1059,8 @@ few changes:
 ```
 ! object is deallocated when it leavs scope, but any data it points to is not -> memory leak
 
-1). class destructor is a needed to implicitly invoked when a object leave scope
-2). ~UnsortedList() => clean up memory by deallocating all the nodes in the list
+1) class destructor is a needed to implicitly invoked when a object leave scope
+2) ~UnsortedList() => clean up memory by deallocating all the nodes in the list
 ```
 #### • Linked list-based
 ```
@@ -1081,24 +1077,24 @@ elif (CompareTo == Less) { cout << "Item is not in the list" << endl; };
 ------------------------------------------------------------------------
 
 ! Cannot use Binary Search int this case 
-1). binary search require being able to randomly access elements of the list 
-2). Linked lists can only access directly linked nodes one by one
+1) binary search require being able to randomly access elements of the list 
+2) Linked lists can only access directly linked nodes one by one
 ```
 ##### [+] *PutItem*
 ```
 Can't always look a head (location->next)->info, because exception will happen in the end  
 
 solution. two poitners, recording previous and current Node
-1). predLoc
-2). location 
+1) predLoc
+2) location 
 
 // code
 ```
-<img src="./pic/putItemLinkedList1.png" width=450>
+<img src="./pic/putItemLinkedList1.png" width=400>
 <br>
 <br>
-<img src="./pic/putItemLinkedList2.png" width=350>
-<img src="./pic/putItemLinkedList3.png" width=400>
+<img src="./pic/putItemLinkedList2.png" width=300>
+<img src="./pic/putItemLinkedList3.png" width=300>
 <br>
 <br>
 
@@ -1139,8 +1135,37 @@ no logical limit on the number of items in ths structure
 ---------------------------
 >> Linked list is Unbounded
 ```
-# Stacks
+# Stacks (ADT)
+```
+Last in First Out (LIFO)
+```
 ### Properties
+#### • Logical Level 
+```
+A stack is an ADT in which elements are added and removed from only the top of the stack
+
+
+          Push        Pop
+                   
+            |           |
+            |           |   ---> Top 
+            |-----------|
+            |           |
+            |-----------|
+            |           |
+            |-----------|
+            |           |
+            |-----------|
+            |           |
+            -------------
+```
+#### • Application Level 
+```
+1) Palindorome 
+2) Any kind of reversing data work, etc
+
+// code
+```
 ### Implementation 
 #### • Array-based 
 #### • Linked list-based 
