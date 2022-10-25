@@ -1090,11 +1090,10 @@ solution. two poitners, recording previous and current Node
 
 // code
 ```
-<img src="./pic/putItemLinkedList1.png" width=300>
+<img src="./pic/putItemLinkedList1.png" width=400>
 <br>
 <br>
-<img src="./pic/putItemLinkedList2.png" width=200>
-<img src="./pic/putItemLinkedList3.png" width=200>
+<img src="./pic/putItemLinkedList2.png" width=700>
 <br>
 <br>
 
