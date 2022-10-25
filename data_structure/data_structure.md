@@ -943,29 +943,12 @@ Put into Empty list
 ! Linked list don't have an explicit size space
 ! try if you can allocated new memory for limit
 ! btw, dynamic memory is located in the heap
-
-bool UnsortedType::IsFull() const 
-// Returns true if there is no room for another ItemType 
-// on the free store; false otherwise 
-{
-    NodeType* location;
-    try 
-    {
-        location = new NodeType;
-        delete location;
-        return false;
-    }
-    catch (std::bad_alloc exception)
-    {
-        return true;
-    }
-}
 ```
 ##### [+] *MakeEmpty*
 ```
 100% sure this one is an iterator
 
-< delete always start from the head >
+! delete always start from the head
 1) makeEmpty() must deallocate each node individually in order to empty the list 
 2) This is accomplished using a while loop 
 3) Iteration starts at listData, the head of the list, and continues using listData->next 
@@ -1061,6 +1044,17 @@ few changes:
 
 1) class destructor is a needed to implicitly invoked when a object leave scope
 2) ~UnsortedList() => clean up memory by deallocating all the nodes in the list
+
+--------------------------------------------------------------------------------------------
+// for array-based destructor 
+// we create a pointer of an array, which stores the address of first location in array
+// delete that is enough
+
+UnsortedType::~UnsortType()
+{
+    delete [] arrayPtr;
+    cout << "destructor called" << endl;
+}
 ```
 #### • Linked list-based
 ```
@@ -1069,16 +1063,99 @@ functions to change:
 -> PutItem()
 -> DeleteItem()
 ```
+##### [+] *NodeType* 
+```
+struct NodeType
+{
+    ItemType info;
+    NodeType* next;
+}
+```
+##### [+] *Constructor*
+```
+SortedType::SortedType()    // Class constructor 
+{
+    length = 0;
+    listData = NULL;
+}
+```
+##### [+] *IsFull*
+```
+bool SortedType::IsFull() const 
+// Returns true if there is no room for another ItemType 
+// on the free store; false otherwise 
+{
+    NodeType* location;
+    try 
+    {
+        location = new NodeType;
+        delete location;
+        return false;
+    }
+    catch (std::bad_alloc exception)
+    {
+        return true;
+    }
+}
+```
+##### [+] *MakeEmpty*
+```
+// deletion always starts with the head
+void SortedType::MakeEmpty()
+{
+  NodeType* tempPtr;
+
+  while (listData != NULL)
+  {
+    tempPtr = listData;
+    listData = listData->next;
+    delete tempPtr;
+  }
+  length = 0;
+}
+```
 ##### [+] *GetItem*
 ```
-loop through the linked list:
-if (CompareTo == Equal) { returm item };
-elif (CompareTo == Less) { cout << "Item is not in the list" << endl; };
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+|                                                                                   |
+|   loop through the linked list:                                                   |
+|   if (CompareTo == Equal) { returm item };                                        |
+|   elif (CompareTo == Less) { cout << "Item is not in the list" << endl; };        |
+|                                                                                   |
+|-----------------------------------------------------------------------------------|
+|                                                                                   |
+|   ! Cannot use Binary Search int this case                                        |
+|   1) binary search require being able to randomly access elements of the list     |
+|   2) Linked lists can only access directly linked nodes one by one                |
+|                                                                                   |
+-------------------------------------------------------------------------------------
+```
+```
+ItemType SortedType::GetItem(ItemType& item, bool& found)
+{
+  bool moreToSearch;
+  NodeType* location;
 
-! Cannot use Binary Search int this case 
-1) binary search require being able to randomly access elements of the list 
-2) Linked lists can only access directly linked nodes one by one
+  location = listData;
+  found = false;
+  moreToSearch = (location != NULL);
+
+  while (moreToSearch && !found)
+  {
+    switch(item.ComparedTo(location->info))
+    {
+      case GREATER: location = location->next;
+                    moreToSearch = (location != NULL);
+                    break;
+      case EQUAL:   found = true;
+                    item = location->info;
+                    break;
+      case LESS:    moreToSearch = false;
+                    break;
+    }
+  }
+  return item;
+}
 ```
 ##### [+] *PutItem*
 ```
@@ -1087,8 +1164,51 @@ Can't always look a head (location->next)->info, because exception will happen i
 solution. two poitners, recording previous and current Node
 1) predLoc
 2) location 
-
+```
+```
 // code
+void SortedType::PutItem(ItemType item)
+{
+  NodeType* newNode;  	// pointer to node being inserted
+  NodeType* predLoc;  	// trailing pointer
+  NodeType* location; 	// traveling pointer
+  bool moreToSearch;
+
+  location = listData;
+  predLoc = NULL;
+  moreToSearch = (location != NULL);
+
+  // Find insertion point.
+  while (moreToSearch)
+  {
+    switch(item.ComparedTo(location->info))
+    {
+      case GREATER: predLoc = location;
+      	           location = location->next;
+                    moreToSearch = (location != NULL);
+                    break;
+      case LESS:    moreToSearch = false;
+                    break;
+    }
+    
+  }
+
+  // Prepare node for insertion
+  newNode = new NodeType;
+  newNode->info = item;
+  // Insert node into list.
+  if (predLoc == NULL)         // Insert as first
+  {
+    newNode->next = listData;
+    listData = newNode;
+  }
+  else
+  {
+    newNode->next = location;
+    predLoc->next = newNode;
+  }
+  length++;
+}
 ```
 <img src="./pic/putItemLinkedList1.png" width=400>
 <br>
@@ -1101,13 +1221,78 @@ solution. two poitners, recording previous and current Node
 ```
 linear way: compare against "(location->next)->info" to find the item to delete
 
-// code
+// code 
+void SortedType::DeleteItem(ItemType item)
+{
+  NodeType* location = listData;
+  NodeType* tempLocation;
+
+  // Locate node to be deleted.
+  if (item.ComparedTo(listData->info) == EQUAL)
+  {
+    tempLocation = location;
+    listData = listData->next;	// Delete first node.
+  }
+  else
+  {
+    while (item.ComparedTo((location->next)->info) != EQUAL)
+      location = location->next;
+
+    // Delete node at location->next
+    tempLocation = location->next;
+    location->next = (location->next)->next;
+  }
+  delete tempLocation;
+  length--;
+}
 ```
 <img src="./pic/delelteItemLinkedList.png" width=400>
 
 ##### [+] *ResetList*
 ```
 // code
+void SortedType::ResetList()
+{
+  currentPos = NULL;
+} 
+
+ItemType SortedType::GetNextItem()
+{
+  ItemType item;
+  if (currentPos == NULL)
+    currentPos = listData;
+  item = currentPos->info; 
+  currentPos = currentPos->next;
+  return item;
+
+}
+```
+##### [+] *GetNextItem* 
+```
+ItemType SortedType::GetNextItem()
+{
+  ItemType item;
+  if (currentPos == NULL)
+    currentPos = listData;
+  item = currentPos->info; 
+  currentPos = currentPos->next;
+  return item;
+
+}
+```
+##### [+] *Destructor (Linked List)*
+```
+SortedType::~SortedType()
+{
+  NodeType* tempPtr;
+
+  while (listData != NULL)
+  {
+    tempPtr = listData;
+    listData = listData->next;
+    delete tempPtr;
+  }
+}
 ```
 ### Time Complexity/order of magnitude
 <img src="./pic/sortListCompareTimeComplexity.png">
@@ -1171,13 +1356,162 @@ A stack is an ADT in which elements are added and removed from only the top of t
 ### Implementation 
 #### • Array-based 
 ```
-// code (array-based)
+#include "StackType.h"
+
+
+StackType::StackType(int max)               // custom constructor
+{
+  maxStack = max;
+  top = -1;
+  items = new int[maxStack];
+}
+--------------------------------------------------------------------------------------------
+
+StackType::StackType()                      // default constructor
+{
+  maxStack = 500;
+  top = -1;
+  items = new int[maxStack];
+}
+--------------------------------------------------------------------------------------------
+
+bool StackType::IsEmpty() const             // check if the top == -1
+{
+  return (top == -1);
+}
+--------------------------------------------------------------------------------------------
+
+bool StackType::IsFull() const              // check if the top == max - 1
+{
+  return (top == maxStack-1);
+}
+--------------------------------------------------------------------------------------------
+
+void StackType::Push(int newItem)           
+{
+  if (IsFull())                             // user-defined exception FullStack()
+    throw FullStack();                      // throw that if IsFull() = true
+  top++;                                    // else top increment 1
+  items[top] = newItem;                     // let items[top] = newItem
+}
+--------------------------------------------------------------------------------------------
+
+void StackType::Pop()
+{
+  if( IsEmpty() )                           
+    throw EmptyStack();                     // throw user-deined exception EmptyStack()
+  top--;                                    // since it's array, don't really need to delete
+}                                           // decrement top value, later overwrite for push
+--------------------------------------------------------------------------------------------
+
+int StackType::Top()
+{
+  if (IsEmpty())
+    throw EmptyStack();
+  return items[top];                        // return the top item
+}    
+--------------------------------------------------------------------------------------------
+
+StackType::~StackType()
+{
+  delete [] items;                          // delete array pointer
+}
+--------------------------------------------------------------------------------------------
 ```
-<img src="./pic/tracingStack.png">
+<img src="./pic/tracingStack.png" width=600>
+
 
 #### • Linked list-based 
 ```
-// code (linked-list based)
+#include "StackType.h"
+
+struct NodeType                             // Node Type
+{
+  int info;
+  NodeType* next;
+};
+--------------------------------------------------------------------------------------------
+
+StackType::StackType()
+{
+  topPtr = NULL;                            // constructor
+}
+--------------------------------------------------------------------------------------------
+
+bool StackType::IsFull() const              // check if there's still memory
+{
+    NodeType* location;
+  try
+  {
+    location = new NodeType;
+    delete location;
+    return false;
+  }
+  catch(std::bad_alloc exception)
+  {
+    return true;
+  }
+}
+--------------------------------------------------------------------------------------------
+
+// destructor (iterator)
+StackType::~StackType()
+{
+  NodeType* tempPtr;                        // use tempPtr 
+
+  while (topPtr != NULL)                    // as long as tempPtr != NULL
+  {                                         // not yet reach the end
+    tempPtr = topPtr;
+    topPtr = topPtr->next;
+    delete tempPtr;
+  }
+}
+--------------------------------------------------------------------------------------------
+
+bool StackType::IsEmpty() const
+{
+  return (topPtr == NULL);
+}
+--------------------------------------------------------------------------------------------
+
+// Linked-List is automatically a stack seeing from left to right (as Top to Down in stack)
+void StackType::Push(int newItem)
+{
+  if (IsFull())
+    throw FullStack();                      // check if full
+  else
+  {
+    NodeType* location;                     // not full, create new node to store newItem
+    location = new NodeType;                // record address 
+    location->info = newItem;               // record info
+    location->next = topPtr;                // let newNode point to the first Node
+    topPtr = location;                      // set topPtr pointing to the new Node
+  }
+}
+--------------------------------------------------------------------------------------------
+
+void StackType::Pop()
+{
+  if (IsEmpty())
+    throw EmptyStack();                     // check if empty
+  else
+  {  
+    NodeType* tempPtr;                      // use tempPtr for deletion from the head
+    tempPtr = topPtr;                       // refer to the figure below
+    topPtr = topPtr->next;
+    delete tempPtr;
+  }
+}
+--------------------------------------------------------------------------------------------
+
+int StackType::Top()
+{
+  if (IsEmpty())
+    throw EmptyStack();                     // check if empty
+  else
+    return topPtr->info;                    // return top value
+}
+--------------------------------------------------------------------------------------------
 
 ```
 <img src="./pic/deleteStack.png">
@@ -1246,11 +1580,11 @@ private:
 
 ```
 4) Fix this Issue
---------------
+----------------------------
 Solution [1]: more intuitive
 {...count the length...}
 
-----------------------------
+------------------------------------------------------------------------
 Solution [2]: less intuitive, but cooler and efficient, go with this one
 ```
 <img src="./pic/floatingQueueIssuesFix.png" width=600>
@@ -1280,4 +1614,107 @@ Solution [2]: less intuitive, but cooler and efficient, go with this one
 ```
 ### Implementation 
 #### • Array-based 
+```
+#include "QueType.h"
+
+// Post: (1) maxQue, front, and rear have been initialized. 
+//       (2) The array to hold the queue elements has been dynamically allocated.
+QueType::QueType(int max)
+{
+  maxQue = max + 1;
+  front = maxQue - 1;
+  rear = maxQue - 1;
+  items = new int[maxQue];
+}
+---------------------------------------------------------------------------------------------
+
+// Post: (1) maxQue, front, and rear have been initialized. 
+//       (2) The array to hold the queue elements has been dynamically allocated.
+
+QueType::QueType()                                  // Default class constructor
+{
+  maxQue = 501;
+  front = maxQue - 1;
+  rear = maxQue - 1;
+  items = new int[maxQue];
+}
+---------------------------------------------------------------------------------------------
+
+// Destructor
+QueType::~QueType()
+{
+  delete [] items;
+}
+---------------------------------------------------------------------------------------------
+
+// Post: front and rear have been reset to the empty state.
+void QueType::MakeEmpty() 
+{
+  front = maxQue - 1;                               // don't really need to delete
+  rear = maxQue - 1;                                // array-based just override
+}
+---------------------------------------------------------------------------------------------
+
+bool QueType::IsEmpty() const
+{
+  return (rear == front);
+}
+---------------------------------------------------------------------------------------------
+
+bool QueType::IsFull() const
+{
+  return ((rear + 1) % maxQue == front);            // mod used here
+}
+---------------------------------------------------------------------------------------------
+
+// Post: If (queue is not full) newItem is at the rear of the queue; 
+// otherwise a FullQueue exception is thrown.  
+void QueType::Enqueue(int newItem) 
+{
+  if (IsFull())
+    throw FullQueue();
+  else
+  {
+    rear = (rear +1) % maxQue;                     // include % in the calculation
+    items[rear] = newItem;                         // deal with the situation rear is the end
+  }
+}
+
+        ____________________________________________
+        |       |       |          |       |       |    front = 2 
+        |   C   |       | reserved |   A   |   B   |
+        |       |       |          |       |       |    rear = 0
+        --------------------------------------------
+           [0]     [1]      [2]       [3]     [4]
+
+           // rear is 0, plus 1 will result in 1
+           // add item at there
+
+---------------------------------------------------------------------------------------------
+
+// Post: If (queue is not empty) the front of the queue has been removed 
+// and a copy returned in item; othersiwe a EmptyQueue exception has been thrown.
+void QueType::Dequeue(int& item)
+{
+  if (IsEmpty())
+    throw EmptyQueue();
+  else
+  {
+    front = (front + 1) % maxQue;
+    item = items[front];
+  }
+}
+
+        ____________________________________________
+        |       |       |          |       |       |    front = 2 
+        |   C   |       | reserved |   A   |   B   |
+        |       |       |          |       |       |    rear = 0
+        --------------------------------------------
+           [0]     [1]      [2]       [3]     [4]
+
+        // since we preserve the index before actual front item as "front"
+        // use front + 1 to locate actual front item
+
+---------------------------------------------------------------------------------------------
+```
 #### • Linked list-based 
