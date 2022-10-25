@@ -443,7 +443,7 @@ assume 2 bytes for type int, memory address is located with bytes
      and function prototype
 ```
 #### • One Dimensonal Array
-##### - incorrect way
+##### [-] incorrect way
 ```
 #include <iostream>
 using namespace std;
@@ -475,7 +475,7 @@ explain: when passing int arr to fun() in main, it is always treated as a pointe
          you can't the correct size of a pointer 
          the solution is passing the size as a parameter to the main as well
 ```
-##### + correct way 1
+##### [+] correct way 1
 ```
 #include <iostream>
 using namespace std;
@@ -495,7 +495,7 @@ int main()
     return 0;
 }
 ```
-##### + correct way 2
+##### [+] correct way 2
 ```
 (when you have function that correctly calculate size with string)
 
@@ -520,14 +520,14 @@ int main()
 }
 ```
 #### • Two Dimensonal Array
-##### + method 1
+##### [+] method 1
 ```
 // specify the size of columns of 2D array
 void processArr(int a[][10]) {
    // Do something
 }
 ```
-##### + method 2 
+##### [+] method 2 
 ```
 // pass array containing pointers
 void processArr(int *a[10]) {           // passing a pointer of an array of 10 pointers
@@ -539,7 +539,7 @@ for(int i = 0; i < 10; i++)
    array[i] = new int[10];              // initialize each pointer in the 10 pointer-array
 processArr(array);
 ```
-##### + method 3
+##### [+] method 3
 ```
 #include <iostream>
 using namespace std;
@@ -708,7 +708,7 @@ Computers are always limited in the computational ability and memory
 + Efficiency is the center of algorithms
 ```
 #### • Growth Rate 
-##### + Example 1 
+##### [+] Example 1 
 ```
 [Question]: 
 determine whether x is one of A[1], A[2],..., A[n], and retrieve information about x.
@@ -727,7 +727,7 @@ if (i > n) then i = 0;
 <2>. Worst case?                        --> n
 <3>. Best case?                         --> 1
 ```
-##### + Example 2 
+##### [+] Example 2 
 ```
 Square Matrix Multiplication 
 
@@ -758,7 +758,7 @@ for i = 1 to n do
 <1>. What is the number of multiplications?     --> i * j * k = n^3
 <2>. What is the number of additions?           --> same? think that later
 ```
-##### + explain
+##### [+] explain
 ```
 further abstraction we use in algorithm analysis is to characterize in terms of growth 
 
@@ -823,16 +823,186 @@ int* intPointer = &alpha;                       // return a address like this: 0
 *intPointer = 25;                               // alpha is now 25
 ```
 # Dynamic Memory Allocation
-### Static v.s Dynamic memory allocation 
+#### • Static
+```
+(when): compile time
+allocates a fixed amount of memory during compile time, pre-specify in declaration 
+```
+#### • Dynamic memory allocation 
+```
+(when): runtime
+Allocation of memory space for a variable at run time, as opposed to static one
+
+(where):
+Dynamic allocation creates variables on heap (or free store),
+a section of memory reserved for dynamic allocation
+```
 ### Use cases
-### Static v.s Dynamic arrays 
-### initialization
+Dynamic allocation uses the keyword **new**
+```
+int* ptr = new int;
+// new returns a pointer to the newly allocated int on the heap
+// and the value can only be accessed via this pointer
+
+(new):
+      • pointers can point to nothing using NULL 
+      • if no memory is available on the heap, new operator returns NULL (for check memory)
+```
 ### Memory Leak Issue
+```
+A memory leak is the loss of available memory space 
+that occurs when some "dynamically" allocated memory is never deallocated, called garbage
+```
+#### • Example 
+```
+float* money = new float;
+*money = 33.46;
+float* myMoney = new float;
+```
+<img src="./memoryLeak1.png" width=300>
+<br>
+
+```
+•myMoney = *money;                  // set the value of myMoney = the value of money
+```
+<img src="./memoryLeak2.png" width=300>
+<br>
+
+```
+myMoney = money;                    // set the memory address of myMoney = money's
+```
+<img src="./memoryLeak3.png" width=300>
+<br>
+
+```
+The memory cell originally used by myMoney is now inaccessible.
+Since there's no way to collect the garbage, it is small memory leak
+```
+#### • Delete Operation 
+```
+[1]. If it is single variables 
+     >> delete myMoney;              // safely clean up the memory allocated to myMoney
+
+[2]. If it is array variables
+     >> delete [] myArray;           // deleting array
+```
+### *Static v.s Dynamic arrays 
+### *initialization
 
 # Lists
+### Linked List 
+A collection of **nodes** that are <u>linked together</u> in a chain using **pointers**
+#### • Node 
+```
+[1]. basic component of a linked list, store data and a pointer to the next node
+[2]. Nodes are created when needed using dynamically allocated memory 
+[3]. The last node in the list has a NULL pointer
+```
+#### • Observer (getter)
+#### • Transformers (setter)
+#### • Iterator
+
+#### • Member function
+##### [+] *PutItem*
+```
+! Order Matter, do step 4 over step 3 will cause memory leak
+------------------------------------------------------------
+1). Create a new node 
+2). Set the node's info to the input data 
+3). Set the node's next pointer to the listData, the first item in the list
+4). Set listData to point to the new node
+```
+<img src="./putItem.png">
+
+```
+void UnsortedType::PutItem (ItemType item)
+// Pre: list is not full and item is not in list 
+// Post: item is in the list; length has been incremented
+{
+    NodeType* location;
+    // create a new node and fill it 
+    location = new NodeType;
+    location->info = item;
+    location->next = listData;
+
+    // the new node becomes head of the list 
+    listData = location;
+    length++;                                 // record the length of linked list
+}
+```
+```
+Put into Empty list 
+1). create new node 
+2). make new node point to NULL 
+3). make listData point to NULL 
+```
+##### [+] *Constructor*
+```
+1). Largely unchanged
+2). Set length to 0 
+#). Set the external pointer to NULL
+```
+##### [+] *IsFull* 
+```
+Linked list don't have an explicit size limit, try if you can allocated new memory for space
+
+bool UnsortedType::IsFull() const 
+// Returns true if there is no room for another ItemType 
+// on the free store; false otherwise 
+{
+    NodeType* location;
+    try 
+    {
+        location = new NodeType;
+        delete location;
+        return false;
+    }
+    catch (std::bad_alloc exception)
+    {
+        return true;
+    }
+}
+```
+##### [+] *MakeEmpty*
+```
+100% sure this one is an iterator
+
+< delete always start from the head >
+1). makeEmpty() must deallocate each node individually in order to empty the list 
+2). This is accomplished using a while loop 
+3). Iteration starts at listData, the head of the list, and continues using listData->next 
+4). Iteration stops when listData is NULL
+```
+##### [+] *GetItem*
+<img src="./getItem.png">
+
+```
+Linear Search through the list to find the desired item
+```
+<br>
+
+##### [+] *DeleteItem*
+<img src="./deleteItem.png">
+
+```
+1). tempPtr to locate the item that need to be deleted, link it; 
+2). predecessor(previous pointer) point to location->next 
+3). delete the tempPtr
+```
+<br>
+
+#### • Comparing Implementations 
+<img src="./compareTimeComplexity.png">
+
 ### Sorted v.s Unsorted Lists
+#### • Unsorted List
+#### • Sorted List
 ### Sorted List implementations
 #### • Array-based (static & dynamic) 
+```
+[array-based]:
+the length field must be present in order to define the extent of the list within the array
+```
 #### • Linked list-based
 ### Time Complexity/order of magnitude
 
