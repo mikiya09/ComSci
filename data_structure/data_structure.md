@@ -1103,7 +1103,7 @@ linear way: compare against "(location->next)->info" to find the item to delete
 
 // code
 ```
-<img src="./pic/delelteItemLinkedList.png" width=300>
+<img src="./pic/delelteItemLinkedList.png" width=400>
 
 ##### [+] *ResetList*
 ```
@@ -1139,24 +1139,27 @@ no logical limit on the number of items in ths structure
 Last in First Out (LIFO)
 ```
 ### Properties
-#### • Logical Level 
+#### • Logical Level
 ```
 A stack is an ADT in which elements are added and removed from only the top of the stack
 
 
-          Push        Pop
-                   
-            |           |
-            |           |   ---> Top 
-            |-----------|
-            |           |
-            |-----------|
-            |           |
-            |-----------|
-            |           |
-            |-----------|
-            |           |
-            -------------
+    class StackType
+    {                                                   Push     Pop
+    public:                                               |       ^
+        StackType();                                      v       |
+        bool IsFull() const;                            |           |
+        bool IsEmpty() const;                           |           |   ---> Top 
+                                                        |-----------|
+        void Push( ItemType item);                      |           |
+        void Pop();                                     |-----------|
+        ItemType Top() const;                           |           |
+                                                        |-----------|
+    private:                                            |           |
+        int top;                                        |-----------|
+        ItemType items[MAX_ITEMS];                      |           |
+    };                                                  -------------
+
 ```
 #### • Application Level 
 ```
@@ -1167,11 +1170,114 @@ A stack is an ADT in which elements are added and removed from only the top of t
 ```
 ### Implementation 
 #### • Array-based 
+```
+// code (array-based)
+```
+<img src="./pic/tracingStack.png">
+
 #### • Linked list-based 
+```
+// code (linked-list based)
+
+```
+<img src="./pic/deleteStack.png">
+
+#### • Complexity Comparison 
+<img src="./pic/stackImplementationCompare.png">
 
 # Queues
-### Focus on Floating Queues 
+```
+First in, First Out (FIFO)
+```
 ### Properties 
+#### • Logical Level 
+```
+A queue is an ADT in which elements are added to the rear and removed from the front
+
+class QueueType
+{
+public:
+    QueueType(int max);
+    QueueType();
+    ~QueueType();
+
+    bool IsEmpty() const;
+    bool IsFull() const;
+    void Enqueue(ItemType item);    // add newItem to the rear of the queue 
+    void Dequeue(ItemType& item);   // remove front item from queue
+
+private:
+    ItemType* items;                // Dynamically allocated array 
+    int maxQue;                     // max length 
+};
+
+
+                   Front                             Rear 
+                  _________________________________________
+                  |       |       |       |       |       |
+    Dequeue -->   |       |       |  ...  |       |       |   <-- Enqueue
+                  -----------------------------------------
+
+```
+##### [-] Fixed-Front Queue 
+```
+(no efficient, waste a lots of memory space)
+```
+<img src="./pic/fixFrontQueue.png">
+
+##### [+] Floating Queue (focus on this)
+```
+1) more efficiient
+```
+
+```
+2) when rear is the indeed the last item in the queue => wrap around => use modulus(mod %)
+
+// (rear+1) % length, in this case 5
+```
+<img src="./pic/floatingQueue.png" width=800>
+
+```
+3) Issue with set front and rear directly
+
+=> in the following situation, cannot distinguish Empty Queue & Full Queue
+```
+<img src="./pic/floatingQueueIssue.png" width=500>
+
+```
+4) Fix this Issue
+--------------
+Solution [1]: more intuitive
+{...count the length...}
+
+----------------------------
+Solution [2]: less intuitive, but cooler and efficient, go with this one
+```
+<img src="./pic/floatingQueueIssuesFix.png" width=600>
+
+```
+[empty queue]:
+1) according to figure 1 above, when Dequeue 
+2) front += 1 
+3) since front is the index before actual front item, front == rear gives empty queue
+
+-------------------------------------------------------------------------------------
+
+[full queue]:
+1) according to figure 2 above, when front = 2 while the actual front is at index = 3
+2) rear + 1 = front, indicates Full
+
+-------------------------------------------------------------------------------------
+
+// front = index of the array slot "preceding" the front element in the queue
+// always reserve this slot to be empty(never store queue element here)
+// if we initialize a queue with 100, what we actually use is 99 space
+```
+#### • Application Level
+```
+// For users simplicity, maxQue = max + 1;
+// because by adopting the solution 2, we will have empty space in the queue
+```
 ### Implementation 
 #### • Array-based 
 #### • Linked list-based 
