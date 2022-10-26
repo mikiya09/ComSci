@@ -1,5 +1,5 @@
 
-# Something needed to know in CS
+# Computer Science Concepts
 
 
 ### 1) Computer Organization [[1]](./fundamental/Computer_Organization.md)
