@@ -47,9 +47,14 @@ Grady Booch, "what Is and Isn't Object Oriented Design", 1989
      • know your programming language, editor, etc
 
 [2] Run-Time Errors
-     • errors occur during execution, often causing the program to crash
+     • errors occur during execution after successfully compiled, refer to BUG we called
      • (Robustness): the ability of a program to recover from an error 
      • often found with sufficient testing
+        1) logical error
+        2) Input/Output error
+        3) undefined object error
+        4) division by zero error
+        5) etc
 ```
 
 ### TEST 
@@ -73,6 +78,8 @@ Grady Booch, "what Is and Isn't Object Oriented Design", 1989
 
 ### Abstract Data Type (ADT)
 ```
++ we are talking about "nouns", not "verb"
+
 Data 
 • representation of information 
   in a manner suitable for communication or analysis by humans or machines
@@ -82,22 +89,23 @@ Data are nouns of the programming world
 • The information that is processed
 
 Definition 
-• A data typen whose (logical) properties (domain and operations) 
+• A data type whose (logical) properties (domain and operations) 
   are specified independently of any particular implementation.
 ```
 
 ### Different views of ADT 
-#### • Application Level
-```
-modeling real-life data in a specific context, also known as user level
-```
+
 #### • Logical Level
 ```
 abstract view of the domain and operations
 ```
 #### • Implementation Level
 ```
-specific representation to hold the data items, and implementation of operations
+specific representation to "hold" the data items, and implementation of operations
+```
+#### • Application Level
+```
+modeling real-life data in a specific context, also known as user level
 ```
 #### • Ex: ADT List
 ```
@@ -108,10 +116,11 @@ specific representation to hold the data items, and implementation of operations
   => every element except last one has a unique successor
 
 (Logical Level)
-  : operations supported: PutItem(), GetItem(), DeleteItem(), GetNext(), ...
+  => domain: data that resembles private data, or struct that defined in .h/.cpp file
+  => operations supported: PutItem(), GetItem(), DeleteItem(), GetNext(), ...
 
 (Implementation Level)
-  : implemented using array, linked list, or other; codes for operations
+  : implemented using array, linked list, or others; codes for operations
 ```
 
 #### • Library Example
@@ -170,7 +179,7 @@ specific representation to hold the data items, and implementation of operations
      > class 
 ```
 
-### Unstructured v.s structured data types
+### Unstructured v.s Structured data types
 #### • Unstructured 
 ```
 components are [not] organized with respect to one another
@@ -318,11 +327,12 @@ struct StudentType {
    NameType name;               // any structure can be a member of a struct 
    int      idNum;
    float    credits;
-   float    gpa;
+   float*    gpa;
 };
 StudentType student1,student2;  
 student1.name.last;             // accessing struct member using dot(.)
 student2.name.first[0];         // accessing struct member that is an array
+student2->gpa                   // if it is a pointer, accessing the value with ->
 ```
 
 
@@ -425,8 +435,8 @@ Based Address 8000
 
 so, baseAddress + (2*12 + 7) * 2 
 --------------------------------
-row index = 2, so pass through first and second row (together 24 spots)
-column index = 7, the 7th spot in the third row
+row index = 2, so pass through first(index=0) and second(index=1) row (together 24 spots)
+column index = 7, the 7th spot in the third row(index=2)
 assume 2 bytes for type int, memory address is located with bytes
 ```
 ### Passing arrays as function parameters
@@ -474,6 +484,8 @@ explain: when passing int arr to fun() in main, it is always treated as a pointe
 ```
 ##### [+] correct way 1
 ```
+// passing the size as a varible
+
 #include <iostream>
 using namespace std;
 void fun(int arr[], int n)                // same as void fun(int arr[], int n)
@@ -580,7 +592,7 @@ int main()
 ```
 ### Abstraction 
 ```
-[.h]        file -> data member and member function specification 
+[.h]        file -> known as header file, data member and member function specification 
 [.cpp]      file -> member function implementation 
 [main.cpp]  file -> objects being used in here
 ```
@@ -629,30 +641,37 @@ int main()
 # Error & Exception Management
 ### Define your own [Exception](http://peterforgacs.github.io/2017/06/25/Custom-C-Exceptions-For-Beginners/) 
 ```
-Exception is an user-defined class
+Exception could be an user-defined class
 ```
 ### Try/throw/catch
 ```
 #include <iostream>
 using namespace std;
  
-class demo {
+class demo {                                        // create a class
+public:
+    void throwError();
 };
  
+void demo::throwError()                             // define a member function in the class
+{
+    cout << "My Exception Happens" << endl;
+}
+
 int main()
 {
     try {
         throw demo();
     }
  
-    catch (demo d) {
-        cout << "My Exception Happens \n";
+    catch (demo d) {                                // catch a class object d
+        d.throwError();                             // execute d's method.throwError()
     }
 }
 ```
 ### Employ pre-defined exception classes/functions
 ```
-// IsFull() in Unsorted linked-list
+#include <new>
 
 bool UnsortedType::IsFull() const
 // return true if there is no room for another ItemType 
@@ -770,7 +789,7 @@ input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
 ```
 ### Big O Notation 
 ```
-The worst case (upper bound) of the algorithm execution time
+The worst case (upper bound) of the algorithm execution time, use linked list as an exmaple
 ```
 <!-- ![Big-O-Comparison](./pic/bigO.png) -->
 <img src="./pic/bigO.png" width = 700>
@@ -805,13 +824,13 @@ A pointer variable contains the memory address of another variable
 
 [for what]: for indirect addressing of data and for dynamic allocation of memory 
 ```
-### Declaration
+### • Declaration
 ```
 use an aterisk(*)
 -----------------
 int* intPointer;
 ```
-### Manipulation (operation)
+### • Manipulation (operation)
 ```
 // ampersand(&) returns the address of a variable
 int alpha = 10;
@@ -820,8 +839,41 @@ int* intPointer = &alpha;                       // return a address like this: 0
 // accessing variables value through pointer 
 *intPointer = 25;                               // alpha is now 25
 ```
+### • Example
+```
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int* intPtr_1 = new int;                // pointer of a single int value
+    int* intPtr_2 = new int [10];           // pointer of an array of int
+    int** intPtr_3 = new int* [10];         // pointer of an array of int pointers
+
+    cout << *intPtr_1 << endl;              // since intPtr is an address
+                                            // to access the value stored on this address
+                                            // use asterisk: *(0x600003260040) = 0
+    for (int i=0; i<10; i++)
+    {
+        cout << intPtr_2[i] << endl;        // other way of print element: *(intPtr_2+i)
+    }                                       // all are int values on the following address
+                                            // * = [] here I guess equivalent to below
+                                            // *(0x600003260040+i) = 0x600003260040[i]
+    for (int i=0; i<10; i++)
+    {
+        cout << intPtr_3[i] << endl;        // all are int pointers on the following address
+    }
+
+    // deletion
+    delete intPtr_1;
+    delete [] intPtr_2;
+    delete [] intPtr_3;
+
+    return 0;
+}
+```
 # Dynamic Memory Allocation
-#### • Static
+#### • Static Memory allocation
 ```
 (when): compile time
 allocates a fixed amount of memory during compile time, pre-specify in declaration 
@@ -888,7 +940,19 @@ Since there's no way to collect the garbage, it is small memory leak
 ### *initialization
 
 # Lists
-### Linked List 
+```
+a collection of homegeneous items
+```
+### array-based List (unsorted)
+#### .h file
+```
+refer to sorted .h
+```
+#### .cpp file
+```
+refer to sorted .cpp
+```
+### Linked List (unsorted)
 A collection of **nodes** that are <u>linked together</u> in a chain using **pointers**
 #### • Node 
 ```
@@ -896,11 +960,132 @@ A collection of **nodes** that are <u>linked together</u> in a chain using **poi
 [2] Nodes are created when needed using dynamically allocated memory 
 [3] The last node in the list has a NULL pointer
 ```
-#### • Observer (getter)
-#### • Transformers (setter)
-#### • Iterator
+#### .h file
+```
+#include "ItemType.h"
 
+struct NodeType;
+
+class UnsortedType
+{
+public:
+  UnsortedType();
+  ~UnsortedType();
+
+  void MakeEmpty();
+
+  bool IsFull() const;
+
+  int GetLength() const;
+
+  ItemType GetItem(ItemType& item, bool& found);
+
+  void PutItem(ItemType item);
+
+  void DeleteItem(ItemType item);
+
+  void ResetList();
+
+  ItemType GetNextItem();
+
+private:
+  NodeType* listData;
+  int length;
+  NodeType* currentPos;
+};
+
+```
 #### • Member Functions
+##### [+] *struct*
+```
+struct NodeType
+{
+    ItemType info;
+    NodeType* next;
+}
+```
+##### [+] *constructor*
+```
+UnsortedType::UnsortedType()
+{
+    length = 0;
+    listData = NULL;
+}
+```
+##### [+] *destructor*
+```
+UnsortedType::~UnsortedType()
+// Post: List is empty; all items have been deallocated.
+{
+  NodeType* tempPtr;
+
+  while (listData != NULL)
+  {
+    tempPtr = listData;
+    listData = listData->next;
+    delete tempPtr;
+  }
+}
+------------------- version 2 when you have MakeEmpty() function ---------------------------
+
+UnsortedType::~UnsortedType()
+{
+    MakeEmpty();
+}
+```
+##### [+] *IsFull*
+```
+! Linked list don't have an explicit size space
+! try if you can allocated new memory for limit
+! btw, dynamic memory is located in the heap
+```
+```
+bool UnsortedType::IsFull() const
+{
+    NodeType* location;
+    try
+    {
+        location = new NodeType;
+        delete location;
+        return false;
+    }
+    catch (std::bad_alloc exception)
+    {
+        return true;
+    }
+}
+```
+##### [+] *GetLength*
+```
+int UnsortedType::GetLength() const
+{
+    return length;
+}
+```
+##### [+] *MakeEmpty*
+```
+100% sure this one is an iterator
+
+! delete always start from the head
+1) makeEmpty() must deallocate each node individually in order to empty the list 
+2) This is accomplished using a while loop 
+3) Iteration starts at listData, the head of the list, and continues using listData->next 
+4) Iteration stops when listData is NULL
+```
+```
+void UnsortedType::MakeEmpty()
+{
+    NodeType* tempPtr;
+
+    while (listData != NULL)
+    {
+        tempPtr = listData;             // point to listData(head)
+        listData = listData->next;      // listData point to next node
+        delete tempPtr;                 // delete first node pointed by tempPtr
+    }
+    length = 0;
+}
+```
 ##### [+] *PutItem*
 ```
 ! Order Matter, do step 4 over step 3 will cause memory leak
@@ -914,18 +1099,14 @@ A collection of **nodes** that are <u>linked together</u> in a chain using **poi
 
 ```
 void UnsortedType::PutItem (ItemType item)
-// Pre: list is not full and item is not in list 
-// Post: item is in the list; length has been incremented
 {
     NodeType* location;
-    // create a new node and fill it 
-    location = new NodeType;
+    location = new NodeType;                    // create a new node and fill it
     location->info = item;
     location->next = listData;
 
-    // the new node becomes head of the list 
-    listData = location;
-    length++;                                 // record the length of linked list
+    listData = location;                        // new node becomes head of the list
+    length++;                                   // record the length of linked list
 }
 ```
 ```
@@ -934,33 +1115,37 @@ Put into Empty list
 2) make new node point to NULL 
 3) make listData point to NULL 
 ```
-##### [+] *Constructor*
-```
-1) Largely unchanged
-2) Set length to 0 
-3) Set the external pointer to NULL
-```
-##### [+] *IsFull* 
-```
-! Linked list don't have an explicit size space
-! try if you can allocated new memory for limit
-! btw, dynamic memory is located in the heap
-```
-##### [+] *MakeEmpty*
-```
-100% sure this one is an iterator
 
-! delete always start from the head
-1) makeEmpty() must deallocate each node individually in order to empty the list 
-2) This is accomplished using a while loop 
-3) Iteration starts at listData, the head of the list, and continues using listData->next 
-4) Iteration stops when listData is NULL
-```
 ##### [+] *GetItem*
 <img src="./pic/getItem.png" width=500>
 
 ```
-Linear Search through the list to find the desired item
+// Linear Search through the list to find the desired item
+// same as searching if item exist
+// check the input boolean value found after passing it into the search function
+
+ItemType UnsortedType::GetItem(ItemType& item, bool& found)
+{
+    bool moreToSearch;
+    NodeType* location = listData;
+    found = false;
+
+    moreToSearch = (location != NULL);          // start with listData, check if node->NULL
+    while (moreToSearch)                        // assume item must exist
+    {
+        if (location->info == item)
+        {
+            found = true;
+            item = location->info;
+        }
+        else
+        {
+           location = location->next;
+           moreToSearch = (location != NULL);
+        }
+    }
+    return item;
+}
 ```
 <br>
 
@@ -971,6 +1156,52 @@ Linear Search through the list to find the desired item
 1) tempPtr to locate the item that need to be deleted, link it; 
 2) predecessor(previous pointer) point to location->next 
 3) delete the tempPtr
+```
+```
+void SortedType::DeleteItem(ItemType item)
+{
+  NodeType* location = listData;
+  NodeType* tempLocation;
+
+  // Locate node to be deleted.
+  if (item.ComparedTo(location->info) == EQUAL)
+  {
+    tempLocation = location;
+    listData = location->next;	                        // listData point to next location 
+  }                                                     // same as saying deleting this node
+  else
+  {
+    // remove || condition if assume item must exist
+    while (item.ComparedTo((location->next)->info) != EQUAL || location->next != NULL) 
+      location = location->next;
+
+    // Delete node at location->next
+    tempLocation = location->next;
+    location->next = (location->next)->next;
+  }
+  delete tempLocation;                                  // because delete tempLocation here
+  length--;
+}
+```
+##### [+] *ResetList*
+```
+void UnsortedType::ResetList()
+{
+    currentPos = NULL;
+}
+```
+##### [+] *GetNextItem*
+```
+ItemType UnsortedType::GetNextItem()
+{
+  ItemType item;
+  if (currentPos == NULL) {
+    currentPos = listData;              // currentPos is a node pointer
+  }
+  currentPos = currentPos->next;
+  item = currentPos->info;
+  return item;
+}
 ```
 <br>
 
@@ -1002,10 +1233,117 @@ refer to above example and all **member functions**
 ### Sorted List implementations
 #### • Array-based (static) 
 ```
-[array-based]:
 the length field must be present in order to define the extent of the list within the array
 ```
-**PutItem**
+##### [+] .h file
+```
+#ifndef SORTED
+#define SORTED
+
+#include "ItemType.h" 
+// File ItemType.h must be provided by the user of this class. 
+//  ItemType.h must contain the following definitions: 
+//  MAX_ITEMS:     the maximum number of items on the list 
+//  ItemType:      the definition of the objects on the list 
+//  RelationType:  {LESS, GREATER, EQUAL}
+//  Member function ComparedTo(ItemType item) which returns 
+//       LESS, if self "comes before" item 
+//       GREATER, if self "comes after" item 
+//       EQUAL, if self and item are the same 
+
+class SortedType 
+{
+public:
+  SortedType();
+
+  void MakeEmtpy();
+  
+  bool IsFull() const;
+
+  int GetLength() const;
+
+  ItemType GetItem(ItemType item, bool& found);
+
+  void PutItem(ItemType item);
+
+  void DeleteItem(ItemType item);
+
+  void ResetList();
+
+  ItemType GetNextItem();
+
+  void MakeEmpty();
+
+private:
+  int length;
+  ItemType info[100];       // assume the max length = 100
+  int currentPos;
+};
+#endif
+```
+##### [+] *constructor*
+```
+SortedType::SortedType()
+{
+    length = 0;
+}
+```
+##### [+] *MakeEmpty*
+```
+void SortedType::MakeEmpty()
+{
+    length = 0;
+}
+```
+##### [+] *IsFull*
+```
+bool SortedType::IsFull() const
+{
+    return (length == 100);
+}
+```
+##### [+] *GetLength*
+```
+int SortedType::IsFull() const
+{
+    return length;
+}
+```
+##### [+] *GetItem*
+```
+// Apply Binary Search: time complexity = O(log2N)
+// assume item exist
+
+ItemType SortedType::GetItem(ItemType item, bool& found)
+{
+    int midpoint;
+    int first = 0;                                          // index of first item
+    int last = length - 1;                                  // index of last item
+
+    bool moreToSearch = (first <= last);
+    found = false;
+    while (moreToSearch && !found)
+    {
+        midPoint = ( first + last ) / 2;                    // set midPoint
+        switch (item.ComparedTo(info[midpoint]))
+        {
+            case LESS:      last = midPoint - 1;            // if less, select LHS
+                            moreToSearch = (first <= last);
+                            break;
+            case GREATER:   first = midPoint + 1;           // if greater, select RHS
+                            moreToSearch = (first <= last);
+                            break;
+            case EQUAL:     found = true;
+                            item = info[midPoint];
+                            break;
+        }
+    }
+    return item;
+}
+```
+<img src="./pic/binarySearch.png">
+
+##### [+] *PutItem*
 ```
 (Linear Search is required)
 1) Find the space where new element should go
@@ -1013,21 +1351,64 @@ the length field must be present in order to define the extent of the list withi
 3) insert the element in the space
 4) increment the length by 1
 ```
+```
+// assume item exist
+
+void SortedType::PutItem(ItemType item) 
+{
+  bool moreToSearch;
+  int location = 0;
+
+  moreToSearch = (location < length);
+  while (moreToSearch) 
+  {
+    if (info[location] < item) {
+        moreToSearch = false;
+    }
+    elif (info[location] > item) {
+        location ++;
+        moreToSearch = (location < length);
+    }
+    else
+    {
+        break;
+    }
+  } 
+
+  for (int i = length; i > location; i--)   // looping from the end, need to shift item back
+    info[i] = info[i - 1];                  // length = max_index + 1, so is able to shift 
+  info[location] = item;                    // let item = where the location lays
+  length++;                                 // increment length
+}
+```
 <img src="./pic/arrayBased.png">
 
-**DeleteItem**
+##### [+] *DeleteItem*
 ```
 1) assume item for deletion is in the list, simple linear search find them
 2) when found, move subsequent element up one space (overwritting)
 3) decrement the length by 1
 ```
-**GetItem**
-
 ```
-Binary Search (more to come in the following section)
-```
-<img src="./pic/binarySearch.png">
+void SortedType::DeleteItem(ItemType item) 
+{
+  int location = 0;
 
+  while (item.ComparedTo(info[location]) != EQUAL)
+    location++;
+  for (int index = location + 1; index < length; index++)
+    info[index - 1] = info[index];
+  length--;
+}
+```
+##### [+] *ResetList*
+```
+void SortedType::ResetList()
+// Post: currentPos has been initialized
+{
+    curretnPos = -1;
+}
+```
 #### • Array-based (dynamic) 
 ```
 few changes:
@@ -1060,63 +1441,28 @@ UnsortedType::~UnsortType()
 ```
 #### • Linked list-based
 ```
-functions to change:
+functions to change compare to array-based sort list:
 -> GetItem()
 -> PutItem()
 -> DeleteItem()
 ```
 ##### [+] *NodeType* 
 ```
-struct NodeType
-{
-    ItemType info;
-    NodeType* next;
-}
+refer to above
 ```
 ##### [+] *Constructor*
 ```
-SortedType::SortedType()    // Class constructor 
-{
-    length = 0;
-    listData = NULL;
-}
+refer to above
 ```
 ##### [+] *IsFull*
 ```
-bool SortedType::IsFull() const 
-// Returns true if there is no room for another ItemType 
-// on the free store; false otherwise 
-{
-    NodeType* location;
-    try 
-    {
-        location = new NodeType;
-        delete location;
-        return false;
-    }
-    catch (std::bad_alloc exception)
-    {
-        return true;
-    }
-}
+refer to above IsFull
 ```
 ##### [+] *MakeEmpty*
 ```
-// deletion always starts with the head
-void SortedType::MakeEmpty()
-{
-  NodeType* tempPtr;
-
-  while (listData != NULL)
-  {
-    tempPtr = listData;
-    listData = listData->next;
-    delete tempPtr;
-  }
-  length = 0;
-}
+refer to above MakeEmpty
 ```
-##### [+] *GetItem*
+##### [+] **GetItem*
 ```
 -------------------------------------------------------------------------------------
 |                                                                                   |
@@ -1133,30 +1479,31 @@ void SortedType::MakeEmpty()
 -------------------------------------------------------------------------------------
 ```
 ```
-ItemType SortedType::GetItem(ItemType& item, bool& found)
+// here we need to compare 3 situations, because the list is sorted (in order)
+ItemType SortedType::GetItem(ItemType item, bool& found) 
 {
-  bool moreToSearch;
-  NodeType* location;
+    bool moreToSearch;
+    NodeType* location;
 
-  location = listData;
-  found = false;
-  moreToSearch = (location != NULL);
-
-  while (moreToSearch && !found)
-  {
-    switch(item.ComparedTo(location->info))
+    location = listData;
+    fount = false;
+    moreToSearch = (location != NULL);
+    
+    while (moreToSearch && !found)
     {
-      case GREATER: location = location->next;
-                    moreToSearch = (location != NULL);
-                    break;
-      case EQUAL:   found = true;
-                    item = location->info;
-                    break;
-      case LESS:    moreToSearch = false;
-                    break;
+        switch(item.ComparedTo(location->info))
+        {
+            case GREATER: location = location->next;
+                          moreToSearch = (location != NULL);
+                          break;
+            case EQUAL:   found = true;
+                          item = location->info;
+                          break;
+            case LESS:    moreToSearch = false;
+                          break;
+        }
     }
-  }
-  return item;
+    return item;
 }
 ```
 ##### [+] *PutItem*
@@ -1223,7 +1570,6 @@ void SortedType::PutItem(ItemType item)
 ```
 linear way: compare against "(location->next)->info" to find the item to delete
 
-// code 
 void SortedType::DeleteItem(ItemType item)
 {
   NodeType* location = listData;
@@ -1237,7 +1583,7 @@ void SortedType::DeleteItem(ItemType item)
   }                                                     // same as saying deleting this node
   else
   {
-    while (item.ComparedTo((location->next)->info) != EQUAL)
+    while (item.ComparedTo((location->next)->info) != EQUAL)    // assume item exist 
       location = location->next;
 
     // Delete node at location->next
@@ -1252,49 +1598,15 @@ void SortedType::DeleteItem(ItemType item)
 
 ##### [+] *ResetList*
 ```
-// code
-void SortedType::ResetList()
-{
-  currentPos = NULL;
-} 
-
-ItemType SortedType::GetNextItem()
-{
-  ItemType item;
-  if (currentPos == NULL)
-    currentPos = listData;
-  item = currentPos->info; 
-  currentPos = currentPos->next;
-  return item;
-
-}
+refer to above ResetList
 ```
 ##### [+] *GetNextItem* 
 ```
-ItemType SortedType::GetNextItem()
-{
-  ItemType item;
-  if (currentPos == NULL)
-    currentPos = listData;
-  item = currentPos->info; 
-  currentPos = currentPos->next;
-  return item;
-
-}
+refer to above GetNextItem
 ```
 ##### [+] *Destructor (Linked List)*
 ```
-SortedType::~SortedType()
-{
-  NodeType* tempPtr;
-
-  while (listData != NULL)
-  {
-    tempPtr = listData;
-    listData = listData->next;
-    delete tempPtr;
-  }
-}
+refer to above Destructor
 ```
 ### Time Complexity/order of magnitude
 <img src="./pic/sortListCompareTimeComplexity.png">
@@ -1774,6 +2086,7 @@ QueType::QueType()                                  // class constructor
 ---------------------------------------------------------------------------------------------
 
 // Post: Queue is empty; all elements have been deallocated
+// don't have to worry about floating queue concept, because queue linked-list don't float
 void QueType::MakeEmpty()
 {
     NodeType* tempPtr;
