@@ -2,18 +2,18 @@
 # Something needed to know in CS
 
 
-### 1) [computer organization](./fundamental/Computer_Organization.md)
+### 1) Computer Organization [[1]](./fundamental/Computer_Organization.md)
 
-### 2) [C++](./programming_language/conceptC++.md)
+### 2) C++ [[1]](./programming_language/conceptC++.md)
 
 ### 3) Data Structure [[1]](./data_structure/dataStructureBasic.md)[[2]](./data_structure/dataStructureAdvanced.md)
 
-### 4) [algorithm](./algorithm)
+### 4) Algorithm [[1]](./algorithm)
 
-### 5) [git](./fundamental/Git.md)
+### 5) Git [[1]](./fundamental/Git.md)
 
-### 6) [Theory of Computation](./fundamental/TOC.md)
+### 6) Theory of Computation [[1]](./fundamental/TOC.md)
 
-### 7) [blockchain](./blockchain/blockchain-concept.md)
+### 7) Blockchain [[1]](./blockchain/blockchain-concept.md)
 
-### 8) [Javascript](./programming_language/JS)
+### 8) Javascript [[1]](./programming_language/JS)
