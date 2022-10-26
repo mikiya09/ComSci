@@ -637,7 +637,9 @@ int main()
 ### Composition
 
 ### *Templates
-
+```
+refer to below
+```
 # Error & Exception Management
 ### Define your own [Exception](http://peterforgacs.github.io/2017/06/25/Custom-C-Exceptions-For-Beginners/) 
 ```
@@ -648,6 +650,8 @@ Exception could be an user-defined class
 #include <iostream>
 using namespace std;
  
+class demoDemo {};                                  // this also works
+
 class demo {                                        // create a class
 public:
     void throwError();
@@ -1242,14 +1246,7 @@ the length field must be present in order to define the extent of the list withi
 
 #include "ItemType.h" 
 // File ItemType.h must be provided by the user of this class. 
-//  ItemType.h must contain the following definitions: 
-//  MAX_ITEMS:     the maximum number of items on the list 
-//  ItemType:      the definition of the objects on the list 
-//  RelationType:  {LESS, GREATER, EQUAL}
-//  Member function ComparedTo(ItemType item) which returns 
-//       LESS, if self "comes before" item 
-//       GREATER, if self "comes after" item 
-//       EQUAL, if self and item are the same 
+//  MAX_ITEMS:     100
 
 class SortedType 
 {
@@ -2182,4 +2179,187 @@ void QueType::Dequeue(ItemType& item)
     }
 }
 ---------------------------------------------------------------------------------------------
+```
+# Templates 
+```
+making a C++ function a template can let it apply to variables of all types 
+```
+### Examples
+#### • without Class 
+##### [+] Format 
+```
+template<class T>
+
+1) class T: T refers to a type you will apply later, can be substitute with typename 
+2) T:       just a place holder, you will any name, but class keyword must be consistent
+
+for example.
+>> template<class ItemType>
+>> template<class COOL>
+```
+##### [+] Normal Situation 
+```
+void swapValues(int& variable1, int& variable2)
+{
+    int temp;
+    temp = variable1;
+    variable1 = variable2;
+    variable2 = temp;
+}
+```
+##### [+] With Template
+```
+template<class T>
+void swapValues(T& variable1, T& variable2)
+{
+    T temp;
+    temp = variable1;
+    variable1 = variable2;
+    variable2 = temp;
+}
+```
+##### [+] Test Code
+```
+int main() 
+{
+    int numOne = 5, numTwo = 3;
+    char letterOne = 'a', letterTwo = 'b';
+
+    cout << "Before Swap" << endl;
+    cout << "=== num ===" << endl;
+    cout << "The first number: " << numOne << " The second number: " << numTwo << endl;
+    cout << "=== letter ===" << endl;
+    cout << "The first letter: " << letterOne << " The second letter: " << letterTqo << endl;
+
+    // performing swap 
+    swapValues(numOne, numTwo);
+    swapValues(letterOne, letterTwo);
+    cout << " =========================== " << endl;
+
+    cout << "After Swap" << endl;
+    cout << "=== num ===" << endl;
+    cout << "The first number: " << numOne << " The second number: " << numTwo << endl;
+    cout << "=== letter ===" << endl;
+    cout << "The first letter: " << letterOne << " The second letter: " << letterTqo << endl;
+
+}
+```
+#### • with Class
+##### [+] Format 
+```
+=> className<dataType> classObject;
+
+|
+V
+className<int> classObject;
+className<string> classObject;
+className<ItemType> classObject;
+```
+##### [+] Normal Situation 
+##### [+] With Template 
+```
+#include <iostream>
+using namespace std;
+
+template <class T>              // class template
+class Number {
+   private:
+    T num;                      // variable of type T
+
+   public:
+    Number(T n) : num(n) {}     // constructor
+
+    T getNum()
+    {
+        return num;
+    }
+};
+```
+##### [+] Test Code
+```
+int main() {
+
+    Number<int> numberInt(7);                            // create object with int type
+
+    Number<double> numberDouble(7.7);                    // create object with double type
+
+    cout << "int Number = " << numberInt.getNum() << endl;
+    cout << "double Number = " << numberDouble.getNum() << endl;
+
+    return 0;
+}
+```
+##### [+] StackType 
+```
+class FullStack {};
+class EmptyStack {};
+
+// .h
+// ===========================================
+template<class ItemType>
+class StackType 
+{
+public:
+    StackType();
+    bool IsEmpty() const;
+    bool IsFull() const;
+    void Push(ItemType item);
+    void Pop();
+    ItemType Top() const;
+
+private:
+    int top;
+    ItemType items<100>
+};
+
+// .cpp
+// ===========================================
+// constructor 
+template<class ItemType> 
+StackType<ItemType>::StackType()
+{
+    top = -1;
+}
+
+// is empty
+template<class ItemType>
+bool StackType<ItemType>::IsEmpty() const
+{
+    return (top == -1);
+}
+
+// is full
+template<class ItemType>
+bool StackType<ItemType>::IsFull() const
+{
+    return (top == 100 -1);
+}
+
+// push
+template<class ItemType>
+void StackType<ItemType>::Push(ItemType newItem)
+{
+    if (IsFull())
+        throw FullStack();
+    top ++;
+    items<top> = newItem;
+}
+
+// pop
+template<class ItemType>
+void StackType<ItemType>::Pop()
+{
+    if (IsEmpty())
+        throw EmptyStack();
+    top --;
+}
+
+// return top value
+template<class ItemType>
+ItemType StackType<ItemType>::Top()
+{
+    if (IsEmpty())
+        throw EmptyStack();
+    return items<top>;
+}
 ```
