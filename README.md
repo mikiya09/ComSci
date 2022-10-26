@@ -6,9 +6,7 @@
 
 ### 2) [C++](./programming_language/conceptC++.md)
 
-### 3) [Data Structure](./data_structure/)
-#### + [Basic](./data_structure/dataStructureBasic.md)
-#### + [Advanced](./data_structure/dataStructureAdvanced.md)
+### 3) Data Structure [[1]](./data_structure/dataStructureBasic.md)[[2]](./data_structure/dataStructureAdvanced.md)
 
 ### 4) [algorithm](./algorithm)
 
