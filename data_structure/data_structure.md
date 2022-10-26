@@ -373,7 +373,7 @@ Base address (lowest address)
               values[0]   values[1]   values[2]   values[3]   values[4]
 
     Address of values[index]?
-    = Address(index) = BaseAddress + Index * SizeOfElement
+    = Address(index) = BaseAddress + (The number of)Index * SizeOfElement
 
 ```
 
@@ -488,7 +488,7 @@ explain: when passing int arr to fun() in main, it is always treated as a pointe
 
 #include <iostream>
 using namespace std;
-void fun(int arr[], int n)                // same as void fun(int arr[], int n)
+void fun(int arr[], int n)                // same as void fun(int *arr, int n)
 {                                         // array as parameter is always treated as pointer
     int i;
     for (i = 0; i < n; i++)
@@ -540,7 +540,7 @@ void processArr(int a[][10]) {
 ```
 // pass array containing pointers
 void processArr(int *a[10]) {           // passing a pointer of an array of 10 pointers
-   // Do Something
+   // Do Something                      // a[] = *a in terms of parameter: *a[10] = a[][10]
 }
 
 // When callingint *array[10];
@@ -869,9 +869,9 @@ int main()
     }
 
     // deletion
-    delete intPtr_1;
-    delete [] intPtr_2;
-    delete [] intPtr_3;
+    delete intPtr_1;                        // deleting the value on that pointer address
+    delete [] intPtr_2;                     // same 
+    delete [] intPtr_3;                     // same
 
     return 0;
 }
@@ -1172,7 +1172,7 @@ void SortedType::DeleteItem(ItemType item)
   {
     tempLocation = location;
     listData = location->next;	                        // listData point to next location 
-  }                                                     // same as saying deleting this node
+  }                                                     // same as saying deleting first node
   else
   {
     // remove || condition if assume item must exist
@@ -1191,7 +1191,7 @@ void SortedType::DeleteItem(ItemType item)
 ```
 void UnsortedType::ResetList()
 {
-    currentPos = NULL;
+    currentPos = NULL;                  // currentPos is node pointer, set it to NULL
 }
 ```
 ##### [+] *GetNextItem*
@@ -1306,7 +1306,7 @@ int SortedType::IsFull() const
     return length;
 }
 ```
-##### [+] *GetItem*
+##### [+] *GetItem (binary search)*
 ```
 // Apply Binary Search: time complexity = O(log2N)
 // assume item exist
@@ -1653,7 +1653,7 @@ A stack is an ADT in which elements are added and removed from only the top of t
                                                         |-----------|
     private:                                            |           |
         int top;                                        |-----------|
-        ItemType items[MAX_ITEMS];                      |           |
+        ItemType *items[MAX_ITEMS];                      |           |
     };                                                  -------------
 
 ```
@@ -1673,7 +1673,7 @@ A stack is an ADT in which elements are added and removed from only the top of t
 StackType::StackType(int max)               // custom constructor
 {
   maxStack = max;
-  top = -1;
+  top = -1;                                 // because the first index = 0
   items = new int[maxStack];
 }
 --------------------------------------------------------------------------------------------
@@ -1945,8 +1945,11 @@ QueType::QueType(int max)
 QueType::QueType()                                  // Default class constructor
 {
   maxQue = 501;
-  front = maxQue - 1;
-  rear = maxQue - 1;
+  front = maxQue - 1;                               // space precede the first item
+                                                    // so it's the last index
+  rear = maxQue - 1;                                // actual last index
+                                                    // make sense since front = rear is empty
+                                                    // front = rear + 1 is full
   items = new int[maxQue];
 }
 ---------------------------------------------------------------------------------------------
@@ -2051,7 +2054,7 @@ void QueType::Dequeue(int& item)
 |                                                                                           |
 |       void MakeEmpty();                                                                   |
 |       void Enqueue(ItemType);                                                             |
-|       void Dequque*ItemType&);        // item store copies is a node, modify it ditectly  |
+|       void Dequque(ItemType&);        // item store copies is a node, modify it ditectly  |
 |       bool IsEmpty() const;                                                               |
 |       bool IsFull() const;                                                                |   
 |                                                                                           |
@@ -2173,8 +2176,8 @@ void QueType::Dequeue(ItemType& item)
         item = front->info;
         front = front->next;
 
-        if (front == NULL)
-            rear = NULL;
+        if (front == NULL)          // if the one deleted is the only node
+            rear = NULL;            // make both pointer point to NULL
         delete tempPtr;
     }
 }
