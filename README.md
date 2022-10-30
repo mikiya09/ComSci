@@ -10,10 +10,22 @@
 
 ### 4) Algorithm [[1]](./algorithm)
 
-### 5) Git [[1]](./fundamental/Git.md)
+### 5) Database [[1]](./database/relationalDatabase.md)
 
-### 6) Theory of Computation [[1]](./fundamental/TOC.md)
+### 6) Git [[1]](./fundamental/Git.md)
 
-### 7) Blockchain [[1]](./blockchain/blockchain-concept.md)
+### 7) Theory of Computation [[1]](./fundamental/TOC.md)
 
-### 8) Javascript [[1]](./programming_language/JS)
+### 8) Blockchain [[1]](./blockchain/blockchain-concept.md)
+
+### 9) Javascript [[1]](./programming_language/JS)
+
+
+
+# More to know
+
+### • Scripting Language
+
+### • Dart (Flutter)
+
+### • Distributed System

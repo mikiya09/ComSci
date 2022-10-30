@@ -636,7 +636,6 @@ int main()
 ```
 ### Composition
 
-### *Templates
 ```
 refer to below
 ```
@@ -1653,7 +1652,7 @@ A stack is an ADT in which elements are added and removed from only the top of t
                                                         |-----------|
     private:                                            |           |
         int top;                                        |-----------|
-        ItemType *items[MAX_ITEMS];                      |           |
+        ItemType *items[MAX_ITEMS];                     |           |
     };                                                  -------------
 
 ```
@@ -2036,7 +2035,7 @@ void QueType::Dequeue(int& item)
 ```
 ---------------------------------------------------------------------------------------------
 |                                                                                           |
-|                                                                                           |
+|   // .h                                                                                   |
 |   // Header file for ADT queue                                                            |
 |                                                                                           |
 |   class FullQueue {};                                                                     |
