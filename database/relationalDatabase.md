@@ -165,7 +165,7 @@ whichever stage crash happen TXN result in not complete at all
 2) We can operate on it, and database maps internally into this procedural language
 ```
 #### • Relational Schema 
-<img src="./pic/relationalSchema.png">
+<img src="./pic/relationalSchema.png" width=500>
 <br>
 
 ```
@@ -176,11 +176,11 @@ A relational schema describes the data that is contained in a relational instanc
 A relational instance is a set of tuples(rows) all conforming to the same schema
 ```
 ##### [+] Columns
-<img src="./pic/relationalColumns.png" width=700>
+<img src="./pic/relationalColumns.png" width=500>
 <br> 
 
 ##### [+] Rows
-<img src="./pic/relationalRows.png" width=700>
+<img src="./pic/relationalRows.png" width=500>
 <br>
 
 ```
@@ -210,7 +210,7 @@ ex).
 ```
 [!] Domain: set of relations -> relation = table 
 ```
-<img src="./pic/DBMSworkflow.png">
+<img src="./pic/DBMSworkflow.png" width=500>
 
 ```
 1) operands are variables that stand for relations and relations (sets of tuples)
@@ -260,22 +260,20 @@ Language for describing queries on a relational database
 2) Procedural 
 ```
 ### RA Operators
--------
-#### • Select Operator
+#### 1) Select Operator
 ```
 produce table containing subset of rows of argument table satisfying condition
                          --------------
 ```
 **&#x03ec;**<sub>condition</sub>(relation)
 
-<img src="./pic/selectOperator.png">
+<img src="./pic/selectOperator.png" width=500>
 <br>
 
 ##### [+] Selection Condition 
-<img src="./pic/selectionCondition.png">
+<img src="./pic/selectionCondition.png" width=500>
 
--------
-#### • Project Operator 
+#### 2) Project Operator 
 ```
 Produces table containing subset of columns of argument table
                           -----------------
@@ -290,8 +288,7 @@ result is a table(relation) with no duplicates, it can have fewer tuples than th
 
 <img src="./pic/projectExample.png">
 
--------
-#### • Set Operator 
+#### 3) Set Operator 
 
 *Relation is a set of tuples, so set operations should apple: **&#x2229;, U,** ---(set different)*
 ```
@@ -315,11 +312,10 @@ reiterate:
 ```
 
 ##### [+] Example 
-<img src="./pic/unionCompatibleExample.png" width=500>
+<img src="./pic/unionCompatibleExample.png" width=400>
 
---------
 
-#### • Cartesian Product 
+#### 4) Cartesian Product 
 ```
 If R and S are two relations, R x S is the set of all concantenated tuples <x, y> 
 where x is a tuple in R and y is a tuple in S
@@ -334,41 +330,37 @@ where x is a tuple in R and y is a tuple in S
 expensive to compute
 ```
 
-<img src="./pic/cartesianProduct.png" width=500>
+<img src="./pic/cartesianProduct.png" width=400>
 
 ##### [+] Renaming 
-<img src="./pic/renaming.png" width=600>
+<img src="./pic/renaming.png" width=400>
 
-------
-#### • Union ( U )
+#### 5) Union ( U )
 
-<img src="./pic/union.png" width=600>
+<img src="./pic/union.png" width=400>
 
 ```
 Two relations could have common tuples, but no nessarily
 ```
-<img src="./pic/union2.png" width=650>
+<img src="./pic/union2.png" width=400>
 
-------
-#### • Difference ( -- )
-<img src="./pic/difference.png" width=600>
+#### 6) Difference ( -- )
+<img src="./pic/difference.png" width=400>
 
 ```
 deduct the part belongs to R2 from R1, or reserve
 ```
-<img src="./pic/difference2.png" width=600>
+<img src="./pic/difference2.png" width=400>
 
-------
-#### • Intersection ( &#x2229; )
-<img src="./pic/intersection.png" width=600>
+#### 7) Intersection ( &#x2229; )
+<img src="./pic/intersection.png" width=400>
 
 ```
 the common part both R1 and R2 have
 ```
-<img src="./pic/intersection2.png" width=600>
+<img src="./pic/intersection2.png" width=400>
 
-------
-#### • Cartesian-Product Operation 
+#### 8) Cartesian-Product Operation 
 ##### [+] Notation: r x s
 ```
 defined as:
@@ -377,7 +369,7 @@ r x s = {t q | t ∈ r and q ∈ s}, t, q are rows in r and s
 1) assume that attributes of r(R) and s(S) are disjoint (That is, R ∩ S = ∅)
 2) if attributes of r(R) and s(S) are not disjoint, then renaming must be used
 ```
-<img src="./pic/cartesianProductOperation.png" width=500>
+<img src="./pic/cartesianProductOperation.png" width=400>
 
 ##### [+] **&#x03ec;**<sub>A=C</sub>(r x s)
 ```
@@ -385,8 +377,7 @@ select rows where the value of A = C
 ```
 <img src="./pic/cartesianProductOperation2.png" width=400>
 
-------
-#### • Join 
+#### 9) Join 
 **Catesina Product = "join"**
 ```
 1) theta join:
@@ -410,7 +401,7 @@ S = (E, B, D)
 ```
 **&#x03c0;**<sub>r.a, r.B, r.C, r.D, r.E</sub>(**&#x03ec;**<sub>r.B=s.B ∧ r.D=s.D</sub>(r x s))
 
-<img src="./pic/natrualJoin.png" width=500>
+<img src="./pic/natrualJoin.png" width=400>
 
 ```
 1) cross-product (cartesian product) of r and s
@@ -429,7 +420,6 @@ S = (E, B, D)
 3) conditions ?
 4) which table give us the conditions ?
 ```
--------
 #### Sample Query 1 
 <img src="./pic/sampleQuery1.png" width=500>
 
@@ -441,20 +431,15 @@ S = (E, B, D)
 
 ```
 
------
 #### Sample Query 2 
 <img src="./pic/sampleQuery2.png" width=500>
 
------
 #### Sample Query 3 
 <img src="./pic/samplyQuery3.png" width=500>
 
------
 #### Sample Query 4 
 <img src="./pic/sampleQuery4.png" width=500>
 
------
 #### Sample Query 5
 <img src="./pic/sampleQuery5.png" width=500>
 
------
