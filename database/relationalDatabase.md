@@ -378,21 +378,86 @@ select rows where the value of A = C
 <img src="./pic/cartesianProductOperation2.png" width=400>
 
 #### 9) Join 
-**Catesina Product = "join"**
+**Cartesina Product (could)= "join"**
 ```
-1) theta join:
-   + allows for arbitrary comparison relationships (such as >)
+benefit: 
++ taking Cartesian prodcut of two relations give us all the possible tuples that are paired together
 
-2) equijoin 
-   + a theta join using the equality operator 
-
-*3) natual join
-    + is an equijoin on attributes that have the same name in each relationship 
-    + additionally, natrual join removes the duplicate columns 
-      involved in the equality comparison so only 1 of each compared column remains
+donwside:
+- not efficient when huge relations with thousands of tuples that having large amount of attributes
 ```
+
+
+##### [+] Mental Presentation (attribute level)
+```
+1) join operates at attribute(row) level, 
+2) all attributes from two table will be collected together 
+   as the attributes list for the newly combined table
+3) if there are attributes with the same name, renaming is needed
+
+-------------------------------------------------
+| attribute 1 | attribute 2 | ... | attribute n |
+-------------------------------------------------
+.
+.
+.
+
+```
+
+##### [+] Theta Join 
+```
+• allows for arbitrary comparision relationship (such as >, < and =)
+  => natural join with conditions
+
+student                         Subject 
+____________________            ___________________
+| SID | Name | Std |            | Class | Subject |
+|-----|------|-----|            |-------|---------|
+| 101 | Alex |  10 |            |   10  |   Math  |
+| 102 | Lucy |  11 |            |-------|---------|
+--------------------            |   10  | English |
+                                |-------|---------|
+                                |   11  |  Music  |
+                                |-------|---------|
+                                |   11  |  Sport  |
+                                -------------------
+```
+**theta(θ) join:** STUDENT ⋈ <sub>Student.Std = Subject.Class</sub> SUBJECT 
+```
+result: 
+
+Std = Class, so all the values are equal, there are just different attribute name
+------------------------------------------------
+|  SID  |  Name  |  Std  |  Class  |  Subject  |
+|-------|--------|-------|---------|-----------|
+|  101  |  Alex  |   10  |    10   |    Math   |
+|-------|--------|-------|---------|-----------|
+|  101  |  Alex  |   10  |    10   |  English  |
+|-------|--------|-------|---------|-----------|
+|  102  |  Lucy  |   11  |    11   |   Music   |
+|-------|--------|-------|---------|-----------|
+|  102  |  Lucy  |   11  |    11   |  Sports   |
+------------------------------------------------
+
+```
+
+```
+another example 
+```
+<img src='./pic/thetaJoin.png' width=500>
+
+##### [+] Equijoin 
+```
+above example actually could be regarded as an equijoin
+```
+
 ##### [+] Natrual Join 
 ```
+1) an equijoin on attributes(at least one) that have the same name in each relationship 
+2) additionally, natrual join removes the duplicate columns 
+   involved in the equality comparison so only 1 of each compared column remains
+
+
 R = (a, B, C, D) 
 S = (E, B, D)
 
@@ -404,8 +469,12 @@ S = (E, B, D)
 <img src="./pic/natrualJoin.png" width=400>
 
 ```
-1) cross-product (cartesian product) of r and s
-2) since both relations have attributes B and C, choose rows where r.B = s.B & r.D = s.D
+---------------------------------------------------------------------------------------------
+| 1) cross-product (cartesian product) of r and s                                           |
+| 2) since both relations have attributes B and C, choose rows where r.B = s.B & r.D = s.D  |
+|                                                                                           |
+| 3) Must have at least one same attribute name in both tables(relations) for natural join  |
+---------------------------------------------------------------------------------------------
 ```
 
 ### Exercise 
@@ -420,7 +489,7 @@ S = (E, B, D)
 3) conditions ?
 4) which table give us the conditions ?
 ```
-#### Sample Query 1 
+#### 1) Sample Query
 <img src="./pic/sampleQuery1.png" width=500>
 
 ```
@@ -428,18 +497,403 @@ S = (E, B, D)
 2) saliors give sname 
 3) bid = #103
 4) boats and reserves (the connection we need to build [sname ~ bid])
+```
+
+#### 2) Sample Query
+<img src="./pic/sampleQuery2.png" width=500>
+
+```
+1) sname 
+2) saliors give sname 
+3) color = red 
+4) boats, reserves and sailor (connection we need to build is sname ~ color)
+```
+*Answer:* π<sub>sname</sub>((Ϭ<sub>color='red'</sub>Boats) ⋈ Reserves ⋈ Salior)
+
+#### 3) Sample Query
+<img src="./pic/samplyQuery3.png" width=500>
+
+```
+1) sname 
+2) salior 
+3) color = 'red' or 'green'
+4) sailors, boats and reserves
+
+same logic as query2, but but here introduce a new way of construct query 
+```
+**create temporary relation:** ⍴(Tempboats, (Ϭ<sub>color='red' ⋁ color='green'</sub>Boats)) <br>
+**Final Answer:** π<sub>sname</sub>(Tempboats ⋈ Reserves ⋈ Sailors)
+
+#### 4) Sample Query
+<img src="./pic/sampleQuery4.png" width=500>
+
+```
+same logic, but using "and" operator
+```
+
+**saliors who reserve red boat:**   ⍴(Tempred, π<sub>sid</sub>(Ϭ<sub>color='red'</sub>Boats ⋈ Reserves)) <br>
+**saliors who reserve green boat:** ⍴(Tempgreen, π<sub>sid</sub>(Ϭ<sub>color='green'</sub>Boats ⋈ Reserves)) <br>
+**intersect them(because both red and green at the same time):** π<sub>sname</sub>((Tempred ⋂ Tempgreen) ⋈ Sailors)
+
+
+#### 5) Sample Query
+<img src="./pic/sampleQuery5.png" width=500>
+
+```
+in the query 4 logic: 
+when asking who reserve red boat 
+the sailor we found could not only have red boat reserved but other colors as well
+
+<>: negation
+```
+**saliors who reserve red boat:** ⍴(Tempred, π<sub>sid</sub>(Ϭ<sub>color='red'</sub>Boats ⋈ Reserves)) <br>
+**saliors who reserve other color boats but not red:** ⍴(Tempothers, π<sub>sid</sub>(Ϭ<sub>color=<>'red'</sub>Boats ⋈ Reserves)) <br>
+**salior reserve red and other colors - who reserve other color except red: <br>**
+π<sub>sname</sub>((Tempred - Tempother) ⋈ Sailors)
+
+#### 6) Self Join (natural join)
+<img src="./pic/selfJoin.png" width=550>
+
+#### 7) Practice: find maximum
+
+#### 8) go over the ppt example as well
+
+# SQL & schema definitions
+
+### why SQL?
+```
+Find all bars that sell beers above $2.5 
+
+sells 
+----------------------------
+|  bar  |  beer  |  price  |
+|---------------------------
+| Joe's |   Bud  |   2.50  |
+|-------|--------|---------|
+| Joe's | Miller |   2.75  |
+|-------|--------|---------|
+| Sue's |   Bud  |   2.50  |
+|-------|--------|---------|
+| Joe's |  Coors |   2.50  |
+----------------------------
+
+PROJECT bar (SELECT price > 2.5 Sells)
+
+--------------------------------------------------------------------------------------------
+reason to use SQL 
+1) may be hard for ordinary programmers to write (especially when the query becomes complex)
+
+2) better devise a query language that is more "English", more understandable
+
+3) A SQL query can be translated into a RA expression
+```
+
+### Definition 
+
+#### • SQL (Structured Query Language)
+```
+very high-level programming language, every SQL will be optimized before execution
+```
+#### • Data Definition Language (DDL)
+```
++ define relational schemata 
++ create/alter/delete tables 
+```
+#### • Data Manipulation Language (DML)
+```
++ Insert/delete/modify tuples in tables 
++ Query one or more tables
+```
+<img src="./pic/SQLtable.png" width=600>
+
+```
+1) Attributes must have an atomic type in standard SQL (not a list, set, etc)
+                           ------
+
+2) Atomic type 
+    • Boolean 
+    • Numbers:   INT, BIBINT, SMALLINT, FLOAT
+    • Character: CHAR(20), VARCHAR(50)
+    • Others:    MONEY, DATETIME
+
+3) The number of attributes is the arity of the relation 
+                                   -----
+                                must be unique
+```
+
+#### • Table Schemas 
+
+<img src="./pic/SQLschema.png" width=600>
+
+#### • Key Constraints 
+```
+A key is a minimal subset of attributes that acts as a unique identifier for tuples in a relation
+
+1) lots of attributes 
+   minimal subset of attributes mean that key should have at least one attribute
+
+2) unique identifier for tuples
+```
+
+##### [+] NULL & NOT NULL
+```
+to say "don't know the value" we use NULL
+
+---------------------
+| sid | name | gpa  |
+|-----|------|------|
+| 123 | Bob  | 3.9  |
+|-----|------|------|
+| 143 | Jim  | NULL |       say, Jim just enrorlled in his first class 
+---------------------
+
+In SQL, we may constrain a column to be NOT NULL, for example "name" in this table can't be unknown
+```
+
+##### [+] General Constraints 
+```
+In theory, we can specify as many arbitrary constraints as possible 
+
+but we don't do that, because Performance!
+------------------------------------------
+whenever we do something ugly (or avoid doing something convenient) it's for the sake of performance
+```
+#### • Summary 
+```
+Schema and Constraints are useful for optimization
+```
+
+# Single-table queries 
+
+#### • renaming 
+```
+If you want the result to have different attribute names, use "AS <new name>" to rename
+
+table:
+Beers(name, manf)
+-----------------
+SELECT name AS beer, manf 
+FROM Beers 
+WHERE manf = 'Anheuser-Busch'
+```
+
+#### • NULL 
+```
+1) Tuples in SQL relations can have NULL as a value for one or more components 
+
+    + Missing Value: we know Joe's Bar has some address, but we don't know what it is 
+    + Inapplicable:  the value of attribute spouse for an unmarried person
+
+2) SQL will evaluate to TRUE only if it knows for *sure*
+3) SQL will return only cases for which it evaluates to TRUE 
+
+--------------------------------------------------------------------------------------------
+ex.
+(price < 2.00) OR (price >= 2.00)
+(price >= 2.00)
+
+intuitively, price could be less than 2.00, or greater or equal to 2.00 -> doesn't know for sure
+```
+
+##### [+] Three-Valued Logic 
+```
+The logic of conditions in SQL is a 3-valued logic: 
+1) TURE
+2) FALSE 
+3) UNKNOWN
+
+• when any value is compared with NULL, the truth value is UNKNOWN 
+  but query only produces a tuple in the answer if its truth value for the WHERE clause is TRUE
+```
+
+##### [+] Three-valued logic Example 
+```
+1) TURE = 1 
+2) FALSE = 2 
+3) Unknown = 1/2 
+-----------------
+I)   AND = MIN 
+II)  OR = MAX 
+III) NOT(x) = 1-x 
+-----------------
+
+(age > 20) AND ((age < 10) OR NOT (price < 5))
+                      |
+                      V 
+TRUE AND (FALSE OR NOT(Unknown)) = MIN(1, MAX(0, (1-1/2))) = MIN(1, MAX(0, 1/2)) = MIN(1, 1/2) = 1/2 = unknown
+```
+
+<img src="./pic/nullValueExample.png" width=500>
+
+##### [+] Testing for Null 
+```
+SELECT * FROM Person 
+WHERE age < 25 OR age >= 25 OR age IS NULL 
+      ---------------------    -----------
+   won't include null value     Null value is included
+```
+
+#### • Constraints
+```
+1) NOT NULL 
+2) DEFAULT 
+3) UNIQUE 
+4) CHECK 
+
+constrain enforcement
+---------------------------------------------
+CREATE TABLE COMPANY(
+    ID      INT  primary key NOT NULL,
+    NAME    TEXT             NOT NULL,
+    AGE     INT              NOT NULL UNIQUE,
+    ADDRESS CHAR(50),
+    SALARY  REAL             DEFAULT 50000.00
+);
+```
+
+# Multi-table queries 
+#### • Foreign key constraints 
+<img src="./pic/foreignKey.png" width=750>
+
+##### [+] Foreign Keys and update operations 
+<img src="./pic/foreignKeyOperation.png" width=500>
+
+<img src="./pic/foreignKeyExample.png" width=500>
+
+#### • Joins
+
+##### [+] Example 1 
+<img src="./pic/SQLJoin.png" width=600>
+
+```
+alternative way to write query 
+
+(method 1)                                  (method 2)
+SELECT PName, Price                         SELECT PName, Price 
+FROM   Product, Company                     FROM   Product 
+WHERE  Manufacturer = CName                 JOIN   Company On Manufacturer = 'CName' (foreign key)
+AND    Country = 'Japan'                    AND    Country = 'Japan'
+AND    Price <= 200                         WHERE  Price <= 200
+
+=================
+I prefer method 1
+```
+
+##### [+] Example 2
+<img src="./pic/SQLJoin2.png" width=600>
+
+#### • Tuple Variable Ambiguity in Multi-Table 
+<img src="./pic/tupleVariableAmbiguity.png" width=600>
+
+```
+we cannot do this: 
+-----------------------------
+SELECT DISTINCT name, address 
+FROM Person, Company 
+WHERE worksfor = name 
+
+which name and address are we refering?
+```
+#### • SQL semantics 
+<img src="./pic/SQLsemantics.png" width=600>
+<img src="./pic/SQLsemanticsJoin.png" width=600>
+
+```
+semantics ≠ execution order, DBMS executes command after optimization
+```
+##### [+] Unintuitive Query for understanding why operating with ∅ will result in ∅ 
+```
 
 ```
 
-#### Sample Query 2 
-<img src="./pic/sampleQuery2.png" width=500>
+#### • Multiset Operations 
+##### [+] Multisets 
+<img src="./pic/multisets1.png" width=600>
+<img src="./pic/multisets2.png" width=600>
+<img src="./pic/multisets3.png" width=600>
 
-#### Sample Query 3 
-<img src="./pic/samplyQuery3.png" width=500>
+##### [+] Multisets Operations
+**Intersect**
+```
+SELECT R.A FROM R, S 
+WHERE R.A = S.A 
+INTERSECT 
+SELECT R.A FROM R, T 
+WHERE R.A = T.A
+```
+<img src="./pic/intersect.png" width=250>
 
-#### Sample Query 4 
-<img src="./pic/sampleQuery4.png" width=500>
+**Union**
+```
+SELECT R.A FROM R, S 
+WHERE R.A = S.A 
+UNION 
+SELECT R.A FROM R, T 
+FROM R, T
+WHERE R.A = T.A
 
-#### Sample Query 5
-<img src="./pic/sampleQuery5.png" width=500>
+by default, SQL operator uses set semantics, so there aren't duplicate after single operation
+```
+<img src="./pic/mutlisetUnion.png" width=250>
 
+**Union All**
+```
+SELECT R.A FROM R, S 
+WHERE R.A = S.A 
+UNION ALL
+SELECT R.A FROM R, T 
+FROM R, T
+WHERE R.A = T.A
+```
+<img src="./pic/unionAll.png" width=350>
+
+**Except**
+```
+EXCEPT (replace where above operator is)
+```
+<img src="./pic/except.png" width=350>
+
+##### [+] Issues with Intersect
+<img src="./pic/intersectIssue.png" width=600>
+
+```
+As the green background text indicates:
+all companies with factories in the US will be return, so as those with factory in China 
+but at the same time, companies that have company exclusively located in one place will be selected as well 
+
+intuitively, we want to use intersect to meet the criteria, but in fact fail in this case
+|
+V 
+introduce nexted queries for solving issues that require intersect operation logic
+```
+#### • Nested Queries
+<img src="./pic/nestedQuery.png" width=600>
+
+```
+refer to those example in the slides
+```
+
+# Aggregation & Group By
+#### • Aggregation Operator 
+```
+1) SUM 
+2) COUNT 
+3) MIN 
+4) MAX 
+5) AVG
+```
+##### [+] COUNT
+
+##### [+] GROUP BY 
+
+##### [+] HAVING
+```
+1) HAVING clauses operate on aggregate condition (column level) 
+
+2) WHERE clauses operate on individual tuples (row level)
+```
+
+##### [+] Quantifiers 
+```
+DISTINCT
+```
