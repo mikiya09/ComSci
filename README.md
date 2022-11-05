@@ -20,6 +20,8 @@
 
 ### 9) Javascript [[1]](./programming_language/JS)
 
+### 10) LaTex [[1]](./LaTex/LaTex.md)
+
 
 
 # More to know

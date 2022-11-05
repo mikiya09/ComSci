@@ -74,7 +74,11 @@ could be any string, but better use the same as github one
 ```
 #### • cancel commit 
 ```
->> git reset --hard HEAD-1
+# undo last commit
+>> git reset --soft HEAD~
+
+# undo all changes 
+>> git reset
 ```
 
 ### [5] Push/Pull
