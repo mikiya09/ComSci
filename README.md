@@ -3,11 +3,15 @@
 
 
 ### &#x23f5; Computer Organization 
-**[+] --> [basic](./fundamental/Computer_Organization.md)**
+**[+] [essential](./fundamental/Computer_Organization.md)**
 
-### 2) C++ [[1]](./programming_language/conceptC++.md)
+### &#x23f5; C++
+**[+] [concepts](./programming_language/conceptC++.md)**
 
-### 3) Data Structure [[1]](./data_structure/dataStructureBasic.md)[[2]](./data_structure/dataStructureAdvanced.md)
+### &#x23f5; Data Structure 
+**[+] [basic structure](./data_structure/dataStructureBasic.md)**
+<br>
+**[+] [advanced structure](./data_structure/dataStructureAdvanced.md)**
 
 ### 4) Algorithm [[1]](./algorithm)
 
