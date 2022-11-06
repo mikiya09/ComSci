@@ -5,30 +5,36 @@
 ### &#x23f5; Computer Organization 
 **[+] [essential](./fundamental/Computer_Organization.md)**
 
-### &#x23f5; C++
-**[+] [concepts](./programming_language/conceptC++.md)**
+### &#x23f5; Programming Language
+**[+] [C++](./programming_language/conceptC++.md)**
+<br>
+**[+] [javascript](./programming_language/JS)**
 
 ### &#x23f5; Data Structure 
 **[+] [basic structure](./data_structure/dataStructureBasic.md)**
 <br>
 **[+] [advanced structure](./data_structure/dataStructureAdvanced.md)**
 
-### 4) Algorithm [[1]](./algorithm)
+### &#x23f5; Algorithm 
+**[+] [basic algorithm](./algorithm)**
 
-### 5) Database [[1]](./database/relationalDatabase.md)
+### &#x23f5; Database 
+**[+] [relational](./database/relationalDatabase.md)**
 
-### 6) Git [[1]](./fundamental/Git.md)
+### &#x23f5; Git 
+**[+] [basic command](./fundamental/Git.md)**
 
-### 7) Theory of Computation [[1]](./fundamental/TOC.md)
+### &#x23f5; Theory of Computation 
+**[+] [TOC](./fundamental/TOC.md)**
 
-### 8) Blockchain [[1]](./blockchain/blockchain-concept.md)
+### &#x23f5; Blockchain 
+**[+] [concepts](./blockchain/blockchain-concept.md)**
 
-### 9) Javascript [[1]](./programming_language/JS)
+### &#x23f5; LaTex 
+**[+] [what is this](./LaTex/LaTex.md)**
 
-### 10) LaTex [[1]](./LaTex/LaTex.md)
-
-### 11) Math
-**+ [Linear Algebra](./Math/linearAlgebra.md)**
+### &#x23f5; Math
+**[+] [Linear Algebra](./Math/linearAlgebra.md)**
 
 
 
