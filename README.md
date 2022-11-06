@@ -2,7 +2,7 @@
 # Computer Science Concepts
 
 
-### 1) Computer Organization [[1]](./fundamental/Computer_Organization.md)
+## [+] Computer Organization [[1]](./fundamental/Computer_Organization.md)
 
 ### 2) C++ [[1]](./programming_language/conceptC++.md)
 
