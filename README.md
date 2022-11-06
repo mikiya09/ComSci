@@ -22,6 +22,9 @@
 
 ### 10) LaTex [[1]](./LaTex/LaTex.md)
 
+### 11) Math
+**+ [Linear Algebra](./Math/linearAlgebra.md)**
+
 
 
 # More to know
