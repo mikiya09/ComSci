@@ -2,8 +2,8 @@
 # Computer Science Concepts
 
 
-## &#x23f5 Computer Organization 
-**[[+] basic](./fundamental/Computer_Organization.md)**
+### &#x23f5; Computer Organization 
+**[+] [basic](./fundamental/Computer_Organization.md)**
 
 ### 2) C++ [[1]](./programming_language/conceptC++.md)
 
