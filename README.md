@@ -4,7 +4,7 @@
 
 ### &#x23f5; Computer Organization 
 **[+] [essential](./fundamental/Computer_Organization.md)**
-### ------------------------------
+**--------------------------------**
 
 ### &#x23f5; Programming Language
 **[+] [C++](./programming_language/conceptC++.md)**
