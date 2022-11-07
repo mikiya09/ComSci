@@ -3,7 +3,7 @@
 
 
 ### &#x23f5; Computer Organization 
-**[+] [essential](./fundamental/Computer_Organization.md)**
+**[+] [essential](./fundamental/Computer_Organization.md)** <br>
 **--------------------------------**
 
 ### &#x23f5; Programming Language
