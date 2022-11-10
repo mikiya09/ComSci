@@ -2365,3 +2365,9 @@ ItemType StackType<ItemType>::Top()
     return items<top>;
 }
 ```
+
+# Linked List
+
+### Circular Linked List
+
+### reverse Linked List
