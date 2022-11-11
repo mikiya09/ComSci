@@ -95,19 +95,19 @@ Definition
 
 ### Different views of ADT 
 
-#### • Logical Level
+#### [+] Logical Level
 ```
 abstract view of the domain and operations
 ```
-#### • Implementation Level
+#### [+] Implementation Level
 ```
 specific representation to "hold" the data items, and implementation of operations
 ```
-#### • Application Level
+#### [+] Application Level
 ```
 modeling real-life data in a specific context, also known as user level
 ```
-#### • Ex: ADT List
+#### [+] Ex: ADT List
 ```
 (Application Level) 
   : modeling real-life list, a homogeneous collection of elements with a linear relation
@@ -123,7 +123,7 @@ modeling real-life data in a specific context, also known as user level
   : implemented using array, linked list, or others; codes for operations
 ```
 
-#### • Library Example
+#### [+] Library Example
 ```
 [1] Application Level: Public Library that you can make the use of 
 
@@ -147,7 +147,7 @@ modeling real-life data in a specific context, also known as user level
 ```
 ### C++ Data Types
 
-#### • Simple
+#### [+] Simple
 ```
 [1] Integral (完整的)
      > char
@@ -166,7 +166,7 @@ modeling real-life data in a specific context, also known as user level
      > pointer 
      > reference 
 ```
-#### • Composite
+#### [+] Composite
 ```
 [1] Definition 
      : stores a collection of individual data components under *one variable name*,
@@ -180,12 +180,12 @@ modeling real-life data in a specific context, also known as user level
 ```
 
 ### Unstructured v.s Structured data types
-#### • Unstructured 
+#### [+] Unstructured 
 ```
 components are [not] organized with respect to one another
 e.g. strcut and classes
 ```
-#### • Structured 
+#### [+] Structured 
 ```
 organization of components determines method used to access individual components
 e.g. arrays
@@ -193,7 +193,7 @@ e.g. arrays
 
 
 ### Pass-by-value v.s pass-by-reference
-#### • Pass by value
+#### [+] Pass by value
 ```
     sending a copy of the contents of the actual argument
     -----------------               -------------------
@@ -204,7 +204,7 @@ e.g. arrays
     so, actual argument cannot be changed by the function 
 ```
 
-#### • Pass by reference (&)
+#### [+] Pass by reference (&)
 ```
  sends the location (memory address) of the actual argument 
     -----------------                -------------------
@@ -289,8 +289,8 @@ MonthlySalesType monthSales;
 | Type: local & global  |
 -------------------------
 
-[ex].
 --------------------------------------------------------------------------------------------
+[ex].
 #include<iostream>
 using namespace std;
 
@@ -314,7 +314,12 @@ int main()
 ```
 
 ### Structs (alias: records)
+**definition**
 ```
+1) another way of creating abstract data type, just like class but by default everything is public 
+2) usually used with class
+
+--------------------------------------------------------------------------------------------------
 [ex].
 
 struct NameType {
@@ -449,8 +454,8 @@ assume 2 bytes for type int, memory address is located with bytes
 [2] protect array from unintentional changes by using "const" in formal parameter 
      and function prototype
 ```
-#### • One Dimensonal Array
-##### [-] incorrect way
+#### [+] One Dimensonal Array
+##### • incorrect way
 ```
 #include <iostream>
 using namespace std;
@@ -482,105 +487,11 @@ explain: when passing int arr to fun() in main, it is always treated as a pointe
          you can't the correct size of a pointer 
          the solution is passing the size as a parameter to the main as well
 ```
-##### [+] correct way 1
-```
-// passing the size as a varible
+##### • [correct way](./basic/Array/1DArray.cpp)
 
-#include <iostream>
-using namespace std;
-void fun(int arr[], int n)                // same as void fun(int *arr, int n)
-{                                         // array as parameter is always treated as pointer
-    int i;
-    for (i = 0; i < n; i++)
-        cout << arr[i] << " ";
-}
- 
-// Driver program
-int main()
-{
-    int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-    int n = sizeof(arr) / sizeof(arr[0]);
-    fun(arr, n);
-    return 0;
-}
-```
-##### [+] correct way 2
-```
-(when you have function that correctly calculate size with string)
+#### [+] Two Dimensonal Array
+##### • [methods](./basic/Array/2DArray.cpp)
 
-#include <iostream>
-using namespace std;
-
-void fun(char* arr)                 // same as void fun(char arr[]) {...}
-{
-    int i;
-    int n = strlen(arr);
-    cout << "n = " << n << endl;
-    for (i = 0; i < n; i++)
-        cout << arr[i] << " ";
-}
- 
-// Driver program
-int main()
-{
-    char arr[] = "comeonbaby";
-    fun(arr);
-    return 0;
-}
-```
-#### • Two Dimensonal Array
-##### [+] method 1
-```
-// specify the size of columns of 2D array
-void processArr(int a[][10]) {
-   // Do something
-}
-```
-##### [+] method 2 
-```
-// pass array containing pointers
-void processArr(int *a[10]) {           // passing a pointer of an array of 10 pointers
-   // Do Something                      // a[] = *a in terms of parameter: *a[10] = a[][10]
-}
-
-// When callingint *array[10];
-for(int i = 0; i < 10; i++)
-   array[i] = new int[10];              // initialize each pointer in the 10 pointer-array
-processArr(array);
-```
-##### [+] method 3
-```
-#include <iostream>
-using namespace std;
-
-void processArr(int **a)
-{
-    // Do something
-}
-
-int main()
-{
-    int **array;
-    array = new int *[10];          // pay attention to how to declare below one
-    for (int i=0; i<10; i++)
-    {
-        array[i] = new int[10];     // in comparison with above one
-    }
-    for (int i=0; i<10; i++)
-    {
-        for (int j=0; j<10; j++)
-        {
-            cout << array[i][j];
-        }
-        cout << endl;
-    }
-
-    cout << *array << endl;     // print out the first address
-    // processArr(array);
-
-    return 0;
-}
-```
 
 # Object-Oriented Programming
 ```
@@ -645,6 +556,7 @@ refer to below
 Exception could be an user-defined class
 ```
 ### Try/throw/catch
+**[pre-defined exception](./basic/Exception/preDefined.cpp)**
 ```
 #include <iostream>
 using namespace std;
@@ -672,28 +584,8 @@ int main()
     }
 }
 ```
-### Employ pre-defined exception classes/functions
-```
-#include <new>
 
-bool UnsortedType::IsFull() const
-// return true if there is no room for another ItemType 
-// on the free store; false otherwise 
-{
-    NodeType* location;
-    try
-    {
-        location = new NodeType;
-        delete location;
-        return false;
-    }
-    catch (std::bad_alloc exception)
-    {
-        return true;
-    }
-}
 
-```
 # Algorithm
 ```
 1. A logical sequence of discrete steps 
@@ -704,29 +596,29 @@ bool UnsortedType::IsFull() const
 ```
 The theoretical study of design and analysis of computer algorithms, not about programming
 ```
-#### • Design
+#### [+] Design
 ```
 [1] design correct algorithms which minimize cost
 [2] efficiency is the design criterion
 ```
-#### • Analysis
+#### [+] Analysis
 ```
 + predict the cost of an algorithm in terms of resource and performance
 ```
-#### • Basic Goals for designing
+#### [+] Basic Goals for designing
 ```
 [1] always correct
 [2] always terminates
 [3] always care about performance
 ```
-#### • WHY?
+#### [+] WHY?
 ```
 Computers are always limited in the computational ability and memory
 + Resources are always limited
 + Efficiency is the center of algorithms
 ```
-#### • Growth Rate 
-##### [+] Example 1 
+#### [+] Growth Rate 
+##### • Example 1 
 ```
 [Question]: 
 determine whether x is one of A[1], A[2],..., A[n], and retrieve information about x.
@@ -745,7 +637,7 @@ if (i > n) then i = 0;
 <2> Worst case?                        --> n
 <3> Best case?                         --> 1
 ```
-##### [+] Example 2 
+##### • Example 2 
 ```
 Square Matrix Multiplication 
 
@@ -776,7 +668,7 @@ for i = 1 to n do
 <1> What is the number of multiplications?     --> i * j * k = n^3
 <2> What is the number of additions?           --> same? think that later
 ```
-##### [+] explain
+##### • explain
 ```
 further abstraction we use in algorithm analysis is to characterize in terms of growth 
 
@@ -795,13 +687,13 @@ input size   |    n    |   nlgn   |   n^2   |   n^3   |   2^n   |
 The worst case (upper bound) of the algorithm execution time, use linked list as an exmaple
 ```
 <!-- ![Big-O-Comparison](./pic/bigO.png) -->
-<img src="./pic/bigO.png" width = 700>
+<img src="./pic/bigO.png" width = 600>
 
 ### Comparison of algorithm
 ```
 [Goal]: Compare the efficiency of different algorithm, efficiency is what matters!
 ```
-#### • One problem Two Algorithm
+#### [!] One problem Two Algorithm
 ```
 [problem]: Calculate the sum of the integers from 1 to N, i.e. 1+2+3+...+(N-1)+N 
 
@@ -813,7 +705,7 @@ for (count=1; count<=N; count++)
 [Alg #2]:                           --> one addition, one multiplication and one division
 sum = (1+N)*(N/2);
 ```
-#### • How to compare ?
+#### [+] How to compare ?
 ```
 [1] Compare the actual running time on a computer 
 [2] Compare the number instructions/statements executed
@@ -827,13 +719,13 @@ A pointer variable contains the memory address of another variable
 
 [for what]: for indirect addressing of data and for dynamic allocation of memory 
 ```
-### • Declaration
+### Declaration
 ```
 use an aterisk(*)
 -----------------
 int* intPointer;
 ```
-### • Manipulation (operation)
+### Manipulation (operation)
 ```
 // ampersand(&) returns the address of a variable
 int alpha = 10;
@@ -842,7 +734,7 @@ int* intPointer = &alpha;                       // return a address like this: 0
 // accessing variables value through pointer 
 *intPointer = 25;                               // alpha is now 25
 ```
-### • Example
+### Pointer Ex).
 ```
 #include <iostream>
 using namespace std;
@@ -876,12 +768,13 @@ int main()
 }
 ```
 # Dynamic Memory Allocation
-#### • Static Memory allocation
+### Memory Allocation
+#### [+] Static Memory allocation
 ```
 (when): compile time
 allocates a fixed amount of memory during compile time, pre-specify in declaration 
 ```
-#### • Dynamic memory allocation 
+#### [+] Dynamic memory allocation 
 ```
 (when): runtime
 Allocation of memory space for a variable at run time, as opposed to static one
@@ -906,32 +799,32 @@ int* ptr = new int;
 A memory leak is the loss of available memory space 
 that occurs when some "dynamically" allocated memory is never deallocated, called garbage
 ```
-#### • Example 
+#### [+] Ex).
 ```
 float* money = new float;
 *money = 33.46;
 float* myMoney = new float;
 ```
-<img src="./pic/memoryLeak1.png" width=300>
+<img src="./pic/memoryLeak1.png" width=200>
 <br>
 
 ```
 •myMoney = *money;                  // set the value of myMoney = the value of money
 ```
-<img src="./pic/memoryLeak2.png" width=300>
+<img src="./pic/memoryLeak2.png" width=200>
 <br>
 
 ```
 myMoney = money;                    // set the memory address of myMoney = money's
 ```
-<img src="./pic/memoryLeak3.png" width=300>
+<img src="./pic/memoryLeak3.png" width=200>
 <br>
 
 ```
 The memory cell originally used by myMoney is now inaccessible.
 Since there's no way to collect the garbage, it is small memory leak
 ```
-#### • Delete Operation 
+#### [+] Delete Operation 
 ```
 [1] If it is single variables 
      >> delete myMoney;              // safely clean up the memory allocated to myMoney
@@ -939,67 +832,44 @@ Since there's no way to collect the garbage, it is small memory leak
 [2] If it is array variables
      >> delete [] myArray;           // deleting array
 ```
-### *Static v.s Dynamic arrays 
-### *initialization
+# List (in C++)
+**a collection of homogeneous items**
 
-# Lists
+
+### Linked List 
+
+#### [+] Circular Linked List
+#### [+] Reverse Linked List
+
+### Unsorted list
+#### [+] Array based 
+##### • static & dynamic (refer to [SortedType](./basic/List/))
 ```
-a collection of homegeneous items
+The length field must be present in order to define the extent of the list within the array
+
+• differences 
+1) GetItem() 
+    > for SortedType you can use binary search, 
+    > but for UnsortedType you had to loop through whole list
+2) PutItem()
+    > SortedType had to maintain the order, after find the location for inserting
+    > UnsortedType put anywhere that require less computing power
+3) DeleteItem()
+    > SortedType need to maintain order, move item a space up after deletion
+    > UnsortedType can just place the last item to where an item is deleted and decrement length
 ```
-### array-based List (unsorted)
-#### .h file
-```
-refer to sorted .h
-```
-#### .cpp file
-```
-refer to sorted .cpp
-```
-### Linked List (unsorted)
-A collection of **nodes** that are <u>linked together</u> in a chain using **pointers**
-#### • Node 
+#### [+] Linked-List based
+A collection of **node** that are linked toegther by **pointer** in a chain
+##### &#x23f5; Node
 ```
 [1] basic component of a linked list, store data and a pointer to the next node
 [2] Nodes are created when needed using dynamically allocated memory 
 [3] The last node in the list has a NULL pointer
 ```
-#### .h file
-```
-#include "ItemType.h"
-
-struct NodeType;
-
-class UnsortedType
-{
-public:
-  UnsortedType();
-  ~UnsortedType();
-
-  void MakeEmpty();
-
-  bool IsFull() const;
-
-  int GetLength() const;
-
-  ItemType GetItem(ItemType& item, bool& found);
-
-  void PutItem(ItemType item);
-
-  void DeleteItem(ItemType item);
-
-  void ResetList();
-
-  ItemType GetNextItem();
-
-private:
-  NodeType* listData;
-  int length;
-  NodeType* currentPos;
-};
-
-```
-#### • Member Functions
-##### [+] *struct*
+##### &#x23f5; Header file [(.h)](./basic/List/UnsortedType_LL.h)
+##### &#x23f5; Implementation file [(.cpp)](./basic/List/UnsortedType_LL.cpp)
+##### • *struct*
+*creating a type using strcut*
 ```
 struct NodeType
 {
@@ -1007,75 +877,29 @@ struct NodeType
     NodeType* next;
 }
 ```
-##### [+] *constructor*
+##### &#x23f5; *constructor*
+##### &#x23f5; *destructor*
 ```
-UnsortedType::UnsortedType()
-{
-    length = 0;
-    listData = NULL;
-}
-```
-##### [+] *destructor*
-```
-UnsortedType::~UnsortedType()
-// Post: List is empty; all items have been deallocated.
-{
-  NodeType* tempPtr;
-
-  while (listData != NULL)
-  {
-    tempPtr = listData;
-    listData = listData->next;
-    delete tempPtr;
-  }
-}
-------------------- version 2 when you have MakeEmpty() function ---------------------------
+// version 2:
 
 UnsortedType::~UnsortedType()
 {
     MakeEmpty();
 }
 ```
-##### [+] *IsFull*
-```
-! Linked list don't have an explicit size space
-! try if you can allocated new memory for limit
-! btw, dynamic memory is located in the heap
-```
-```
-bool UnsortedType::IsFull() const
-{
-    NodeType* location;
-    try
-    {
-        location = new NodeType;
-        delete location;
-        return false;
-    }
-    catch (std::bad_alloc exception)
-    {
-        return true;
-    }
-}
-```
-##### [+] *GetLength*
-```
-int UnsortedType::GetLength() const
-{
-    return length;
-}
-```
-##### [+] *MakeEmpty*
+##### &#x23f5; *IsFull*
+##### &#x23f5; *GetLength*
+##### &#x23f5; *MakeEmpty*
 ```
 100% sure this one is an iterator
+-----------------------------------------------------------------------------------------------
+| ! delete always start from the head                                                         |
+| 1) makeEmpty() must deallocate each node individually in order to empty the list            |
+| 2) This is accomplished using a while loop                                                  |
+| 3) Iteration starts at listData, the head of the list, and continues using listData->next   |
+| 4) Iteration stops when listData is NULL                                                    |
+-----------------------------------------------------------------------------------------------
 
-! delete always start from the head
-1) makeEmpty() must deallocate each node individually in order to empty the list 
-2) This is accomplished using a while loop 
-3) Iteration starts at listData, the head of the list, and continues using listData->next 
-4) Iteration stops when listData is NULL
-```
-```
 void UnsortedType::MakeEmpty()
 {
     NodeType* tempPtr;
@@ -1089,7 +913,7 @@ void UnsortedType::MakeEmpty()
     length = 0;
 }
 ```
-##### [+] *PutItem*
+##### &#x23f5; *PutItem*
 ```
 ! Order Matter, do step 4 over step 3 will cause memory leak
 ------------------------------------------------------------
@@ -1101,211 +925,69 @@ void UnsortedType::MakeEmpty()
 <img src="./pic/putItem.png">
 
 ```
-void UnsortedType::PutItem (ItemType item)
-{
-    NodeType* location;
-    location = new NodeType;                    // create a new node and fill it
-    location->info = item;
-    location->next = listData;
-
-    listData = location;                        // new node becomes head of the list
-    length++;                                   // record the length of linked list
-}
-```
-```
 Put into Empty list 
 1) create new node 
 2) make new node point to NULL 
 3) make listData point to NULL 
 ```
 
-##### [+] *GetItem*
+##### &#x23f5; *GetItem*
 <img src="./pic/getItem.png" width=500>
 
 ```
-// Linear Search through the list to find the desired item
-// same as searching if item exist
-// check the input boolean value found after passing it into the search function
-
-ItemType UnsortedType::GetItem(ItemType& item, bool& found)
-{
-    bool moreToSearch;
-    NodeType* location = listData;
-    found = false;
-
-    moreToSearch = (location != NULL);          // start with listData, check if node->NULL
-    while (moreToSearch)                        // assume item must exist
-    {
-        if (location->info == item)
-        {
-            found = true;
-            item = location->info;
-        }
-        else
-        {
-           location = location->next;
-           moreToSearch = (location != NULL);
-        }
-    }
-    return item;
-}
+1) Linear Search through the list to find the desired item
+2) same as searching if item exist
+3) check the input boolean value found after passing it into the search function
 ```
 <br>
 
-##### [+] *DeleteItem*
-<img src="./pic/deleteItem.png" width=500>
-
+##### &#x23f5; *DeleteItem*
 ```
 1) tempPtr to locate the item that need to be deleted, link it; 
 2) predecessor(previous pointer) point to location->next 
 3) delete the tempPtr
 ```
-```
-void SortedType::DeleteItem(ItemType item)
-{
-  NodeType* location = listData;
-  NodeType* tempLocation;
+<img src="./pic/deleteItem.png" width=500>
 
-  // Locate node to be deleted.
-  if (item.ComparedTo(location->info) == EQUAL)
-  {
-    tempLocation = location;
-    listData = location->next;	                        // listData point to next location 
-  }                                                     // same as saying deleting first node
-  else
-  {
-    // remove || condition if assume item must exist
-    while (item.ComparedTo((location->next)->info) != EQUAL || location->next != NULL) 
-      location = location->next;
-
-    // Delete node at location->next
-    tempLocation = location->next;
-    location->next = (location->next)->next;
-  }
-  delete tempLocation;                                  // because delete tempLocation here
-  length--;
-}
-```
-##### [+] *ResetList*
-```
-void UnsortedType::ResetList()
-{
-    currentPos = NULL;                  // currentPos is node pointer, set it to NULL
-}
-```
-##### [+] *GetNextItem*
-```
-ItemType UnsortedType::GetNextItem()
-{
-  ItemType item;
-  if (currentPos == NULL) {
-    currentPos = listData;              // currentPos is a node pointer
-  }
-  currentPos = currentPos->next;
-  item = currentPos->info;
-  return item;
-}
-```
+##### &#x23f5; *ResetList*
+##### • *GetNextItem*
 <br>
 
-#### • Comparing Implementations 
+
+#### [+] Comparing Implementations 
 <img src="./pic/compareTimeComplexity.png" width=700>
 
-### Sorted v.s Unsorted Lists
-#### • Unsorted List
-refer to above example and all **member functions**
-#### • Sorted List
-##### [+] Logical Level (no changes)
+### SortedType
+##### • Logical Level (no changes)
 ```
 1) Only change from unsorted list is guaranteeing list elements are sorted
 2) Order is determined by ItemType's CompareTo method 
 3) PutItem and DeleteItem pre- and post- condition: list is sorted and remains sorted
 ```
-##### [+] Application Level (no changes)
+##### • Application Level (no changes)
 ```
 1) Nothing has changed for the user, list interface is exactly the same
 2) GetNextItem will return the next item in key order
 ```
-##### [+] Imlementation Level (few changes)
+##### • Imlementation Level (few changes)
 ```
 -----------------------------------------------------------------
 |   1) PutItem, DeleteItem: Ensure list remains Sorted <br>     |
 |   2) GetItem can be improved                                  |
 -----------------------------------------------------------------
 ```
-### Sorted List implementations
-#### • Array-based (static) 
+#### [+] Array-based (static) 
 ```
 the length field must be present in order to define the extent of the list within the array
 ```
-##### [+] .h file
-```
-#ifndef SORTED
-#define SORTED
+##### &#x23f5; Header File [(.h)](./basic/List/SortedType_aBased.h)
+##### &#x23f5; Implementation File [(.cpp)](./basic/List/SortedType_aBased.cpp)
+##### &#x23f5; *constructor*
+##### &#x23f5; *MakeEmpty*
+##### &#x23f5; *IsFull*
+##### &#x23f5; *GetLength*
 
-#include "ItemType.h" 
-// File ItemType.h must be provided by the user of this class. 
-//  MAX_ITEMS:     100
-
-class SortedType 
-{
-public:
-  SortedType();
-
-  void MakeEmtpy();
-  
-  bool IsFull() const;
-
-  int GetLength() const;
-
-  ItemType GetItem(ItemType item, bool& found);
-
-  void PutItem(ItemType item);
-
-  void DeleteItem(ItemType item);
-
-  void ResetList();
-
-  ItemType GetNextItem();
-
-  void MakeEmpty();
-
-private:
-  int length;
-  ItemType info[100];       // assume the max length = 100
-  int currentPos;
-};
-#endif
-```
-##### [+] *constructor*
-```
-SortedType::SortedType()
-{
-    length = 0;
-}
-```
-##### [+] *MakeEmpty*
-```
-void SortedType::MakeEmpty()
-{
-    length = 0;
-}
-```
-##### [+] *IsFull*
-```
-bool SortedType::IsFull() const
-{
-    return (length == 100);
-}
-```
-##### [+] *GetLength*
-```
-int SortedType::IsFull() const
-{
-    return length;
-}
-```
-##### [+] *GetItem (binary search)*
+##### &#x23f5; *GetItem (binary search)*
 ```
 // Apply Binary Search: time complexity = O(log2N)
 // assume item exist
@@ -1339,15 +1021,14 @@ ItemType SortedType::GetItem(ItemType item, bool& found)
 ```
 <img src="./pic/binarySearch.png">
 
-##### [+] *PutItem*
+##### &#x23f5; *PutItem*
 ```
 (Linear Search is required)
 1) Find the space where new element should go
 2) create space for new element, by moving all subsequent elements down one space
 3) insert the element in the space
 4) increment the length by 1
-```
-```
+
 // assume item exist
 
 void SortedType::PutItem(ItemType item) 
@@ -1379,13 +1060,13 @@ void SortedType::PutItem(ItemType item)
 ```
 <img src="./pic/arrayBased.png">
 
-##### [+] *DeleteItem*
+##### &#x23f5; *DeleteItem*
 ```
 1) assume item for deletion is in the list, simple linear search find them
 2) when found, move subsequent element up one space (overwritting)
 3) decrement the length by 1
-```
-```
+
+//
 void SortedType::DeleteItem(ItemType item) 
 {
   int location = 0;
@@ -1397,15 +1078,8 @@ void SortedType::DeleteItem(ItemType item)
   length--;
 }
 ```
-##### [+] *ResetList*
-```
-void SortedType::ResetList()
-// Post: currentPos has been initialized
-{
-    curretnPos = -1;
-}
-```
-#### • Array-based (dynamic) 
+##### &#x23f5; *ResetList*
+#### [+] Array-based (dynamic) 
 ```
 few changes:
 
@@ -1417,7 +1091,7 @@ few changes:
 ```
 <img src="./pic/dynamicArrayBased.png" width=500>
 
-##### [+] *Destructor*
+##### &#x23f5; *Destructor*
 ```
 ! object is deallocated when it leavs scope, but any data it points to is not -> memory leak
 
@@ -1435,30 +1109,25 @@ UnsortedType::~UnsortType()
     cout << "destructor called" << endl;
 }
 ```
-#### • Linked list-based
+
+#### [+] Linked-List based
+**Header File[(.h)](./basic/List/SortedType_LL.h)** 
+
+<br>
+
+**Implementation File[(.cpp)](./basic/List/SortedType_LL.cpp)** 
+****
 ```
 functions to change compare to array-based sort list:
 -> GetItem()
 -> PutItem()
 -> DeleteItem()
 ```
-##### [+] *NodeType* 
-```
-refer to above
-```
-##### [+] *Constructor*
-```
-refer to above
-```
-##### [+] *IsFull*
-```
-refer to above IsFull
-```
-##### [+] *MakeEmpty*
-```
-refer to above MakeEmpty
-```
-##### [+] **GetItem*
+##### &#x23f5; *NodeType* 
+##### &#x23f5; *Constructor*
+##### &#x23f5; *IsFull*
+##### &#x23f5; *MakeEmpty*
+##### &#x23f5; **GetItem*
 ```
 -------------------------------------------------------------------------------------
 |                                                                                   |
@@ -1473,8 +1142,7 @@ refer to above MakeEmpty
 |   2) Linked lists can only access directly linked nodes one by one                |
 |                                                                                   |
 -------------------------------------------------------------------------------------
-```
-```
+
 // here we need to compare 3 situations, because the list is sorted (in order)
 ItemType SortedType::GetItem(ItemType item, bool& found) 
 {
@@ -1502,15 +1170,14 @@ ItemType SortedType::GetItem(ItemType item, bool& found)
     return item;
 }
 ```
-##### [+] *PutItem*
+##### &#x23f5; **PutItem*
 ```
 Can't always look a head (location->next)->info, because exception will happen in the end  
 
 solution. two poitners, recording previous and current Node
 1) predLoc
 2) location 
-```
-```
+
 // code
 void SortedType::PutItem(ItemType item)
 {
@@ -1562,7 +1229,7 @@ void SortedType::PutItem(ItemType item)
 <br>
 <br>
 
-##### [+] *DeleteItem*
+##### &#x23f5; **DeleteItem*
 ```
 linear way: compare against "(location->next)->info" to find the item to delete
 
@@ -1592,19 +1259,12 @@ void SortedType::DeleteItem(ItemType item)
 ```
 <img src="./pic/delelteItemLinkedList.png" width=400>
 
-##### [+] *ResetList*
-```
-refer to above ResetList
-```
-##### [+] *GetNextItem* 
-```
-refer to above GetNextItem
-```
-##### [+] *Destructor (Linked List)*
-```
-refer to above Destructor
-```
-### Time Complexity/order of magnitude
+##### &#x23f5; *ResetList*
+##### &#x23f5; *GetNextItem* 
+##### &#x23f5; *Destructor (Linked List)*
+
+
+#### [+] Time Complexity/order of magnitude
 <img src="./pic/sortListCompareTimeComplexity.png">
 
 ```
@@ -1615,20 +1275,22 @@ refer to above Destructor
 3). Linked likst:   as long as computer has memory
 ```
 
-### Bounded and Unbounded ADTs
-#### • Bounded 
+#### [+] Bounded and Unbounded ADTs
+##### • Bounded 
 ```
 There is a logical limit on the number of items in the structure
 ----------------------------------------------------------------
 >> array-based list is bounded, but you can modify it into dynamic memory allocated version 
 >> so that storage can be expanded as long as there are space in the heap
 ```
-#### • Unbounded
+##### • Unbounded
 ```
 no logical limit on the number of items in ths structure
 ---------------------------
 >> Linked list is Unbounded
 ```
+
+
 # Stacks (ADT)
 ```
 Last in First Out (LIFO)
@@ -2366,8 +2028,4 @@ ItemType StackType<ItemType>::Top()
 }
 ```
 
-# Linked List
 
-### Circular Linked List
-
-### reverse Linked List

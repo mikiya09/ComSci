@@ -11,6 +11,8 @@
 
 # Binary Search Tree (BST)
 
+### [incorrect way of thinking BST](https://www.enjoyalgorithms.com/blog/validate-binary-search-tree)
+
 ### BST properties 
 **code[[1]](./advanced/BST/TreeType.h)[[2]](./advanced/BST/TreeType.cpp)[[3]](./advanced/BST/main.cpp)** 
 ```
@@ -47,13 +49,13 @@ bool TreeType::IsBST()
 • code is executed one line by one line, from top to down
 
 
-                            [ complete binary tree ]
+                                    [ complete binary tree ]
 
-                                        e
-             down to up ^             /   \
-                        |            c     g
-                                    / \   / \
-                        start -->  a   d f   z 
+                                                e
+                     down to up ^             /   \
+                                |            c     g
+                                            / \   / \
+                                start -->  a   d f   z 
     
                     
         1) when first time going into the function, root == NULL automatically maintain properties
@@ -84,3 +86,8 @@ bool TreeType::IsBST()
             > ...
         6) at e level, both c and g maintain the property, so the whole tree is BST
 ```
+
+
+# Heap
+
+# Hash
