@@ -1111,12 +1111,8 @@ UnsortedType::~UnsortType()
 ```
 
 #### [+] Linked-List based
-**Header File[(.h)](./basic/List/SortedType_LL.h)** 
-
-<br>
-
-**Implementation File[(.cpp)](./basic/List/SortedType_LL.cpp)** 
-****
+##### &#x23f5; Header File[(.h)](./basic/List/SortedType_LL.h)
+##### &#x23f5; Implementation File[(.cpp)](./basic/List/SortedType_LL.cpp)
 ```
 functions to change compare to array-based sort list:
 -> GetItem()
@@ -1291,6 +1287,10 @@ no logical limit on the number of items in ths structure
 ```
 
 
+
+
+
+
 # Stacks (ADT)
 ```
 Last in First Out (LIFO)
@@ -1327,168 +1327,45 @@ A stack is an ADT in which elements are added and removed from only the top of t
 ```
 ### Implementation 
 #### • Array-based 
-```
-#include "StackType.h"
+##### &#x23f5; Header file [(.h)](./basic/Stack/StackType.h)
+##### &#x23f5; Implementation file [(.cpp)](./basic/Stack/StackType.cpp)
 
-
-StackType::StackType(int max)               // custom constructor
-{
-  maxStack = max;
-  top = -1;                                 // because the first index = 0
-  items = new int[maxStack];
-}
---------------------------------------------------------------------------------------------
-
-StackType::StackType()                      // default constructor
-{
-  maxStack = 500;
-  top = -1;
-  items = new int[maxStack];
-}
---------------------------------------------------------------------------------------------
-
-bool StackType::IsEmpty() const             // check if the top == -1
-{
-  return (top == -1);
-}
---------------------------------------------------------------------------------------------
-
-bool StackType::IsFull() const              // check if the top == max - 1
-{
-  return (top == maxStack-1);
-}
---------------------------------------------------------------------------------------------
-
-void StackType::Push(int newItem)           
-{
-  if (IsFull())                             // user-defined exception FullStack()
-    throw FullStack();                      // throw that if IsFull() = true
-  top++;                                    // else top increment 1
-  items[top] = newItem;                     // let items[top] = newItem
-}
---------------------------------------------------------------------------------------------
-
-void StackType::Pop()
-{
-  if( IsEmpty() )                           
-    throw EmptyStack();                     // throw user-deined exception EmptyStack()
-  top--;                                    // since it's array, don't really need to delete
-}                                           // decrement top value, later overwrite for push
---------------------------------------------------------------------------------------------
-
-int StackType::Top()
-{
-  if (IsEmpty())
-    throw EmptyStack();
-  return items[top];                        // return the top item
-}    
---------------------------------------------------------------------------------------------
-
-StackType::~StackType()
-{
-  delete [] items;                          // delete array pointer
-}
---------------------------------------------------------------------------------------------
-```
 <img src="./pic/tracingStack.png" width=600>
 
 
 #### • Linked list-based 
+##### &#x23f5; Header File [(.h)](./basic/Stack/StackType_LL.h)
 ```
-#include "StackType.h"
+struct NodeType;
 
-struct NodeType                             // Node Type
+class StackType
 {
-  int info;
-  NodeType* next;
+	
+public:
+  StackType();
+
+  ~StackType();
+  
+  void Push(int newItem);
+  
+  void Pop();
+  
+  int Top();
+
+  bool IsFull() const;
+
+  bool IsEmpty() const;
+
+public:
+  NodeType* topPtr;
+
 };
---------------------------------------------------------------------------------------------
-
-StackType::StackType()
-{
-  topPtr = NULL;                            // constructor
-}
---------------------------------------------------------------------------------------------
-
-bool StackType::IsFull() const              // check if there's still memory
-{
-    NodeType* location;
-  try
-  {
-    location = new NodeType;
-    delete location;
-    return false;
-  }
-  catch(std::bad_alloc exception)
-  {
-    return true;
-  }
-}
---------------------------------------------------------------------------------------------
-
-// destructor (iterator)
-StackType::~StackType()
-{
-  NodeType* tempPtr;                        // use tempPtr 
-
-  while (topPtr != NULL)                    // as long as tempPtr != NULL
-  {                                         // not yet reach the end
-    tempPtr = topPtr;
-    topPtr = topPtr->next;
-    delete tempPtr;
-  }
-}
---------------------------------------------------------------------------------------------
-
-bool StackType::IsEmpty() const
-{
-  return (topPtr == NULL);
-}
---------------------------------------------------------------------------------------------
-
-// Linked-List is automatically a stack seeing from left to right (as Top to Down in stack)
-void StackType::Push(int newItem)
-{
-  if (IsFull())
-    throw FullStack();                      // check if full
-  else
-  {
-    NodeType* location;                     // not full, create new node to store newItem
-    location = new NodeType;                // record address 
-    location->info = newItem;               // record info
-    location->next = topPtr;                // let newNode point to the first Node
-    topPtr = location;                      // set topPtr pointing to the new Node
-  }
-}
---------------------------------------------------------------------------------------------
-
-void StackType::Pop()
-{
-  if (IsEmpty())
-    throw EmptyStack();                     // check if empty
-  else
-  {  
-    NodeType* tempPtr;                      // use tempPtr for deletion from the head
-    tempPtr = topPtr;                       // refer to the figure below
-    topPtr = topPtr->next;
-    delete tempPtr;
-  }
-}
---------------------------------------------------------------------------------------------
-
-int StackType::Top()
-{
-  if (IsEmpty())
-    throw EmptyStack();                     // check if empty
-  else
-    return topPtr->info;                    // return top value
-}
---------------------------------------------------------------------------------------------
-
 ```
+##### &#x23f5; Implementation File [(.cpp)](./basic/Stack/StackType_LL.cpp)
+
 <img src="./pic/deleteStack.png">
 
-#### • Complexity Comparison 
+#### [+] Complexity Comparison 
 <img src="./pic/stackImplementationCompare.png">
 
 # Queues
@@ -1496,7 +1373,7 @@ int StackType::Top()
 First in, First Out (FIFO)
 ```
 ### Properties 
-#### • Logical Level 
+#### [+] Logical Level 
 ```
 A queue is an ADT in which elements are added to the rear and removed from the front
 
@@ -1525,18 +1402,16 @@ private:
                   -----------------------------------------
 
 ```
-##### [-] Fixed-Front Queue 
+#### [+] Implementation Level
+##### • Fixed-Front Queue 
 ```
 (no efficient, waste a lots of memory space)
 ```
 <img src="./pic/fixFrontQueue.png">
 
-##### [+] Floating Queue (focus on this)
+##### • Floating Queue (focus on this)
 ```
 1) more efficiient
-```
-
-```
 2) when rear is the indeed the last item in the queue => wrap around => use modulus(mod %)
 
 // (rear+1) % length, in this case 5
@@ -1579,69 +1454,20 @@ Solution [2]: less intuitive, but cooler and efficient, go with this one
 // always reserve this slot to be empty(never store queue element here)
 // if we initialize a queue with 100, what we actually use is 99 space
 ```
-#### • Application Level
+#### [+] Application Level
 ```
 // For users simplicity, maxQue = max + 1;
 // because by adopting the solution 2, we will have empty space in the queue
 ```
 ### Implementation 
-#### • Array-based 
+#### [+] Array-based [(.cpp)](./basic/Queue/QueueType.cpp)
+##### &#x23f5; constructor
+##### &#x23f5; destructor
+##### &#x23f5; MakeEmpty()
+##### &#x23f5; IsEmpty()
+##### &#x23f5; IsFull()
+##### &#x23f5; Enqueue()
 ```
-#include "QueType.h"
-
-// Post: (1) maxQue, front, and rear have been initialized. 
-//       (2) The array to hold the queue elements has been dynamically allocated.
-QueType::QueType(int max)
-{
-  maxQue = max + 1;
-  front = maxQue - 1;
-  rear = maxQue - 1;
-  items = new int[maxQue];
-}
----------------------------------------------------------------------------------------------
-
-// Post: (1) maxQue, front, and rear have been initialized. 
-//       (2) The array to hold the queue elements has been dynamically allocated.
-
-QueType::QueType()                                  // Default class constructor
-{
-  maxQue = 501;
-  front = maxQue - 1;                               // space precede the first item
-                                                    // so it's the last index
-  rear = maxQue - 1;                                // actual last index
-                                                    // make sense since front = rear is empty
-                                                    // front = rear + 1 is full
-  items = new int[maxQue];
-}
----------------------------------------------------------------------------------------------
-
-// Destructor
-QueType::~QueType()
-{
-  delete [] items;
-}
----------------------------------------------------------------------------------------------
-
-// Post: front and rear have been reset to the empty state.
-void QueType::MakeEmpty() 
-{
-  front = maxQue - 1;                               // don't really need to delete
-  rear = maxQue - 1;                                // array-based just override
-}
----------------------------------------------------------------------------------------------
-
-bool QueType::IsEmpty() const
-{
-  return (rear == front);
-}
----------------------------------------------------------------------------------------------
-
-bool QueType::IsFull() const
-{
-  return ((rear + 1) % maxQue == front);            // mod used here
-}
----------------------------------------------------------------------------------------------
-
 // Post: If (queue is not full) newItem is at the rear of the queue; 
 // otherwise a FullQueue exception is thrown.  
 void QueType::Enqueue(int newItem) 
@@ -1664,9 +1490,9 @@ void QueType::Enqueue(int newItem)
 
            // rear is 0, plus 1 will result in 1
            // add item at there
-
----------------------------------------------------------------------------------------------
-
+```
+##### &#x23f5; Dequeue()
+```
 // Post: If (queue is not empty) the front of the queue has been removed 
 // and a copy returned in item; othersiwe a EmptyQueue exception has been thrown.
 void QueType::Dequeue(int& item)
@@ -1689,111 +1515,19 @@ void QueType::Dequeue(int& item)
 
         // since we preserve the index before actual front item as "front"
         // use front + 1 to locate actual front item
-
----------------------------------------------------------------------------------------------
 ```
-#### • Linked list-based 
 
+#### [+] Linked list-based 
+##### &#x23f5; Header File [(.h)](./basic/Queue/QueueType_LL.h)
+##### &#x23f5; Implementation File [(.cpp)](./basic/Queue/QueueType_LL.cpp)
+##### &#x23f5; NodeType
+##### &#x23f5; constructor
+##### &#x23f5; destructor
+##### &#x23f5; MakeEmpty()
+##### &#x23f5; IsFull()
+##### &#x23f5; IsEmpty()
+##### &#x23f5; Enqueue()
 ```
----------------------------------------------------------------------------------------------
-|                                                                                           |
-|   // .h                                                                                   |
-|   // Header file for ADT queue                                                            |
-|                                                                                           |
-|   class FullQueue {};                                                                     |
-|                                                                                           |
-|   class EmptyQueue {};                                                                    |
-|                                                                                           |
-|   typedef char ItemType                                                                   |
-|   struct NodeType;                                                                        |
-|                                                                                           |
-|   class QueType                                                                           |
-|   {                                                                                       |
-|   public:                                                                                 |
-|       QueType();                                                                          |
-|       ~QueType();                                                                         |
-|                                                                                           |
-|       void MakeEmpty();                                                                   |
-|       void Enqueue(ItemType);                                                             |
-|       void Dequque(ItemType&);        // item store copies is a node, modify it ditectly  |
-|       bool IsEmpty() const;                                                               |
-|       bool IsFull() const;                                                                |   
-|                                                                                           |
-|   private:                                                                                |
-|       NodeType* front;                                                                    |
-|       NodeType* rear;                                                                     |
-|   };                                                                                      |
-|                                                                                           |
-|                                                                                           |
----------------------------------------------------------------------------------------------
-
-
----------------------------------------------------------------------------------------------
-
-#include <new>                                      // for bad_alloc
-
-struct NodeType
-{
-    ItemType info;
-    NodeType* next;
-};
-
-// Post: front and rear are set to NULL
-QueType::QueType()                                  // class constructor
-{
-    front = NULL;
-    rear = NULL;
-}
----------------------------------------------------------------------------------------------
-
-// Post: Queue is empty; all elements have been deallocated
-// don't have to worry about floating queue concept, because queue linked-list don't float
-void QueType::MakeEmpty()
-{
-    NodeType* tempPtr;
-
-    while (front != NULL)
-    {
-        tempPtr = front;
-        front  = front->next;
-        delete tempPtr;
-    }
-    rear = NULL;
-}
----------------------------------------------------------------------------------------------
-
-// destructor
-QueType::~QueType()
-{
-    MakeEmpty();                // deallocate all the nodes, set front and rear to NULL
-}
----------------------------------------------------------------------------------------------
-
-// returns true if there is no space for another NodeType object in heap memory
-// false otherwise
-bool QueType::IsFull() const
-{
-    NodeType* location;
-    try
-    {
-        location = new NodeType;
-        delete location;
-        return false;
-    }
-    catch(std::bad_alloc exception)
-    {
-        return true;
-    }
-}
----------------------------------------------------------------------------------------------
-
-// return true if there are no elements on the queue and false otherwise
-bool QueType::IsEmpty() const
-{
-    return (front == NULL);             // only need to check front's value, front is a node
-}
----------------------------------------------------------------------------------------------
-
 // add newItem to the rear of the queue
 // pre:  Queue has been initialized
 // post: If (queue is not full), newItem is at the rear of the queue, otherwise FullQueue()
@@ -1818,8 +1552,10 @@ void QueType::Enqueue(ItemType newItem)
         rear = newNode;                 // directly make rear pointer = newNode pointer
     }
 }
----------------------------------------------------------------------------------------------
 
+```
+##### &#x23f5; Dequeue()
+```
 // remove front item from the queue and returns(store) it in item variable
 // pre:  Queue has been initialized
 // post: If (queue is not empty), the front of the queue has been removed 
@@ -1848,9 +1584,9 @@ void QueType::Dequeue(ItemType& item)
 ```
 making a C++ function a template can let it apply to variables of all types 
 ```
-### Examples
-#### • without Class 
-##### [+] Format 
+### Ex).
+#### [+] without Class 
+##### • Format 
 ```
 template<class T>
 
@@ -1861,7 +1597,7 @@ for example.
 >> template<class ItemType>
 >> template<class COOL>
 ```
-##### [+] Normal Situation 
+##### • Normal Situation 
 ```
 void swapValues(int& variable1, int& variable2)
 {
@@ -1871,7 +1607,7 @@ void swapValues(int& variable1, int& variable2)
     variable2 = temp;
 }
 ```
-##### [+] With Template
+##### • With Template
 ```
 template<class T>
 void swapValues(T& variable1, T& variable2)
@@ -1882,7 +1618,7 @@ void swapValues(T& variable1, T& variable2)
     variable2 = temp;
 }
 ```
-##### [+] Test Code
+##### • Test Code
 ```
 int main() 
 {
@@ -1908,8 +1644,8 @@ int main()
 
 }
 ```
-#### • with Class
-##### [+] Format 
+#### [+] with Class
+##### • Format 
 ```
 => className<dataType> classObject;
 
@@ -1919,8 +1655,8 @@ className<int> classObject;
 className<string> classObject;
 className<ItemType> classObject;
 ```
-##### [+] Normal Situation 
-##### [+] With Template 
+##### • Normal Situation 
+##### • With Template 
 ```
 #include <iostream>
 using namespace std;
@@ -1939,7 +1675,7 @@ class Number {
     }
 };
 ```
-##### [+] Test Code
+##### • Test Code
 ```
 int main() {
 
@@ -1953,79 +1689,6 @@ int main() {
     return 0;
 }
 ```
-##### [+] StackType 
-```
-class FullStack {};
-class EmptyStack {};
-
-// .h
-// ===========================================
-template<class ItemType>
-class StackType 
-{
-public:
-    StackType();
-    bool IsEmpty() const;
-    bool IsFull() const;
-    void Push(ItemType item);
-    void Pop();
-    ItemType Top() const;
-
-private:
-    int top;
-    ItemType items<100>
-};
-
-// .cpp
-// ===========================================
-// constructor 
-template<class ItemType> 
-StackType<ItemType>::StackType()
-{
-    top = -1;
-}
-
-// is empty
-template<class ItemType>
-bool StackType<ItemType>::IsEmpty() const
-{
-    return (top == -1);
-}
-
-// is full
-template<class ItemType>
-bool StackType<ItemType>::IsFull() const
-{
-    return (top == 100 -1);
-}
-
-// push
-template<class ItemType>
-void StackType<ItemType>::Push(ItemType newItem)
-{
-    if (IsFull())
-        throw FullStack();
-    top ++;
-    items<top> = newItem;
-}
-
-// pop
-template<class ItemType>
-void StackType<ItemType>::Pop()
-{
-    if (IsEmpty())
-        throw EmptyStack();
-    top --;
-}
-
-// return top value
-template<class ItemType>
-ItemType StackType<ItemType>::Top()
-{
-    if (IsEmpty())
-        throw EmptyStack();
-    return items<top>;
-}
-```
+##### &#x23f5; Template with [StackType](./basic/Template/Template_Stack.cpp)
 
 
