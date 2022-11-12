@@ -452,4 +452,8 @@ bool TreeType::IsBST()
 
 # Heap
 
+# Priority Queue 
+
+# Heap Sort
+
 # Hash

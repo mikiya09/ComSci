@@ -16,7 +16,7 @@
 >> git status                       // check branch
 ```
 ### [2] Connect Local Repository with remote one (github)
-#### • username and email 
+#### &#x23f5; username and email 
 **username** and **useremail** are used for tracking who are making changes to repo locally
 ```
 could be any string, but better use the same as github one
@@ -25,7 +25,7 @@ could be any string, but better use the same as github one
 >> git config --global user.email "spacelion121319@gmail.com"
 >> git config -l                                                 // check username and email
 ```
-#### • access token for login from terminal 
+#### &#x23f5; access token for login from terminal 
 ```
 1) www.github.com --> settings --> Developers settings --> Personal Access Tokens
 2) name your token || delete || expire || regenerate new one
@@ -33,12 +33,12 @@ could be any string, but better use the same as github one
 4) whenever you pull or push from github, if ask username and token: "JoJo" and that token
 ```
 
-#### • set/cancel one-time pass (optional)
+#### &#x23f5; set/cancel one-time pass (optional)
 ```
 >> git config --global credential.helper cache          // set 
 >> git config --global --unset credential.helper        // cancel
 ```
-#### • setting up remote repo 
+#### &#x23f5; setting up remote repo 
 ```
 # create new repo on github 
 # go to github page --> click "+" --> New Repository --> Name it --> Public/Private 
@@ -51,7 +51,7 @@ could be any string, but better use the same as github one
 >> git remote add origin https://github.com/user_name/repo_name.git
 ```
 
-#### • change remote repo 
+#### &#x23f5; change remote repo 
 [github docs](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
 ```
 # list current remote repo 
@@ -72,7 +72,7 @@ could be any string, but better use the same as github one
 >> git commit -m "commit message"   // describe what you had changed in this commit
 >> git status                       // check status
 ```
-#### • cancel commit 
+#### &#x23f5; cancel commit 
 ```
 # undo last commit
 >> git reset --soft HEAD~
@@ -86,36 +86,56 @@ could be any string, but better use the same as github one
 >> git push -u origin main 
 >> git pull origin main
 ```
-### [6] Manage Repo 
-#### • Branch 
+### [6] Branch
+#### &#x23f5; checkout/switch
 ```
 # check out
->> git checkout -b new_branch           // -b: create new branchs 
-                                        // git checkout: leave current branch 
->> git checkout main                    // leave current branch go to main
+>> git checkout -b new_branch               // -b: create new branchs 
+                                            // git checkout: leave current branch 
+>> git checkout main                        // leave current branch go to main
 
-# merge 
->> git merge main                       // merge all stuff in my branch to main
-
-# list
->> git branch -a                        // list all branch 
->> git branch -r                        // list remote? 
->> git branch                           // try, won't kill you
-
-# switch branchs 
+# switch
 >> checkout branch_name 
+```
+#### &#x23f5; merge
+```
+# merge 
+>> git merge main                           // merge all stuff in my branch to main
 
+```
+#### &#x23f5; List Branch
+```
+# list
+>> git branch -a                            // list all branch 
+>> git branch -r                            // list remote? 
+>> git branch                               // try, won't kill you
+```
+#### &#x23f5; Delete Branch
+```
 # delete branch 
->> git branch -d branch_name            // won't let you delete the branch you currently in
+>> git branch -d branch_name                // won't let you delete the branch you currently in
 >> git push origin --delete branch_name 
 
+```
+#### &#x23f5; Diverge/Converge
+```
 # branches diverge/converge
 # if you make changes directly through github(remote)
 # and make different changes in local repo at the same time 
 # will cause version conflict 
 >> git pull origin main 
 >> git status 
->> git merge origin/branch_name         // here branch_name = main
+>> git merge origin/branch_name             // here branch_name = main
+```
+#### &#x23f5; Rename Branch(main)
+```
+# go to repo -> settings -> under Code and automation -> click Branches -> rename it
+
+# for local consistent, rename local as well 
+>> git branch -m older_name new_name 
+>> git fetch origin 
+>> git branch -u origin/new_name new_name 
+>> git remote set-head origin -a                // act that link and remote and local for push/pull, i guess
 ```
 
 ### .gitignore
