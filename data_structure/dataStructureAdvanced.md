@@ -270,7 +270,7 @@ V
     .
     |
     V 
-    1010 -> the base case has been reached, start popping the run-time stack, propagating the result back to the original call
+    1010 -> base case reached, start popping the run-time stack, propagating the result back to the original call
     --------------------------------------------------
     | Call number | Number | Result | Return address |
     |-------------|--------|--------|----------------|
@@ -356,19 +356,19 @@ void Insert(NodeType<ItemType>*& listPtr, ItemType item)
 ```
 // recursively comparing the current with the previous one
 // recursion make the checking start from the leaf, so prevNode refer to smaller one (if BST)
-bool checkBST(TreeNode* tree, ItemType& prevNode)
+bool checkBST(TreeNode* tree, TreeNode& prevNode)
 {
     if (tree == NULL) {
         return true;
     }
-    bool left = checkBST(tree->left, prevNode);
-    if (prevNode && tree->info < prevNode) {
+    bool Left = checkBST(tree->left, prevNode);
+    if (prevNode && tree->info < prevNode->info) {      // check if prevNode has address & info < prevNode->info
         return false;
     }
 
-    prevNode = tree->info;
-    bool right = checkBST(tree->right, prevNode);
-    if (left == true && right == true) {
+    prevNode = tree;
+    bool Right = checkBST(tree->right, prevNode);
+    if (Left == true && Right == true) {
         return true;
     }
     else {
@@ -378,51 +378,75 @@ bool checkBST(TreeNode* tree, ItemType& prevNode)
 
 bool TreeType::IsBST()
 {
-    ItemType prev = '1';
+    TreeNode prev;                          // create new Node, no info stored, only address 
     return checkBST(root, prev);
 }
 
-====================================== algorithm walk through ============================================
+=========================================== algorithm walk through =================================================
 • checkBST function will end when reach the bottom line, no iteration inside, no "loop" inside
 • code is executed one line by one line, from top to down
 
 
                                     [ complete binary tree ]
 
-                                                e
-                     down to up ^             /   \
-                                |            c     g
-                                            / \   / \
-                                start -->  a   d f   z 
-    
-                    
-        1) when first time going into the function, root == NULL automatically maintain properties
-        2) then meet the recursive call of checkBST(), compiler will finish this line then go down
-            > in our example, c as TreeNode and 1 as prevNode will be given into sub call
-            > sub call will let c meet if (tree == NULL) first 
-            > c is not NULL, and again meet checkBST(), this time a and 1 goes into checkBST()
-                > because this time a->left is NULL 
-                > so when it first meet if (tree == NULL), the sub function call will return false
-                > the recursion stop, and boolean value will be stored into "left" variable
-            > process when tree=a, prevNode exist and tree->info is not less than it right now
-            > then assign prevNode with current tree info
-            > then check recursively on the right side, checkBST(tree->right, prevNode);
-                > because a is already a leaf, so right==NULL, "right" will also return true
-                > first left recursion return true, on the c level "left=checkBST()" evaluate to true
-            > continue on c, prevNode was a previously, now assign c to it
-                > again meet checkBST() for right child, in this case is d
-                > because d doesn't have child, left = true, and prevNode will be assigned with d
-                > why? because item at d's position is greater than c by BST property
-                > we are checking the tree in order (small->large)
-                > since d is leaf node, so that "right" evaluate to true
-            > finish checking the right child of c, go back to root node e
-        3) same process as those in the sub tree, e is graeter than d, so property no violated
-        4) prevNode is assigned with e right now, and start checking for the right subtree
-        5) each time goes into checkBST(), all the process will be done again
-            > ...
-                > ....
-            > ...
-        6) at e level, both c and g maintain the property, so the whole tree is BST
+                                                        e
+                             down to up ^             /   \
+                                        |            c     g
+                                                    / \   / \
+                                        start -->  a   d f   z 
+---------------------------------------------------------------------------------------------------------------------
+                      |
+                      |
+                      V
+             --------------------
+             |  Enter Function  |
+             --------------------      $ Loop a
+                      |                1) tree = a->left = NULL
+                      |                2) prevNode exist, and a > prevNode->info=NULL: pass
+                      |                3) Left:  tree = a -> checkBST(a->left, '1')=true, '1' < prevNode = a
+                      |                4) Right: tree = a -> checkBST(a->right, '1')=true, (Left & Right)=true
+                      |                5) Return true, get out of Loop a
+                      |                ------------------------------------------------------------------------------
+                      V               |                                                                             |
+               tree = e != NULL       |                                                                             |
+               prevNode = prev        | -------------                                                               |
+                      |               | |           |                                                               |
+                      |               | |           | $ Loop c                                                      |
+                      |               | |           | 1) tree = c->left = a != NULL                                 |
+                      V               V V           | 2) Left: tree=c -> checkBST(c->left, prev): enter Loop a      |
+        left = checkBST(tree->left, prev)           | 3) Left=true, prevNode=c = exist, and c > a: pass             |
+        tree = c != NULL              | |           | 4) Right: tree=d -> checkBST(d->left, c), prevNode=d          |
+                      |               | |           | 5) Left & Right = true                                        |
+                      |               | |   Loop c  |                                                               |
+                      |               | -------------                                                               |
+                      |               |                                                                             |
+                      V               |     Loop a        *step 4 enter Loop d, but similar to a so refer to Loop a |
+                prevNode = e          -------------------------------------------------------------------------------
+      right = checkBST(tree->right, prevNode)
+                tree = g != NULL
+                      |
+                      |
+                      |                                                       loop f
+--------------------> | ------------------------------------------------------------
+|                     |                                           Loop g           |
+|     --------------> | ------------------------------------------------           |
+|     |                                                                |           |
+|     |      $ Loop g                                                  |           |
+|     |      1) tree = g ! = NULL                                      |           |
+|     |      2) Left: tree=g -> checkBST(g->left, e) enter Loop f      |           |
+|     |      3) Left=true, prevNode = e = exist, and g > e: pass       |           |
+|     |      4) prevNode=g                                             |           |
+|     |      5) Right: tree=z -> checkBST(z->left, g) = true           |           |
+|     |      6) Return true, get out of the function                   |           |
+|     |      * step 5 enter Loop z but omit because resemble Loop f    |           |
+|     ------------------------------------------------------------------           |
+|                                                                                  |
+|        $ Loop f                                                                  |
+|        1) tree = f->left = NULL                                                  |
+|        2) Left:  tree = f -> checkBST(f->left, e) = true, prevNode = f           |
+|        3) Right: tree = f -> checkBST(f->right, e) = true, (Left & Right)=true   |
+|        4) Return true, get out of Loop f                                         |
+------------------------------------------------------------------------------------
 ```
 
 
