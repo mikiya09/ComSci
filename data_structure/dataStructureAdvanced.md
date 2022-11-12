@@ -353,7 +353,7 @@ void Insert(NodeType<ItemType>*& listPtr, ItemType item)
 
 ### BST properties 
 **code[[1]](./advanced/BST/TreeType.h)[[2]](./advanced/BST/TreeType.cpp)[[3]](./advanced/BST/main.cpp)** 
-```
+```cpp
 // recursively comparing the current with the previous one
 // recursion make the checking start from the leaf, so prevNode refer to smaller one (if BST)
 bool checkBST(TreeNode* tree, TreeNode& prevNode)
@@ -454,12 +454,15 @@ bool TreeType::IsBST()
 # Priority Queue 
 
 ### Queue
-##### • Enqueue an item 
-##### • Dequque: Item returned has been in the queue the longest amount of time (FCFS)
-
+```
+• Enqueue an item 
+• Dequque: Item returned has been in the queue the longest amount of time (FCFS)
+```
 ### Priority Queue 
-##### • Enqueue a pair <item, priority>
-##### • Dequeue: Item returned has highest priority
+```
+• Enqueue a pair <item, priority>
+• Dequeue: Item returned has highest priority
+```
 
 ### Application Layer 
 ```
@@ -467,8 +470,10 @@ A priority queue is an ADT with the property that only the highest-priority elem
 ```
 #### [+] Server Systems
 #### [+] Some Graph Algorithm 
-##### • Dijkstra Algorithm 
-##### • Spanning Tree Algorithm
+```
+• Dijkstra Algorithm 
+• Spanning Tree Algorithm
+```
 
 ### Implementation (refer to below heap section)
 ```
@@ -540,7 +545,7 @@ ex).
 ```
 #### [+] Ex).
 ##### &#x23f5; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
-<img src="./pic/heap.png">
+<img src="./pic/heap.png" width=650>
 
 ##### &#x23f5; exercise 
 ```
