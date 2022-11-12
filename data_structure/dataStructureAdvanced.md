@@ -597,6 +597,17 @@ void Swap(ItemType& one, ItemType& two)
 ##### &#x23f5; ReheapDown 
 ```cpp 
 
+// each comparison involving three nodes in every recursion 
+// like this 
+//                        -----
+//                        |   |
+//                        -----
+//                       /     \
+//                      /       \
+//                   -----     -----
+//                   |   |     |   |
+//                   -----     -----
+
 tempalte<class ItemType>
 void HeapType<ItemType>::ReheapDown(int root, int bottom)
 // Post: Heap properties is restored 
@@ -609,23 +620,23 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
     leftChild = root*2 + 1;
     rightChild = root*2 + 2;
 
-    // 
+    // all are index, bottom meaning the length
     if (leftChild <= bottom)
     {
         if (leftChild == bottom) {
             maxChild = leftChild;
         }
         else {
-            if (elements[leftChild] <= elements[rightChild]) {
+            if (elements[leftChild] <= elements[rightChild]) {   // elements is an array, data member
                 maxChild = rightChild;
             }
             else {
                 macChild = leftChild;
             }
         }
-        if (element[root] < elements[maxChild]) {
-            Swap(elemenet[root], elements[maxChild]);
-            ReheapDown(maxChild, bottom);
+        if (element[root] < elements[maxChild]) {         
+            Swap(elemenet[root], elements[maxChild]);  // maxChild is an index
+            ReheapDown(maxChild, bottom);              // recursion starts at position of maxChild, not the value
         }
     }
 }
@@ -634,21 +645,22 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 <img src="./pic/ReheapDown.png" width=600>
 
 
-##### &#x23f5; 
+##### &#x23f5; ReheapUp
 ```cpp
 template<class ItemType>
 void HeapType<ItemType>::ReheapUp(int root, int bottom)
 // pre: bottom is the index of the node that may violate the heap order, 
 //      the order property is satisfied from root to next-to-last node 
+// Post: Heap order property is restored between root and bottom
 {
     int parent;
 
     if (bottom > root)
     {
-        parent = (bottom-1)/2;
+        parent = (bottom-1)/2;                          // given parent's formula and bottom index 
         if (elements[parent] < elements[bottom]) 
         {
-            Swap(elements[parent], elements[bottom]);
+            Swap(elements[parent], elements[bottom]);   // calculating from bottom to top
             ReheapUp(root, parent);
         }
     }
@@ -657,7 +669,18 @@ void HeapType<ItemType>::ReheapUp(int root, int bottom)
 ```
 <img src="./pic/ReheapUp.png" width=600>
 
+#### [+] Implement Priority Queue with Heap
+```
+Two Issues:
 
+1) Dequeue 
+    -> return the root of the heap, leaving a hole at the top
+    -> how to fill the hole without violating the heap property
+
+2) Enqueue 
+    -> place an element as the bottom element 
+    -> which not be the appropriate position according to new element's value
+```
 
 # Heap Sort
 
