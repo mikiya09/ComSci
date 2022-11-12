@@ -47,14 +47,16 @@ int Factorial(int number) {
 ### Verifying Recursive Functions
 #### [+] method 1: walking through the whole execution --> tedious but useful
 #### [+] method 2: Three-Question Method
-##### • Base-Case Question
-*Is there a non-recursive case in the method, and does it work correctly?*
-##### • Smaller-Caller Question 
-*Does each recursive call involve a smaller case of the problem*
-##### • General-Case Question
-*Assuming the recursive calls work correctly, does the rest of the function work correctly?*
+```
+• Base-Case Question
+    + Is there a non-recursive case in the method, and does it work correctly?
+• Smaller-Caller Question 
+    + Does each recursive call involve a smaller case of the problem
+• General-Case Question
+    + Assuming the recursive calls work correctly, does the rest of the function work correctly?
+
+```
 #### [+] Analysis Recursion
-*Ex 1). Factorial*
 ```
 1) base-case question: 
     > the base case occurs when n=1
@@ -67,7 +69,6 @@ int Factorial(int number) {
     > n * factorial(n-1) corresponds with the mathematical formula
 ```
 #### [+] Design Recursion 1
-*Ex 2). Searching in a List*
 ```
 Q: Check if a particular value is in a list?
 
@@ -120,7 +121,7 @@ int Combinations(int group, int members)
 }
 ```
 
-<img src="./pic/Combinations.png" width=500>
+<img src="./pic/Combinations.png" width=400>
 
 #### [+] Recursive Binary Search 
 ```
@@ -152,7 +153,7 @@ END FUNCTION
 associating a memory address with a variable name
 ```
 ##### &#x23f5; Static Binding 
-*occurs at compile time*
+###### occurs at compile time
 ```
 1) When a program is compiled, each variable is entered into a symbol table and bound to a memory address
                                                                ------------
@@ -174,7 +175,7 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
     -> "get value started at 0002, get the value stored at 0003, store the sum in 0001" (assembly language)
 ```
 
-<img src="./pic/staticBinding.png">
+<img src="./pic/staticBinding.png" width=500>
 
 *issues*
 ```
