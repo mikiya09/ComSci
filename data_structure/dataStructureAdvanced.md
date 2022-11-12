@@ -153,7 +153,7 @@ END FUNCTION
 associating a memory address with a variable name
 ```
 ##### &#x23f5; Static Binding 
-###### occurs at compile time
+###### *occurs at compile time*
 ```
 1) When a program is compiled, each variable is entered into a symbol table and bound to a memory address
                                                                ------------
@@ -162,7 +162,7 @@ associating a memory address with a variable name
 3) Function parameters and local variables are also bound to memory addresses at this time
    -------------------     ---------------      
 ```
-*Symbol Table*
+###### *Symbol Table*
 ```
 Three variables are declared: int a, b, c -> The compiler binds them in the symbol table:
                             ---------------------------
@@ -175,9 +175,9 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
     -> "get value started at 0002, get the value stored at 0003, store the sum in 0001" (assembly language)
 ```
 
-<img src="./pic/staticBinding.png" width=500>
+<img src="./pic/staticBinding.png" width=650>
 
-*issues*
+###### *issues*
 ```
 1) each parameter and local variable has a single, fixed memory address associated with it
 *2) a recursive function call would overwrite the variables of the previous call
@@ -186,7 +186,7 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
 ```
 
 ##### &#x23f5; Dynamic Binding
-*occurs at run time*
+###### *occurs at run time*
 ```
 1) Variable names are bound to memory addresses at run time
                                                 -----------
@@ -196,6 +196,157 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
 3) variables and parameters for function stored in the Activation Record
                                                        -----------------
 ```
+#### [+] Activation Records
+##### • need to know
+```
+functions need to store local variables, parameters, and return address
+    + return address: where execution returns to, once execution of the function has completed
+```
+##### • what is this 
+```
+Activation Record: 
+    + a record used at run time to store information about a function, 
+        1) its variables 
+        2) parameters 
+        3) return address 
+        4) register values
+    + also call stack frame
+                -----------
+    + every function call creates a new activation record, which is deleted once the call is complete
+```
+
+<img src="./pic/stackFrame.png" width=650>
+
+#### [+] Run-Time Stack
+<img src="./pic/runTimeStack.png" width=650>
+
+##### &#x23f5; Ex: Run-Time Stack of Factorial(4)
+```
+1) at address 5200 is the statement: answer = Factorial(4);
+2) this starts the recursive algorithm by pushing an activation record onto the stack
+3) the recursive call inside Factorial is at address 1010: return number * Factorial(number-1)
+4) refer to above for original code in C++
+
+|
+V
+5200 -> answer = Factorial(4)
+    |
+    V
+    1010 -> return number * Factorial(number-1)
+    --------------------------------------------------
+    | Call number | Number | Result | Return address |
+    |-------------|--------|--------|----------------|
+    |      1      |   4    |   ???  |      5200      |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    --------------------------------------------------
+    |
+    V 
+    1010 -> the activation record contains the parameter (4), the result (unknown), and the return address (5200)
+    --------------------------------------------------
+    | Call number | Number | Result | Return address |
+    |-------------|--------|--------|----------------|
+    |      1      |   4    |   ???  |      5200      |
+    |-------------|--------|--------|----------------|
+    |      2      |   3    |   ???  |      1010      |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    --------------------------------------------------
+    |
+    V
+    1010 -> the recursive calls continue, since the base case had not been reached yet (number == 0)
+    .
+    .
+    .
+    |
+    V 
+    1010 -> the base case has been reached, start popping the run-time stack, propagating the result back to the original call
+    --------------------------------------------------
+    | Call number | Number | Result | Return address |
+    |-------------|--------|--------|----------------|
+    |      1      |   4    |   ???  |      5200      |
+    |-------------|--------|--------|----------------|
+    |      2      |   3    |   ???  |      1010      |
+    |-------------|--------|--------|----------------|
+    |      3      |   2    |   ???  |      1010      |
+    |-------------|--------|--------|----------------|
+    |      4      |   1    |   ???  |      1010      |
+    |-------------|--------|--------|----------------|
+    |      5      |   0    |    1   |      1010      |
+    --------------------------------------------------
+    |
+    V 
+    --------------------------------------------------
+    | Call number | Number | Result | Return address |
+    |-------------|--------|--------|----------------|
+    |      1      |   4    |   ???  |      5200      |  6x4=24
+    |-------------|--------|--------|----------------|
+    |      2      |   3    |   ???  |      1010      |  2x3=6
+    |-------------|--------|--------|----------------|
+    |      3      |   2    |   ???  |      1010      |  1x2=2
+    |-------------|--------|--------|----------------|
+    |      4      |   1    |    1   |      1010      |  1x1=1
+    |-------------|--------|--------|----------------|
+    |             |        |        |      1010      |
+    --------------------------------------------------
+    .
+    .
+    .
+    |
+    V 
+    5200 -> the final result is calcualted (24), and returned to address 5200
+         -> the result is stored at answer and the main method continues executing
+    --------------------------------------------------
+    | Call number | Number | Result | Return address |
+    |-------------|--------|--------|----------------|
+    |      1      |   4    |   24   |      5200      |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    |-------------|--------|--------|----------------|
+    |             |        |        |                |
+    --------------------------------------------------
+```
+
+##### &#x23f5; Recursion Depth 
+```
+The number of recursive calls constitutes the depth of recursion
+
+ex). 
+
+template<class ItemType>
+void Insert(NodeType<ItemType>*& listPtr, ItemType item)
+{
+    if (listPtr == NULL || item < listPtr->info)
+    {
+        // Save current pointer 
+        NodeType<ItemType>* tempPtr = listPtr;
+
+        // Get new node
+        listPtr = new NodeType<ItemType>;
+        listPtr->info = item;
+        listPtr->next = tempPtr;
+    }
+    else Insert(listPtr->next, item);
+}
+```
+
+<img src="./pic/recursiveInsert.png" width=500>
+
+
 # Binary Search Tree (BST)
 
 ### [incorrect way of thinking BST](https://www.enjoyalgorithms.com/blog/validate-binary-search-tree)
