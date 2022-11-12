@@ -522,7 +522,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
                     / \       / \
             ------ G - H --- I - J ------------ Level 3: children should be filled under D first then E (AFAL)
 ```
-<img src="./pic/treeExample.png">
+<img src="./pic/treeExample.png" width=650>
 
 
 #### [+] Shape 
@@ -632,6 +632,34 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 
 ```
 <img src="./pic/ReheapDown.png" width=600>
+
+
+##### &#x23f5; 
+```cpp
+template<class ItemType>
+void HeapType<ItemType>::ReheapUp(int root, int bottom)
+// pre: bottom is the index of the node that may violate the heap order, 
+//      the order property is satisfied from root to next-to-last node 
+{
+    int parent;
+
+    if (bottom > root)
+    {
+        parent = (bottom-1)/2;
+        if (elements[parent] < elements[bottom]) 
+        {
+            Swap(elements[parent], elements[bottom]);
+            ReheapUp(root, parent);
+        }
+    }
+}
+
+```
+<img src="./pic/ReheapUp.png" width=600>
+
+
+
 # Heap Sort
+
 
 # Hash
