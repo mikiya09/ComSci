@@ -382,7 +382,7 @@ bool TreeType::IsBST()
     return checkBST(root, prev);
 }
 
-=========================================== algorithm walk through =================================================
+=========================================== algorithm walk through ================================================
 • checkBST function will end when reach the bottom line, no iteration inside, no "loop" inside
 • code is executed one line by one line, from top to down
 
@@ -394,7 +394,7 @@ bool TreeType::IsBST()
                                         |            c     g
                                                     / \   / \
                                         start -->  a   d f   z 
----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
                       |
                       |
                       V
@@ -406,47 +406,47 @@ bool TreeType::IsBST()
                       |                3) Left:  tree = a -> checkBST(a->left, '1')=true, '1' < prevNode = a
                       |                4) Right: tree = a -> checkBST(a->right, '1')=true, (Left & Right)=true
                       |                5) Return true, get out of Loop a
-                      |                ------------------------------------------------------------------------------
-                      V               |                                                                             |
-               tree = e != NULL       |                                                                             |
-               prevNode = prev        | -------------                                                               |
-                      |               | |           |                                                               |
-                      |               | |           | $ Loop c                                                      |
-                      |               | |           | 1) tree = c->left = a != NULL                                 |
-                      V               V V           | 2) Left: tree=c -> checkBST(c->left, prev): enter Loop a      |
-        left = checkBST(tree->left, prev)           | 3) Left=true, prevNode=c = exist, and c > a: pass             |
-        tree = c != NULL              | |           | 4) Right: tree=d -> checkBST(d->left, c), prevNode=d          |
-                      |               | |           | 5) Left & Right = true                                        |
-                      |               | |   Loop c  |                                                               |
-                      |               | -------------                                                               |
-                      |               |                                                                             |
-                      V               |     Loop a        *step 4 enter Loop d, but similar to a so refer to Loop a |
-                prevNode = e          -------------------------------------------------------------------------------
+                      |                ----------------------------------------------------------------------------
+                      V               |                                                                           |
+               tree = e != NULL       |                                                                           |
+               prevNode = prev        | -------------                                                             |
+                      |               | |           |                                                             |
+                      |               | |           | $ Loop c                                                    |
+                      |               | |           | 1) tree = c->left = a != NULL                               |
+                      V               V V           | 2) Left: tree=c -> checkBST(c->left, prev): enter Loop a    |
+        left = checkBST(tree->left, prev)           | 3) Left=true, prevNode=c = exist, and c > a: pass           |
+        tree = c != NULL              | |           | 4) Right: tree=d -> checkBST(d->left, c), prevNode=d        |
+                      |               | |           | 5) Left & Right = true                                      |
+                      |               | |   Loop c  |                                                             |
+                      |               | -------------                                                             |
+                      |               |                                                                           |
+                      V               |     Loop a      *step 4 enter Loop d, but similar to a so refer to Loop a |
+                prevNode = e          -----------------------------------------------------------------------------
       right = checkBST(tree->right, prevNode)
                 tree = g != NULL
                       |
                       |
                       |                                                       loop f
---------------------> | ------------------------------------------------------------
-|                     |                                           Loop g           |
-|     --------------> | ------------------------------------------------           |
-|     |                                                                |           |
-|     |      $ Loop g                                                  |           |
-|     |      1) tree = g ! = NULL                                      |           |
-|     |      2) Left: tree=g -> checkBST(g->left, e) enter Loop f      |           |
-|     |      3) Left=true, prevNode = e = exist, and g > e: pass       |           |
-|     |      4) prevNode=g                                             |           |
-|     |      5) Right: tree=z -> checkBST(z->left, g) = true           |           |
-|     |      6) Return true, get out of the function                   |           |
-|     |      * step 5 enter Loop z but omit because resemble Loop f    |           |
-|     ------------------------------------------------------------------           |
-|                                                                                  |
-|        $ Loop f                                                                  |
-|        1) tree = f->left = NULL                                                  |
-|        2) Left:  tree = f -> checkBST(f->left, e) = true, prevNode = f           |
-|        3) Right: tree = f -> checkBST(f->right, e) = true, (Left & Right)=true   |
-|        4) Return true, get out of Loop f                                         |
-------------------------------------------------------------------------------------
+ -------------------> | ------------------------------------------------------------
+ |                    |                                           Loop g           |
+ |    --------------> | ------------------------------------------------           |
+ |    |                                                                |           |
+ |    |      $ Loop g                                                  |           |
+ |    |      1) tree = g ! = NULL                                      |           |
+ |    |      2) Left: tree=g -> checkBST(g->left, e) enter Loop f      |           |
+ |    |      3) Left=true, prevNode = e = exist, and g > e: pass       |           |
+ |    |      4) prevNode=g                                             |           |
+ |    |      5) Right: tree=z -> checkBST(z->left, g) = true           |           |
+ |    |      6) Return true, get out of the function                   |           |
+ |    |      * step 5 enter Loop z but omit because resemble Loop f    |           |
+ |    ------------------------------------------------------------------           |
+ |                                                                                 |
+ |       $ Loop f                                                                  |
+ |       1) tree = f->left = NULL                                                  |
+ |       2) Left:  tree = f -> checkBST(f->left, e) = true, prevNode = f           |
+ |       3) Right: tree = f -> checkBST(f->right, e) = true, (Left & Right)=true   |
+ |       4) Return true, get out of Loop f                                         |
+ -----------------------------------------------------------------------------------
 ```
 
 
