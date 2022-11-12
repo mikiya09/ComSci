@@ -450,10 +450,183 @@ bool TreeType::IsBST()
 ```
 
 
-# Heap
 
 # Priority Queue 
 
+### Queue
+##### • Enqueue an item 
+##### • Dequque: Item returned has been in the queue the longest amount of time (FCFS)
+
+### Priority Queue 
+##### • Enqueue a pair <item, priority>
+##### • Dequeue: Item returned has highest priority
+
+### Application Layer 
+```
+A priority queue is an ADT with the property that only the highest-priority element can be accessed at any time
+```
+#### [+] Server Systems
+#### [+] Some Graph Algorithm 
+##### • Dijkstra Algorithm 
+##### • Spanning Tree Algorithm
+
+### Implementation (refer to below heap section)
+```
+enqueue and dequeue: both O(logN) steps, even in the worst case
+```
+
+# Heap
+### Tree 
+##### &#x23f5; Full Tree
+```
+: a binary tree in which each node has 0 or 2 children
+
+                        -----
+                        |   |    2 children
+                        -----
+                       /     \
+                      /       \
+                   -----     -----
+        0 child    |   |     |   |    2 children
+                   -----     -----
+                            /     \
+                           /       \
+                        -----     -----
+            0 child     |   |     |   |    0 child
+                        -----     -----
+
+```
+##### &#x23f5; Complete Binary Tree
+```
+1) a binary tree in which every level, except possibly the last, is completely filled
+2) all nodes are as far left as possible(AFAL)
+
+
+                    TreeNode •
+                             |
+                             V
+            ---------------- A ---------------- Level 0: Filled? Yes
+                            / \ 
+                           /   \
+                          /     \
+                         /       \
+            ----------- B ------- C ----------- Level 1: Filled? Yes, at most nodes at level 1
+                       / \       /
+                      /   \     /
+            -------- D --- E - F -------------- Level 2: Filled? No, maximally 4 nodes, but only 3
+                    / \       / \
+            ------ G - H --- I - J ------------ Level 3: children should be filled under D first then E (AFAL)
+```
+<img src="./pic/treeExample.png">
+
+
+#### [+] Shape 
+```
+its shape must be a complete binary tree!
+```
+#### [+] Order
+```
+For each node in the heap, the value inside is greater or equal to the value in each of its children
+greater (>) or equal (=)
+
+
+ex).
+
+            C                   50                      70
+           / \                 /  \                    /  \
+          A   T               20  30                 60    12
+                             /  \                   /  \  /
+                            18  10                 40  30 8
+```
+#### [+] Ex).
+##### &#x23f5; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
+<img src="./pic/heap.png">
+
+##### &#x23f5; exercise 
+```
+Q: tree elements stored in by level, from left to right 
+
+    ----------------------------------------
+    | 13 | 3 | 4 | 10 | 23 | 31 | 100 | 32 |
+    ----------------------------------------
+
+1) draw the complete binary tree 
+2) find the parent of node 5, which is the fifth node (without drawing the tree)
+    + odd index always is left child
+    + even index always is right child, except 0
+3) where are the left child of node 2, right child ?
+
+
+// Heap Specification (.h)
+```
+#### [+] Heap Specification (.h)
+```cpp
+// Heap Specification 
+
+template<class ItemType>
+// Assumes ItemType is either a built-in simple type or a class with overloaded relational operators
+struct HeapType 
+{
+    void ReheapDown(int root, int bottom);
+    void ReheapUp(int root, int bottom);
+    ItemType* elements;                     // Array to be allocated dynamically 
+    int numElements;
+};
+```
+#### [+] Implementation 
+
+##### &#x23f5; Swap
+```cpp 
+// simple operatrion function that ReheapUp and ReheapDown to work
+template<class ItemType>
+// template here means that ItemType is a generic type, which can be substituted with any type(int, etc)
+void Swap(ItemType& one, ItemType& two)
+{
+    ItemType temp;
+    temp = one;
+    one = two;
+    two = temp;
+}
+```
+
+##### &#x23f5; ReheapDown 
+```cpp 
+
+tempalte<class ItemType>
+void HeapType<ItemType>::ReheapDown(int root, int bottom)
+// Post: Heap properties is restored 
+{
+    int maxChild;
+    int rightChild;
+    int leftChild;
+
+    // calculation based on index 
+    leftChild = root*2 + 1;
+    rightChild = root*2 + 2;
+
+    // 
+    if (leftChild <= bottom)
+    {
+        if (leftChild == bottom) {
+            maxChild = leftChild;
+        }
+        else {
+            if (elements[leftChild] <= elements[rightChild]) {
+                maxChild = rightChild;
+            }
+            else {
+                macChild = leftChild;
+            }
+        }
+        if (element[root] < elements[maxChild]) {
+            Swap(elemenet[root], elements[maxChild]);
+            ReheapDown(maxChild, bottom);
+        }
+    }
+}
+
+```
+<img src="./pic/ReheapDown.png" width=600>
 # Heap Sort
 
 # Hash
