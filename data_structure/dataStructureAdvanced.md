@@ -897,3 +897,124 @@ A).
 n elements at the back of the array are sorted
 ```
 # Hash
+
+### Set 
+#### [+] Logical Level 
+```
+An unsorted collection of distinct values, based on the mathematical concept
+                          --------
+```
+##### &#x23f5; Component(base) Type
+##### &#x23f5; Subset
+##### &#x23f5; Universal Set
+##### &#x23f5; Empty Set
+
+#### [+] Set Operations
+##### &#x23f5; Store & Delete 
+##### &#x23f5; Union
+##### &#x23f5; Intersection
+##### &#x23f5; Difference 
+##### &#x23f5; Cardinality
+
+##### &#x23f5; Ex).
+```
+SetA = {A, B, D, G, Q, S}
+SetB = {A, D, P, S, Z}
+
+Union(SetA, SetB) = {A, B, D, G, P, Q, S, Z}
+Intersection(SetA, SetB) = {A, D, S}
+Difference(SetA, SetB) = {B, G, Q}              // order difference
+Difference(SetB, SetA) = {P, Z} Q}              // order difference
+```
+#### [+] Application Level 
+#### [+] Implementation Level
+
+### Map
+#### [+] Logical Level
+##### &#x23fb; An ADT that is a collection of *key-value pairs*
+```
+1) key: a value of the base type of the map, used to look up an associated value 
+2) store unsorted, unique values 
+3) do not support Union, and etc. No mathematical basis 
+4) Supports Find O(1)
+```
+#### [+] Application Level
+#### [+] Implementation Level
+#### [+] O(1) Search 
+```
+always big O of 1 for search if you have key in maps: Hashing = map + set
+```
+
+### Hashing 
+```
+a technique for ordering and accessing elements in a list by manipulating the keys of the elements
+```
+#### [+] Hash Function
+```
+a function that manipuates the key to produce an array index 
+                                      ----------------------
+```
+##### &#x23f5; Ex). h(k) = return (k mod m)
+<img src="./pic/HashingEx.png" width=600>
+
+#### [+] Collisions
+```
+when multiple keys produce the same hash location 
+
+ex). 01234 and 97534 mod 100 both produce hash value of "34"
+```
+
+##### &#x23f5; Linear Probing
+```
+1) Resolves hasd collisions by searching for the next available space 
+2) If the end of the hash is reached, linear probing loops around to the beginning 
+3) check if an item is in the hash table 
+
+    -> calculate the hash and search sequentially until the matching key is found 
+    -> stop when an empty space or the orginal hash is found
+```
+<img src="./pic/LinearProbing.png" width=600>
+
+###### &#x23fb; h(k) = k mod m
+```
+insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
+
+        -----                 ------
+     0  |   |                 | 0  |  0
+        -----                 ------  
+     1  |   |                 | 1  |  1
+        -----                 ------
+     2  |   |                 | 49 |  2
+        -----                 ------
+     3  |   |                 | 81 |  3
+        -----                 ------
+     4  |   |       -->       | 4  |  4
+        -----                 ------
+     5  |   |                 | 25 |  5
+        -----                 ------
+     6  |   |                 | 16 |  6
+        -----                 ------
+     7  |   |                 | 36 |  7
+        -----                 ------
+     8  |   |                 | 64 |  8
+        -----                 ------
+     9  |   |                 | 9  |  9
+        -----                 ------
+```
+
+##### &#x23f5; Issues with Linear probing -> Rehashing
+```
+1) deleting an item creates an empty spot, when three items with the same hash and second is deleted
+   Linear Probing stop 
+
+2) Clustering Issue 
+    + when items not in the direct hash value position, searching increase, time complexity -> O(n)
+
+3) Rehashing: (hash value + c) % s
+
+    + Quadratic Probing 
+    + Random Probing
+```
+
+#### [+] Buckets & Chaining
+
