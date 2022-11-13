@@ -1591,7 +1591,8 @@ making a C++ function a template can let it apply to variables of all types
 template<class T>
 
 1) class T: T refers to a type you will apply later, can be substitute with typename 
-2) T:       just a place holder, you will any name, but class keyword must be consistent
+2) T:       just a place holder, you can use any name, but "class" this keyword must be consistent
+3) ADT:     
 
 for example.
 >> template<class ItemType>
@@ -1689,6 +1690,35 @@ int main() {
     return 0;
 }
 ```
-##### &#x23f5; Template with [StackType](./basic/Template/Template_Stack.cpp)
+##### &#x23f5; Template with ADT Class
 
+###### [StackType Example](./basic/Template/Template_Stack.cpp)
+```
+ex) delcare array with template class, using <> brackets
+
+1). if template<class ItemType>, 
+    declaring array with ItemType will be like ItemType<size>;
+
+2). if ADT like class PQType {}, under private data member use class from other library 
+    from LTS heap library 
+    private:
+            HeapType<ItemType> items;
+
+reminder). 
+
+    + inside the HeapType from other library, while in the PQType definition, HeapType also use this template
+    + every member function inside PQType class need to have this 
+    ------------------ format ------------------
+            tempalte<class ItemType>
+            PQType<ItemType>::PQType(int max)
+            {
+                maxItems = max;
+                items.elements = new ItemType[max];
+                length = 0;
+            }
+
+    * template<class ItemType> at the top 
+    * <ItemType> before scope resolution
+```
+###### refer to [PQType](./dataStructureAdvanced.md) for more info
 

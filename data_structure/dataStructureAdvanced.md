@@ -600,13 +600,15 @@ void Swap(ItemType& one, ItemType& two)
 // each comparison involving three nodes in every recursion 
 // like this 
 //                        -----
-//                        |   |
+//                        |   |     <- maintain
 //                        -----
 //                       /     \
 //                      /       \
 //                   -----     -----
-//                   |   |     |   |
+//    maintian ->    |   |     |   |    <- maintain
 //                   -----     -----
+//                  
+// ReheapDown maintain the heap property of the whole tree!
 
 tempalte<class ItemType>
 void HeapType<ItemType>::ReheapDown(int root, int bottom)
@@ -647,6 +649,26 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 
 ##### &#x23f5; ReheapUp
 ```cpp
+
+//                        -----
+//                        |   |     <- maintain
+//                        -----
+//                       /     \
+//                      /       \
+//                   -----     -----
+//                   |   |     |   | 
+//                   -----     -----
+//                  /     \
+//                 /       \
+//              -----     -----
+//              |   |     |   |     <- maintain
+//              -----     -----
+
+//
+// ReheapUp only maintain the heap property of the top and bottom
+// bottom is the index of last node, root is top one at index 000 
+// not necessarily maintain the whole tree, because when new item is not greater than root, nothing happens
+
 template<class ItemType>
 void HeapType<ItemType>::ReheapUp(int root, int bottom)
 // pre: bottom is the index of the node that may violate the heap order, 
@@ -657,32 +679,213 @@ void HeapType<ItemType>::ReheapUp(int root, int bottom)
 
     if (bottom > root)
     {
-        parent = (bottom-1)/2;                          // given parent's formula and bottom index 
+        parent = (bottom-1)/2;                         // calculating parent index, flooring and ceiling sometimes
         if (elements[parent] < elements[bottom]) 
         {
-            Swap(elements[parent], elements[bottom]);   // calculating from bottom to top
+            Swap(elements[parent], elements[bottom]);  // calculating from bottom to top
             ReheapUp(root, parent);
         }
     }
 }
 
 ```
+
+##### &#x23f5; Why not always ReheapDown ?
+```
+because different conditions in different algorithm for them to process 
+1) ReheapDown: continue when leftChild is less or equal than bottom leaf 
+2) ReheapUp:   continue when bottom is gerater than root
+```
+
 <img src="./pic/ReheapUp.png" width=600>
 
 #### [+] Implement Priority Queue with Heap
+##### &#x23f5; Two Issues
 ```
-Two Issues:
-
 1) Dequeue 
     -> return the root of the heap, leaving a hole at the top
     -> how to fill the hole without violating the heap property
 
+-----------------------------------------------------------------------------
+
 2) Enqueue 
     -> place an element as the bottom element 
     -> which not be the appropriate position according to new element's value
+
 ```
 
-# Heap Sort
+##### &#x23f5; PQType Declaration 
+```cpp 
+class FullPQ() {};
+class EmptyPQ() {};
+template<class ItemType>    // template
 
+class PQType 
+{
+public:
+    PQType(int);            // constructor 
+    ~PQType();              // destructor
+
+    void MakeEmpty();
+    bool IsEmpty() const;
+    bool IsFull() const;
+    void Enqueue(ItemType, newItem);
+    void Dequeue(ItemType& item);
+private:
+    int length;
+    HeapType<ItemType> items;
+    int maxItems;
+}
+```
+
+##### &#x23f5; PQType Definitions
+```cpp
+template<class ItemType>
+PQType<ItemType>::PQType(int max)
+{
+    maxItems = max;
+    items.elements = new ItemType[max];
+    length = 0;
+}
+
+template<class ItemType>
+void PQType<ItemType>::MakeEmpty()
+{
+    length = 0;
+}
+
+template<class ItemType>
+PQType<ItemType>::~PQType()
+{
+    delete [] items.elements;
+}
+```
+
+##### &#x23f5; Solutions to Two issues
+```
+solution 1) for Dequeue()
+    + call ReheapDown() after place the bottom item to the root
+    + before dequeue heap propertiy maintain, after replacing root with bottom, must violating property
+    + so starting from root check down
+
+solution 2) for Enqueue()
+    + the reason no using ReheapDown() is because adding new item necessarily violating the heap property
+```
+
+###### &#x23fb; Dequeue 
+```cpp 
+template<class ItemType>
+void PQType<ItemType>::Dequeue(ItemType& item)
+{
+    if (length == 0)
+        throw EmptyPQ();
+    else 
+    {
+        item = items.elements[0];
+        items.elements[0] = items.elements[length-1];
+        length--;
+        items.ReheapDown(0, length-1);
+    }
+}
+```
+###### &#x23fb; Enqueue 
+```cpp 
+template<class ItemType>
+void PQType<ItemType>::Enqueue(ItemType new Item)
+{
+    if (length == maxItems)
+        throw FullPQ();
+    else 
+    {
+        length++;
+        items.elements[length-1] = newItem;
+        items.ReheapUp(0, length-1);
+    }
+}
+```
+##### &#x23f5; Time Complexity
+<img src="./pic/timeComplexityPQ.png" width=600>
+
+
+# Heap Sort
+```
+1) search for the highest value 
+|
+V
+2) insert it at the last position 
+|
+V
+3) repeat for the next highest value
+```
+##### &#x23f5; downside
+```
+search for second/next highest value in the list makes this selection sort inefficient
+```
+##### &#x23f5; overcome downside
+```
+heap for this selection sort efficient, because only need to select highest for each recursion/iteration 
+```
+##### &#x23f5; steps 
+```
+remove the root --> ReheapDown --> repeat
+```
+
+#### [+] Building a Heap (heapify)
+##### &#x23f5; meet preconditions -> ReheapDown()
+```
+1) unsorted list is a tree
+2) there are no holes in the array
+3) all the leaf nodes are heaps already
+```
+##### &#x23f5; start with Unsorted List
+<img src='./pic/unsortedHeap.png' width=600>
+
+##### &#x23f5; Find first non-leaf node
+```
+firstNonLeaf = maxLen/2 - 1;
+
+ex). if we have length of 9, 9(index 0 - 8) nodes at total and will form a tree like the following:
+
+                                ◯
+                               / \
+                              ◯   ◯
+                             / \ / \
+                            ◯  ◯ ◯  ◯
+                           / \ 
+                          ◯   ◯
+
+index: 4, 5, 6, 7, 8 are leaf nodes -> take floor(9/2)-1 = 3
+
+                                ◯
+                              /   \
+                             ◯     ◯
+                           /  \   /  \
+                          ◯    ◯ ◯    ◯
+                         / \  / \
+                        ◯   ◯ ◯  ◯
+
+index: 5, 6, 7, 8, 9, 10 are leaf nodes -> take floor(11/2)-1 = 4
+
+```
+##### &#x23f5; Sorting 
+```cpp 
+template<class ItemType>
+void HeapSort(ItemType values[], int numValues)
+// Assumption: Function ReheapDown is available 
+// Post: The elements in the array values are sorted by key 
+{
+    int index;
+    // convert the array of values into a heap -> heapify
+    for (index = numValues/2 - 1; index >= 0; index--)
+        ReheapDown(values, index, numValues-1);
+    // Sort the array 
+    for (index = numValues-1; index >= 1; index--)
+    {
+        Swap(values[0], values[index]);
+        ReheapDown(values, 0, index-1);
+    }
+}
+```
+<img src="./pic/heapSort.png" width=600>
 
 # Hash
