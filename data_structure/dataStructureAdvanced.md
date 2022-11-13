@@ -888,4 +888,12 @@ void HeapSort(ItemType values[], int numValues)
 ```
 <img src="./pic/heapSort.png" width=600>
 
+##### &#x23fb; Sorted Item is placed at the end of the array 
+```
+Q).
+taking an array of length m for heap sort, stop at the n th recursion (n<m), what will happen?
+
+A).
+n elements at the back of the array are sorted
+```
 # Hash
