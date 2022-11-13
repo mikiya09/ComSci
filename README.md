@@ -16,7 +16,7 @@
 ##### &#x23f5; [basic](./algorithm/)
 
 #### [+] Database 
-##### &#x23f5; [relational](./database/relationalDatabase.md)
+##### &#x23f5; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
 
 #### [+] Git 
 ##### &#x23f5; [basic command](./fundamental/Git.md)
