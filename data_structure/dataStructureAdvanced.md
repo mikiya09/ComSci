@@ -955,7 +955,7 @@ a function that manipuates the key to produce an array index
                                       ----------------------
 ```
 ##### &#x23f5; Ex). h(k) = return (k mod m)
-<img src="./pic/HashingEx.png" width=600>
+<img src="./pic/HashingEx.png" width=500>
 
 #### [+] Collisions
 ```
