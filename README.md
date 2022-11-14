@@ -2,37 +2,37 @@
 
 # Computer Science
 #### [+] Computer Organization 
-##### &#x23fa; [essential](./fundamental/Computer_Organization.md)
+##### &#x23f5; [essential](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
-##### &#x25cf; [C++](./programming_language/conceptC++.md)
-##### &#x25cf; [JavaScript](./programming_language/JS/)
+##### &#x23f5; [C++](./programming_language/conceptC++.md)
+##### &#x23f5; [JavaScript](./programming_language/JS/)
 
 #### [+] Data Structure 
-##### &#x25cf; [basic](./data_structure/dataStructureBasic.md)
-##### &#x25cf; [advanced](./data_structure/dataStructureAdvanced.md)
+##### &#x23f5; [basic](./data_structure/dataStructureBasic.md)
+##### &#x23f5; [advanced](./data_structure/dataStructureAdvanced.md)
 
 #### [+] Algorithm 
-##### &#x25cf; [basic](./algorithm/)
+##### &#x23f5; [basic](./algorithm/)
 
 #### [+] Database 
-##### &#x25cf; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
+##### &#x23f5; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
 
 #### [+] Git 
-##### &#x25cf; [basic command](./fundamental/Git.md)
+##### &#x23f5; [basic command](./fundamental/Git.md)
 
 #### [+] Theory of Computation 
-##### &#x25cf; [TOC](./fundamental/TOC.md)
+##### &#x23f5; [TOC](./fundamental/TOC.md)
 
 #### [+] Blockchain 
-##### &#x25cf; [concepts](./blockchain/blockchain-concept.md)
+##### &#x23f5; [concepts](./blockchain/blockchain-concept.md)
 
 # Math
 #### [+] LaTex 
-##### &#x25cf; [use it](./LaTex/LaTex.md)
+##### &#x23f5; [use it](./LaTex/LaTex.md)
 
 #### [+] Algebra  
-##### &#x25cf; [Linear Algebra](./Math/linearAlgebra.md)
+##### &#x23f5; [Linear Algebra](./Math/linearAlgebra.md)
 
 
 # More to know
