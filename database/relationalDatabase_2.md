@@ -37,8 +37,5 @@ E/R is a visual syntax for DB design which is precise enough for technical point
 
 #### [+] Entities and Entity Sets
 
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    flowchart LR 
+        id1((This is the text in the circle))
