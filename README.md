@@ -5,8 +5,8 @@
 ##### &#x25c8; [essential](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
-##### &#x265e; [C++](./programming_language/conceptC++.md)
-##### &#x265e; [JavaScript](./programming_language/JS/)
+##### &#x25c9; [C++](./programming_language/conceptC++.md)
+##### &#x25ce; [JavaScript](./programming_language/JS/)
 
 #### [+] Data Structure 
 ##### &#x265e; [basic](./data_structure/dataStructureBasic.md)
