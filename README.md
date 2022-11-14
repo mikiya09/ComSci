@@ -2,37 +2,37 @@
 
 # Computer Science
 #### [+] Computer Organization 
-##### &#x25c8; [essential](./fundamental/Computer_Organization.md)
+##### &#x25cf; [essential](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
-##### &#x25c9; [C++](./programming_language/conceptC++.md)
-##### &#x25ce; [JavaScript](./programming_language/JS/)
+##### &#x25cf; [C++](./programming_language/conceptC++.md)
+##### &#x25cf; [JavaScript](./programming_language/JS/)
 
 #### [+] Data Structure 
-##### &#x265e; [basic](./data_structure/dataStructureBasic.md)
-##### &#x265e; [advanced](./data_structure/dataStructureAdvanced.md)
+##### &#x25cf; [basic](./data_structure/dataStructureBasic.md)
+##### &#x25cf; [advanced](./data_structure/dataStructureAdvanced.md)
 
 #### [+] Algorithm 
-##### &#x265e; [basic](./algorithm/)
+##### &#x25cf; [basic](./algorithm/)
 
 #### [+] Database 
-##### &#x265e; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
+##### &#x25cf; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
 
 #### [+] Git 
-##### &#x265e; [basic command](./fundamental/Git.md)
+##### &#x25cf; [basic command](./fundamental/Git.md)
 
 #### [+] Theory of Computation 
-##### &#x265e; [TOC](./fundamental/TOC.md)
+##### &#x25cf; [TOC](./fundamental/TOC.md)
 
 #### [+] Blockchain 
-##### &#x265e; [concepts](./blockchain/blockchain-concept.md)
+##### &#x25cf; [concepts](./blockchain/blockchain-concept.md)
 
 # Math
 #### [+] LaTex 
-##### &#x265e; [use it](./LaTex/LaTex.md)
+##### &#x25cf; [use it](./LaTex/LaTex.md)
 
 #### [+] Algebra  
-##### &#x265e; [Linear Algebra](./Math/linearAlgebra.md)
+##### &#x25cf; [Linear Algebra](./Math/linearAlgebra.md)
 
 
 # More to know
