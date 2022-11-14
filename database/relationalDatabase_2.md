@@ -43,7 +43,6 @@ flowchart LR
 #### test
 ```mermaid 
 sequenceDiagram
-    participant John
-    
+    Alice->John
 ```
 
