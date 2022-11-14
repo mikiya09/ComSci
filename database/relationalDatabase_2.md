@@ -38,7 +38,7 @@ E/R is a visual syntax for DB design which is precise enough for technical point
 #### [+] Entities and Entity Sets
 ```mermaid
 flowchart LR 
-    s[Start] --> A;
+    s[Start  ] --> A;
     A --> B;
 ```
 | Command | Description |
