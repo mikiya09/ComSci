@@ -152,7 +152,7 @@ END FUNCTION
 ```
 associating a memory address with a variable name
 ```
-##### &#x23f5; Static Binding 
+##### &#x266f; Static Binding 
 ###### *occurs at compile time*
 ```
 1) When a program is compiled, each variable is entered into a symbol table and bound to a memory address
@@ -185,8 +185,8 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
 4) Therefore, langauges that only have static storage allocation cannot support recursion
 ```
 
-##### &#x23f5; Dynamic Binding
-###### *occurs at run time*
+##### &#x266f; Dynamic Binding
+###### • occurs at run time
 ```
 1) Variable names are bound to memory addresses at run time
                                                 -----------
@@ -220,7 +220,7 @@ Activation Record:
 #### [+] Run-Time Stack
 <img src="./pic/runTimeStack.png" width=650>
 
-##### &#x23f5; Ex: Run-Time Stack of Factorial(4)
+##### &#x266f; Ex: Run-Time Stack of Factorial(4)
 ```
 1) at address 5200 is the statement: answer = Factorial(4);
 2) this starts the recursive algorithm by pushing an activation record onto the stack
@@ -321,7 +321,7 @@ V
     --------------------------------------------------
 ```
 
-##### &#x23f5; Recursion Depth 
+##### &#x266f; Recursion Depth 
 ```
 The number of recursive calls constitutes the depth of recursion
 
@@ -482,7 +482,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
 
 # Heap
 ### Tree 
-##### &#x23f5; Full Tree
+##### &#x266f; Full Tree
 ```
 : a binary tree in which each node has 0 or 2 children
 
@@ -501,7 +501,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
                         -----     -----
 
 ```
-##### &#x23f5; Complete Binary Tree
+##### &#x266f; Complete Binary Tree
 ```
 1) a binary tree in which every level, except possibly the last, is completely filled
 2) all nodes are as far left as possible(AFAL)
@@ -543,11 +543,11 @@ ex).
                              /  \                   /  \  /
                             18  10                 40  30 8
 ```
-#### [+] Ex).
-##### &#x23f5; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
+#### [+] Ex
+##### &#x266f; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
 <img src="./pic/heap.png" width=650>
 
-##### &#x23f5; exercise 
+##### &#x266f; exercise 
 ```
 Q: tree elements stored in by level, from left to right 
 
@@ -580,7 +580,7 @@ struct HeapType
 ```
 #### [+] Implementation 
 
-##### &#x23f5; Swap
+##### &#x266f; Swap
 ```cpp 
 // simple operatrion function that ReheapUp and ReheapDown to work
 template<class ItemType>
@@ -594,7 +594,7 @@ void Swap(ItemType& one, ItemType& two)
 }
 ```
 
-##### &#x23f5; ReheapDown 
+##### &#x266f; ReheapDown 
 ```cpp 
 
 // each comparison involving three nodes in every recursion 
@@ -647,7 +647,7 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 <img src="./pic/ReheapDown.png" width=600>
 
 
-##### &#x23f5; ReheapUp
+##### &#x266f; ReheapUp
 ```cpp
 
 //                        -----
@@ -690,7 +690,7 @@ void HeapType<ItemType>::ReheapUp(int root, int bottom)
 
 ```
 
-##### &#x23f5; Why not always ReheapDown ?
+##### &#x266f; Why not always ReheapDown ?
 ```
 because different conditions in different algorithm for them to process 
 1) ReheapDown: continue when leftChild is less or equal than bottom leaf 
@@ -700,7 +700,7 @@ because different conditions in different algorithm for them to process
 <img src="./pic/ReheapUp.png" width=600>
 
 #### [+] Implement Priority Queue with Heap
-##### &#x23f5; Two Issues
+##### &#x266f; Two Issues
 ```
 1) Dequeue 
     -> return the root of the heap, leaving a hole at the top
@@ -714,7 +714,7 @@ because different conditions in different algorithm for them to process
 
 ```
 
-##### &#x23f5; PQType Declaration 
+##### &#x266f; PQType Declaration 
 ```cpp 
 class FullPQ() {};
 class EmptyPQ() {};
@@ -738,7 +738,7 @@ private:
 }
 ```
 
-##### &#x23f5; PQType Definitions
+##### &#x266f; PQType Definitions
 ```cpp
 template<class ItemType>
 PQType<ItemType>::PQType(int max)
@@ -761,7 +761,7 @@ PQType<ItemType>::~PQType()
 }
 ```
 
-##### &#x23f5; Solutions to Two issues
+##### &#x266f; Solutions to Two issues
 ```
 solution 1) for Dequeue()
     + call ReheapDown() after place the bottom item to the root
@@ -772,7 +772,7 @@ solution 2) for Enqueue()
     + the reason no using ReheapDown() is because adding new item necessarily violating the heap property
 ```
 
-###### &#x23fb; Dequeue 
+###### &#x266f; Dequeue 
 ```cpp 
 template<class ItemType>
 void PQType<ItemType>::Dequeue(ItemType& item)
@@ -788,7 +788,7 @@ void PQType<ItemType>::Dequeue(ItemType& item)
     }
 }
 ```
-###### &#x23fb; Enqueue 
+###### &#x266f; Enqueue 
 ```cpp 
 template<class ItemType>
 void PQType<ItemType>::Enqueue(ItemType new Item)
@@ -803,7 +803,7 @@ void PQType<ItemType>::Enqueue(ItemType new Item)
     }
 }
 ```
-##### &#x23f5; Time Complexity
+##### &#x266f; Time Complexity
 <img src="./pic/timeComplexityPQ.png" width=600>
 
 
@@ -817,30 +817,30 @@ V
 V
 3) repeat for the next highest value
 ```
-##### &#x23f5; downside
+##### &#x266f; downside
 ```
 search for second/next highest value in the list makes this selection sort inefficient
 ```
-##### &#x23f5; overcome downside
+##### &#x266f; overcome downside
 ```
 heap for this selection sort efficient, because only need to select highest for each recursion/iteration 
 ```
-##### &#x23f5; steps 
+##### &#x266f; steps 
 ```
 remove the root --> ReheapDown --> repeat
 ```
 
 #### [+] Building a Heap (heapify)
-##### &#x23f5; meet preconditions -> ReheapDown()
+##### &#x266f; meet preconditions -> ReheapDown()
 ```
 1) unsorted list is a tree
 2) there are no holes in the array
 3) all the leaf nodes are heaps already
 ```
-##### &#x23f5; start with Unsorted List
+##### &#x266f; start with Unsorted List
 <img src='./pic/unsortedHeap.png' width=600>
 
-##### &#x23f5; Find first non-leaf node
+##### &#x266f; Find first non-leaf node
 ```
 firstNonLeaf = maxLen/2 - 1;
 
@@ -867,7 +867,7 @@ index: 4, 5, 6, 7, 8 are leaf nodes -> take floor(9/2)-1 = 3
 index: 5, 6, 7, 8, 9, 10 are leaf nodes -> take floor(11/2)-1 = 4
 
 ```
-##### &#x23f5; Sorting 
+##### &#x266f; Sorting 
 ```cpp 
 template<class ItemType>
 void HeapSort(ItemType values[], int numValues)
@@ -888,7 +888,7 @@ void HeapSort(ItemType values[], int numValues)
 ```
 <img src="./pic/heapSort.png" width=600>
 
-##### &#x23fb; Sorted Item is placed at the end of the array 
+##### &#x266f; Sorted Item is placed at the end of the array 
 ```
 Q).
 taking an array of length m for heap sort, stop at the n th recursion (n<m), what will happen?
@@ -904,19 +904,19 @@ n elements at the back of the array are sorted
 An unsorted collection of distinct values, based on the mathematical concept
                           --------
 ```
-##### &#x23f5; Component(base) Type
-##### &#x23f5; Subset
-##### &#x23f5; Universal Set
-##### &#x23f5; Empty Set
+##### &#x266f; Component(base) Type
+##### &#x266f; Subset
+##### &#x266f; Universal Set
+##### &#x266f; Empty Set
 
 #### [+] Set Operations
-##### &#x23f5; Store & Delete 
-##### &#x23f5; Union
-##### &#x23f5; Intersection
-##### &#x23f5; Difference 
-##### &#x23f5; Cardinality
+##### &#x266f; Store & Delete 
+##### &#x266f; Union
+##### &#x266f; Intersection
+##### &#x266f; Difference 
+##### &#x266f; Cardinality
 
-##### &#x23f5; Ex).
+##### &#x266f; Ex)
 ```
 SetA = {A, B, D, G, Q, S}
 SetB = {A, D, P, S, Z}
@@ -931,7 +931,7 @@ Difference(SetB, SetA) = {P, Z} Q}              // order difference
 
 ### Map
 #### [+] Logical Level
-##### &#x23fb; An ADT that is a collection of *key-value pairs*
+##### &#x266f; An ADT that is a collection of *key-value pairs*
 ```
 1) key: a value of the base type of the map, used to look up an associated value 
 2) store unsorted, unique values 
@@ -954,7 +954,7 @@ a technique for ordering and accessing elements in a list by manipulating the ke
 a function that manipuates the key to produce an array index 
                                       ----------------------
 ```
-##### &#x23f5; Ex). h(k) = return (k mod m)
+##### &#x266f; Ex). h(k) = return (k mod m)
 <img src="./pic/HashingEx.png" width=500>
 
 #### [+] Collisions
@@ -964,7 +964,7 @@ when multiple keys produce the same hash location
 ex). 01234 and 97534 mod 100 both produce hash value of "34"
 ```
 
-##### &#x23f5; Linear Probing
+##### &#x266f; Linear Probing
 ```
 1) Resolves hasd collisions by searching for the next available space 
 2) If the end of the hash is reached, linear probing loops around to the beginning 
@@ -975,7 +975,7 @@ ex). 01234 and 97534 mod 100 both produce hash value of "34"
 ```
 <img src="./pic/LinearProbing.png" width=600>
 
-###### &#x23fb; h(k) = k mod m
+###### &#x266f; h(k) = k mod m
 ```
 insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
 
@@ -1002,7 +1002,7 @@ insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
         -----                 ------
 ```
 
-##### &#x23f5; Issues with Linear probing -> Rehashing
+##### &#x266f; Issues with Linear probing -> Rehashing
 ```
 1) deleting an item creates an empty spot, when three items with the same hash and second is deleted
    Linear Probing stop 

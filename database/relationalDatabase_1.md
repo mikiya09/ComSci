@@ -53,7 +53,7 @@ A schema is a description of a particular collection of data, using the given da
     + every relation in a relational data model has a schema describing types
 ```
 
-##### &#x23f5; Logical Schema
+##### &#x266f; Logical Schema
 ```
 Logical Schema 
     
@@ -79,7 +79,7 @@ Logical Schema
 
 ```
 
-##### &#x23f5; Physical Schema 
+##### &#x266f; Physical Schema 
 ```
 1) Administrator Level 
 2) describe data layout 
@@ -87,7 +87,7 @@ Logical Schema
     + Some data in sorted order (index)
 ```
 
-##### &#x23f5; External Schema 
+##### &#x266f; External Schema 
 ```
 1) Application Level
 2) Views
@@ -99,14 +99,14 @@ Logical Schema
 ```
 Applications do not need to worry about how the data is structure and stored 
 ```
-##### &#x23f5; Logical Data Independence
+##### &#x266f; Logical Data Independence
 ```
 Don't ask can we add a new entity or attribute without rewriting the applications 
 : you can
 
 >> protection from changes in the logical structure of the data
 ```
-##### &#x23f5; Physical Data Independence
+##### &#x266f; Physical Data Independence
 ```
 Don't ask which disks are the data stored on? Is the data indexed?
 : you don't need to know 
@@ -115,7 +115,7 @@ Don't ask which disks are the data stored on? Is the data indexed?
 ```
 
 #### [+] Key Concepts (challenges)
-##### &#x23f5; Transaction & Atomicity 
+##### &#x266f; Transaction & Atomicity 
 ```
 1) Transaction (TXN): an atomic sequence of database actions (reads/writes)
 
@@ -141,7 +141,7 @@ all instruction in the box is a TXN, while crash of DB could happen either
 because the properties of atomicity, 
 whichever stage crash happen TXN result in not complete at all 
 ```
-##### &#x23f5; Consistency 
+##### &#x266f; Consistency 
 ```
 1) An action results in a state which conforms to all integrity constraints
 
@@ -152,7 +152,7 @@ whichever stage crash happen TXN result in not complete at all
 > however, note that DBMS does not understand the real meaning of the constraints consistency 
 > burden is still on the user
 ```
-##### &#x23f5; Locking (concurrency)
+##### &#x266f; Locking (concurrency)
 ```
 1) DBMS ensures that the execution of {T1, ... ,Tn} is equivalent to some serial execution 
 
@@ -188,11 +188,11 @@ A relational schema describes the data that is contained in a relational instanc
 ```
 A relational instance is a set of tuples(rows) all conforming to the same schema
 ```
-##### &#x23fb; Columns
+##### &#x266f; Columns
 <img src="./pic/relationalColumns.png" width=500>
 <br> 
 
-##### &#x23fb; Rows
+##### &#x266f; Rows
 <img src="./pic/relationalRows.png" width=500>
 <br>
 
@@ -239,7 +239,7 @@ ex).
 2) RA operates on sets(multisets)
 3) every attribute must have a unique name 
 ```
-##### &#x23f5; Operations
+##### &#x266f; Operations
 ```
 1) Basic Operators (5)
    > select 
@@ -253,7 +253,7 @@ ex).
    > renaming: p
    > join (natural, equi-join, theta join)
 ```
-##### &#x23f5; Classfication 
+##### &#x266f; Classfication 
 ```
 1) Operations that remove parts of relations:
     + selection 
@@ -271,12 +271,12 @@ ex).
 ```
 Language for describing queries on a relational database 
 ```
-##### &#x23f5; Structured Query Language (SQL)
+##### &#x266f; Structured Query Language (SQL)
 ```
 1) Predominant application-level query language 
 2) Declarative 
 ```
-##### &#x23f5; Relational Algebra 
+##### &#x266f; Relational Algebra 
 ```
 1) Intermediate language used within DBMS 
 2) Procedural 
@@ -292,7 +292,7 @@ produce table containing subset of rows of argument table satisfying condition
 <img src="./pic/selectOperator.png" width=600>
 <br>
 
-##### &#x23f5; Selection Condition 
+##### &#x266f; Selection Condition 
 <img src="./pic/selectionCondition.png" width=600>
 
 #### [+] Project Operator 
@@ -322,7 +322,7 @@ result is a table(relation) with no duplicates, it can have fewer tuples than th
 3) Hence, scope of set operations limited to union compatible relations 
                                              --------------------------
 ```
-##### &#x23f5; Union Compatible Relations 
+##### &#x266f; Union Compatible Relations 
 ```
 Two relations are union compatible if 
     1) both have same number of columns 
@@ -333,7 +333,7 @@ reiterate:
 + union compatible relations can be combined using union, intersection and set difference
 ```
 
-##### &#x23fb; Example 
+##### &#x266f; Example 
 <img src="./pic/unionCompatibleExample.png" width=400>
 
 
@@ -347,14 +347,14 @@ where x is a tuple in R and y is a tuple in S
 |
 3) Attributes of relation must have distinct names, which is not guranteed with Cartesian product
 ```
-##### &#x23f5; Compute
+##### &#x266f; Compute
 ```
 expensive to compute
 ```
 
 <img src="./pic/cartesianProduct.png" width=400>
 
-##### *#x23f5; Renaming 
+##### &#x266f; Renaming 
 <img src="./pic/renaming.png" width=400>
 
 #### [+] Union ( U )
@@ -383,7 +383,7 @@ the common part both R1 and R2 have
 <img src="./pic/intersection2.png" width=400>
 
 #### [+] Cartesian-Product Operation 
-##### &#x23f5; Notation: r x s
+##### &#x266f; Notation: r x s
 ```
 defined as:
 r x s = {t q | t ∈ r and q ∈ s}, t, q are rows in r and s 
@@ -393,14 +393,14 @@ r x s = {t q | t ∈ r and q ∈ s}, t, q are rows in r and s
 ```
 <img src="./pic/cartesianProductOperation.png" width=400>
 
-##### &#x23f5; **&#x03ec;**<sub>A=C</sub>(r x s)
+##### &#x266f; **&#x03ec;**<sub>A=C</sub>(r x s)
 ```
 select rows where the value of A = C
 ```
 <img src="./pic/cartesianProductOperation2.png" width=400>
 
 #### [+] Join 
-##### &#x23f5; Cartesina Product (could)= "join"
+##### &#x266f; Cartesina Product (could)= "join"
 ```
 benefit: 
 + taking Cartesian prodcut of two relations give us all the possible tuples that are paired together
@@ -410,7 +410,7 @@ donwside:
 ```
 
 
-##### &#x23fb; Mental Presentation (attribute level)
+##### &#x266f; Mental Presentation (attribute level)
 ```
 1) join operates at attribute(row) level, 
 2) all attributes from two table will be collected together 
@@ -426,7 +426,7 @@ donwside:
 
 ```
 
-##### &#x23f5; Theta Join 
+##### &#x266f; Theta Join 
 ```
 • allows for arbitrary comparision relationship (such as >, < and =)
   => natural join with conditions
@@ -462,15 +462,15 @@ Std = Class, so all the values are equal, there are just different attribute nam
 ------------------------------------------------
 
 ```
-###### &#x23fb; Another Example
+###### &#x266f; Another Example
 <img src='./pic/thetaJoin.png' width=500>
 
-##### &#x23f5; Equijoin 
+##### &#x266f; Equijoin 
 ```
 above example actually could be regarded as an equijoin
 ```
 
-##### &#x23f5; Natrual Join 
+##### &#x266f; Natrual Join 
 ```
 1) an equijoin on attributes(at least one) that have the same name in each relationship 
 2) additionally, natrual join removes the duplicate columns 
@@ -501,7 +501,7 @@ S = (E, B, D)
 + Natural Join could combine different attributes into one relations 
 + building connection between all attributes from one table and all attributes from the other table
 ```
-##### &#x23f5; solution steps 
+##### &#x266f; solution steps 
 ```
 1) what will be in the result ? 
 2) which table give us what from 1) ?
@@ -667,7 +667,7 @@ A key is a minimal subset of attributes that acts as a unique identifier for tup
 2) unique identifier for tuples
 ```
 
-##### &#x23f5; NULL & NOT NULL
+##### &#x266f; NULL & NOT NULL
 | sid | name | gap
 | --- | --- | --- |
 | 123 | Bob | 3.9 |
@@ -724,7 +724,7 @@ ex.
 intuitively, price could be less than 2.00, or greater or equal to 2.00 -> doesn't know for sure
 ```
 
-##### &#x23f5; Three-Valued Logic 
+##### &#x266f; Three-Valued Logic 
 ```
 The logic of conditions in SQL is a 3-valued logic: 
 1) TURE
@@ -735,7 +735,7 @@ The logic of conditions in SQL is a 3-valued logic:
   but query only produces a tuple in the answer if its truth value for the WHERE clause is TRUE
 ```
 
-##### &#x23f5; Three-valued logic Example 
+##### &#x266f; Three-valued logic Example 
 ```
 1) TURE = 1 
 2) FALSE = 2 
@@ -769,7 +769,7 @@ ex). From the Following Sells relation:
                          unknown
 ```
 
-##### &#x23f5; Testing for Null 
+##### &#x266f; Testing for Null 
 ```
 SELECT * FROM Person 
 WHERE age < 25 OR age >= 25 OR age IS NULL 
@@ -806,7 +806,7 @@ CREATE TABLE COMPANY(
 
 #### [+] Joins
 
-##### &#x23f5; Example 1 
+##### &#x266f; Example 1 
 <img src="./pic/SQLJoin.png" width=600>
 
 ```
@@ -823,7 +823,7 @@ AND    Price <= 200                         WHERE  Price <= 200
 I prefer method 1
 ```
 
-##### &#x23f5; Example 2
+##### &#x266f; Example 2
 <img src="./pic/SQLJoin2.png" width=600>
 
 #### [+] Tuple Variable Ambiguity in Multi-Table 
@@ -845,7 +845,7 @@ which name and address are we refering?
 ```
 semantics ≠ execution order, DBMS executes command after optimization
 ```
-##### &#x23f5; Unintuitive Query for understanding why operating with ∅ will result in ∅ 
+##### &#x266f; Unintuitive Query for understanding why operating with ∅ will result in ∅ 
 ```
 
 ```
@@ -856,8 +856,8 @@ semantics ≠ execution order, DBMS executes command after optimization
 <img src="./pic/multisets2.png" width=600>
 <img src="./pic/multisets3.png" width=600>
 
-##### &#x23f5; Multisets Operations
-###### &#x23fb; Intersect
+##### &#x266f; Multisets Operations
+###### &#x266f; Intersect
 ```
 SELECT R.A FROM R, S 
 WHERE R.A = S.A 
@@ -867,7 +867,7 @@ WHERE R.A = T.A
 ```
 <img src="./pic/intersect.png" width=250>
 
-###### &#x23fb; Union
+###### &#x266f; Union
 ```
 SELECT R.A FROM R, S 
 WHERE R.A = S.A 
@@ -880,7 +880,7 @@ by default, SQL operator uses set semantics, so there aren't duplicate after sin
 ```
 <img src="./pic/mutlisetUnion.png" width=250>
 
-###### &#x23fb; Union All
+###### &#x266f; Union All
 ```
 SELECT R.A FROM R, S 
 WHERE R.A = S.A 
@@ -891,13 +891,13 @@ WHERE R.A = T.A
 ```
 <img src="./pic/unionAll.png" width=350>
 
-###### &#x23fb; Except
+###### &#x266f; Except
 ```
 EXCEPT (replace where above operator is)
 ```
 <img src="./pic/except.png" width=350>
 
-##### &#x23f5; Issues with Intersect
+##### &#x266f; Issues with Intersect
 <img src="./pic/intersectIssue.png" width=600>
 
 ```
@@ -926,18 +926,18 @@ refer to those example in the slides
 4) MAX 
 5) AVG
 ```
-##### &#x23f5; COUNT
+##### &#x266f; COUNT
 
-##### &#x23f5; GROUP BY 
+##### &#x266f; GROUP BY 
 
-##### &#x23f5; HAVING
+##### &#x266f; HAVING
 ```
 1) HAVING clauses operate on aggregate condition (column level) 
 
 2) WHERE clauses operate on individual tuples (row level)
 ```
 
-##### &#x23f5; Quantifiers 
+##### &#x266f; Quantifiers 
 ```
 DISTINCT
 ```

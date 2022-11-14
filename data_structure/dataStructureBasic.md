@@ -455,7 +455,7 @@ assume 2 bytes for type int, memory address is located with bytes
      and function prototype
 ```
 #### [+] One Dimensonal Array
-##### • incorrect way
+##### &#x266f; incorrect way
 ```
 #include <iostream>
 using namespace std;
@@ -487,10 +487,10 @@ explain: when passing int arr to fun() in main, it is always treated as a pointe
          you can't the correct size of a pointer 
          the solution is passing the size as a parameter to the main as well
 ```
-##### • [correct way](./basic/Array/1DArray.cpp)
+##### &#x266f; [correct way](./basic/Array/1DArray.cpp)
 
 #### [+] Two Dimensonal Array
-##### • [methods](./basic/Array/2DArray.cpp)
+##### &#x266f; [methods](./basic/Array/2DArray.cpp)
 
 
 # Object-Oriented Programming
@@ -618,7 +618,7 @@ Computers are always limited in the computational ability and memory
 + Efficiency is the center of algorithms
 ```
 #### [+] Growth Rate 
-##### • Example 1 
+##### &#x266f; Example 1 
 ```
 [Question]: 
 determine whether x is one of A[1], A[2],..., A[n], and retrieve information about x.
@@ -637,7 +637,7 @@ if (i > n) then i = 0;
 <2> Worst case?                        --> n
 <3> Best case?                         --> 1
 ```
-##### • Example 2 
+##### &#x266f; Example 2 
 ```
 Square Matrix Multiplication 
 
@@ -668,7 +668,7 @@ for i = 1 to n do
 <1> What is the number of multiplications?     --> i * j * k = n^3
 <2> What is the number of additions?           --> same? think that later
 ```
-##### • explain
+##### &#x266f; explain
 ```
 further abstraction we use in algorithm analysis is to characterize in terms of growth 
 
@@ -843,7 +843,7 @@ Since there's no way to collect the garbage, it is small memory leak
 
 ### Unsorted list
 #### [+] Array based 
-##### • static & dynamic (refer to [SortedType](./basic/List/))
+##### &#x266f; static & dynamic (refer to [SortedType](./basic/List/))
 ```
 The length field must be present in order to define the extent of the list within the array
 
@@ -860,14 +860,14 @@ The length field must be present in order to define the extent of the list withi
 ```
 #### [+] Linked-List based
 A collection of **node** that are linked toegther by **pointer** in a chain
-##### &#x23f5; Node
+##### &#x266f; Node
 ```
 [1] basic component of a linked list, store data and a pointer to the next node
 [2] Nodes are created when needed using dynamically allocated memory 
 [3] The last node in the list has a NULL pointer
 ```
-##### &#x23f5; Header file [(.h)](./basic/List/UnsortedType_LL.h)
-##### &#x23f5; Implementation file [(.cpp)](./basic/List/UnsortedType_LL.cpp)
+##### &#x266f; Header file [(.h)](./basic/List/UnsortedType_LL.h)
+##### &#x266f; Implementation file [(.cpp)](./basic/List/UnsortedType_LL.cpp)
 ##### • *struct*
 *creating a type using strcut*
 ```
@@ -877,8 +877,8 @@ struct NodeType
     NodeType* next;
 }
 ```
-##### &#x23f5; *constructor*
-##### &#x23f5; *destructor*
+##### &#x266f; *constructor*
+##### &#x266f; *destructor*
 ```
 // version 2:
 
@@ -887,9 +887,9 @@ UnsortedType::~UnsortedType()
     MakeEmpty();
 }
 ```
-##### &#x23f5; *IsFull*
-##### &#x23f5; *GetLength*
-##### &#x23f5; *MakeEmpty*
+##### &#x266f; *IsFull*
+##### &#x266f; *GetLength*
+##### &#x266f; *MakeEmpty*
 ```
 100% sure this one is an iterator
 -----------------------------------------------------------------------------------------------
@@ -913,7 +913,7 @@ void UnsortedType::MakeEmpty()
     length = 0;
 }
 ```
-##### &#x23f5; *PutItem*
+##### &#x266f; *PutItem*
 ```
 ! Order Matter, do step 4 over step 3 will cause memory leak
 ------------------------------------------------------------
@@ -931,7 +931,7 @@ Put into Empty list
 3) make listData point to NULL 
 ```
 
-##### &#x23f5; *GetItem*
+##### &#x266f; *GetItem*
 <img src="./pic/getItem.png" width=500>
 
 ```
@@ -941,7 +941,7 @@ Put into Empty list
 ```
 <br>
 
-##### &#x23f5; *DeleteItem*
+##### &#x266f; *DeleteItem*
 ```
 1) tempPtr to locate the item that need to be deleted, link it; 
 2) predecessor(previous pointer) point to location->next 
@@ -949,8 +949,8 @@ Put into Empty list
 ```
 <img src="./pic/deleteItem.png" width=500>
 
-##### &#x23f5; *ResetList*
-##### • *GetNextItem*
+##### &#x266f; *ResetList*
+##### &#x266f; *GetNextItem*
 <br>
 
 
@@ -980,14 +980,14 @@ Put into Empty list
 ```
 the length field must be present in order to define the extent of the list within the array
 ```
-##### &#x23f5; Header File [(.h)](./basic/List/SortedType_aBased.h)
-##### &#x23f5; Implementation File [(.cpp)](./basic/List/SortedType_aBased.cpp)
-##### &#x23f5; *constructor*
-##### &#x23f5; *MakeEmpty*
-##### &#x23f5; *IsFull*
-##### &#x23f5; *GetLength*
+##### &#x266f; Header File [(.h)](./basic/List/SortedType_aBased.h)
+##### &#x266f; Implementation File [(.cpp)](./basic/List/SortedType_aBased.cpp)
+##### &#x266f; *constructor*
+##### &#x266f; *MakeEmpty*
+##### &#x266f; *IsFull*
+##### &#x266f; *GetLength*
 
-##### &#x23f5; *GetItem (binary search)*
+##### &#x266f; *GetItem (binary search)*
 ```
 // Apply Binary Search: time complexity = O(log2N)
 // assume item exist
@@ -1021,7 +1021,7 @@ ItemType SortedType::GetItem(ItemType item, bool& found)
 ```
 <img src="./pic/binarySearch.png">
 
-##### &#x23f5; *PutItem*
+##### &#x266f; *PutItem*
 ```
 (Linear Search is required)
 1) Find the space where new element should go
@@ -1060,7 +1060,7 @@ void SortedType::PutItem(ItemType item)
 ```
 <img src="./pic/arrayBased.png">
 
-##### &#x23f5; *DeleteItem*
+##### &#x266f; *DeleteItem*
 ```
 1) assume item for deletion is in the list, simple linear search find them
 2) when found, move subsequent element up one space (overwritting)
@@ -1078,7 +1078,7 @@ void SortedType::DeleteItem(ItemType item)
   length--;
 }
 ```
-##### &#x23f5; *ResetList*
+##### &#x266f; *ResetList*
 #### [+] Array-based (dynamic) 
 ```
 few changes:
@@ -1091,7 +1091,7 @@ few changes:
 ```
 <img src="./pic/dynamicArrayBased.png" width=500>
 
-##### &#x23f5; *Destructor*
+##### &#x266f; *Destructor*
 ```
 ! object is deallocated when it leavs scope, but any data it points to is not -> memory leak
 
@@ -1111,19 +1111,19 @@ UnsortedType::~UnsortType()
 ```
 
 #### [+] Linked-List based
-##### &#x23f5; Header File[(.h)](./basic/List/SortedType_LL.h)
-##### &#x23f5; Implementation File[(.cpp)](./basic/List/SortedType_LL.cpp)
+##### &#x266f; Header File[(.h)](./basic/List/SortedType_LL.h)
+##### &#x266f; Implementation File[(.cpp)](./basic/List/SortedType_LL.cpp)
 ```
 functions to change compare to array-based sort list:
 -> GetItem()
 -> PutItem()
 -> DeleteItem()
 ```
-##### &#x23f5; *NodeType* 
-##### &#x23f5; *Constructor*
-##### &#x23f5; *IsFull*
-##### &#x23f5; *MakeEmpty*
-##### &#x23f5; **GetItem*
+##### &#x266f; *NodeType* 
+##### &#x266f; *Constructor*
+##### &#x266f; *IsFull*
+##### &#x266f; *MakeEmpty*
+##### &#x266f; **GetItem*
 ```
 -------------------------------------------------------------------------------------
 |                                                                                   |
@@ -1166,7 +1166,7 @@ ItemType SortedType::GetItem(ItemType item, bool& found)
     return item;
 }
 ```
-##### &#x23f5; **PutItem*
+##### &#x266f; **PutItem*
 ```
 Can't always look a head (location->next)->info, because exception will happen in the end  
 
@@ -1225,7 +1225,7 @@ void SortedType::PutItem(ItemType item)
 <br>
 <br>
 
-##### &#x23f5; **DeleteItem*
+##### &#x266f; **DeleteItem*
 ```
 linear way: compare against "(location->next)->info" to find the item to delete
 
@@ -1255,9 +1255,9 @@ void SortedType::DeleteItem(ItemType item)
 ```
 <img src="./pic/delelteItemLinkedList.png" width=400>
 
-##### &#x23f5; *ResetList*
-##### &#x23f5; *GetNextItem* 
-##### &#x23f5; *Destructor (Linked List)*
+##### &#x266f; *ResetList*
+##### &#x266f; *GetNextItem* 
+##### &#x266f; *Destructor (Linked List)*
 
 
 #### [+] Time Complexity/order of magnitude
@@ -1272,14 +1272,14 @@ void SortedType::DeleteItem(ItemType item)
 ```
 
 #### [+] Bounded and Unbounded ADTs
-##### • Bounded 
+##### &#x266f; Bounded 
 ```
 There is a logical limit on the number of items in the structure
 ----------------------------------------------------------------
 >> array-based list is bounded, but you can modify it into dynamic memory allocated version 
 >> so that storage can be expanded as long as there are space in the heap
 ```
-##### • Unbounded
+##### &#x266f; Unbounded
 ```
 no logical limit on the number of items in ths structure
 ---------------------------
@@ -1326,15 +1326,15 @@ A stack is an ADT in which elements are added and removed from only the top of t
 // code
 ```
 ### Implementation 
-#### • Array-based 
-##### &#x23f5; Header file [(.h)](./basic/Stack/StackType.h)
-##### &#x23f5; Implementation file [(.cpp)](./basic/Stack/StackType.cpp)
+#### [+] Array-based 
+##### &#x266f; Header file [(.h)](./basic/Stack/StackType.h)
+##### &#x266f; Implementation file [(.cpp)](./basic/Stack/StackType.cpp)
 
 <img src="./pic/tracingStack.png" width=600>
 
 
-#### • Linked list-based 
-##### &#x23f5; Header File [(.h)](./basic/Stack/StackType_LL.h)
+#### [+] Linked list-based 
+##### &#x266f; Header File [(.h)](./basic/Stack/StackType_LL.h)
 ```
 struct NodeType;
 
@@ -1361,7 +1361,7 @@ public:
 
 };
 ```
-##### &#x23f5; Implementation File [(.cpp)](./basic/Stack/StackType_LL.cpp)
+##### &#x266f; Implementation File [(.cpp)](./basic/Stack/StackType_LL.cpp)
 
 <img src="./pic/deleteStack.png">
 
@@ -1403,13 +1403,13 @@ private:
 
 ```
 #### [+] Implementation Level
-##### • Fixed-Front Queue 
+##### &#x266f; Fixed-Front Queue 
 ```
 (no efficient, waste a lots of memory space)
 ```
 <img src="./pic/fixFrontQueue.png">
 
-##### • Floating Queue (focus on this)
+##### &#x266f; Floating Queue (focus on this)
 ```
 1) more efficiient
 2) when rear is the indeed the last item in the queue => wrap around => use modulus(mod %)
@@ -1461,12 +1461,12 @@ Solution [2]: less intuitive, but cooler and efficient, go with this one
 ```
 ### Implementation 
 #### [+] Array-based [(.cpp)](./basic/Queue/QueueType.cpp)
-##### &#x23f5; constructor
-##### &#x23f5; destructor
-##### &#x23f5; MakeEmpty()
-##### &#x23f5; IsEmpty()
-##### &#x23f5; IsFull()
-##### &#x23f5; Enqueue()
+##### &#x266f; constructor
+##### &#x266f; destructor
+##### &#x266f; MakeEmpty()
+##### &#x266f; IsEmpty()
+##### &#x266f; IsFull()
+##### &#x266f; Enqueue()
 ```
 // Post: If (queue is not full) newItem is at the rear of the queue; 
 // otherwise a FullQueue exception is thrown.  
@@ -1491,7 +1491,7 @@ void QueType::Enqueue(int newItem)
            // rear is 0, plus 1 will result in 1
            // add item at there
 ```
-##### &#x23f5; Dequeue()
+##### &#x266f; Dequeue()
 ```
 // Post: If (queue is not empty) the front of the queue has been removed 
 // and a copy returned in item; othersiwe a EmptyQueue exception has been thrown.
@@ -1518,15 +1518,15 @@ void QueType::Dequeue(int& item)
 ```
 
 #### [+] Linked list-based 
-##### &#x23f5; Header File [(.h)](./basic/Queue/QueueType_LL.h)
-##### &#x23f5; Implementation File [(.cpp)](./basic/Queue/QueueType_LL.cpp)
-##### &#x23f5; NodeType
-##### &#x23f5; constructor
-##### &#x23f5; destructor
-##### &#x23f5; MakeEmpty()
-##### &#x23f5; IsFull()
-##### &#x23f5; IsEmpty()
-##### &#x23f5; Enqueue()
+##### &#x266f; Header File [(.h)](./basic/Queue/QueueType_LL.h)
+##### &#x266f; Implementation File [(.cpp)](./basic/Queue/QueueType_LL.cpp)
+##### &#x266f; NodeType
+##### &#x266f; constructor
+##### &#x266f; destructor
+##### &#x266f; MakeEmpty()
+##### &#x266f; IsFull()
+##### &#x266f; IsEmpty()
+##### &#x266f; Enqueue()
 ```
 // add newItem to the rear of the queue
 // pre:  Queue has been initialized
@@ -1554,7 +1554,7 @@ void QueType::Enqueue(ItemType newItem)
 }
 
 ```
-##### &#x23f5; Dequeue()
+##### &#x266f; Dequeue()
 ```
 // remove front item from the queue and returns(store) it in item variable
 // pre:  Queue has been initialized
@@ -1586,7 +1586,7 @@ making a C++ function a template can let it apply to variables of all types
 ```
 ### Ex).
 #### [+] without Class 
-##### • Format 
+##### &#x266f; Format 
 ```
 template<class T>
 
@@ -1598,7 +1598,7 @@ for example.
 >> template<class ItemType>
 >> template<class COOL>
 ```
-##### • Normal Situation 
+##### &#x266f; Normal Situation 
 ```
 void swapValues(int& variable1, int& variable2)
 {
@@ -1608,7 +1608,7 @@ void swapValues(int& variable1, int& variable2)
     variable2 = temp;
 }
 ```
-##### • With Template
+##### &#x266f; With Template
 ```
 template<class T>
 void swapValues(T& variable1, T& variable2)
@@ -1619,7 +1619,7 @@ void swapValues(T& variable1, T& variable2)
     variable2 = temp;
 }
 ```
-##### • Test Code
+##### &#x266f; Test Code
 ```
 int main() 
 {
@@ -1646,7 +1646,7 @@ int main()
 }
 ```
 #### [+] with Class
-##### • Format 
+##### &#x266f; Format 
 ```
 => className<dataType> classObject;
 
@@ -1656,8 +1656,8 @@ className<int> classObject;
 className<string> classObject;
 className<ItemType> classObject;
 ```
-##### • Normal Situation 
-##### • With Template 
+##### &#x266f; Normal Situation 
+##### &#x266f; With Template 
 ```
 #include <iostream>
 using namespace std;
@@ -1676,7 +1676,7 @@ class Number {
     }
 };
 ```
-##### • Test Code
+##### &#x266f; Test Code
 ```
 int main() {
 
@@ -1690,7 +1690,7 @@ int main() {
     return 0;
 }
 ```
-##### &#x23f5; Template with ADT Class
+##### &#x266f; Template with ADT Class
 
 ###### [StackType Example](./basic/Template/Template_Stack.cpp)
 ```
