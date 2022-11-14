@@ -2,7 +2,7 @@
 
 # Computer Science
 #### [+] Computer Organization 
-##### &#x25cf; [essential](./fundamental/Computer_Organization.md)
+##### &#x23fa; [essential](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
 ##### &#x25cf; [C++](./programming_language/conceptC++.md)
