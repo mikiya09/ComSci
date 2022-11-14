@@ -668,18 +668,15 @@ A key is a minimal subset of attributes that acts as a unique identifier for tup
 ```
 
 ##### &#x23f5; NULL & NOT NULL
+| sid | name | gap
+| --- | --- | --- |
+| 123 | Bob | 3.9 |
+| 143 | Jim | NULL|
 ```
-to say "don't know the value" we use NULL
+1) to say "don't know the value" we use NULL
+   say, Jim just enrorlled in his first class 
 
----------------------
-| sid | name | gpa  |
-|-----|------|------|
-| 123 | Bob  | 3.9  |
-|-----|------|------|
-| 143 | Jim  | NULL |       say, Jim just enrorlled in his first class 
----------------------
-
-In SQL, we may constrain a column to be NOT NULL, for example "name" in this table can't be unknown
+2) In SQL, we may constrain a column to be NOT NULL, for example "name" in this table can't be unknown
 ```
 
 ##### &#x23f5; General Constraints 

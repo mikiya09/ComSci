@@ -35,8 +35,6 @@
 ##### &#x23f5; [Linear Algebra](./Math/linearAlgebra.md)
 
 
-
-
 # More to know
 
 ### • Scripting Language

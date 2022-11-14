@@ -10,14 +10,14 @@ agree on structure of the database before deciding on a particular implementatio
          -------------------------
 ```
 #### [+] Database Design Process 
-##### &#x23f5; Requirements analysis 
+##### &#x266f; Requirements analysis 
 ```
 1) What is going to be stored?
 2) How is it going to be used?
 3) What are we going to do with the data?
 4) Who should access the data?
 ```
-##### &#x23f5; Conceptual Design 
+##### &#x266f; Conceptual Design 
 ```
 • A high-level description of the database 
     ----------------------
@@ -27,44 +27,55 @@ agree on structure of the database before deciding on a particular implementatio
        -----------------------------------------------------------
 ```
 
-##### &#x23f5; Logical, Physical, etc
+##### &#x266f; Logical, Physical, etc
 
 ### E/R Basics
+
+<details><summary style=font-size:14px>E/R Model & Diagrams used all three DB design process above</summary>
+<img src="./pic2/E:R.png" width=600>
+</details>
+
 ```
-E/R is a visual syntax for DB design which is precise enough for technical points, but abstract enough for non-technical
+E/R is a visual syntax for DB design which is precise enough for technical points
+but abstract enough for non-technical
 ```
-##### &#x23f5; E/R Model & Diagrams used all three DB design process 
 
 #### [+] Entities and Entity Sets
-```mermaid
-flowchart LR 
-    S[Christmas] --> A;
-    A --> B;
 ```
-| Command | Description |
-| --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+• Entities & Entity sets are the primitive unit of the E/R model 
 
-#### test
-<details><summary>CLICK ME</summary>
-<p>
 
-#### We can hide anything, even code!
+1) Entity
+individual objects, which are members of entity sets 
 
-```ruby
-   puts "Hello World"
+    + Product: iPhone, MacBook, iPad, etc
+    + person:  Spike, Jet, Faye, Ed, Ein
+
+
+2) Entity Set (class or types of objects)
+    + Perdon, Product 
+    + These are what is shown in E/R diagrams - as rectangles
+    + Entity sets represent the sets of all possible entities
+
+        ----------         -----------
+        | Person |         | Product |
+        ----------         -----------
+             ^                  ^
+             |                  |
+        belongs to          belongs to
+        /    |    \        /     |    \
+    Spike   Jet  ...    iPhone  iPad  MacBook
+```
+##### &#x266f; attributes 
+```
+• represented by ovals attached to an entity set (shapes are important, colors are not)
+                                                  ------------------------------------
+```
+```mermaid 
+flowchart
+    P[Product] --- price((price))
+    P --- n((name))
+    P --- c((category))
 ```
 
-</p>
-</details><details><summary>CLICK ME</summary>
-<p>
 
-#### We can hide anything, even code!
-
-```ruby
-   puts "Hello World"
-```
-
-</p>
-</details>
