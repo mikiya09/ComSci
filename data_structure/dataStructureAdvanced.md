@@ -1008,7 +1008,9 @@ insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
    Linear Probing stop 
 
 2) Clustering Issue 
+    + collisions happen
     + when items not in the direct hash value position, searching increase, time complexity -> O(n)
+    + the point of using hashing is the big O of 1 searching time
 
 3) Rehashing: (hash value + c) % s
 
