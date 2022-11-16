@@ -13,7 +13,7 @@
 ##### &#x23f5; [advanced](./data_structure/dataStructureAdvanced.md)
 
 #### [+] Algorithm 
-##### &#x23f5; [basic](./algorithm/)
+##### &#x23f5; [basic](./algorithm/basicAlgorithm.md)
 
 #### [+] Database 
 ##### &#x23f5; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)

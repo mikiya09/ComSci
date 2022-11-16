@@ -587,6 +587,7 @@ int main()
 
 
 # Algorithm
+##### &x266f; [algorithm section](../algorithm/basicAlgorithm.md)
 ```
 1. A logical sequence of discrete steps 
 2. steps that describe a complete solution to a problem
