@@ -2,11 +2,11 @@
 
 ## Basic Component of Algorithm
 
-### [+] Design
+#### [+] Design
 #### &#x266f; goal
 #### &#x266f; why
 
-### [+] Analysis 
+#### [+] Analysis 
 #### &#x266f; Growth Rate
 #### &#x266f; Big O Notation
 

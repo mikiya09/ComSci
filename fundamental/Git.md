@@ -7,6 +7,7 @@
 [4] commit changes 
 [5] push/pull
 [6] manage repo
+[7] ignore some file
 ```
 
 ### [1] Intialize/Create local repo
@@ -16,16 +17,16 @@
 >> git status                       // check branch
 ```
 ### [2] Connect Local Repository with remote one (github)
-#### &#x23f5; username and email 
-**username** and **useremail** are used for tracking who are making changes to repo locally
+##### &#x25cb; username and email 
 ```
-could be any string, but better use the same as github one
+1) username and useremail are used for tracking who are making changes to repo locally
+2) could be any string, but better use the same as github one
 
 >> git config --global user.name "JoJo"
 >> git config --global user.email "spacelion121319@gmail.com"
 >> git config -l                                                 // check username and email
 ```
-#### &#x23f5; access token for login from terminal 
+##### &#x25cb; access token for login from terminal 
 ```
 1) www.github.com --> settings --> Developers settings --> Personal Access Tokens
 2) name your token || delete || expire || regenerate new one
@@ -33,12 +34,12 @@ could be any string, but better use the same as github one
 4) whenever you pull or push from github, if ask username and token: "JoJo" and that token
 ```
 
-#### &#x23f5; set/cancel one-time pass (optional)
+##### &#x25cb; set/cancel one-time pass (optional)
 ```
 >> git config --global credential.helper cache          // set 
 >> git config --global --unset credential.helper        // cancel
 ```
-#### &#x23f5; setting up remote repo 
+##### &#x25cb; setting up remote repo 
 ```
 # create new repo on github 
 # go to github page --> click "+" --> New Repository --> Name it --> Public/Private 
@@ -51,8 +52,7 @@ could be any string, but better use the same as github one
 >> git remote add origin https://github.com/user_name/repo_name.git
 ```
 
-#### &#x23f5; change remote repo 
-[github docs](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
+##### &#x25cb; change remote repo -> refer to [*github docs*](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
 ```
 # list current remote repo 
 >> git remote -v 
@@ -72,7 +72,7 @@ could be any string, but better use the same as github one
 >> git commit -m "commit message"   // describe what you had changed in this commit
 >> git status                       // check status
 ```
-#### &#x23f5; cancel commit 
+##### &#x25cb; cancel commit 
 ```
 # undo last commit
 >> git reset --soft HEAD~
@@ -87,7 +87,7 @@ could be any string, but better use the same as github one
 >> git pull origin main
 ```
 ### [6] Branch
-#### &#x23f5; checkout/switch
+##### &#x25cb; checkout/switch
 ```
 # check out
 >> git checkout -b new_branch               // -b: create new branchs 
@@ -97,27 +97,27 @@ could be any string, but better use the same as github one
 # switch
 >> checkout branch_name 
 ```
-#### &#x23f5; merge
+##### &#x25cb; merge
 ```
 # merge 
 >> git merge main                           // merge all stuff in my branch to main
 
 ```
-#### &#x23f5; List Branch
+##### &#x25cb; List Branch
 ```
 # list
 >> git branch -a                            // list all branch 
 >> git branch -r                            // list remote? 
 >> git branch                               // try, won't kill you
 ```
-#### &#x23f5; Delete Branch
+##### &#x25cb; Delete Branch
 ```
 # delete branch 
 >> git branch -d branch_name                // won't let you delete the branch you currently in
 >> git push origin --delete branch_name 
 
 ```
-#### &#x23f5; Diverge/Converge
+##### &#x25cb; Diverge/Converge
 ```
 # branches diverge/converge
 # if you make changes directly through github(remote)
@@ -127,7 +127,7 @@ could be any string, but better use the same as github one
 >> git status 
 >> git merge origin/branch_name             // here branch_name = main
 ```
-#### &#x23f5; Rename Branch(main)
+##### &#x25cb; Rename Branch(main)
 ```
 # go to repo -> settings -> under Code and automation -> click Branches -> rename it
 
@@ -138,13 +138,17 @@ could be any string, but better use the same as github one
 >> git remote set-head origin -a                // act that link and remote and local for push/pull, i guess
 ```
 
-### .gitignore
+### [7] Ignore Some file
 [auto-generating .gitignore](https://www.toptal.com/developers/gitignore)
 ```
 include this file in the local .git directory for eliminating items you don't want to push 
 
 >> vim .gitignore 
 >> {copy and paste}
+```
+##### &#x25cb; syntax 
+```
+no pdf -> *.pdf
 ```
 
 ### publish site
