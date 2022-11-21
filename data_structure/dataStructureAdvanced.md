@@ -718,19 +718,20 @@ because different conditions in different algorithm for them to process
 ```cpp 
 class FullPQ() {};
 class EmptyPQ() {};
-template<class ItemType>    // template
+template<class ItemType>                    // template
 
 class PQType 
 {
 public:
-    PQType(int);            // constructor 
-    ~PQType();              // destructor
+    PQType(int);                            // constructor 
+    ~PQType();                              // destructor
 
-    void MakeEmpty();
-    bool IsEmpty() const;
-    bool IsFull() const;
-    void Enqueue(ItemType, newItem);
-    void Dequeue(ItemType& item);
+    void MakeEmpty();                       // empty the array 
+    bool IsEmpty() const;                   // check if the array is empty 
+    bool IsFull() const;                    // check if the array is full
+    void Enqueue(ItemType newItem);         // Enter an item at the end of the array then call ReheapUp()
+    void Dequeue(ItemType& item);           // Remove the root and call ReheapDown()
+
 private:
     int length;
     HeapType<ItemType> items;
