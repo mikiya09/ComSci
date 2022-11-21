@@ -858,7 +858,7 @@ index:  -> 4, 5, 6, 7, 8 are leaf nodes
         -> 9/2 -1 by default in C++ is taking the floor 
         -> so 3
         -> we need the first non-leaf node 
-        -> start from there and looping through all non-leaf node
+        -> start from there and looping through all non-leaf node backward
 
                                 ◯
                               /   \
