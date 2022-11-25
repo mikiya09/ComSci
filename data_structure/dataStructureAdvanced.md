@@ -610,6 +610,11 @@ void Swap(ItemType& one, ItemType& two)
 //                  
 // ReheapDown maintain the heap property of the whole tree!
 
+
+
+// remember that in order to be a heap, there's a SHAPE and ORDER properties
+// SHAPE: complete binary tree 
+// ORDER: every node must greater or equal to its children node
 tempalte<class ItemType>
 void HeapType<ItemType>::ReheapDown(int root, int bottom)
 // Post: Heap properties is restored 
@@ -633,7 +638,7 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
                 maxChild = rightChild;
             }
             else {
-                macChild = leftChild;
+                maxChild = leftChild;
             }
         }
         if (element[root] < elements[maxChild]) {         
@@ -716,8 +721,8 @@ because different conditions in different algorithm for them to process
 
 ##### &#x266f; PQType Declaration 
 ```cpp 
-class FullPQ() {};
-class EmptyPQ() {};
+class FullPQ{};
+class EmptyPQ{};
 template<class ItemType>                    // template
 
 class PQType 
@@ -750,15 +755,27 @@ PQType<ItemType>::PQType(int max)
 }
 
 template<class ItemType>
+PQType<ItemType>::~PQType()
+{
+    delete [] items.elements;
+}
+
+template<class ItemType>
 void PQType<ItemType>::MakeEmpty()
 {
     length = 0;
 }
 
 template<class ItemType>
-PQType<ItemType>::~PQType()
+bool PQType<ItemType>::IsEmpty()
 {
-    delete [] items.elements;
+    return length == 0;
+}
+
+template<class ItemType>
+bool PQType<ItemType>::IsFull()
+{
+    return length == maxItem;
 }
 ```
 
@@ -771,6 +788,22 @@ solution 1) for Dequeue()
 
 solution 2) for Enqueue()
     + the reason no using ReheapDown() is because adding new item necessarily violating the heap property
+```
+
+###### &#x266f; Enqueue 
+```cpp 
+template<class ItemType>
+void PQType<ItemType>::Enqueue(ItemType newItem)
+{
+    if (length == maxItems)
+        throw FullPQ();
+    else 
+    {
+        length++;
+        items.elements[length-1] = newItem;
+        items.ReheapUp(0, length-1);
+    }
+}
 ```
 
 ###### &#x266f; Dequeue 
@@ -786,21 +819,6 @@ void PQType<ItemType>::Dequeue(ItemType& item)
         items.elements[0] = items.elements[length-1];
         length--;
         items.ReheapDown(0, length-1);
-    }
-}
-```
-###### &#x266f; Enqueue 
-```cpp 
-template<class ItemType>
-void PQType<ItemType>::Enqueue(ItemType new Item)
-{
-    if (length == maxItems)
-        throw FullPQ();
-    else 
-    {
-        length++;
-        items.elements[length-1] = newItem;
-        items.ReheapUp(0, length-1);
     }
 }
 ```

@@ -29,10 +29,11 @@
 
 # Math
 #### [+] LaTex 
-##### &#x23f5; [use it](./LaTex/LaTex.md)
+##### &#x23f5; [guide](./LaTex/LatexGuide.md)
+##### &#x23f5; [templates](./LaTex/)
 
 #### [+] Algebra  
-##### &#x23f5; [Linear Algebra](./Math/linearAlgebra.md)
+##### &#x23f5; [Linear Algebra](./Math/)
 
 
 # More to know
