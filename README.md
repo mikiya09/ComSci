@@ -30,7 +30,7 @@
 # Math
 #### [+] LaTex 
 ##### &#x23f5; [guide](./LaTex/LatexGuide.md)
-##### &#x23f5; [templates](./LaTex/)
+##### &#x23f5; [templates](./LaTex/templates/)
 
 #### [+] Algebra  
 ##### &#x23f5; [Linear Algebra](./Math/)
