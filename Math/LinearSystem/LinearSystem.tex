@@ -1,0 +1,265 @@
+
+
+\documentclass{article}
+\usepackage{blindtext}
+
+% setting up the margin of the paper 
+\usepackage[a4paper, total={6.3in, 9in}]{geometry}
+
+% setup for font family for the title/section name, for text font you have set ti seperately
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% package for tables, this package I don't why always stay at the top of the document
+\usepackage{tikz}
+% I don't know what is this for right now
+\usepackage{mathtools,eqparbox}
+
+% not sure for right now 
+\usepackage{array}
+
+% index package 
+\usepackage{imakeidx}
+\makeindex % this line is mandatory
+
+% package for basic symbol characters $/rhd$
+% https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols
+\usepackage{latexsym}
+
+% system of equation (such as large bracket)
+\usepackage{amsmath}
+
+% ================================================== Main.tex ==============================================
+\begin{document}
+
+
+% ploting the table using tikz package
+\begin{table}
+\[\begin{array}{c|ccccc}
+\tikz{\node[below left, inner sep=1pt] (food) {Food};%
+      \node[above right,inner sep=1pt] (ingredient) {Ingredient};%
+      \draw (food.north west|-ingredient.north west) -- (food.south east-|ingredient.south east);}
+ & Ca^{2+} & Na^{+} & Sugar & Calories \\
+\hline
+    rice & x_{11} & x_{12} & x_{13} & y_{1} \\
+    meat & x_{21} & x_{22} & x_{23} & y_{2} \\
+    fish & x_{31} & x_{32} & x_{33} & y_{3} \\
+    apple & x_{41} & x_{42} & x_{43} & y_{4} \\
+\end{array}\]
+\caption{Nutrition Values}
+\end{table}
+
+% section start
+\section{Representation of Matrix}
+Table could be viewed as a matrix, below are an illustration coressponding to the above table. The 4x3 matrix stands for attributes while weights are used for calculating y (outcome)
+\begin{center}
+    $\begin{bmatrix}
+        x_{11} & x_{12} & x_{13} \\
+        x_{21} & x_{22} & x_{23} \\
+        x_{31} & x_{32} & x_{33} \\
+        x_{41} & x_{42} & x_{43} \\
+    \end{bmatrix}$
+    x 
+    $\begin{bmatrix} 
+        w_{1} \\ 
+        w_{2} \\
+        w_{3} \\
+    \end{bmatrix}$
+    =
+    $\begin{bmatrix} 
+        y_{1} \\ 
+        y_{2} \\
+        y_{3} \\
+        y_{4} \\
+    \end{bmatrix}$ \\
+\end{center}
+
+% only centering centain text
+\centerline{matrix multiplication(dim): 4x3 • 3x1 = 4x1}
+
+% subsection
+\subsection{In general}
+\text{Like numbers, matrices can be added, subtracted, multiplied, and divided} \\
+\text{matrices have many other uses in mathematics and the sciences, knowing matrix algebra is essential}
+
+% new section 
+\section{Matrix Properties}
+\subsection{Equality}
+The matrices A = $[a_{ij}]$ and B = $[b_{ij}]$ are equal if and only if \\ 
+• they have the same dimension m x n \\ 
+• corresponding entries are equal $a_{ij} = b_{ij}$: for i=1, 2, ... ,m and j=1, 2, ... ,n 
+
+
+% stretch the size of the table in vertical level
+\begin{center}
+    \renewcommand{\arraystretch}{4}
+
+    \begin{tabular}{|*2{>{\renewcommand{\arraystretch}{1}}c|}}
+    \hline
+    \textbf{Equal} & \textbf{Unequal}\\
+    \hline
+    $ \left[ \begin{array}{ccc} \sqrt{4} & 2^2 & e^0 \\ 0.5 & 1 & 1-1 \end{array}\right]$ = $ \left[ \begin{array}{ccc} 2 & 4 & 1 \\ \frac{1}{2} & \frac{2}{2} & 0 \end{array}\right]$  & 
+    $ \left[ \begin{array}{cc} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{array}\right]$ $\neq \left[ \begin{array}{ccc} 1 & 3 & 5 \\ 2 & 4 & 6 \end{array}\right]$ \\
+    \hline
+    \end{tabular} 
+\end{center}
+
+• Find a, b, c, and d if 
+$\begin{bmatrix}
+    a & b \\ 
+    c & d
+\end{bmatrix}$
+= 
+$\begin{bmatrix}
+    1 & 3 \\ 
+    5 & 2
+\end{bmatrix}$. 
+In order for two matrices to be equal, we have a=1, b=3, c=5, d=2
+
+
+\subsection{Addition, Subtraction, and Scalar Multiplication}
+
+Let A = $[a_{ij}]$ and B = $[b_{ij}]$ be matrices of the \textbf{same dimension} m x n, c be any real number \\
+\indent 1) addition: A + B = $[a_{ij} + b_{ij}]$ \\
+\indent 2) subtraction: A - B = $[a_{ij} - b_{ij}]$ \\ 
+\indent 3) scalar product: cA = $[ca_{ij}]$
+
+\subsection{Multiplcation of Matrices}
+The product AB (or A•B) of two matrices A and B is defined only when the number of columns in A is equal to the number of rows in B 
+
+
+
+\begin{center}
+  \begin{tabular}{ | l | c | r |}
+    \hline
+    Matrices & A & B \\ \hline
+    Dimensions & m x \textbf{n} & \textbf{n} x k \\ 
+    \hline
+  \end{tabular} \\
+\end{center}
+\centerline{n is the columns in A, rows in B, the new resulting matrix has the dimension of \textbf{m x k}} 
+
+\begin{itemize}
+    \item[$>>$] \textbf{Inner Product} \\
+    if $[a_1 a_2 \hdots a_n]$ is a row of A, and if 
+    $\begin{bmatrix} 
+        b_1 \\ 
+        b_2 \\ 
+        \vdots \\
+        b_n \\
+    \end{bmatrix}$
+    is a column of B, their inner product is the number \\ $\mathbf{a_1b_1 + a_2b_2 + \hdots + a_nb_n}$
+
+    \item[$>>$] \textbf{ex)} \\ 
+    $\begin{bmatrix} 
+        2 & -1 & 0 & 4
+    \end{bmatrix}$
+    and 
+    $\begin{bmatrix} 
+        5 \\ 
+        4 \\ 
+        -3 \\
+        \frac{1}{2} \\
+    \end{bmatrix}$
+    gives: 2•5 + (-1)•4 + 0•(-3) + 4• $\frac{1}{2}$ = 8
+
+    \item[$>>$] $\mathbf{c_{ij}}$ \\ 
+    based on the examples, the resulting formula for matrices multiplcation with multi-entry
+
+    $\begin{bmatrix} 
+        a_{11} & a_{12} \\ 
+        a_{21} & a_{22} \\ 
+    \end{bmatrix}$
+    • 
+    $\begin{bmatrix} 
+        b_{11} & b_{12} & b_{13} \\ 
+        b_{21} & b_{22} & b_{23} \\ 
+    \end{bmatrix}$
+    = \\
+    $\begin{bmatrix} 
+        c_{11}(a_{11}*b_{11} + a_{12}*b_{21}) & c_{12}(a_{11}*b_{12} + a_{12}*b_{22}) & c_{13}(a_{11}*b_{13} + a_{12}*b_{23}) \\ 
+        c_{21}(a_{21}*b_{11} + a_{22}*b_{21}) & c_{22}(a_{21}*b_{12} + a_{22}*b_{22}) & c_{23}(a_{21}*b_{13} + a_{12}*b_{23}) \\ 
+    \end{bmatrix}$
+
+\end{itemize}
+
+
+\subsection{Properties of Matrix Multiplication}
+
+$\rhd$ Order Matters \\
+\indent 1) $A^2 - B^2 = (A+B)(A-B)$ {\color{red}False: expand and do the calculation}  \\
+\indent 2) $(A+B)^2 = A^2 + 2AB + B^2$ {\color{red}False: found order changed after expanding} \\
+\indent 3) $(A-B)^2 = A^2 - 2AB + B^2$ {\color{red}False: found order changed after expanding}  \\
+\indent 4) $(AB)^2 = A^2B^2$ {\color{red}False: (AB)(AB) = ABAB, there is BA discomfort with original order} \\
+\indent 5) $(kA)(kB) = k^2(AB)$ {\color{green}True}
+
+
+\subsection{Application of Matrix Multiplcation}
+
+$\begin{bmatrix} 
+    1 & -1 & 3 \\ 
+    1 & 2 & -2 \\ 
+    3 & -2 & 5 \\ 
+\end{bmatrix}$
+• 
+$\begin{bmatrix} 
+    x \\
+    y \\ 
+    z \\
+\end{bmatrix}$
+= 
+$\begin{bmatrix} 
+    4 \\
+    10 \\ 
+    14 \\
+\end{bmatrix}$
+becomes this
+$\begin{bmatrix} 
+    x & -y & 3z \\ 
+    x & 2y & -2z \\ 
+    3x & -y & 5z \\ 
+\end{bmatrix}$
+=
+$\begin{bmatrix} 
+    4 \\
+    10 \\ 
+    14 \\
+\end{bmatrix}$
+\\
+\textbf{it becomes the system of linear equation}
+$\begin{cases}
+    x-y+3z = 4 \\ 
+    x+2y-2z = 10 \\ 
+    3x-y+5z = 14 \\ 
+\end{cases}$
+
+% ------------ different way of writing system of equation -------------
+% \begin{equation*}
+%   \left\{
+%     \begin{aligned}
+%       & x-y+3z = 4 \\
+%       & x+2y-2z = 10 \\
+%       & 3x-y+5z = 14 \\
+%       % & {\left|
+%       %   \frac{k_{p\omega}s + k_{i\omega}}{s} \cdot \frac{1}{Ts + 1}
+%       % \right|}_{s = j \cdot 2\pi} = 1
+%     \end{aligned}
+%   \right.
+% \end{equation*}
+% ----------------------------------------------------------------------
+
+
+\subsection{Matrix Transpose}
+
+1) A: $\begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}$ is a 1x3 matrix $\rightarrow$ $A^T$: $\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}$ becomes a 3x1 matrix \\
+2) A square Matrix A is symmetric if x = $x^T$, visual representation: $\begin{bmatrix} a & b \\ c & d \end{bmatrix} \rightarrow$ $\begin{bmatrix} a & c\\ b & d \end{bmatrix}$\\
+3) A = $\begin{bmatrix} 1 & 5 \\ 5 & 1 \end{bmatrix}$ = $A^T$ = $\begin{bmatrix} 1 & 5 \\ 5 & 1 \end{bmatrix}$ \\
+4) matrix operation with transpose: $\begin{cases} (A^T)^T = A \\ (A+B)^T = A^T + B^T \\ (AB)^T = B^TA^T \\ (cA)^T = c(A^T) \end{cases}$
+
+
+\section{Determinants and Cramer's Rule}
+
+
+\end{document}
+
+
