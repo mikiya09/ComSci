@@ -28,6 +28,9 @@
 
 % system of equation (such as large bracket)
 \usepackage{amsmath}
+\usepackage[makeroom]{cancel} % cancel out single item by using \cancel{}
+\usepackage{soul} % straight cross line not in matrix
+\usepackage{nicematrix} % draw straight cross line inside matrix
 
 % ================================================== Main.tex ==============================================
 \begin{document}
@@ -257,7 +260,101 @@ $\begin{cases}
 4) matrix operation with transpose: $\begin{cases} (A^T)^T = A \\ (A+B)^T = A^T + B^T \\ (AB)^T = B^TA^T \\ (cA)^T = c(A^T) \end{cases}$
 
 
-\section{Determinants and Cramer's Rule}
+\subsection{Inverse of the Matrix}
+A square matrix M is invertible or non-singlar if there exist a matrix B such that A•B = I
+
+\subsection{Identity Matrix}
+In linear algebra, the \textbf{identity matrix} of size n is the n x n \textbf{square matrix} with \textbf{ones} on the \textbf{main diagonal} and \textbf{zeros} elsewhere, denoted by $I_n$ \\
+\indent >> $I_1$=[1], $I_2=\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, $I_3=\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$, $\hdots$ ,
+$I_n=\begin{bmatrix} 1 & 0 & 0 & \hdots & 0 \\ 0 & 1 & 0 & \hdots & 0 \\ 0 & 0 & 1 & \hdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \hdots & 1 \end{bmatrix}$
+
+\section{Determinants}
+
+If a matrix is square (rows = columns), then we can assign to it a number called its determinant. \\ 
+\indent >> determinant can be used to solve systems of linear equation \\
+\indent >> useful in determining whether a matrix has an inversse \\ 
+\indent >> denote by det(A) or |A|
+
+\subsection{Determinants of 2 x 2 Matrix}
+A = $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is: det(A)= $\begin{vmatrix} a & b \\ c & d \end{vmatrix}$ = ad - bc \\ 
+B = $\begin{vmatrix} 6 & -3 \\ 2 & 3 \end{vmatrix}$, det(B) = 6•3-(-3)•2 = 18 -(-6) = 24
+
+
+\subsection{Determinants of n x n Matrix}
+If A is an n x n matrix, the determinant of A is obtained by multiplying each element of the first row by its cofactor, and then adding the result, below is the general form 
+\begin{itemize}
+
+    \item[>>] cofactor: the determinant for chosen element with row and column are crossed out(denoted by $a_{ij}$)
+    \item[>>] GF => expand the first row: det(A)=|A|= $\begin{vmatrix}
+                                        a_{11} & a_{12} & \hdots & a_{1n} \\ 
+                                        a_{21} & a_{22} & \hdots & a_{2n} \\
+                                        \vdots & \vdots & \ddots & \vdots \\
+                                        a_{n1} & a_{n2} & \hdots & a_{nn}
+                                    \end{vmatrix} = a_{11}A_{11} + a_{12}A_{12} + \hdots + a_{1n}A_{1n}$ 
+    \item[>>] use 3x3 matrix as example: A = $\begin{vmatrix} 2 & 3 & -1 \\ 0 & 2 & 4 \\ -2 & 5 & 6 \end{vmatrix}$ while the positive and negative sign of $a_{ij}$ 
+              is determined by checking the odd or even of (i+j), like this $\begin{bmatrix} + & - & +  \\ - & + & - \\ + & - & + \end{bmatrix}$
+    \item[>>] expand the first row
+    \begin{itemize}
+        \item[1)] $A_{11}$ = 2
+            $\begin{pNiceMatrix} 
+                  2 & 3 & -1 \\ 
+                  0 & 2 & 4 \\ 
+                  -2 & 5 & 6 
+                  \CodeAfter 
+                  \begin{tikzpicture}
+                     \draw [thick,red] (1-1.west) -- (1-3.east); 
+                     \draw [thick,red] (1-1.north) -- (3-1.south); 
+                  \end{tikzpicture}
+              \end{pNiceMatrix}$
+              = 2 $\begin{vmatrix} 2 & 4 \\ 5 & 6 \end{vmatrix}$
+
+        \item[2)] $A_{12}$ = -3  
+              $\begin{pNiceMatrix}
+                  2 & 3 & -1 \\ 
+                  0 & 2 & 4 \\ 
+                  -2 & 5 & 6 
+                  \CodeAfter 
+                  \begin{tikzpicture}
+                     \draw [thick,red] (1-1.west) -- (1-3.east); 
+                     \draw [thick,red] (1-2.north) -- (3-2.south); 
+                  \end{tikzpicture}
+              \end{pNiceMatrix}$
+              = -3 $\begin{vmatrix} 0 & 4 \\ -2 & 6 \end{vmatrix}$
+
+        \item[3)] $A_{12}$ = -3  
+              $\begin{pNiceMatrix}
+                  2 & 3 & -1 \\ 
+                  0 & 2 & 4 \\ 
+                  -2 & 5 & 6 
+                  \CodeAfter 
+                  \begin{tikzpicture}
+                     \draw [thick,red] (1-1.west) -- (1-3.east); 
+                     \draw [thick,red] (1-3.north) -- (3-3.south); 
+                  \end{tikzpicture}
+              \end{pNiceMatrix}$
+              = -1 $\begin{vmatrix} 0 & 2 \\ -2 & 5 \end{vmatrix}$
+    \end{itemize}
+
+    det(A) = 2(2•6 - 4•5) -3[0•6-4(-2)] -[0•5-2(-2)] \\ 
+    = -16-24-4 \\
+    = -44
+
+    \item[>>] you can expand a whole row or column in either direction, not only the first row, you can also use the last column something like that -> Same result.
+\end{itemize}
+
+\subsection{invertibility}
+if A is a square matrix, then A has an inverse if and only if det(A) $\neq$ 0 \\
+\indent >> ex. show that the matrix A has no inverse A=$\begin{bmatrix} 1 & 2 & 0 & 4 \end{bmatrix}$
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
