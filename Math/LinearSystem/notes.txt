@@ -1,0 +1,57 @@
+
+1. calculator: https://www.wolframalpha.com/
+
+2. linear combination 
+
+3. linear independence/depdendence 
+
+    - (not require) showing that a collection of matrices is linearly independent: https://www.youtube.com/watch?v=FnNJeEKuzck
+
+    - determine whether a collection of vectors in R3 is linearly independent: https://www.youtube.com/watch?v=LlGL4uoHp-M
+
+    - linear dependence: https://www.youtube.com/watch?v=XI2kYIxhe-o
+
+    - solving a linear system: inconsistent system case: https://www.youtube.com/watch?v=cMjmEDWK1xY
+
+    - {v1, v1+v2, v1-v2, v1+v2+v3, v4}, check if linearly dependent, on the homework 3
+
+4. span of a set of vectors
+
+    - https://www.youtube.com/watch?v=ivP-6oicIWU
+
+    - one vector is in the span of other vector: https://www.youtube.com/watch?v=kzjVqg0Xxhk
+
+    - determine whether a collection of vectors in R^3 spans R^3: https://www.youtube.com/watch?v=nfXyFZNkD7E
+        - whether span the dimension is related to number of vector in a system?
+
+    - determine whether vectors span R3 and is the collection a basis: https://www.youtube.com/watch?v=c4iSuULqENY
+
+5. homogeneous systems of linear equations
+
+    - trivial or non-trivial solution: https://www.youtube.com/watch?v=JlJWyWJARRU&t=9s
+
+    - consistent/inconsistent of the system: https://www.youtube.com/watch?v=K5MmwciV1BA 
+
+
+
+6. eigen value 
+   
+    - calculate eigen value: https://www.youtube.com/watch?v=7E1C0THuS3w
+
+    - eigen value does not necessarily need to be real, or integer
+
+    - finding eigenvalue of a 3x3 matrix: https://www.youtube.com/watch?v=CoLbtfsBySM
+
+    - finding the basis for eigenspace: https://www.youtube.com/watch?v=j0JJFGcPsAI
+
+    - (not require): find a eigenvector corresponding to given eigenvalue
+
+    - characteristic equations and eigen values: https://www.youtube.com/watch?v=EM__AHpEzE4&t=318s
+        - https://www.youtube.com/watch?v=EM__AHpEzE4
+
+
+7. eigenspace 
+
+    - eigen vector and eigen value: https://www.youtube.com/watch?v=ihscX_B1BoA&t=228s
+
+    - eigenspace and linear depdendence: https://www.youtube.com/watch?v=8QHPlik7HAU
