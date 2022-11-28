@@ -38,7 +38,7 @@
 \usepackage{pgfplots} % 2 dimensional ploting
 \pgfplotsset{compat=1.10}
 \usetikzlibrary{datavisualization.formats.functions} % 2 dimensional ploting
-
+\usetikzlibrary{tikzmark} % arrow for pointing
 \usepackage{tikz-3dplot} % 3 dimensional plot
 
 % ================================================== Main.tex ==============================================
@@ -1016,12 +1016,40 @@ In other words, you can build up all vectors with scalars \{ $c_1, c_2, \hdots, 
 
 \subsection{Null Space}
 
+\begin{center}
+$\tikzmark{a}A\tikzmark{b}x=\tikzmark{c}B$
 
+\begin{tikzpicture}[remember picture,overlay]
+\draw[<-] 
+  ([shift={(2pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a) 
+  node[anchor=east] {$\scriptstyle \text{\color{red}coefficient matrix: operates on x resulting in B}$}; 
+\draw[<-] 
+  ([shift={(2pt,10pt)}]pic cs:b) |- ([shift={(2pt,20pt)}]pic cs:b) 
+  node[anchor=south] {$\scriptstyle \text{\color{red}unknown independent variables}$}; 
+\draw[<-] 
+  ([shift={(2pt,-2pt)}]pic cs:c) |- ([shift={(20pt,-10pt)}]pic cs:c) 
+  node[anchor=west] {$\scriptstyle \text{\color{red}dependent variables}$}; 
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+    \item Definition: The null space of an mxn matrix A is the set of all solutions to the homogeneous equation, Ax=$\vec{\boldsymbol{0}}$
+
+    \item Metaphor: machine is A, raw material is x, B is what being made by operating A on x. Hence we set B to 0, for getting all vectors which is raw material for 
+        \underline{\textbf{Null Space}}
+
+    \item Example:
+\end{itemize}
 
 \subsection{Column Space}
+The column space of an mxn matrix A is the set of all possible linear combination of the columns of A  \\
+\indent >> ex.
 
 \subsection{Row Space}
+The set of all linear combination of the row vectors of matrix A is called the row space: Row A \\
+\indent >> ex.
 
+\indent >> Col$A^T$ = Row A
 \subsection{Linear Transformation}
 
 \subsection{Bases for Null A and Col A}
