@@ -83,7 +83,8 @@
 
 ### [5] Push/Pull
 ```
->> git push -u origin main 
+>> git push -u origin main          // when you have multiple branch, you need to specify one to push 
+>> git push                         // if you only have one main branch
 >> git pull origin main
 ```
 ### [6] Branch
