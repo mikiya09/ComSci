@@ -33,6 +33,12 @@
 \usepackage[makeroom]{cancel} % cancel out single item by using \cancel{}
 \usepackage{soul} % straight cross line not in matrix
 \usepackage{nicematrix} % draw straight cross line inside matrix
+\NiceMatrixOptions{
+code-for-first-row = \color{red} ,
+code-for-last-row = \color{red} ,
+code-for-first-col = \color{blue} ,
+code-for-last-col = \color{red}
+} % nice matrix labeling
 \usepackage{mathtools} % display fraction-like 
 \newcommand\aug{\fboxsep=-\fboxrule\!\!\!\fbox{\strut}\!\!\!} % this line is for the veritical line in augmented matrix, but you can use array to achieve this as well
 
@@ -1047,18 +1053,113 @@ $\tikzmark{d}A\tikzmark{e}x=\tikzmark{f}B$
     \item Metaphor: machine is A, raw material is x, B is what being made by operating A on x. Hence we set B to 0, for getting all vectors which is raw material for 
         \underline{\textbf{Null Space}}
 
-    \item Example:
+    \item Example: A = 
+        $\begin{bmatrix}  
+            3 & 6 & 6 & 3 & 9 \\ 
+            6 & 12 & 13 & 0 & 3
+        \end{bmatrix}$,
+        Find an explicit description of \textbf{Null A}. 
+        \begin{itemize}
+            \item[1)] solve. Ax = 0: 
+                $\begin{bmatrix}  
+                    3 & 6 & 6 & 3 & 9 & \aug & 0 \\ 
+                    6 & 12 & 13 & 0 & 3 & \aug & 0
+                \end{bmatrix} \sim \begin{bmatrix}
+                    1 & 2 & 0 & 13 & 33 & \aug & 0 \\ 
+                    0 & 0 & 1 & -6 & -13 & \aug & 0
+                \end{bmatrix}$ \\
+
+            \item[2)] answer. two pivots: on row 1$(x_1)$ and row 3$(x_3)$, three free variables: $x_2, x_4, x_5$, express using the free variable, because they can take any value:
+                $\begin{bmatrix}
+                    x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+                \end{bmatrix} = 
+                \begin{bmatrix}
+                    -2x_2 - 13x_4 - 33x_5 \\ 
+                    x_2 \\ 
+                    0 + 6x_4 + 15x_5 \\ 
+                    x_4  \\ 
+                    x_5
+                \end{bmatrix}$
+                = $x_2\begin{bNiceMatrix}[first-row] 
+                    \vec{u_1} \\
+                    -2  \\ 1 \\ 0 \\ 0 \\ 0
+                \end{bNiceMatrix}$ 
+                + 
+                $x_4\begin{bNiceMatrix}[first-row] 
+                    \vec{u_2} \\
+                    -13  \\ 0 \\ 6 \\ 1 \\ 0
+                \end{bNiceMatrix}$ 
+                + 
+                $x_5\begin{bNiceMatrix}[first-row] 
+                    \vec{u_3} \\
+                    -33  \\ 0 \\ 15 \\ 0 \\ 1
+                \end{bNiceMatrix}$
+
+            \item[3)] also. 
+                $\begin{bmatrix}
+                    x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+            \end{bmatrix} = x_2\vec{u_1} + x_4\vec{u_2} + x_5\vec{u_3} \rightarrow$ Null A = span \{$\vec{u_1}, \vec{u_2}, \vec{u_3}$\} 
+
+        \end{itemize}
 \end{itemize}
 
+% array-like matrix labeling
+% $
+% \begin{blockarray}{c}
+%     \color{red}u_1 \\
+% \begin{block}{[c]}
+%   -2  \\
+%   1  \\
+%   0  \\
+%   0  \\
+%   0  \\
+% \end{block}
+% \end{blockarray}
+% $
 
 
 \subsection{Column Space}
 The column space of an mxn matrix A is the set of all possible linear combination of the columns of A  \\
-\indent >> ex.
+\begin{itemize}
+    \item Col A: A = \{ x: x is in $R^n$ and "Ax=B" \}
+    \item Find a basis for Col A where A =
+        $\begin{bmatrix}
+            1 & 2 & 0 & 4 \\ 
+            2 & 4 & -1 & 3 \\ 
+            3 & 6 & 2 & 22 \\ 
+            4 & 8 & 0 & 16
+            \end{bmatrix}$: \\ 
+            $\begin{bmatrix} A & \aug & b  \end{bmatrix}$ = 
+            $\begin{bmatrix}
+                1 & 2 & 0 & 4 & \aug & b_1 \\
+                2 & 4 & -1 & 3 & \aug & b_2 \\ 
+                3 & 6 & 2 & 22 & \aug & b_3 \\ 
+                4 & 8 & 0 & 16 & \aug & b_4 
+            \end{bmatrix} \sim$
+            $\begin{bNiceMatrix}[last-row]
+                1 & 2 & 0 & 4 & \aug & b_1^{'} \\ 
+                0 & 0 & 1 & 5 & \aug & b_2^{'} \\ 
+                0 & 0 & 0 & 0 & \aug & b_3^{'} \\ 
+                0 & 0 & 0 & 0 & \aug & b_4^{'} \\ 
+                \vec{a_1} & \vec{a_2} & \vec{a_3} & \vec{a_4} \\ 
+            \end{bNiceMatrix}$, $b^{'}$ is just for simplicity, it will have scalars value and "+" or "-" sign during row reduction.
+
+    \item Basis \{ $a_1, a_3$ \}, because they are independent variables
+    \item Col A = span \{ $\vec{a_1}, \vec{a_3}$ \}
+\end{itemize}
 
 \subsection{Row Space}
 The set of all linear combination of the row vectors of matrix A is called the row space: Row A \\
-\indent >> ex.
+\indent >> ex. A = 
+$\begin{bmatrix}
+    -1 & 2 & 3 & 6 \\ 
+    2 & -5 & -6 & -12 \\ 
+    1 & -3 & -3 & -6
+\end{bmatrix} \sim \begin{bmatrix}
+    1 & 0 & -3 & 0 \\ 
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 0 & 1
+\end{bmatrix}$: Row A = span \{ $\vec{x_1}, \vec{x_2}, \vec{x_3}$ \}
 
 \indent >> Col$A^T$ = Row A
 \subsection{Linear Transformation}
