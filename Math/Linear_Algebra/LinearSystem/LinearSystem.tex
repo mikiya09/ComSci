@@ -18,6 +18,7 @@
 
 % not sure for right now 
 \usepackage{array}
+\usepackage{blkarray, bigstrut} % matrix label
 
 % index package 
 \usepackage{imakeidx}
@@ -40,6 +41,14 @@
 \usetikzlibrary{datavisualization.formats.functions} % 2 dimensional ploting
 \usetikzlibrary{tikzmark} % arrow for pointing
 \usepackage{tikz-3dplot} % 3 dimensional plot
+\newcommand{\Arrow}[1]{%
+\parbox{#1}{\tikz{\draw[->](0,0)--(#1,0);}}
+} % for \Arrow in tikz package
+
+\hbadness=10000  % silence the warning for \\ breaking on empty line
+
+\usetikzlibrary{automata,arrows,positioning,calc} % markov chain
+
 
 % ================================================== Main.tex ==============================================
 \begin{document}
@@ -1017,17 +1026,17 @@ In other words, you can build up all vectors with scalars \{ $c_1, c_2, \hdots, 
 \subsection{Null Space}
 
 \begin{center}
-$\tikzmark{a}A\tikzmark{b}x=\tikzmark{c}B$
+$\tikzmark{d}A\tikzmark{e}x=\tikzmark{f}B$
 
 \begin{tikzpicture}[remember picture,overlay]
 \draw[<-] 
-  ([shift={(2pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a) 
+  ([shift={(2pt,-2pt)}]pic cs:d) |- ([shift={(-10pt,-10pt)}]pic cs:d) 
   node[anchor=east] {$\scriptstyle \text{\color{red}coefficient matrix: operates on x resulting in B}$}; 
 \draw[<-] 
-  ([shift={(2pt,10pt)}]pic cs:b) |- ([shift={(2pt,20pt)}]pic cs:b) 
+  ([shift={(2pt,10pt)}]pic cs:e) |- ([shift={(2pt,20pt)}]pic cs:e) 
   node[anchor=south] {$\scriptstyle \text{\color{red}unknown independent variables}$}; 
 \draw[<-] 
-  ([shift={(2pt,-2pt)}]pic cs:c) |- ([shift={(20pt,-10pt)}]pic cs:c) 
+  ([shift={(2pt,-2pt)}]pic cs:f) |- ([shift={(20pt,-10pt)}]pic cs:f) 
   node[anchor=west] {$\scriptstyle \text{\color{red}dependent variables}$}; 
 \end{tikzpicture}
 \end{center}
@@ -1041,6 +1050,8 @@ $\tikzmark{a}A\tikzmark{b}x=\tikzmark{c}B$
     \item Example:
 \end{itemize}
 
+
+
 \subsection{Column Space}
 The column space of an mxn matrix A is the set of all possible linear combination of the columns of A  \\
 \indent >> ex.
@@ -1052,13 +1063,271 @@ The set of all linear combination of the row vectors of matrix A is called the r
 \indent >> Col$A^T$ = Row A
 \subsection{Linear Transformation}
 
+A linear transformation \textbf{T} from a vector space \textbf{V} into another vector space \textbf{W} is a rule that assigns to each vector $\vec{x}$ from \textbf{V} a new unique vector $\boldsymbol{T(x)}$ 
+in \textbf{W} 
+
+\indent >> $T(\vec{v} + \vec{u}) = T(\vec{v}) + T(\vec{u})$
+\\
+\indent >> $T(c\vec{v}) = cT(\vec{v})$
+
+\subsection{Kernel}
+
+\begin{itemize}
+
+    \item[1)] The kernel (an null space) of T is the set of all vectors $\vec{v}$ in V such that $T(\vec{v})$=0, it is a null space. The range of T is the set of all vectos in W such that $T(\vec{v})$=0. 
+        Thus T(x) can be expressed as A and col(A) = Range(T)
+
+    \item[2)] \begin{tikzpicture}[x=1cm, y=1cm, z=-0.6cm]
+    % Axes
+    \draw [->] (0,0,0) -- (2,0,0) node [right] {$x$};
+    \draw [->] (0,0,0) -- (0,2,0) node [left] {$y$};
+    \draw [->] (0,0,0) -- (0,0,2) node [left] {$z$};
+    % Vectors
+    \draw [->, thick] (0,0,0) -- (1,1,0);
+    \draw [->, thick] (0,0,0) -- (1,0,1);
+    \draw [->, thick] (0,0,0) -- (-1,0,1);
+    % Ticks
+        \foreach \i in {1,2};
+
+    % Dashed lines
+    % \draw [loosely dashed]
+    %     (0,2,0) -- (2,2,0) -- (2,0,0)
+    %     (0,0,1) -- (2,0,1) -- (2,0,0)
+    %     ;
+
+    % Labels
+   \node [right] at (1,1,0) {$v_1$};
+   \node [right] at (1,0,1) {$v_2$};
+   \node [above] at (-1,0,1) {$v_3$};
+\end{tikzpicture} \Arrow{3cm} \begin{tikzpicture}[x=1cm, y=1cm, z=-0.6cm]
+        % Axes
+        \draw [->] (0,0,0) -- (2,0,0) node [right] {$x$};
+        \draw [->] (0,0,0) -- (0,2,0) node [left] {$y$};
+        \draw [->] (0,0,0) -- (0,0,2) node [left] {$z$};
+        % Vectors
+        \draw [->, thick] (0,0,0) -- (0.5,2,0);
+        \draw [->, thick] (0,0,0) -- (2,0,2);
+        \draw [->, thick] (0,0,0) -- (-0.7,0,0.2);
+        % Ticks
+            \foreach \i in {1,2};
+
+        % Dashed lines
+        % \draw [loosely dashed]
+        %     (0,2,0) -- (2,2,0) -- (2,0,0)
+        %     (0,0,1) -- (2,0,1) -- (2,0,0)
+        %     ;
+
+        % Labels
+       \node [right] at (0.5,2,0) {$T(v_1)$};
+       \node [right] at (2,0,2) {$T(v_2)$};
+       \node [above] at (-0.7,0,0.2) {$T(v_3)$};
+\end{tikzpicture}
+
+
+\item[3)] From left vector space to the right vector space, we can transforming the dimension from one to another, it could be higher dimension, same or lower. The point is that 
+    when we are transforming the dimension, we are trying to find new patterns from original knowledge space(left) to new knowledge space(right). 
+
+\item[4)] \color{red}If all the vectos cluster close to zero after the transformation is perform, meaning T(x) learns nothing
+
+\end{itemize}
+
+
 \subsection{Bases for Null A and Col A}
+
+\begin{itemize}
+    
+    \item To find the basis for \textbf{NULL A} $\rightarrow$ we solve $\begin{bmatrix} A & \aug& 0 \end{bmatrix}$ to find free variable: 
+        $\sim 
+        \begin{bmatrix}
+            1 & c & 0 & \aug & b_1 \\ 
+            0 & 0 & 1 & \aug & b_2 \\ 
+            0 & 0 & 0 & \aug & 0 
+        \end{bmatrix}, x_2$ is the free variable: $\begin{cases} x_3=b_2 \\ x_1 = b_1 - cx_2 \end{cases}$, $\vec{x} = 
+            \begin{bmatrix}
+                x_1 \\ x_2 \\ x_3 
+            \end{bmatrix} = 
+            \begin{bmatrix}
+                b_1 - cx_2 \\ 
+                x_2 \\ 
+                b_2 + 0 \cdot x_2
+            \end{bmatrix} = 
+            \begin{bmatrix}
+                b_1 \\ 0 \\ b_2 
+            \end{bmatrix} + x_2
+            \begin{bmatrix}
+                -c \\ 1 \\ 0
+            \end{bmatrix}$. The dimension of Nul(A) is the number of free variable of A $\rightarrow$ dim(Nul A) = $\#$ of free variable
+
+    \item To find the basis of Col A use compute REF of the matrix A: $\begin{bmatrix} A \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \rightarrow$ dim(col A) = $\#$ pivots
+
+\end{itemize}
 
 \subsection{Rank Theorem}
 
+The dimensions of the column space and row space are equal and that's called Rank
+\begin{center}
+    dim(Col A) = dim (Row $A^T$)
+\end{center}
+For an MxN matrix: \\[10pt]
+\begin{center}
+
+
+    $\tikzmark{a}\textbf{rank}(A)+\tikzmark{b}\textbf{dim}(\text{Nul} A)=\tikzmark{c}n$
+
+\begin{tikzpicture}[remember picture,overlay]
+\draw[<-] 
+  ([shift={(2pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a) 
+  node[anchor=east] {$\scriptstyle \text{\color{red} numbers of pivots}$}; 
+\draw[<-] 
+  ([shift={(2pt,10pt)}]pic cs:b) |- ([shift={(2pt,20pt)}]pic cs:b) 
+  node[anchor=south] {$\scriptstyle \text{\color{red}numbers of free variables}$}; 
+\draw[<-] 
+  ([shift={(2pt,-2pt)}]pic cs:c) |- ([shift={(20pt,-10pt)}]pic cs:c) 
+  node[anchor=west] {$\scriptstyle \text{\color{red}numbers of the columns}$}; 
+\end{tikzpicture}
+\end{center}
+\indent >> Machine generates 20 dimensions, how do we know what's basic hate, and what are derived hate? -> calculating the rank and and see how many are independent vector for checking.
+
 \subsection{Eigen Value and Eigen Vector}
 
+A$\vec{x} = \lambda\vec{x}$, where $\lambda$ is a scalar value operator A could be reduce to constant value: $\boldsymbol{\lambda}$ is called Eigen Value, $\boldsymbol{\vec{x}}$ is called Eigen Vector
+
+\begin{itemize}
+    \item[1)] solution: A$\vec{x}$ = $\lambda\vec{x} \\
+        \rightarrow A\vec{x} - \lambda\vec{x}$ = 0 \\ 
+        $\rightarrow A\vec{x} - \lambda \textbf{I}\vec{x}$ = 0\\
+        $\rightarrow (A-\lambda \textbf{I}) \vec{x}$ = 0 \\ 
+        remember that: it's the same as saying $[A\vec{x}=\vec{B}]$: if $\vec{x}$=0 then it's trivial which is impossible because $\vec{B} \neq 0$ then $\vec{x}$ is not-trivial (Non-zero) \\
+        $\rightarrow \vec{x}$ is non-trivial, then det(A-$\vec{\lambda\textbf{I}}$)=0; since ($A-\lambda\textbf{I}$) is 0, it's determinant is 0
+
+    \item[2)] ex. Find the Eigen Value and Eigen vector for 
+        $\begin{bmatrix}
+            -6 & 3 \\ 
+            4 & 5
+        \end{bmatrix}$, solution:
+        $\begin{bmatrix}
+            -6 & 3 \\ 4 & 5
+        \end{bmatrix} \cdot 
+        \begin{bmatrix}
+            x_1 \\ x_2
+        \end{bmatrix} = \lambda \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+        \begin{itemize}
+            \item[•] $A-\lambda\textbf{I}\vec{x}$ = $\begin{bmatrix}
+                    -6 & 3 \\ 4 & 5
+            \end{bmatrix}$
+            $ - \lambda \begin{bmatrix}
+                1 & 0 \\ 0 & 1
+            \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} -6-\lambda & 3 \\ 4 & 5 - \lambda \end{bmatrix}$, 
+            so as \textbf{det}
+            ($\begin{bmatrix}
+                -6-\lambda & 3 \\ 4 & 5-\lambda
+            \end{bmatrix}$) = 0 \\
+
+        \item[•] solve $(-6-\lambda)(5-\lambda) =0 \sim \lambda_1 = 6, \lambda_2 = -7$ \\
+
+        \item[•] check $\lambda_1$: $\begin{bmatrix} -6 & 3 \\ 4 & 5 \end{bmatrix}
+            \begin{bmatrix}
+                x_1 \\ 
+                x_2
+            \end{bmatrix} = 
+            6 \begin{bmatrix}
+                x_1 \\ x_2
+            \end{bmatrix} \rightarrow \begin{cases}
+                -6x_1 + 3_x2 = 6x_1 \\ 
+                4x_1 + 5x_2 = 6x_2 
+            \end{cases} \rightarrow 
+            \begin{cases}
+                12x_1 = 3x_2 \\ 
+                x_2 = 4x_1
+            \end{cases} \rightarrow \begin{bmatrix}
+            -6 & 3 \\ 4 & 5 
+            \end{bmatrix} \begin{bmatrix}
+            1 \\ 4
+            \end{bmatrix}$ = 
+            $
+            \begin{bmatrix}
+                -6+12 \\ 4+20
+            \end{bmatrix}$ = 6
+            $\begin{bmatrix}
+                1 \\ 4
+            \end{bmatrix}$ \\
+
+        \item[•] check $\lambda_2$ yourself
+        \end{itemize}
+\end{itemize}
+
+
 \section{Markov Chain}
+
+A Markov Chain is a sequence of probability vector $x_k$, where k $\in$ N, together with stochastic matrix P, such that $x_0$ is the initial state, and $x_k = P^k x_0$ \\\\
+\indent Hence, we consider that 
+\begin{itemize}
+    \item[] $x_1 = px_0$
+    \item[] $x_2 = px_1$
+    \item[] $\vdots$
+    \item[] $x_n = p^{(1)}p^{(2)} \hdots p^{(k)}x_0$
+    \end{itemize}
+
+
+
+
+\subsection{Application of Markov Chain For ranking website}
+
+$\rightarrow$ is the outlink(link to other website, $w_2$ doesn't have outlinks)
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
+	\tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+	\node[state]    (w2)                     {$w_2$};
+	\node[state]    (w1)[below of=w2]   {$w_1$};
+	\node[state]    (w3)[right of=w1]   {$w_3$};
+	\node[state]    (w4)[right of=w3]   {$w_4$};
+
+    \path % path to other nodes
+	(w1) edge			node{$1/2$}	(w2)
+	(w1) edge			node{$1/2$}	(w3)
+	(w3) edge[bend left, above]			node{$1/2$}	(w4)
+	(w4) edge[bend left, below]			node{$1$}	(w3)
+    (w3) edge[above]			node{$1/2$}	(w2);
+	\end{tikzpicture}
+\end{center}
+
+
+
+\begin{equation*}
+    \mathbf{\textbf{Perference Hypothesis}}=
+  \begin{blockarray}{*{4}{c} l}
+    \begin{block}{*{4}{>{$\footnotesize}c<{$}} l}
+        $\tikzmark{from}w_1$ & $w_2$ & $w_3$ & $w_4$ & \\
+    \end{block}
+    \begin{block}{[*{4}{c}]>{$\footnotesize}l<{$}}
+      0 & 0 & 0 & 0  \bigstrut[t]& $\tikzmark{to}w_1$ \\
+      1/2 & 0 & 1/2 & 0  & $w_2$ \\
+      1/2 & 0 & 0 & 1  & $w_3$ \\
+      0 & 0 & 1/2 & 0  & $w_4$ \\
+    \end{block}
+  \end{blockarray}
+\end{equation*}
+\begin{tikzpicture}[remember picture,overlay]
+    \draw[<-] 
+      ([shift={(2pt,10pt)}]pic cs:from) |- ([shift={(2pt,20pt)}]pic cs:from) 
+      node[anchor=south] {$\scriptstyle \text{\color{red}from}$}; 
+    \draw[<-] 
+      ([shift={(2pt,10pt)}]pic cs:to) |- ([shift={(2pt,20pt)}]pic cs:to) 
+      node[anchor=south] {$\scriptstyle \text{\color{red}to}$}; 
+\end{tikzpicture}
+
+$\sim$ assume we the matrix for $x_n = \begin{bmatrix} 0.2 \\ 0 \\ 0.7 \\ 0.1  \end{bmatrix}$, this is the personal perference for four different websites
+
+
+\subsection{Steady State}
+Let P be an nxn stochastic matrix. A steady state n equilibrium vector q in $R^n$ is a vector that can be defined as follows:
+\begin{center}
+    $p \cdot \color{red}q\color{black} = 1 \cdot q$ \\ 
+    (\color{red} a state as $x_k$ \color{black})
+\end{center}
+is the same as saying: Ax = $\lambda$x (where $\lambda$ = 1, q is the eigen vector and 1 is the eigen value)
 
 \end{document}
 

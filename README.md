@@ -33,7 +33,7 @@
 ##### &#x23f5; [templates](./LaTex/templates/)
 
 #### [+] Algebra  
-##### &#x23f5; [Linear Algebra](./Math/)
+##### &#x23f5; [Linear Algebra](./Math/Linear_Algebra/)
 
 
 # More to know
