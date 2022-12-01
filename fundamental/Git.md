@@ -74,11 +74,11 @@
 ```
 ##### &#x25cb; cancel commit 
 ```
-# undo last commit
->> git reset --soft HEAD~
-
-# undo all changes 
+# undo last changes 
 >> git reset
+
+# undo all commit
+>> git reset --soft HEAD~
 ```
 
 ### [5] Push/Pull
@@ -147,6 +147,14 @@ include this file in the local .git directory for eliminating items you don't wa
 >> vim .gitignore 
 >> {copy and paste}
 ```
+
+##### &#x25cb; Current Directory 
+```
+if you have .git repo inside a git repo, the .gitignore inside parent directory won't have effect on children's
+
+don't do ths if not necessary
+```
+
 ##### &#x25cb; syntax 
 ```
 no pdf -> *.pdf
