@@ -1,6 +1,8 @@
 
-
 # Computer Science
+```
+minecraft birth location: /tp -1806.812 93 10542.678
+```
 #### [+] Computer Organization 
 ##### &#x23f5; [essential](./fundamental/Computer_Organization.md)
 
@@ -19,7 +21,7 @@
 ##### &#x23f5; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
 
 #### [+] Git 
-##### &#x23f5; [basic command](./fundamental/Git.md)
+##### &#x23f5; [command](./fundamental/Git.md)
 
 #### [+] Theory of Computation 
 ##### &#x23f5; [TOC](./fundamental/TOC.md)
