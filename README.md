@@ -1,7 +1,7 @@
 
 # Computer Science
 ```
-minecraft birth location: /tp -1806.812 93 10542.678
+understand something is important
 ```
 #### [+] Computer Organization 
 ##### &#x23f5; [essential](./fundamental/Computer_Organization.md)
