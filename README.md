@@ -8,18 +8,16 @@ understand something is important
 
 #### [+] Programming Language 
 ##### &#x23f5; [C++](./programming_language/conceptC++.md)
-##### &#x23f5; [JavaScript](./programming_language/JS/)
+##### &#x23f5; [JavaScript](./programming_language/JS/) 
 
-#### (+) Data Structure 
 
-##### &#x266f; [basic](./data_structure/dataStructureBasic.md) 
-##### &#x266f; [advanced](./data_structure/dataStructureAdvanced.md)
-
-#### [+] Algorithm 
-##### &#x23f5; [basic](./algorithm/basicAlgorithm.md)
+#### [+] Algorithm & Data Structure
+##### &#x23f5; data structure: [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
+##### &#x23f5; algorithm: [basic](./algorithm/basicAlgorithm.md)
 
 #### [+] Database 
-##### &#x23f5; [relational](./database/)[[1]](./database/relationalDatabase_1.md)[[2]](./database/relationalDatabase_2.md)
+##### &#x23f5; relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
+##### &#x23f5; non-relational
 
 #### [+] Git 
 ##### &#x23f5; [command](./fundamental/Git.md)
@@ -32,8 +30,7 @@ understand something is important
 
 # Math
 #### [+] LaTex 
-##### &#x23f5; [guide](./LaTex/LatexGuide.md)
-##### &#x23f5; [templates](./LaTex/templates/)
+##### &#x23f5; [guide](./LaTex/LatexGuide.md) | [templates](./LaTex/templates/)
 
 #### [+] Algebra  
 ##### &#x23f5; [Linear Algebra](./Math/Linear_Algebra/)
