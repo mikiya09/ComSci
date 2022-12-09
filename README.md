@@ -5,9 +5,9 @@ understand something is important
 ```
 
 #### &#x25c9; Programming Language 
-##### &#x21b3; [C++](./programming_language/conceptC++.md) &#x21b3; [Python]() &#x21b3; [JavaScript](./programming_language/JS/) 
+##### &#x21f0; [C++](./programming_language/conceptC++.md) &#x21f0; [Python]() &#x21f0; [JavaScript](./programming_language/JS/) 
 #### &#x25c9; Computer Organization 
-##### &#x21f0; [fundamental](./fundamental/Computer_Organization.md)
+##### &#x21b3; [fundamental](./fundamental/Computer_Organization.md)
 
 #### &#x25c9; Database 
 ##### &#x21b3; relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
