@@ -4,8 +4,8 @@
 understand something is important
 ```
 
-#### &#x25cf; Programming Language 
-##### &#x21b3; [C++](./programming_language/conceptC++.md) &#x2192; [Python]() &#x2192; [JavaScript](./programming_language/JS/) 
+#### &#x25c9; Programming Language 
+##### &#x266a; [C++](./programming_language/conceptC++.md) &#x266a; [Python]() &#x266a; [JavaScript](./programming_language/JS/) 
 #### &#x25c9; Computer Organization 
 ##### &#x21b3; [fundamental](./fundamental/Computer_Organization.md)
 
