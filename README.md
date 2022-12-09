@@ -1,16 +1,15 @@
 
-# Computer Science
 ```
 understand something is important
 ```
 
-### &#x25c9; Programming Language 
+## &#x25c9; Programming Language 
 ##### [C++](./programming_language/conceptC++.md) &#x232d; [Python]() &#x232d; [JavaScript](./programming_language/JS/) 
 
-### &#x25c9; Computer Organization 
+## &#x25c9; Computer Organization 
 ##### &#x21b3; [concepts](./fundamental/Computer_Organization.md)
 
-#### &#x25c9; Database 
+## &#x25c9; Database 
 ##### &#x21b3; relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
 ##### &#x21b3; non-relational
 
