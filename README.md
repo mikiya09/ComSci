@@ -31,17 +31,10 @@ understand something is important
 math is important almost for everything
 ```
 
-
-### &#x237e; Algebra
-##### &#x23f5; [Linear Algebra](./mathematics/Math/Linear_Algebra/)
+### &#x237e; Graph
+##### &#x23f5; [graph]()
 ```
 ```
-
-### &#x237e; Latex
-##### &#x23f5; [guide](./mathematics/LaTex/LatexGuide.md) | [templates](./mathematics/LaTex/templates/)
-```
-```
-
 
 # More to know
 
