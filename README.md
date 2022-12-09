@@ -23,6 +23,8 @@ understand something is important
 
 ### &#x237e; Blockchain 
 ##### &#x23f5; [concepts](./blockchain/blockchain-concept.md)
+```
+```
 
 # &#x232d; Mathematics
 ```
@@ -30,12 +32,13 @@ math is important almost for everything
 ```
 ### &#x237e; Algebra
 ##### &#x23f5; Algebra: [Linear Algebra](./Math/Linear_Algebra/)
+```
+```
 
-### &#x237e; Math Tools
-##### &#x23f5; LaTex: [guide](./LaTex/LatexGuide.md) | [templates](./LaTex/templates/)
-
-
-
+### &#x237e; Latex
+##### &#x23f5; Basic: [guide](./LaTex/LatexGuide.md) | [templates](./LaTex/templates/)
+```
+```
 
 
 # More to know
