@@ -28,12 +28,11 @@ understand something is important
 math is important almost for everything
 ```
 
-### &#x237e; Graph
+## &#x237e; Graph
 ##### &#x23f5; [graph]()
-```
-```
+<br />
 
-# More to know
+# &#x232d; More to know
 
 ### &#x26af; Scripting Language
 ### &#x26af; Dart (Flutter)
