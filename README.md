@@ -5,7 +5,7 @@
 understand something is important
 ```
 
-### &#x03e8; Fundamental
+### &#x237e; Fundamental
 ##### &#x23f5; Computer Organization: [concept](./fundamental/Computer_Organization.md)
 ##### &#x23f5; Theory of Computation: [concept](./fundamental/TOC.md)
 ##### &#x23f5; Data Structure: [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
