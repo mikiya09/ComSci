@@ -4,15 +4,16 @@
 understand something is important
 ```
 #### [+] Computer Organization 
-##### &#x23f5; [essential](./fundamental/Computer_Organization.md)
+##### &#x23f5; [fundamental](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
 ##### &#x23f5; [C++](./programming_language/conceptC++.md)
 ##### &#x23f5; [JavaScript](./programming_language/JS/)
 
-#### [+] Data Structure 
-##### &#x23f5; [basic](./data_structure/dataStructureBasic.md)
-##### &#x23f5; [advanced](./data_structure/dataStructureAdvanced.md)
+#### &#x23f5; Data Structure 
+
+##### &#x266f; [basic](./data_structure/dataStructureBasic.md) 
+##### &#x266f; [advanced](./data_structure/dataStructureAdvanced.md)
 
 #### [+] Algorithm 
 ##### &#x23f5; [basic](./algorithm/basicAlgorithm.md)
