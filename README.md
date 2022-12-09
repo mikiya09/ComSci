@@ -4,10 +4,10 @@
 understand something is important
 ```
 
-### &#x25c9; Programming Language 
+#### &#x25c9; Programming Language 
 ##### &#x21b3; [C++](./programming_language/conceptC++.md) &#x232d; [JavaScript](./programming_language/JS/)
 
-### &#x25c9; Computer Organization 
+#### &#x25c9; Computer Organization 
 ##### &#x23f5; [fundamental](./fundamental/Computer_Organization.md)
 
 #### [+] Database 
