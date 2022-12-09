@@ -11,17 +11,17 @@ understand something is important
 ##### &#x23f5; Data Structure: [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
 ##### &#x23f5; Algorithm: [basic](./algorithm/basicAlgorithm.md) | [advance]()
 ##### &#x23f5; Programming Language: [C++](./programming_language/conceptC++.md) | [Python]() | [JavaScript](./programming_language/JS/) 
-----
+<br/>
 
 ### &#x237e; Database 
 ##### &#x23f5; Relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
 ##### &#x23f5; Non-relational: 
 ##### &#x23f5; Git: [command](./fundamental/Git.md)
-----
+<br/>
 
 ### &#x237e; Blockchain 
 ##### &#x23f5; [concepts](./blockchain/blockchain-concept.md)
-----
+<br/>
 
 # &#x232d; Mathematics
 ```
