@@ -9,12 +9,12 @@ understand something is important
 #### &#x25c9; Computer Organization 
 ##### &#x21b3; [fundamental](./fundamental/Computer_Organization.md)
 
-#### [+] Database 
+#### &#x25c9; Database 
 ##### &#x21b3; relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
 ##### &#x21b3; non-relational
 
-#### [+] Data Structure
-##### &#x23f5; [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
+#### &#x25c9; Data Structure
+##### &#x21b3; [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
 
 #### [+] Algorithm
 ##### &#x23f5; [basic](./algorithm/basicAlgorithm.md)
