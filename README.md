@@ -7,13 +7,13 @@ understand something is important
 ##### &#x23f5; [fundamental](./fundamental/Computer_Organization.md)
 
 #### [+] Programming Language 
-##### &#x23f5; [C++](./programming_language/conceptC++.md)
-##### &#x23f5; [JavaScript](./programming_language/JS/) 
+##### &#x23f5; [C++](./programming_language/conceptC++.md) | [javaScript](./programming_language/JS/) 
 
+#### [+] Data Structure
+##### &#x23f5; [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
 
-#### [+] Algorithm & Data Structure
-##### &#x23f5; data structure: [basic](./data_structure/dataStructureBasic.md) | [advance](./data_structure/dataStructureAdvanced.md)
-##### &#x23f5; algorithm: [basic](./algorithm/basicAlgorithm.md)
+#### [+] Algorithm
+##### &#x23f5; [basic](./algorithm/basicAlgorithm.md)
 
 #### [+] Database 
 ##### &#x23f5; relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
@@ -23,7 +23,7 @@ understand something is important
 ##### &#x23f5; [command](./fundamental/Git.md)
 
 #### [+] Theory of Computation 
-##### &#x23f5; [TOC](./fundamental/TOC.md)
+##### &#x23f5; [concepts](./fundamental/TOC.md)
 
 #### [+] Blockchain 
 ##### &#x23f5; [concepts](./blockchain/blockchain-concept.md)
