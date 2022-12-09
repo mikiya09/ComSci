@@ -11,7 +11,7 @@ understand something is important
 ##### &#x23f5; Data Structure: [basic](./fundamental/data_structure/dataStructureBasic.md) | [advance](./fundamental/data_structure/dataStructureAdvanced.md)
 ##### &#x23f5; Algorithm: [basic](./fundamental/algorithm/basicAlgorithm.md) | [advance]()
 ##### &#x23f5; Programming Language: [C++](./fundamental/programming_language/conceptC++.md) | [Python]() | [JavaScript](./fundamental/programming_language/JS/)
-<hr />
+<hr style="border: 0.3px solid green; width:40%;"></hr>
 
 ### &#x237e; Database 
 ##### &#x23f5; Relational: [operation](./database/relationalDatabase_1.md) | [design](./database/relationalDatabase_2.md)
