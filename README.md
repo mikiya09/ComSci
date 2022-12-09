@@ -10,7 +10,7 @@ understand something is important
 ##### &#x23f5; [C++](./programming_language/conceptC++.md)
 ##### &#x23f5; [JavaScript](./programming_language/JS/)
 
-#### &#x23f5; Data Structure 
+#### (+) Data Structure 
 
 ##### &#x266f; [basic](./data_structure/dataStructureBasic.md) 
 ##### &#x266f; [advanced](./data_structure/dataStructureAdvanced.md)
