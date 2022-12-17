@@ -1,5 +1,15 @@
 
 
+# Template 
+
+
+# Linked List +
+
+### circular
+
+### doubly
+
+### reverse
 
 # Recursion
 ```
@@ -1041,5 +1051,167 @@ insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
     + Random Probing
 ```
 
-#### [+] Buckets & Chaining
+##### &#x266f; Quadratic Probing
+```
+example
+```
+
+#### [+] Buckets & Chaining 
+```
+Handle collisions by allowing multiple elements to have the same hash value 
+```
+
+##### &#x266f; Bucket 
+```
+A collection of values associated with the same hash key; has limited space
+```
+<img src="./pic/buckets.png" width=600>
+
+##### &#x266f; Chain 
+```
+A linked list of elements that share the same hash key; the hash table has pointers to list of values
+```
+<img src="./pic/chain.png" width=600>
+
+##### &#x2192; Chaining Example 
+```
+The hash table is an array of linked lists 
+
+Insert Keys: 0, 1, 4, 9, 16, 25, 36, 49, 64, 81
+    • elements would be associated with the keys 
+    • using the hash function h(k) = k mod m 
+    • m = 10 (which is the size of the original array)
+
+
+            -----    -----                      -----    -----
+            | 0 | -> | 0 |                      | 0 | -> | 0 |
+            |---|    -----                      |---|    ------    -----
+            | 1 | -> | 1 |                      | 1 | -> | 81 | -> | 1 |
+            |---|    -----                      |---|    ------    -----
+            | 2 |                               | 2 |
+            |---|                               |---|
+            | 3 |                               | 3 |
+            |---|    -----                      |---|    ------    -----
+            | 4 | -> | 4 |                      | 4 | -> | 64 | -> | 4 |
+            |---|    ------                     |---|    ------    -----
+            | 5 | -> | 25 |       ---->         | 5 | -> | 25 |
+            |---|    ------                     |---|    ------    ------
+            | 6 | -> | 16 |                     | 6 | -> | 36 | -> | 16 |
+            |---|    ------                     |---|    ------    ------
+            | 7 |                               | 7 |
+            |---|                               |---|
+            | 8 |                               | 8 |
+            |---|    -----                      |---|    ------    -----
+            | 9 | -> | 9 |                      | 9 | -> | 49 | -> | 9 |
+            -----    -----                      -----    ------    -----
+
+Note that: 
+new node is adding at the front, because the of the properties of adding new nodes to linked list
+```
+
+##### &#x2192; Probing v.s. Chaining 
+<img src="./pic/probingVSchaining.png" width=600>
+
+```
+Search: 
+    1) Probing must continue searching the array until all possible hash keys have been checked. 
+    2) Chaining only looks through the chain, which is likely to be relatively small
+
+*Deletion: 
+    1) Chaining simply removes the element from the linked list. 
+    2) Probing requires special signal values
+```
+
+#### [+] Choosing a Good Hash Function 
+```
++ A good hash function reduces colliisions by uniformly distributing elements 
+
+    1) Division Method 
+        • key % size 
+        - by making the table larger than the expected number of elements, collisions can be reduced
+        - very efficient, but collisions can be common
+
+    2) Other Methods
+        • folding: break the key into multiple pieces and concatenate or XOR the pieces to make a complete hash key
+
+    3) Creating a Good Hash Function 
+        • Efficiency 
+        • Simplicity 
+        • Perfect hash functions: are difficult but not impossible, especially for small sets of values.
+```
+<br>
+
+## &#x238f; Sorting 
+
+### &#x2366; Algorithm Evaluation
+```
+1) The number of comparisons made 
+2) The number of times data is moved 
+3) The amount of additional memory used
+```
+
+### &#x2366; Sorting Efficiency (not time complexity)
+```
+• Worst Case: The data is in reverse order 
+
+• Average Case: Random Data, may be somewhat sorted already 
+
+• Best Case: The array is already sorted 
+
+=> Typically, average and worst case performance are similar, if not identical 
+=> For many algorithms, the best case is also the same as the other cases
+```
+
+### &#x2366; Basic Sorting Algorithms 
+
+#### &#x2317; Selection Sort
+```
+1) set "current" to the first index of the array 
+2) Find the smallest value in the array 
+3) Swap the smallest value with the value in the current 
+4) Increment current and repeat steps 2-4 until the end of the array is reached
+
+=> note: the algorithm do the sorting forward, won't touch the order of the other portion of the array
+```
+<img src="./pic/selectionSort.png" width=700>
+
+##### &#x25ca; Analyze Selection Sort
+```
+• A very simple, easy-to-understand algorithm 
+• N iterations are performed 
+• Iteration I checks N - I items to find the next smallest values 
+```
+
+$$ N*(N-1) \over 2 $$
+<center>Comparisons in Total</center>
+
+```
+because less comparisons after some comparisons is finished
+• Therefore, selection sort is O(N^2)
+• Even in the best case, still O(N^2)
+```
+
+
+#### &#x2317; Bubble Sort
+``` 
+1) Set "current" to the first index of the array 
+2) For every index from the end of the list to 1, swap adjacent pairs of elements that are out of order
+    + The name comes from how smaller elements "bubble up" to the top of the array
+    + The inner loop compares values[index] < values[index-1], and swaps the two values if it evaluates to true
+    + The smallest value is brought to the front of the unsorted portion
+3) Increment current and repeat steps 2-3
+4) Stop when current is at the end of the array
+```
+<img src="./pic/bubbleSort.png" width=700>
+
+##### &#x25ca; Analyze Bubble Sort
+```
+• Takes N-1 iterations, because the last iteration puts two values in order
+• Each iteration I perform N-I comparisons 
+• Bubble sort is therefore O(N^2)
+• It may perform several swaps per iteration 
+• An already-sorted array needs only 1 iteration, so the best case is O(N)
+```
+
+#### &#x2317; Insertion Sort
 
