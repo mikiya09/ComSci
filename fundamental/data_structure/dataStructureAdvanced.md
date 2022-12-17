@@ -1214,4 +1214,79 @@ because less comparisons after some comparisons is finished
 ```
 
 #### &#x2317; Insertion Sort
+```
+1) Iterate from arr[1] to arr[n] over the array 
+2) Compare the current element (key) to its predecessor 
+3) If the key element is smaller than its predecessor, compare it to the elements before
+    + Move the greater elements one position up to make spaec for the swapped element 
+4) Increment key and repeat steps 2-4 until the end of the array is reached
+```
+<img src="./pic/insertionSort.png" width=700>
 
+##### &#x25ca; Analyzing Insertion Sort 
+```
+pseudocode 
+--------------------------------------
+for j = 2 to n {
+    key = A[j];
+    i = j - 1;
+    While (i > 0) and (A[i] > key) {
+        A[i+1] = A[i];
+        i = i - 1;
+    }
+    A[i+1] = key;
+}
+--------------------------------------
+
+• O(N^2), like the bubble sorts 
+• Best Case: O(N), since only one comparison is needed, and no data is moved
+```
+
+### &#x2366; O(N log<sub>2</sub>N) Sorting Algorithms
+```
+• O(N^2) is not good enough when sorting large sets of data 
+
+• Splitting the array in half, sorting and then merging the two arrays is (N/2)^2 + (N/2)^2 
+• This "divide-and-conquer" approach can then be applied to each half, giving "NlogN" time complexity sort
+```
+
+#### &#x2317; Merge Sort
+```
+1) Split the array in half 
+2) Recursively MergeSort the two halves 
+3) Merge the two halves 
+4) Base Case: Arrays of < 2 elements are already sorted
+```
+
+##### &#x2192; `Divide`
+<img src="./pic/mergeSortDivide.png" width=500>
+
+##### &#x2192; `Conquer`
+<img src="./pic/mergeSortConquer.png" width=500>
+
+##### &#x2192; `Merge`
+<img src="./pic/mergeSortmerge.png" width=500>
+
+```
+1) Simultaneously walk through both arrays 
+2) If item A < item B, copy item A into the temp array and get the next item from A 
+3) If item B < item A, copy item B into the temp array and get the next item from B 
+4) Stop when one of the the arrays is empty; copy any remaining elements from the other array 
+5) Copy the temp array into the original array
+
+
+pseudocode 
+-------------------------------
+MERGE-SORT(A, p, r)
+    if p < r 
+        q = floor((p+r)/2)
+        MERGE-SORT (A, p, q)
+        MERGE-SORT (A, q+1, r)
+        MERGE(A, p, q, r)
+-------------------------------
+
+```
+
+##### &#x25ca; Analyzing Merge Sort
+
+##### &#x25ca; Merging Levels
