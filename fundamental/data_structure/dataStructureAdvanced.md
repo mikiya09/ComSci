@@ -185,7 +185,7 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
     -> "get value started at 0002, get the value stored at 0003, store the sum in 0001" (assembly language)
 ```
 
-<img src="./pic/staticBinding.png" width=650>
+<img src="./pic/staticBinding.png" width=500>
 
 ##### `issues`
 ```
@@ -225,10 +225,10 @@ Activation Record:
     + every function call creates a new activation record, which is deleted once the call is complete
 ```
 
-<img src="./pic/stackFrame.png" width=650>
+<img src="./pic/stackFrame.png" width=500>
 
 #### &#x2317; Run-Time Stack
-<img src="./pic/runTimeStack.png" width=650>
+<img src="./pic/runTimeStack.png" width=500>
 
 ##### &#x26ac; Ex: Run-Time Stack of Factorial(4)
 ```
@@ -535,7 +535,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
                     / \       / \
             ------ G - H --- I - J ------------ Level 3: children should be filled under D first then E (AFAL)
 ```
-<img src="./pic/treeExample.png" width=650>
+<img src="./pic/treeExample.png" width=500>
 
 
 #### &#x2317; Shape 
@@ -557,7 +557,7 @@ ex).
                             18  10                 40  30 8
 ```
 ##### &#x26ac; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
-<img src="./pic/heap.png" width=650>
+<img src="./pic/heap.png" width=500>
 
 ##### &#x26ac; exercise 
 ```
@@ -835,7 +835,7 @@ void PQType<ItemType>::Dequeue(ItemType& item)
 }
 ```
 ##### &#x26ac; Time Complexity
-<img src="./pic/timeComplexityPQ.png" width=600>
+<img src="./pic/timeComplexityPQ.png" width=400>
 
 
 ## &#x238f; <a name="heapsort"></a> Heap Sort
@@ -869,7 +869,7 @@ remove the root --> ReheapDown --> repeat
 3) all the leaf nodes are heaps already
 ```
 ##### &#x26ac; start with Unsorted List
-<img src='./pic/unsortedHeap.png' width=600>
+<img src='./pic/unsortedHeap.png' width=400>
 
 ##### &#x26ac; Find first non-leaf node
 ```
@@ -990,7 +990,7 @@ a function that manipuates the key to produce an array index
                                       ----------------------
 ```
 ##### &#x26ac; Ex). h(k) = return (k mod m)
-<img src="./pic/HashingEx.png" width=500>
+<img src="./pic/HashingEx.png" width=300>
 
 #### &#x2317; Collisions
 ```
@@ -1008,7 +1008,7 @@ ex). 01234 and 97534 mod 100 both produce hash value of "34"
     -> calculate the hash and search sequentially until the matching key is found 
     -> stop when an empty space or the orginal hash is found
 ```
-<img src="./pic/LinearProbing.png" width=600>
+<img src="./pic/LinearProbing.png" width=500>
 
 ##### `> h(k) = k mod m`
 ```
@@ -1740,7 +1740,7 @@ array-based & linked list-based: largest design question is how to handle edges
 ```
 1) All vertices are stored in an array 
 
-2) Edges are represented in an adjacency matrix, a NxN table that shows the existence and weight of each edge in the graph 
+2) Edges are represented in an adjacency matrix, NxN table shows the weight of each edge in the graph 
                                -----------------
                     - array as row and column at the same time 
 
@@ -1764,3 +1764,21 @@ array-based & linked list-based: largest design question is how to handle edges
 simply searching the vertex array is sufficient <br> 
 [`GetToVertices`](): Enqueues each vertex that the source node has an edge to <br>
 [`GetWeight`](): Looks up the weight in the matrix
+
+#### &#x2317; Linked-List 
+```
+Adjacency List: A linked list that identifies all vertices to which a vertex is connected 
+    - each vertex has its own adjacency list 
+    - two implementation 
+        1. array indices 
+        2. pointers to vertices 
+```
+##### &#x26ac; Array of vertices
+<img src="./pic/arrayVertexGraph.png" width=700>
+
+##### &#x26ac; Linked List vertices
+<img src="./pic/linkedListVertexGraph.png" width=700>
+
+`which to use?`
+
+<img src="./pic/linkedListOrArrayGraph.png" width=600>
