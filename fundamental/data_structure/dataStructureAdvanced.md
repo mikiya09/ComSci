@@ -1630,7 +1630,7 @@ Two vertices are said to be adjacency if they are connected by an edge
 ##### &#x25cb; IsFull
 ##### &#x25cb; IsEmpty
 ##### &#x25cb; GetWeight
-##### &#x25e6; GetToVertices 
+##### &#x26ac; GetToVertices 
 `returns a queue of adjacent vertices`
 #### &#x2317; Others
 
