@@ -133,7 +133,7 @@ int Combinations(int group, int members)
 
 <img src="./pic/Combinations.png" width=400>
 
-##### &#x25cb; Recursive Binary Search 
+##### &#x26ac; Recursive Binary Search 
 ```
 • pseudocode
 
@@ -162,7 +162,7 @@ END FUNCTION
 ```
 associating a memory address with a variable name
 ```
-##### &#x25cb; Static Binding 
+##### &#x26ac; Static Binding 
 ##### `occurs at compile time`
 ```
 1) When a program is compiled, each variable is entered into a symbol table and bound to a memory address
@@ -195,7 +195,7 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
 4) Therefore, langauges that only have static storage allocation cannot support recursion
 ```
 
-##### &#x25cb; Dynamic Binding
+##### &#x26ac; Dynamic Binding
 ##### `occurs at run time`
 ```
 1) Variable names are bound to memory addresses at run time
@@ -207,7 +207,7 @@ Three variables are declared: int a, b, c -> The compiler binds them in the symb
                                                        -----------------
 ```
 #### &#x2317; Activation Records
-##### &#x25cb; need to know
+##### &#x26ac; need to know
 ```
 functions need to store local variables, parameters, and return address
     + return address: where execution returns to, once execution of the function has completed
@@ -230,7 +230,7 @@ Activation Record:
 #### &#x2317; Run-Time Stack
 <img src="./pic/runTimeStack.png" width=650>
 
-##### &#x25cb; Ex: Run-Time Stack of Factorial(4)
+##### &#x26ac; Ex: Run-Time Stack of Factorial(4)
 ```
 1) at address 5200 is the statement: answer = Factorial(4);
 2) this starts the recursive algorithm by pushing an activation record onto the stack
@@ -331,7 +331,7 @@ V
     --------------------------------------------------
 ```
 
-##### &#x25cb; Recursion Depth 
+##### &#x26ac; Recursion Depth 
 ```
 The number of recursive calls constitutes the depth of recursion
 
@@ -495,7 +495,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
 
 ## &#x238f; Heap
 ### &#x2366; Tree 
-##### &#x25cb; Full Tree
+##### &#x26ac; Full Tree
 ```
 : a binary tree in which each node has 0 or 2 children
 
@@ -514,7 +514,7 @@ enqueue and dequeue: both O(logN) steps, even in the worst case
                         -----     -----
 
 ```
-##### &#x25cb; Complete Binary Tree
+##### &#x26ac; Complete Binary Tree
 ```
 1) a binary tree in which every level, except possibly the last, is completely filled
 2) all nodes are as far left as possible(AFAL)
@@ -556,10 +556,10 @@ ex).
                              /  \                   /  \  /
                             18  10                 40  30 8
 ```
-##### &#x25cb; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
+##### &#x26ac; Numbering Nodes Left to Right by Level, storing nodes in array using numbering as index
 <img src="./pic/heap.png" width=650>
 
-##### &#x25cb; exercise 
+##### &#x26ac; exercise 
 ```
 Q: tree elements stored in by level, from left to right 
 
@@ -592,7 +592,7 @@ struct HeapType
 ```
 #### &#x2317; Implementation 
 
-##### &#x25cb; Swap
+##### &#x26ac; Swap
 ```cpp 
 // simple operatrion function that ReheapUp and ReheapDown to work
 template<class ItemType>
@@ -606,7 +606,7 @@ void Swap(ItemType& one, ItemType& two)
 }
 ```
 
-##### &#x25cb; ReheapDown 
+##### &#x26ac; ReheapDown 
 ```cpp 
 
 // each comparison involving three nodes in every recursion 
@@ -664,7 +664,7 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 <img src="./pic/ReheapDown.png" width=600>
 
 
-##### &#x25cb; ReheapUp
+##### &#x26ac; ReheapUp
 ```cpp
 
 //                        -----
@@ -707,7 +707,7 @@ void HeapType<ItemType>::ReheapUp(int root, int bottom)
 
 ```
 
-##### &#x25cb; Why not always ReheapDown ?
+##### &#x26ac; Why not always ReheapDown ?
 ```
 because different conditions in different algorithm for them to process 
 1) ReheapDown: continue when leftChild is less or equal than bottom leaf 
@@ -717,7 +717,7 @@ because different conditions in different algorithm for them to process
 <img src="./pic/ReheapUp.png" width=600>
 
 #### &#x2317; Implement Priority Queue with Heap
-##### &#x25cb; Two Issues
+##### &#x26ac; Two Issues
 ```
 1) Dequeue 
     -> return the root of the heap, leaving a hole at the top
@@ -731,7 +731,7 @@ because different conditions in different algorithm for them to process
 
 ```
 
-##### &#x25cb; PQType Declaration 
+##### &#x26ac; PQType Declaration 
 ```cpp 
 class FullPQ{};
 class EmptyPQ{};
@@ -756,7 +756,7 @@ private:
 }
 ```
 
-##### &#x25cb; PQType Definitions
+##### &#x26ac; PQType Definitions
 ```cpp
 template<class ItemType>
 PQType<ItemType>::PQType(int max)
@@ -791,7 +791,7 @@ bool PQType<ItemType>::IsFull()
 }
 ```
 
-##### &#x25cb; Solutions to Two issues
+##### &#x26ac; Solutions to Two issues
 ```
 solution 1) for Dequeue()
     + call ReheapDown() after place the bottom item to the root
@@ -834,7 +834,7 @@ void PQType<ItemType>::Dequeue(ItemType& item)
     }
 }
 ```
-##### &#x25cb; Time Complexity
+##### &#x26ac; Time Complexity
 <img src="./pic/timeComplexityPQ.png" width=600>
 
 
@@ -848,30 +848,30 @@ V
 V
 3) repeat for the next highest value
 ```
-##### &#x25cb; downside
+##### &#x26ac; downside
 ```
 search for second/next highest value in the list makes this selection sort inefficient
 ```
-##### &#x25cb; overcome downside
+##### &#x26ac; overcome downside
 ```
 heap for this selection sort efficient, because only need to select highest for each recursion/iteration 
 ```
-##### &#x25cb; steps 
+##### &#x26ac; steps 
 ```
 remove the root --> ReheapDown --> repeat
 ```
 
 #### &#x2317; Building a Heap (heapify)
-##### &#x25cb; meet preconditions -> ReheapDown()
+##### &#x26ac; meet preconditions -> ReheapDown()
 ```
 1) unsorted list is a tree
 2) there are no holes in the array
 3) all the leaf nodes are heaps already
 ```
-##### &#x25cb; start with Unsorted List
+##### &#x26ac; start with Unsorted List
 <img src='./pic/unsortedHeap.png' width=600>
 
-##### &#x25cb; Find first non-leaf node
+##### &#x26ac; Find first non-leaf node
 ```
 firstNonLeaf = maxLen/2 - 1;
 
@@ -902,7 +902,7 @@ index:  -> 4, 5, 6, 7, 8 are leaf nodes
 index: 5, 6, 7, 8, 9, 10 are leaf nodes -> take floor(11/2)-1 = 4
 
 ```
-##### &#x25cb; Sorting 
+##### &#x26ac; Sorting 
 ```cpp 
 template<class ItemType>
 void HeapSort(ItemType values[], int numValues)
@@ -923,7 +923,7 @@ void HeapSort(ItemType values[], int numValues)
 ```
 <img src="./pic/heapSort.png" width=600>
 
-##### &#x25cb; Sorted Item is placed at the end of the array 
+##### &#x26ac; Sorted Item is placed at the end of the array 
 ```
 Q).
 taking an array of length m for heap sort, stop at the n th recursion (n<m), what will happen?
@@ -939,19 +939,19 @@ n elements at the back of the array are sorted
 An unsorted collection of distinct values, based on the mathematical concept
                           --------
 ```
-##### &#x25cb; Component(base) Type
-##### &#x25cb; Subset
-##### &#x25cb; Universal Set
-##### &#x25cb; Empty Set
+##### &#x26ac; Component(base) Type
+##### &#x26ac; Subset
+##### &#x26ac; Universal Set
+##### &#x26ac; Empty Set
 
 #### &#x2317; Set Operations
-##### &#x25cb; Store & Delete 
-##### &#x25cb; Union
-##### &#x25cb; Intersection
-##### &#x25cb; Difference 
-##### &#x25cb; Cardinality
+##### &#x26ac; Store & Delete 
+##### &#x26ac; Union
+##### &#x26ac; Intersection
+##### &#x26ac; Difference 
+##### &#x26ac; Cardinality
 
-##### &#x25cb; Ex)
+##### &#x26ac; Ex)
 ```
 SetA = {A, B, D, G, Q, S}
 SetB = {A, D, P, S, Z}
@@ -966,7 +966,7 @@ Difference(SetB, SetA) = {P, Z} Q}              // order difference
 
 ### &#x2366; Map
 #### &#x2317; Logical Level
-##### &#x25cb; An ADT that is a collection of *key-value pairs*
+##### &#x26ac; An ADT that is a collection of *key-value pairs*
 ```
 1) key: a value of the base type of the map, used to look up an associated value 
 2) store unsorted, unique values 
@@ -989,7 +989,7 @@ a technique for ordering and accessing elements in a list by manipulating the ke
 a function that manipuates the key to produce an array index 
                                       ----------------------
 ```
-##### &#x25cb; Ex). h(k) = return (k mod m)
+##### &#x26ac; Ex). h(k) = return (k mod m)
 <img src="./pic/HashingEx.png" width=500>
 
 #### &#x2317; Collisions
@@ -999,7 +999,7 @@ when multiple keys produce the same hash location
 ex). 01234 and 97534 mod 100 both produce hash value of "34"
 ```
 
-##### &#x25cb; Linear Probing
+##### &#x26ac; Linear Probing
 ```
 1) Resolves hasd collisions by searching for the next available space 
 2) If the end of the hash is reached, linear probing loops around to the beginning 
@@ -1037,7 +1037,7 @@ insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
         -----                 ------
 ```
 
-##### &#x25cb; Issues with Linear probing -> Rehashing
+##### &#x26ac; Issues with Linear probing -> Rehashing
 ```
 1) deleting an item creates an empty spot, when three items with the same hash and second is deleted
    Linear Probing stop 
@@ -1053,7 +1053,7 @@ insert keys: {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
     + Random Probing
 ```
 
-##### &#x25cb; Quadratic Probing
+##### &#x26ac; Quadratic Probing
 ```
 example
 ```
@@ -1063,19 +1063,19 @@ example
 Handle collisions by allowing multiple elements to have the same hash value 
 ```
 
-##### &#x25cb; Bucket 
+##### &#x26ac; Bucket 
 ```
 A collection of values associated with the same hash key; has limited space
 ```
 <img src="./pic/buckets.png" width=600>
 
-##### &#x25cb; Chain 
+##### &#x26ac; Chain 
 ```
 A linked list of elements that share the same hash key; the hash table has pointers to list of values
 ```
 <img src="./pic/chain.png" width=600>
 
-##### &#x25cb; Chaining Example 
+##### &#x26ac; Chaining Example 
 ```
 The hash table is an array of linked lists 
 
@@ -1111,7 +1111,7 @@ Note that:
 new node is adding at the front, because the of the properties of adding new nodes to linked list
 ```
 
-##### &#x25cb; Probing v.s. Chaining 
+##### &#x26ac; Probing v.s. Chaining 
 <img src="./pic/probingVSchaining.png" width=600>
 
 ```
@@ -1177,7 +1177,7 @@ Search:
 ```
 <img src="./pic/selectionSort.png" width=700>
 
-##### &#x25cb; Analyze Selection Sort
+##### &#x26ac; Analyze Selection Sort
 ```
 • A very simple, easy-to-understand algorithm 
 • N iterations are performed 
@@ -1206,7 +1206,7 @@ because less comparisons after some comparisons is finished
 ```
 <img src="./pic/bubbleSort.png" width=700>
 
-##### &#x25cb; Analyze Bubble Sort
+##### &#x26ac; Analyze Bubble Sort
 ```
 • Takes N-1 iterations, because the last iteration puts two values in order
 • Each iteration I perform N-I comparisons 
@@ -1225,7 +1225,7 @@ because less comparisons after some comparisons is finished
 ```
 <img src="./pic/insertionSort.png" width=700>
 
-##### &#x25cb; Analyzing Insertion Sort 
+##### &#x26ac; Analyzing Insertion Sort 
 ```
 pseudocode 
 --------------------------------------
@@ -1289,7 +1289,7 @@ MERGE-SORT(A, p, r)
 
 ```
 
-##### &#x25cb; Analyzing Merge Sort
+##### &#x26ac; Analyzing Merge Sort
 ```
 1) The array is split into smaller and smaller arrays until it is finally split into 1- or 0- element arrays 
 2) Merging all of these 1-element arrays into 2-element arrays is O(N)
@@ -1298,7 +1298,7 @@ MERGE-SORT(A, p, r)
     ! extra memeory(space) for a size of an array for temporarily holding data, sorting in not in place
 ```
 
-##### &#x25cb; Merging Levels
+##### &#x26ac; Merging Levels
 <img src="./pic/mergeSort.png" width=650>
 
 #### &#x2317; Quick Sort
@@ -1330,7 +1330,7 @@ QuickSort(first, last)
 ---------------------------------------------------------------------------------------
 ```
 
-##### &#x25cb; Quick Sort: Splitting Algorithm
+##### &#x26ac; Quick Sort: Splitting Algorithm
 ##### `QuickSort is not sorting, is just making sure the values are on the correct side of the split`
 ```
 Concept walk through: 
@@ -1343,7 +1343,7 @@ Concept walk through:
 7) Repeat 4-6 until first and last meet, swap the pivot and last
 ```
 
-##### &#x25cb; Analyzing Quick Sort 
+##### &#x26ac; Analyzing Quick Sort 
 *• Best Case*
 
 <img src="./pic/QuickSortBestCase.png" width=600>
@@ -1355,8 +1355,8 @@ Concept walk through:
 
 #### &#x2317; Heap Sort
 
-##### &#x25cb; [algorithm](#heapsort)
-##### &#x25cb; Analyzing Heap Sort
+##### &#x26ac; [algorithm](#heapsort)
+##### &#x26ac; Analyzing Heap Sort
 ```
 1) The overheadl for building the heap is significant, O(N), and thus heap sort should be avoided for small arrays
 2) ReheapDown is O(logN) and is called N times 
@@ -1368,7 +1368,7 @@ Concept walk through:
 
 #### &#x2317;  Other Considerations
 
-##### &#x25cb; Efficiency
+##### &#x26ac; Efficiency
 ```
 1) effiiency is not the only thing to consider when choosing which sorting algorithm to use 
 2) in some case, O(N^2) may grow slower than O(NlogN)
@@ -1378,7 +1378,7 @@ Concept walk through:
     • O(NlogN) sorts ususally have more overhead and more actions, such as merging
 ```
 
-##### &#x25cb; Space 
+##### &#x26ac; Space 
 ```
 1) Merge Sort requires an additional N memory 
 2) depending on the implementation and the data, QuickSort may use O(N) additional memory 
@@ -1386,7 +1386,7 @@ Concept walk through:
 ```
 
 #### &#x2317; Stable Sorting Algorithms
-##### &#x25cb; Keys and Stability
+##### &#x26ac; Keys and Stability
 ```
 consider a situation: 
     • a record may contain multiple keys, such as a student's name, ID number, and major 
@@ -1397,7 +1397,7 @@ consider a situation:
     => this only works if the sort is stable!
 ```
 
-##### &#x25cb; Stable Sort
+##### &#x26ac; Stable Sort
 ```
 : a sorting algorithm that preserves the order of duplicate keys (course ID has duplicate rows)
 
@@ -1414,7 +1414,7 @@ consider a situation:
 <img src="./pic/stableSort.png" width=800>
 
 
-##### &#x25cb; Unstable Sort 
+##### &#x26ac; Unstable Sort 
 ```
 Heap Sort is the only algorithm so far that is inherentiy unstablebe 
     + because of the heap properties 
@@ -1423,7 +1423,7 @@ Heap Sort is the only algorithm so far that is inherentiy unstablebe
 <img src="./pic/unstableSort.png" width=400>
 
 
-##### &#x25cb; Sorting With Pointers 
+##### &#x26ac; Sorting With Pointers 
 ```
 -> Moving around large objects is ineffcient 
 -> Instead, have an array of pointers to those large objects, and have the sort move the pointers 
@@ -1432,7 +1432,7 @@ Heap Sort is the only algorithm so far that is inherentiy unstablebe
 <img src="./pic/sortingWithPointer.png" width=600>
 
 
-##### &#x25cb; Caching
+##### &#x26ac; Caching
 ```
 1) A small store of very fast memory, to access a small amount of memory quickly
 2) The cache can store a very limited amount of data and code 
@@ -1442,7 +1442,7 @@ Heap Sort is the only algorithm so far that is inherentiy unstablebe
     • an algorithm that makes good use of the cache will be faster than other algorithm that don't
 ```
 
-##### &#x25cb; Sorting & Caching
+##### &#x26ac; Sorting & Caching
 ```
 1)_ Bubble Sort has predictable memory access patterns, and only compares adjacent elements, 
     which complements the cache's behavior 
@@ -1465,14 +1465,14 @@ Heap Sort is the only algorithm so far that is inherentiy unstablebe
     - The base-10 digitis have a radix of 10
 ```
 
-##### &#x25cb; Example
+##### &#x26ac; Example
 ##### `1) how would you modify the Radix Sort to sort the list in descending order then ascending order?`
 <img src="./pic/radixSort.png" width=600>
 
 ##### `2) does Radix Sort return correct sorting results when the input sequence contains negative value?`
 <img src="./pic/radixSortNegative.png" width=600>
 
-##### &#x25cb; Analyzing Radix Sort
+##### &#x26ac; Analyzing Radix Sort
 ```
 • Each item (N) is processed once for each position in the key (P)
 
@@ -1495,7 +1495,7 @@ Heap Sort is the only algorithm so far that is inherentiy unstablebe
 ```
 <img src="./pic/parallelMergeSort.png" width=600>
 
-##### &#x25cb; Thread (线程)
+##### &#x26ac; Thread (线程)
 ```
 For the first attempt at parallelizing Merge Sort, create a new thread for every recursive call 
 
@@ -1516,7 +1516,7 @@ Each parent thread waits for the two child threads it spawns to finish, then mer
 => this approach causes incredible slowdowns and will crash the program on large inputs
 => Each thread has a lot of overhead
 ```
-##### &#x25cb; Chunks
+##### &#x26ac; Chunks
 ```
 : chunks is array size
 
@@ -1529,7 +1529,7 @@ Each parent thread waits for the two child threads it spawns to finish, then mer
 ```
 <img src="./pic/chunksSize.png" width=600>
 
-##### &#x25cb; Avoiding Parallel Access 
+##### &#x26ac; Avoiding Parallel Access 
 ```
 1) Merge Sort works well in parallel because each divided part is independent 
 2) None of the threads access parts of the array that another thread is using (unlike normal merge sort)
@@ -1579,7 +1579,7 @@ Edges have no direction
 <img src="./pic/undirectedGraph.png" width=300>
 
 #### &#x2317; Graph Concepts
-##### &#x25cb; Adjacency
+##### &#x26ac; Adjacency
 ```
 Two vertices are said to be adjacency if they are connected by an edge 
 
@@ -1590,7 +1590,7 @@ Two vertices are said to be adjacency if they are connected by an edge
      ----      --------------------
 ```
 
-##### &#x25cb; Completeness 
+##### &#x26ac; Completeness 
 ```
 >> In a complete graph, every node is directly connected to every other node 
 
@@ -1623,13 +1623,13 @@ Two vertices are said to be adjacency if they are connected by an edge
 ### &#x2366; Graph Operations 
 [`code`]()
 #### &#x2317; Transformers
-##### &#x25cb; AddVertex
-##### &#x25cb; AddEdge
-##### &#x25cb; MakeEmpty
+##### &#x26ac; AddVertex
+##### &#x26ac; AddEdge
+##### &#x26ac; MakeEmpty
 #### &#x2317; Observers
-##### &#x25cb; IsFull
-##### &#x25cb; IsEmpty
-##### &#x25cb; GetWeight
+##### &#x26ac; IsFull
+##### &#x26ac; IsEmpty
+##### &#x26ac; GetWeight
 ##### &#x26ac; GetToVertices 
 `returns a queue of adjacent vertices`
 #### &#x2317; Others
