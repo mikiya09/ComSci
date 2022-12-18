@@ -1617,8 +1617,9 @@ Two vertices are said to be adjacency if they are connected by an edge
 
 3) For instance, the weights on a graph of cities would be the distance between the cities 
 4) The total distance between two cities is the sum of weights on the path between them
+
+=> refer to below DFS example
 ```
-<img src="./pic/weightGraph.png" width=400>
 
 ### &#x2366; Graph Operations 
 [`code`]()
@@ -1634,10 +1635,132 @@ Two vertices are said to be adjacency if they are connected by an edge
 `returns a queue of adjacent vertices`
 #### &#x2317; Others
 
-### &#x2366; Graph Application Level
+### &#x2366; Graph: Application Level
 ```
 Because => traversing(遍历) the graph is independent of the graph itself 
 so      => graph traversal methods are separate from the graph operation
 ```
 
 #### &#x2317; Depth-First Search
+```
+Follows a path as far as possible before backtracking (deep)
+    - similar to postorder traversal of binary trees 
+
+=> it is useful in graphs for checking if a path exists between two nodes (•-•-...-•)
+```
+##### &#x26ac; DFS algorithm 
+```
+1) add the nodes adjacent to the start node to the stack! 
+2) Pop a node off the stack and examine it 
+3) Add all of the nodes adjacent to the popped node to the stack 
+4) Continue until the target node is found or the stack is empty (no more nodes to check)
+```
+##### &#x26ac; DFS Example
+<img src="./pic/DFSexample.png" width=500>
+
+`ex). Flying from Austin to Washington`
+```
+1) Push Austin onto the stack
+2) Pop Austin, push Dallas and Houston onto the stack 
+    -> automatically push Dallas first because the weighted is smaller
+3) Pop Houston, push Atlanta 
+4) Pop Atlanta, push Washington and Houston
+```
+<img src="./pic/DFSexample2.png" width=600>
+
+##### &#x26ac; Marking with DFS
+```
+1) Atlanta leads to both Houston and Washington, but we already visited Houston 
+
+2) By marking nodes, DFS can avoid revisting nodes, which would lead to cycles
+
+3) Three new operations:
+```
+Transformer: [`MarkVertex`]() <br>
+Observer: [`IsMarked`]() <br>
+function: [`ClearMarks`]()
+
+<img src="./pic/DFSexample3.png" width=500>
+
+#### &#x2317; Breadth-First Search
+```
+1) examines all possible paths of the same length before going further
+2) DFS backtracks as little as possible, while BFS backtracks as far as possible
+       --------------------------------        ---------------------------------
+3) Binary tree, BFS explore all the nodes at a particular level before exploring any nodes on the next level
+4) BFS uses a queue to keep track of nodes
+```
+##### &#x26ac; BFS algorithm 
+```
+1) Enqueue Dallas and Houston 
+2) Dequeue Dallas, enqueue Chicago and Denver 
+3) Dequeue Houston, enqueue Atlanta 
+4) Continue until Washingtion is dequeued 
+5) BFS explored all of the one-flight paths before checking the two-flight paths
+```
+<img src="./pic/BFSexample.png" width=500>
+
+##### &#x26ac; Marking with BFS
+```
+1) A node adjacent to multiple nodes may be added to the queue twice 
+    - Denver is enqueued by Dallas(1) and Chicago(2)
+
+2) Marking a node when it is enqueued prevents multiple copies in the queue
+or 
+3) Marked a node when it is dequeued 
+
+=> either way can be useful
+```
+
+#### &#x2317; Single-Source Shortest Path
+```
+Q: Find the shortest path from the starting city to every other city on the map 
+
+A: fewer flights does not mean shorter; instead, use the edge weights to find the shortest path 
+=> that is find the node with the shortest distance
+```
+
+##### &#x26ac; Shortest Path Algorithm
+```
+1) basically the same as DFS and BFS -> stops when there are no unmarked cities 
+
+2) which structure? 
+    - DFS uses stack, BFS uses queue 
+    - But shortest path needs the node with the next shortest distance 
+    - A minimum priority queue handles this, with the distance used as the priority 
+      -------------------------------------           -----------------------------
+```
+
+### &#x2366; Graph: Implementation Level
+```
+array-based & linked list-based: largest design question is how to handle edges 
+```
+
+#### &#x2317; Array-Based 
+```
+1) All vertices are stored in an array 
+
+2) Edges are represented in an adjacency matrix, a NxN table that shows the existence and weight of each edge in the graph 
+                               -----------------
+                    - array as row and column at the same time 
+
+3) Row[0] of the adjacency matrix contains the edges that start at Vertex[0]
+
+4) The matrix could store Boolean values, or numbers for weighted graphs 
+```
+<img src="./pic/graphArrayBased.png" width=600>
+
+##### &#x26ac; Class [Constructors]()
+```
+1) Dynamically allocating two-dimensional arrays can be somewhat complex 
+   -> implement fixes adjacency matrix 50x50
+
+2) The vertices and marks arrays are dynamically allocated
+```
+
+##### &#x26ac; Operations 
+[`AddVertex`](): Inserts the vertex at the end of the array and sets all of its adjacency entries to 0 <br>
+[`AddEdge`](): Takes two vertices, but needs the indices of the vertices in the vertex array; 
+simply searching the vertex array is sufficient <br> 
+[`GetToVertices`](): Enqueues each vertex that the source node has an edge to <br>
+[`GetWeight`](): Looks up the weight in the matrix
