@@ -1299,7 +1299,6 @@ MERGE-SORT(A, p, r)
 ```
 
 ##### &#x26ac; Merging Levels
-<img src="./pic/mergeSort.png" width=660>
 
 #### &#x2317; Quick Sort
 ```
