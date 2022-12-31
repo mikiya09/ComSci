@@ -36,6 +36,18 @@ Temporary Items
 # latex file ignore
 *.pdf
 
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
 
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# db file 
+*.db*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
