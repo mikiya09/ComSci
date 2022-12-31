@@ -178,7 +178,7 @@ whichever stage crash happen TXN result in not complete at all
 2) We can operate on it, and database maps internally into this procedural language
 ```
 #### [+] Relational Schema 
-<img src="./pic/relationalSchema.png" width=500>
+<img src="./operationPic/relationalSchema.png" width=500>
 <br>
 
 ```
@@ -189,11 +189,11 @@ A relational schema describes the data that is contained in a relational instanc
 A relational instance is a set of tuples(rows) all conforming to the same schema
 ```
 ##### &#x266f; Columns
-<img src="./pic/relationalColumns.png" width=500>
+<img src="./operationPic/relationalColumns.png" width=500>
 <br> 
 
 ##### &#x266f; Rows
-<img src="./pic/relationalRows.png" width=500>
+<img src="./operationPic/relationalRows.png" width=500>
 <br>
 
 ```
@@ -289,11 +289,11 @@ produce table containing subset of rows of argument table satisfying condition
                          --------------
 ```
 
-<img src="./pic/selectOperator.png" width=600>
+<img src="./operationPic/selectOperator.png" width=600>
 <br>
 
 ##### &#x266f; Selection Condition 
-<img src="./pic/selectionCondition.png" width=600>
+<img src="./operationPic/selectionCondition.png" width=600>
 
 #### [+] Project Operator 
 ##### &#x03c0;<sub>attribute_list</sub>(relation)
@@ -302,13 +302,13 @@ Produces table containing subset of columns of argument table
                           -----------------
 ```
 
-<img src="./pic/projectOperator.png" width=600>
+<img src="./operationPic/projectOperator.png" width=600>
 
 ```
 result is a table(relation) with no duplicates, it can have fewer tuples than the original
 ```
 
-<img src="./pic/projectExample.png" width=600>
+<img src="./operationPic/projectExample.png" width=600>
 
 #### [+] Set Operator 
 
@@ -334,7 +334,7 @@ reiterate:
 ```
 
 ##### &#x266f; Example 
-<img src="./pic/unionCompatibleExample.png" width=400>
+<img src="./operationPic/unionCompatibleExample.png" width=400>
 
 
 #### [+] Cartesian Product 
@@ -352,35 +352,35 @@ where x is a tuple in R and y is a tuple in S
 expensive to compute
 ```
 
-<img src="./pic/cartesianProduct.png" width=400>
+<img src="./operationPic/cartesianProduct.png" width=400>
 
 ##### &#x266f; Renaming 
-<img src="./pic/renaming.png" width=400>
+<img src="./operationPic/renaming.png" width=400>
 
 #### [+] Union ( U )
 
-<img src="./pic/union.png" width=400>
+<img src="./operationPic/union.png" width=400>
 
 ```
 Two relations could have common tuples, but no nessarily
 ```
-<img src="./pic/union2.png" width=400>
+<img src="./operationPic/union2.png" width=400>
 
 #### [+] Difference ( -- )
-<img src="./pic/difference.png" width=400>
+<img src="./operationPic/difference.png" width=400>
 
 ```
 deduct the part belongs to R2 from R1, or reserve
 ```
-<img src="./pic/difference2.png" width=400>
+<img src="./operationPic/difference2.png" width=400>
 
 #### [+] Intersection ( &#x2229; )
-<img src="./pic/intersection.png" width=400>
+<img src="./operationPic/intersection.png" width=400>
 
 ```
 the common part both R1 and R2 have
 ```
-<img src="./pic/intersection2.png" width=400>
+<img src="./operationPic/intersection2.png" width=400>
 
 #### [+] Cartesian-Product Operation 
 ##### &#x266f; Notation: r x s
@@ -391,13 +391,13 @@ r x s = {t q | t ∈ r and q ∈ s}, t, q are rows in r and s
 1) assume that attributes of r(R) and s(S) are disjoint (That is, R ∩ S = ∅)
 2) if attributes of r(R) and s(S) are not disjoint, then renaming must be used
 ```
-<img src="./pic/cartesianProductOperation.png" width=400>
+<img src="./operationPic/cartesianProductOperation.png" width=400>
 
 ##### &#x266f; **&#x03ec;**<sub>A=C</sub>(r x s)
 ```
 select rows where the value of A = C
 ```
-<img src="./pic/cartesianProductOperation2.png" width=400>
+<img src="./operationPic/cartesianProductOperation2.png" width=400>
 
 #### [+] Join 
 ##### &#x266f; Cartesina Product (could)= "join"
@@ -463,7 +463,7 @@ Std = Class, so all the values are equal, there are just different attribute nam
 
 ```
 ###### &#x266f; Another Example
-<img src='./pic/thetaJoin.png' width=500>
+<img src='./operationPic/thetaJoin.png' width=500>
 
 ##### &#x266f; Equijoin 
 ```
@@ -485,7 +485,7 @@ S = (E, B, D)
 ```
 **&#x03c0;**<sub>r.a, r.B, r.C, r.D, r.E</sub>(**&#x03ec;**<sub>r.B=s.B ∧ r.D=s.D</sub>(r x s))
 
-<img src="./pic/natrualJoin.png" width=400>
+<img src="./operationPic/natrualJoin.png" width=400>
 
 ```
 ---------------------------------------------------------------------------------------------
@@ -509,7 +509,7 @@ S = (E, B, D)
 4) which table give us the conditions ?
 ```
 #### 1) Sample Query
-<img src="./pic/sampleQuery1.png" width=500>
+<img src="./operationPic/sampleQuery1.png" width=500>
 
 ```
 1) sname 
@@ -519,7 +519,7 @@ S = (E, B, D)
 ```
 
 #### 2) Sample Query
-<img src="./pic/sampleQuery2.png" width=500>
+<img src="./operationPic/sampleQuery2.png" width=500>
 
 ```
 1) sname 
@@ -530,7 +530,7 @@ S = (E, B, D)
 *Answer:* π<sub>sname</sub>((Ϭ<sub>color='red'</sub>Boats) ⋈ Reserves ⋈ Salior)
 
 #### 3) Sample Query
-<img src="./pic/samplyQuery3.png" width=500>
+<img src="./operationPic/sampleQuery3.png" width=500>
 
 ```
 1) sname 
@@ -544,7 +544,7 @@ same logic as query2, but but here introduce a new way of construct query
 **Final Answer:** π<sub>sname</sub>(Tempboats ⋈ Reserves ⋈ Sailors)
 
 #### 4) Sample Query
-<img src="./pic/sampleQuery4.png" width=500>
+<img src="./operationPic/sampleQuery4.png" width=500>
 
 ```
 same logic, but using "and" operator
@@ -556,7 +556,7 @@ same logic, but using "and" operator
 
 
 #### 5) Sample Query
-<img src="./pic/sampleQuery5.png" width=500>
+<img src="./operationPic/sampleQuery5.png" width=500>
 
 ```
 in the query 4 logic: 
@@ -571,7 +571,7 @@ the sailor we found could not only have red boat reserved but other colors as we
 π<sub>sname</sub>((Tempred - Tempother) ⋈ Sailors)
 
 #### 6) Self Join (natural join)
-<img src="./pic/selfJoin.png" width=550>
+<img src="./operationPic/selfJoin.png" width=550>
 
 #### 7) Practice: find maximum
 
@@ -622,7 +622,7 @@ very high-level programming language, every SQL will be optimized before executi
 + Insert/delete/modify tuples in tables 
 + Query one or more tables
 ```
-<img src="./pic/SQLtable.png" width=600>
+<img src="./operationPic/SQLtable.png" width=600>
 
 ```
 1) Attributes must have an atomic type in standard SQL (not a list, set, etc)
@@ -797,17 +797,17 @@ CREATE TABLE COMPANY(
 
 # Multi-table queries 
 #### [+] Foreign key constraints 
-<img src="./pic/foreignKey.png" width=750>
+<img src="./operationPic/foreignKey.png" width=750>
 
 ##### &#x23f5; Foreign Keys and update operations 
-<img src="./pic/foreignKeyOperation.png" width=500>
+<img src="./operationPic/foreignKeyOperation.png" width=500>
 
-<img src="./pic/foreignKeyExample.png" width=500>
+<img src="./operationPic/foreignKeyExample.png" width=500>
 
 #### [+] Joins
 
 ##### &#x266f; Example 1 
-<img src="./pic/SQLJoin.png" width=600>
+<img src="./operationPic/SQLJoin.png" width=600>
 
 ```
 alternative way to write query 
@@ -824,10 +824,10 @@ I prefer method 1
 ```
 
 ##### &#x266f; Example 2
-<img src="./pic/SQLJoin2.png" width=600>
+<img src="./operationPic/SQLJoin2.png" width=600>
 
 #### [+] Tuple Variable Ambiguity in Multi-Table 
-<img src="./pic/tupleVariableAmbiguity.png" width=600>
+<img src="./operationPic/tupleVariableAmbiguity.png" width=600>
 
 ```
 we cannot do this: 
@@ -839,8 +839,8 @@ WHERE worksfor = name
 which name and address are we refering?
 ```
 #### [+] SQL semantics 
-<img src="./pic/SQLsemantics.png" width=600>
-<img src="./pic/SQLsemanticsJoin.png" width=600>
+<img src="./operationPic/SQLsemantics.png" width=600>
+<img src="./operationPic/SQLsemanticsJoin.png" width=600>
 
 ```
 semantics ≠ execution order, DBMS executes command after optimization
@@ -852,9 +852,9 @@ semantics ≠ execution order, DBMS executes command after optimization
 
 #### [+] Multiset Operations 
 ##### &#x23f5; Multisets 
-<img src="./pic/multisets1.png" width=600>
-<img src="./pic/multisets2.png" width=600>
-<img src="./pic/multisets3.png" width=600>
+<img src="./operationPic/multisets1.png" width=600>
+<img src="./operationPic/multisets2.png" width=600>
+<img src="./operationPic/multisets3.png" width=600>
 
 ##### &#x266f; Multisets Operations
 ###### &#x266f; Intersect
@@ -865,7 +865,7 @@ INTERSECT
 SELECT R.A FROM R, T 
 WHERE R.A = T.A
 ```
-<img src="./pic/intersect.png" width=250>
+<img src="./operationPic/intersect.png" width=250>
 
 ###### &#x266f; Union
 ```
@@ -878,7 +878,7 @@ WHERE R.A = T.A
 
 by default, SQL operator uses set semantics, so there aren't duplicate after single operation
 ```
-<img src="./pic/mutlisetUnion.png" width=250>
+<img src="./operationPic/mutlisetUnion.png" width=250>
 
 ###### &#x266f; Union All
 ```
@@ -889,16 +889,16 @@ SELECT R.A FROM R, T
 FROM R, T
 WHERE R.A = T.A
 ```
-<img src="./pic/unionAll.png" width=350>
+<img src="./operationPic/unionAll.png" width=350>
 
 ###### &#x266f; Except
 ```
 EXCEPT (replace where above operator is)
 ```
-<img src="./pic/except.png" width=350>
+<img src="./operationPic/except.png" width=350>
 
 ##### &#x266f; Issues with Intersect
-<img src="./pic/intersectIssue.png" width=600>
+<img src="./operationPic/intersectIssue.png" width=600>
 
 ```
 As the green background text indicates:
@@ -911,7 +911,7 @@ V
 introduce nexted queries for solving issues that require intersect operation logic
 ```
 #### [+] Nested Queries
-<img src="./pic/nestedQuery.png" width=600>
+<img src="./operationPic/nestedQuery.png" width=600>
 
 ```
 refer to those example in the slides

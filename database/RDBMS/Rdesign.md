@@ -32,7 +32,7 @@ agree on structure of the database before deciding on a particular implementatio
 ### E/R Basics
 
 <details><summary style=font-size:14px>E/R Model & Diagrams used all three DB design process above</summary>
-<img src="./pic2/E:R.png" width=600>
+<img src="./designPic/E:R.png" width=600>
 </details>
 
 ```
@@ -77,7 +77,7 @@ flowchart
     P --- n((name))
     P --- c((category))
 ```
-<img src="./pic2/entityEx.png" width=600>
+<img src="./designPic/entityEx.png" width=600>
 
 ##### &#x266f; Keys
 ```
@@ -97,19 +97,19 @@ A key is a minimal set of attributes that uniquely identifies an entity
 3) This also means that relationship is uniquely determined by the keys of its entities
 ```
 
-<img src="./pic2/mathDefRelationship.png" width=550>
+<img src="./designPic/mathDefRelationship.png" width=550>
 
 
 <details><summary style=font-size:14px>Key<sub>(Makes)</sub> = Key<sub>(Product)</sub> U key<sub>Company</sub></summary>
-<img src="./pic2/keyEx.png" width=400>
+<img src="./designPic/keyEx.png" width=400>
 </details>
 
 <details><summary style=font-size:14px>relationship example</summary>
-<img src="./pic2/relationshipEx.png" width=600>
+<img src="./designPic/relationshipEx.png" width=600>
 </details>
 
 ##### &#x266f; example 
-<img src="./pic2/relationshipEx2.png" width=650>
+<img src="./designPic/relationshipEx2.png" width=650>
 
 ##### &#x266f; Relationship's Attributes
 ```
@@ -119,7 +119,7 @@ A: a person can only buy a specific product once (on one date)
 
 E: because modeling something as a relationship makes it unique; but it's inappropriate in this case
 ```
-<img src="./pic2/relationshipEx3.png" width=600>
+<img src="./designPic/relationshipEx3.png" width=600>
 
 ##### &#x266f; Football Example
 
