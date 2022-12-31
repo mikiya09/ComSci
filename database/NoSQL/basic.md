@@ -102,9 +102,12 @@ print(collections)
 ```
 basic queries: 
 
-1)
-2)
-3)
+1) connect 
+2) insert 
+3) create collection 
+4) read 
+5) update
+6) delete
 ```
 
 #### &#x2314; Schema Validation

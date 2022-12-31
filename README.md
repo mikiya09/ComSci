@@ -14,7 +14,7 @@ understand something is important
 <br />
 
 ## &#x237e; Database 
-##### &#x23f5; Relational: [operation](./database/RDBMS/Roperation.md) | [design](./database/RDBMS/Rdesign.md) | [code](./database/RDBMS/sql/)
+##### &#x23f5; Relational: [operation](./database/RDBMS/Roperation.md) | [design](./database/RDBMS/Rdesign.md) | [code](./database/RDBMS/code/)
 ##### &#x23f5; Non-relational: [basic](./database/NoSQL/basic.md) | [code](./database/NoSQL/code/)
 ##### &#x23f5; Git: [command](./database/Git.md)
 <br />
