@@ -1,7 +1,6 @@
 
 ## &#x250f; Setup 
-### &#x2317; Account
-go to [`mongoBD`](https://www.mongodb.com)sign in your account
+[`mongoBD`](https://www.mongodb.com)
 
 #### &#x2314; Local Environment
 **`+ create a cluster`**
