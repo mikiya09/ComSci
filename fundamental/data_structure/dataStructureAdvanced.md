@@ -1,17 +1,17 @@
 
 
-## &#x238f; Template 
+## &#x2366; Template 
 
 
-## &#x238f; Linked List +
+## &#x2366; Linked List +
 
-### circular
+### &#x2314; circular
 
-### doubly
+### &#x2314; doubly
 
-### reverse
+### &#x2314; reverse
 
-## &#x238f; Recursion
+## &#x2366; Recursion
 ```
 A function calls itself in order to divide work into smaller portions
 
@@ -54,7 +54,7 @@ int Factorial(int number) {
 *2) recursive solution uses a **branching** construct (the if-else statement)*
 
 
-### &#x2366; Verifying Recursive Functions
+### &#x2314; Verifying Recursive Functions
 #### &#x2317; method 1: walking through the whole execution --> tedious but useful
 #### &#x2317; method 2: Three-Question Method
 ```
@@ -66,7 +66,7 @@ int Factorial(int number) {
     + Assuming the recursive calls work correctly, does the rest of the function work correctly?
 
 ```
-### &#x2366; Analysis Recursion
+### &#x2314; Analysis Recursion
 ```
 1) base-case question: 
     > the base case occurs when n=1
@@ -78,7 +78,7 @@ int Factorial(int number) {
     > assuming factorial (n-1) returns the correct answer
     > n * factorial(n-1) corresponds with the mathematical formula
 ```
-### &#x2366; Design Recursion 1
+### &#x2314; Design Recursion 1
 ```
 Q: Check if a particular value is in a list?
 
@@ -105,7 +105,7 @@ bool ValueInList(ListType list, int value, int startIndex)
     }
 }
 ```
-### &#x2366; Design Recursion 2
+### &#x2314; Design Recursion 2
 ```
 Q: How many combinations of 5 books can be made from a group of 20 books? (n choose k)
 Size: size of the group (n) and number of members in each group (k)
@@ -156,7 +156,7 @@ END FUNCTION
 ```
 
 
-### &#x2366; How Recursion Works? 
+### &#x2314; How Recursion Works? 
 
 #### &#x2317; Binding 
 ```
@@ -357,11 +357,11 @@ void Insert(NodeType<ItemType>*& listPtr, ItemType item)
 <img src="./pic/recursiveInsert.png" width=500>
 
 
-## &#x238f; Binary Search Tree (BST)
+## &#x2366; Binary Search Tree (BST)
 
 ##### [incorrect way of thinking BST](https://www.enjoyalgorithms.com/blog/validate-binary-search-tree)
 
-### &#x2366; BST properties 
+### &#x2314; BST properties 
 **code[[1]](./advanced/BST/TreeType.h)[[2]](./advanced/BST/TreeType.cpp)[[3]](./advanced/BST/main.cpp)** 
 ```cpp
 // recursively comparing the current with the previous one
@@ -461,20 +461,20 @@ bool TreeType::IsBST()
 
 
 
-## &#x238f; Priority Queue 
+## &#x2366; Priority Queue 
 
-### &#x2366; Queue
+### &#x2314; Queue
 ```
 • Enqueue an item 
 • Dequque: Item returned has been in the queue the longest amount of time (FCFS)
 ```
-### &#x2366; Priority Queue 
+### &#x2314; Priority Queue 
 ```
 • Enqueue a pair <item, priority>
 • Dequeue: Item returned has highest priority
 ```
 
-### &#x2366; Application Layer 
+### &#x2314; Application Layer 
 ```
 A priority queue is an ADT with the property that only the highest-priority element can be accessed at any time
 ```
@@ -488,13 +488,13 @@ some examples
 • Spanning Tree Algorithm
 ```
 
-### &#x2366; Implementation (refer to below heap section)
+### &#x2314; Implementation (refer to below heap section)
 ```
 enqueue and dequeue: both O(logN) steps, even in the worst case
 ```
 
-## &#x238f; Heap
-### &#x2366; Tree 
+## &#x2366; Heap
+### &#x2314; Tree 
 ##### &#x26ac; Full Tree
 ```
 : a binary tree in which each node has 0 or 2 children
@@ -838,7 +838,7 @@ void PQType<ItemType>::Dequeue(ItemType& item)
 <img src="./pic/timeComplexityPQ.png" width=400>
 
 
-## &#x238f; <a name="heapsort"></a> Heap Sort
+## &#x2366; <a name="heapsort"></a> Heap Sort
 ```
 1) search for the highest value 
 |
@@ -931,9 +931,9 @@ taking an array of length m for heap sort, stop at the n th recursion (n<m), wha
 A).
 n elements at the back of the array are sorted
 ```
-## &#x238f; Hash
+## &#x2366; Hash
 
-### &#x2366; Set 
+### &#x2314; Set 
 #### &#x2317; Logical Level 
 ```
 An unsorted collection of distinct values, based on the mathematical concept
@@ -964,7 +964,7 @@ Difference(SetB, SetA) = {P, Z} Q}              // order difference
 #### &#x2317; Application Level 
 #### &#x2317; Implementation Level
 
-### &#x2366; Map
+### &#x2314; Map
 #### &#x2317; Logical Level
 ##### &#x26ac; An ADT that is a collection of *key-value pairs*
 ```
@@ -980,7 +980,7 @@ Difference(SetB, SetA) = {P, Z} Q}              // order difference
 always big O of 1 for search if you have key in maps: Hashing = map + set
 ```
 
-### &#x2366; Hashing 
+### &#x2314; Hashing 
 ```
 a technique for ordering and accessing elements in a list by manipulating the keys of the elements
 ```
@@ -1143,16 +1143,16 @@ Search:
 ```
 <br>
 
-## &#x238f; Sorting 
+## &#x2366; Sorting 
 
-### &#x2366; Algorithm Evaluation
+### &#x2314; Algorithm Evaluation
 ```
 1) The number of comparisons made 
 2) The number of times data is moved 
 3) The amount of additional memory used
 ```
 
-### &#x2366; Sorting Efficiency (not time complexity)
+### &#x2314; Sorting Efficiency (not time complexity)
 ```
 • Worst Case: The data is in reverse order 
 
@@ -1164,7 +1164,7 @@ Search:
 => For many algorithms, the best case is also the same as the other cases
 ```
 
-### &#x2366; Basic Sorting Algorithms 
+### &#x2314; Basic Sorting Algorithms 
 
 #### &#x2317; Selection Sort
 ```
@@ -1244,7 +1244,7 @@ for j = 2 to n {
 • Best Case: O(N), since only one comparison is needed, and no data is moved
 ```
 
-### &#x2366; O(N log<sub>2</sub>N) Sorting Algorithms
+### &#x2314; O(N log<sub>2</sub>N) Sorting Algorithms
 ```
 • O(N^2) is not good enough when sorting large sets of data 
 
@@ -1543,9 +1543,9 @@ Worth to use?
 => if implemented correctly, then worth
 ```
 
-## &#x238f; Graphs 
+## &#x2366; Graphs 
 
-### &#x2366; Definition 
+### &#x2314; Definition 
 • A **graph** is a set of **vertices** (nodes) and a set of **edges** that relate the vertices to each other
 ```
 1) each vertex (nodes) is a "thing" or data point, such as a person or a city
@@ -1621,7 +1621,7 @@ Two vertices are said to be adjacency if they are connected by an edge
 => refer to below DFS example
 ```
 
-### &#x2366; Graph Operations 
+### &#x2314; Graph Operations 
 [`code`]()
 #### &#x2317; Transformers
 ##### &#x26ac; AddVertex
@@ -1635,7 +1635,7 @@ Two vertices are said to be adjacency if they are connected by an edge
 `returns a queue of adjacent vertices`
 #### &#x2317; Others
 
-### &#x2366; Graph: Application Level
+### &#x2314; Graph: Application Level
 ```
 Because => traversing(遍历) the graph is independent of the graph itself 
 so      => graph traversal methods are separate from the graph operation
@@ -1731,7 +1731,7 @@ A: fewer flights does not mean shorter; instead, use the edge weights to find th
       -------------------------------------           -----------------------------
 ```
 
-### &#x2366; Graph: Implementation Level
+### &#x2314; Graph: Implementation Level
 ```
 array-based & linked list-based: largest design question is how to handle edges 
 ```
