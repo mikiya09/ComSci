@@ -95,6 +95,7 @@ test_db = client.test
 collections = test_db.list_collection_names()
 # print them
 print(dbs)
+print(collections)
 ```
 ### &#x2317; Operations
 **[`code`](./test/main.py)**
