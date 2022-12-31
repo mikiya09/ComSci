@@ -86,6 +86,9 @@
 >> git push -u origin main          // when you have multiple branch, you need to specify one to push 
 >> git push                         // if you only have one main branch
 >> git pull origin main
+
+[+]: you can run all three steps in one line
+>> git add . && git commit -m "xxx" && git push
 ```
 ### [6] Branch
 ##### &#x25cb; checkout/switch
