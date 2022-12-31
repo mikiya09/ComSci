@@ -50,7 +50,7 @@ something on top of the database, you can think of that database is inside the c
 ##### *`+ model`*
 <img src="./pic/documentModel.png" width=500>
 
-##### *`+ collections inside a database`*
+##### *`+ each collection could contain many documents with/without same schema`*
 <img src="./pic/documentModel2.png" width=500>
 
 #### &#x2314; Connect
@@ -98,7 +98,7 @@ print(dbs)
 print(collections)
 ```
 ### &#x2317; Operations
-**[`code`](./test/main.py)**
+**[`code`](./test/basic_query.py)**
 ```
 basic queries: 
 
