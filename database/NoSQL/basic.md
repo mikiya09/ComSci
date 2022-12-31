@@ -98,7 +98,7 @@ print(dbs)
 print(collections)
 ```
 ### &#x2317; Operations
-**[`code`](./test/basic_query.py)**
+**[`code`](./code/basic_query.py)**
 ```
 basic queries: 
 
