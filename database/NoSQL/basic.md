@@ -130,6 +130,8 @@ When execute command like "collMod", or something involves valiadtor I assume, y
 4) if bad auth happen it might because you have change password, but did not specify at compass connection
 5) if you want to add null values, you have to specify in validation
 ```
+<img src="./pic/accessAdmin.png" width=800>
+
 **[`+ example`](./code/advanced_queries.py): for some reason schema validation is not working properly for my 
 author collections, so I turn that validation level from to "strict" to "off", but book validation works fine,
 I guess it might cause by some unknown reason that I don't need to care for right now**
@@ -215,7 +217,6 @@ production.command("collMod", "book", validator=book_validator)
 }
 ```
 ##### &#x21e2; Reference Patterns 
-**`we reference authors in book collection in our example`**
 ```python 
 # it's always good to use reference pattern because large database has One-to-Many or Many-to-Many
 # ------------------------------------------------------------------------------------------------
@@ -272,6 +273,11 @@ production.command("collMod", "book", validator=book_validator)
    language: "English"
 }
 ```
+**`we reference authors in book collection in our example`** <br>
+
+<img src="./pic/bookData.png" width=400>
+<img src="./pic/authorData.png" width=400>
+
 #### &#x2314; Advanced Queries
 ```
 # google for reference
