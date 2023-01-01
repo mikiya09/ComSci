@@ -111,11 +111,206 @@ basic queries:
 ```
 
 #### &#x2314; Schema Validation
+##### &#x21e2; Admin Access 
+```
+When execute command like "collMod", or something involves valiadtor I assume, you have to change permission 
+                          ----------                                                              ----------
+
+1) open cluster 
+    -> security on the left tab 
+    -> click Database Access 
+2) click edit 
+    -> click built-in Role 
+    -> select Atlas admin giving access
+    -> update user (other users are also given permission here)
+3) configure connection string 
+    -> make sure we are authenticating as admin, which doesn't happen by default
+    -> mongodb+srv://mikiya:{password}@test01.ydhguxj.mongodb.net/?retryWrites=true&w=majority&authSource=admin
+    -> run the valiadtor code and check it on the validation tab
+4) if bad auth happen it might because you have change password, but did not specify at compass connection
+5) if you want to add null values, you have to specify in validation
+```
+**[`+ example`](./code/advanced_queries.py): for some reason schema validation is not working properly for my 
+author collections, so I turn that validation level from to "strict" to "off", but book validation works fine,
+I guess it might cause by some unknown reason that I don't need to care for right now**
+```python
+# json file that specify the requirement for values fields in the schema for collections
+#                                            |
+#                                            v 
+# same as value constraint in relational database when you declare an attribute
+
+# code
+book_validator = {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": ["title", "authors", "publish_date", "type", "copies"],
+            "properties": {
+                "title": {
+                    "bsonType": "string",
+                    "description": "must be a string and is required"
+                },
+                "authors": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "objectId",
+                        "description": "must be an objectid and is required"
+                    }
+                },
+                "publish_data": {
+                    "bsonType": "date",
+                    "description": "must be a date and is required"
+                },
+                "type": {
+                    "enum": ["Fiction", "Non-Fiction"],
+                    "description": "can only be one of the enum values and is required"
+                },
+                "copies": {
+                    "bsonType": "int",
+                    "minimum": 0,
+                    "description": "must be an integer greater than 0 and is required"
+                },
+            }
+        }
+    }
+
+try: 
+    production.create_collection("book")
+except Exception as e:
+    print(e)
+
+production.command("collMod", "book", validator=book_validator)
+```
 #### &#x2314; Data Modeling
+##### &#x21e2; Embedded Document Pattern
+```python
+# if we modeling One-to-One relationship, it's fast using embedded
+# ------------------------------------------------------------------
+
+# patron document
+{
+   _id: "joe",
+   name: "Joe Bookreader"
+}
+
+# address document
+{
+   patron_id: "joe", # reference to patron document
+   street: "123 Fake Street",
+   city: "Faketon",
+   state: "MA",
+   zip: "12345"
+}
+
+# embedded
+# ------------------------------------------------------------------
+{
+   _id: "joe",
+   name: "Joe Bookreader",
+   address: {
+              street: "123 Fake Street",
+              city: "Faketon",
+              state: "MA",
+              zip: "12345"
+            }
+}
+```
+##### &#x21e2; Reference Patterns 
+**`we reference authors in book collection in our example`**
+```python 
+# it's always good to use reference pattern because large database has One-to-Many or Many-to-Many
+# ------------------------------------------------------------------------------------------------
+{
+   title: "MongoDB: The Definitive Guide",
+   author: [ "Kristina Chodorow", "Mike Dirolf" ],
+   published_date: ISODate("2010-09-24"),
+   pages: 216,
+   language: "English",
+   publisher: {
+              name: "O'Reilly Media",
+              founded: 1980,
+              location: "CA"
+            }
+}
+
+{
+   title: "50 Tips and Tricks for MongoDB Developer",
+   author: "Kristina Chodorow",
+   published_date: ISODate("2011-05-06"),
+   pages: 68,
+   language: "English",
+   publisher: {
+              name: "O'Reilly Media",
+              founded: 1980,
+              location: "CA"
+            }
+}
+
+# reference patterns 
+# ------------------------------------------------------------------------------------------------
+{
+   name: "O'Reilly Media",
+   founded: 1980,
+   location: "CA",
+   books: [123456789, 234567890, ...]
+}
+
+{
+    _id: 123456789,
+    title: "MongoDB: The Definitive Guide",
+    author: [ "Kristina Chodorow", "Mike Dirolf" ],
+    published_date: ISODate("2010-09-24"),
+    pages: 216,
+    language: "English"
+}
+
+{
+   _id: 234567890,
+   title: "50 Tips and Tricks for MongoDB Developer",
+   author: "Kristina Chodorow",
+   published_date: ISODate("2011-05-06"),
+   pages: 68,
+   language: "English"
+}
+```
 #### &#x2314; Advanced Queries
+```
+# google for reference
+
+1) $regex 
+2) $lookup 
+3) ...
+```
 #### &#x2314; Pymongo Arrow
+[`package`](https://mongo-arrow.readthedocs.io/en/latest/quickstart.html)
+```python
+# install dependencies
+pip install jupyter pymongoarrow pymongo pandas numpy
+```
+```python 
+import pyarrow 
+from pymongoarrow.api import Schema 
+from pymongoarrow.monkey import patch_all
+import pymongoarrow as pma 
 
+# patch all the apis that work with mongodb's collections, just make sure you run this command 
+patch_all()
 
-### &#x2317; Full Text-Search
+# specify attributes that you want to get 
+author = Schema({"_id": ObjectId, "first_name": pyarrow.string(),
+                 "last_name": pyarrow.string(), "date_of_birth": dt})
+
+# pandas dataframe 
+# remember production = client.production
+df = production.author.find_pandas_all({}, schema=author)   # id is in binary form
+
+# arrow table is what all attributes collected into a list 
+arrow_table = production.author.find_arrow_all({}, schema=author)
+
+# array 
+ndarrays = production.author.find_numpy_all({}, schema=author)
+
+print(df)
+```
+
 
 
