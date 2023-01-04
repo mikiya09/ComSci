@@ -2,7 +2,6 @@
 
 ## &#x250f; Template 
 
-
 ## &#x250f; Linked List +
 
 ### &#x2317; circular

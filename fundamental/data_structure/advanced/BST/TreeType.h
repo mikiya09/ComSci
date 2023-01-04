@@ -1,10 +1,10 @@
 
-
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <vector>
 using namespace std;
+
 
 // setting ItemType as an alias for char 
 typedef char ItemType;
