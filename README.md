@@ -5,13 +5,13 @@
 understand something is important
 ```
 
-## &#x237e; Fundamental
-##### &#x23f5; Computer Organization: [concept](./basics/Computer_Organization.md)
-##### &#x23f5; Theory of Computation: [concept](./basics/TOC.md)
-##### &#x23f5; Data Structure: [basic](./basics/data_structure/dataStructureBasic.md) | [advance](./basics/data_structure/dataStructureAdvanced.md)
-##### &#x23f5; Algorithm: [basic](./basics/algorithm/basicAlgorithm.md) | [advance]()
-##### &#x23f5; Programming Language: [C++](./basics/programming_language/conceptC++.md) | [Python]() | [JavaScript](./basics/programming_language/JS/)
-##### &#x23f5; Scripting Language: [shell](./Scripting/testing)
+## &#x237e; Essence
+##### &#x23f5; Computer Organization: [concept](./essence/computer-organization.md)
+##### &#x23f5; Theory of Computation: [concept](./essence/theory-of-computation.md)
+##### &#x23f5; Data Structure: [basic](./essence/data-structure/dataStructureBasic.md) | [advance](./essence/data-structure/dataStructureAdvanced.md)
+##### &#x23f5; Algorithm: [basic](./essence/algorithm/basicAlgorithm.md) | [advance]()
+##### &#x23f5; Programming Language: [C++](./essence/programming/conceptC++.md) | [Python]() | [JavaScript](./essence/programming/JS/)
+##### &#x23f5; Scripting Language: [shell](./essence/scripting/script.md)
 <br />
 
 ## &#x237e; Database 
