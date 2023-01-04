@@ -1,5 +1,12 @@
 
 
+## Names 
+```
+#: pound 
+&: ampersand 
+*: asterisk
+```
+
 ## &#x250f; Template 
 
 ## &#x250f; Linked List +
