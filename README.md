@@ -15,13 +15,13 @@ understand something is important
 <br />
 
 ## &#x237e; Database 
-##### &#x23f5; relational database: [operation](./Database/RDBMS/Roperation.md) | [design](./Database/RDBMS/Rdesign.md) | [code](./Database/RDBMS/code/)
-##### &#x23f5; non-relational dbms: [command](./Database/NoSQL/command.md) | [code](./Database/NoSQL/code/)
-##### &#x23f5; git: [command](./Database/Git.md)
+##### &#x23f5; relational database: [operation](./database/RDBMS/Roperation.md) | [design](./database/RDBMS/Rdesign.md) | [code](./database/RDBMS/code/)
+##### &#x23f5; non-relational dbms: [basic](./database/NoSQL/basic.md) | [code](./database/NoSQL/code/)
+##### &#x23f5; git: [command](./database/Git.md)
 <br />
 
 ## &#x237e; Blockchain 
-##### &#x23f5; [concept](./Blockchain/blockchain-concept.md)
+##### &#x23f5; [concept](./blockchain/blockchain-concept.md)
 <br />
 
 # &#x232d; Mathematics
@@ -30,7 +30,7 @@ math is important almost for everything
 ```
 
 ## &#x237e; Graph
-##### &#x23f5; [graph](./Mathematics/testing)
+##### &#x23f5; [graph](./mathematics/testing)
 <br />
 
 # &#x232d; More to know
