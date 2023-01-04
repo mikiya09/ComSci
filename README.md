@@ -30,7 +30,7 @@ math is important almost for everything
 ```
 
 ## &#x237e; Graph
-##### &#x23f5; [graph](./mathematics/testing)
+##### &#x23f5; [graph]{./mathematics/graph.tex}
 <br />
 
 # &#x232d; More to know
