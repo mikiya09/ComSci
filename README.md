@@ -15,13 +15,14 @@ understand something is important
 <br />
 
 ## &#x237e; Database 
-##### &#x23f5; relational database: [operation](./database/RDBMS/Roperation.md) | [design](./database/RDBMS/Rdesign.md) | [code](./database/RDBMS/code/)
-##### &#x23f5; non-relational dbms: [basic](./database/NoSQL/basic.md) | [code](./database/NoSQL/code/)
-##### &#x23f5; git: [command](./database/Git.md)
+##### &#x23f5; Relational Database: [operation](./database/RDBMS/Roperation.md) | [design](./database/RDBMS/Rdesign.md) | [code](./database/RDBMS/code/)
+##### &#x23f5; Non-Relational DBMS: [basic](./database/NoSQL/basic.md) | [code](./database/NoSQL/code/)
+##### &#x23f5; Git: [command](./database/Git.md)
 <br />
 
-## &#x237e; Blockchain 
-##### &#x23f5; [concept](./blockchain/blockchain-concept.md)
+## &#x237e; Cryptorize
+##### &#x23f5; Blockchain: [concept](./cryptorize/blockchain/blockchain-concept.md)
+##### &#x23f5; Ethical Hacking: [learn](./cryptorize/hacking/hacking.md)
 <br />
 
 # &#x232d; Mathematics
