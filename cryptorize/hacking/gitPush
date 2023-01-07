@@ -43,7 +43,8 @@ printf "\n --- add message --- \n"
 read -r message                     # whatever I entered 
 
     git commit -m "$message"
-    git push git@github.com:mikiya09/"$repo".git
+    # git push git@github.com:mikiya09/"$repo".git
+    git push
 
 
 # if received N/n on the second if question (because we don't end it with fi)
