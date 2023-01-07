@@ -103,6 +103,8 @@ Zsh  (Z shell):            built on top of bash
 #! /bin/bash               -- if you want to enforce a script to use bash shell
 
 #! /bin/zsh                -- same for z shell, don't worry if you install zsh through homebrew
+
+# but most of the zsh script is able to run in bash shell, so just put it out
 ```
 
 #### &#x2314; configure .zprofile

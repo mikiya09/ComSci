@@ -1,5 +1,5 @@
 
-## &#x250f; Setup 
+# &#x250f; Setup 
 
 [`mongoBD`](https://www.mongodb.com)
 
@@ -97,7 +97,7 @@ collections = test_db.list_collection_names()
 print(dbs)
 print(collections)
 ```
-### &#x2317; Operations
+# &#x250f; Operations
 **[`code`](./code/basic_query.py)**
 ```
 basic queries: 
@@ -110,8 +110,8 @@ basic queries:
 6) delete
 ```
 
-#### &#x2314; Schema Validation
-##### &#x21e2; Admin Access 
+### &#x2317; Schema Validation
+#### &#x2314; Admin Access 
 ```
 When execute command like "collMod", or something involves valiadtor I assume, you have to change permission 
                           ----------                                                              ----------
@@ -182,8 +182,8 @@ except Exception as e:
 
 production.command("collMod", "book", validator=book_validator)
 ```
-#### &#x2314; Data Modeling
-##### &#x21e2; Embedded Document Pattern
+### &#x2317; Data Modeling
+#### &#x2314; Embedded Document Pattern
 ```python
 # if we modeling One-to-One relationship, it's fast using embedded
 # ------------------------------------------------------------------
@@ -216,7 +216,7 @@ production.command("collMod", "book", validator=book_validator)
             }
 }
 ```
-##### &#x21e2; Reference Patterns 
+#### &#x2314; Reference Patterns 
 ```python 
 # it's always good to use reference pattern because large database has One-to-Many or Many-to-Many
 # ------------------------------------------------------------------------------------------------
@@ -278,7 +278,7 @@ production.command("collMod", "book", validator=book_validator)
 <img src="./pic/bookData.png" width=400>
 <img src="./pic/authorData.png" width=400>
 
-#### &#x2314; Advanced Queries
+### &#x2317; Advanced Queries
 ```
 # google for reference
 
@@ -286,7 +286,7 @@ production.command("collMod", "book", validator=book_validator)
 2) $lookup 
 3) ...
 ```
-#### &#x2314; Pymongo Arrow
+### &#x2317; Pymongo Arrow
 [`package`](https://mongo-arrow.readthedocs.io/en/latest/quickstart.html)
 ```python
 # install dependencies

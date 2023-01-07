@@ -1,15 +1,15 @@
 
 
-## Names 
+# Names 
 ```
 #: pound 
 &: ampersand 
 *: asterisk
 ```
 
-## &#x250f; Template 
+# &#x250f; Template 
 
-## &#x250f; Linked List +
+# &#x250f; Linked List +
 
 ### &#x2317; circular
 
@@ -17,7 +17,7 @@
 
 ### &#x2317; reverse
 
-## &#x250f; Recursion
+# &#x250f; Recursion
 ```
 A function calls itself in order to divide work into smaller portions
 
@@ -363,7 +363,7 @@ void Insert(NodeType<ItemType>*& listPtr, ItemType item)
 <img src="./pic/recursiveInsert.png" width=500>
 
 
-## &#x250f; Binary Search Tree (BST)
+# &#x250f; Binary Search Tree (BST)
 
 [**`+ incorrect way of thinking BST`**](https://www.enjoyalgorithms.com/blog/validate-binary-search-tree)
 
@@ -467,7 +467,7 @@ bool TreeType::IsBST()
 
 
 
-## &#x250f; Priority Queue 
+# &#x250f; Priority Queue 
 
 ### &#x2317; Queue
 ```
@@ -499,7 +499,7 @@ some examples
 enqueue and dequeue: both O(logN) steps, even in the worst case
 ```
 
-## &#x250f; Heap
+# &#x250f; Heap
 ### &#x2317; Tree 
 ##### &#x21e2; Full Tree
 ```
@@ -844,7 +844,7 @@ void PQType<ItemType>::Dequeue(ItemType& item)
 <img src="./pic/timeComplexityPQ.png" width=400>
 
 
-## &#x250f; <a name="heapsort"></a> Heap Sort
+# &#x250f; <a name="heapsort"></a> Heap Sort
 ```
 1) search for the highest value 
 |
@@ -938,7 +938,7 @@ taking an array of length m for heap sort, stop at the n th recursion (n<m), wha
 A).
 n elements at the back of the array are sorted
 ```
-## &#x250f; Hash
+# &#x250f; Hash
 
 ### &#x2317; Set 
 #### &#x2314; Logical Level 
@@ -1150,7 +1150,7 @@ Search:
 ```
 <br>
 
-## &#x250f; Sorting 
+# &#x250f; Sorting 
 
 ### &#x2317; Algorithm Evaluation
 ```
@@ -1550,7 +1550,7 @@ Worth to use?
 => if implemented correctly, then worth
 ```
 
-## &#x250f; Graphs 
+# &#x250f; Graphs 
 
 ### &#x2317; Definition 
 • A **graph** is a set of **vertices** (nodes) and a set of **edges** that relate the vertices to each other

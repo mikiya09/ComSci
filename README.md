@@ -10,8 +10,8 @@ understand something is important
 ##### &#x23f5; Theory of Computation: [concept](./essence/theory-of-computation/theory-of-computation.md)
 ##### &#x23f5; Data Structure: [basic](./essence/data-structure/dataStructureBasic.md) | [advance](./essence/data-structure/dataStructureAdvanced.md)
 ##### &#x23f5; Algorithm: [basic](./essence/algorithm/basicAlgorithm.md) | [advance]()
-##### &#x23f5; Programming Language: [C++](./essence/programming/conceptC++.md) | [Python]() | [JavaScript](./essence/programming/JS/)
-##### &#x23f5; Scripting Language: [shell](./essence/scripting/script.md)
+##### &#x23f5; Programming: [c++](./essence/programming/conceptC++.md) | [python]() | [javascript](./essence/programming/JS/)
+##### &#x23f5; Shell: [scripting](./essence/shell/script.md) | [command](./essence/shell/command.md)
 <br />
 
 ## &#x237e; Database 
