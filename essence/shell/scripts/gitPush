@@ -15,6 +15,19 @@ repo=$1         # the repository name up on the github (like ComSci, not your lo
 file=$2         # the file you modified or all of them (*)
 
 
+
+# color red 
+RED='\033[0;31m'
+# no color 
+NOCOLOR='\033[0m'
+# check current branch 
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ "$current_branch" != main ] && [ "$current_branch" != master ]; then 
+    # echo WARNINGS: YOU ARE ON BRANCH: "$current_branch", not main or master. 
+    echo "\n${RED}WARNINGS: YOU ARE ON BRANCH '$current_branch' NOT MAIN OR MASTER${NOCOLOR}"
+fi
+
+
 # check if both repo and file variables has a value or not, if any of them doesn't have a value, exit
 if [ -z "$1" ] || [ -z "$2" ]; then 
         echo ERROR: include repo name followed by filename or \* \(glob\) for entire dir. 
@@ -49,7 +62,7 @@ read -r message                     # whatever I entered
 
 # if received N/n on the second if question (because we don't end it with fi)
 elif [[ $REPLY =~ ^[Nn]$ ]]; then 
-    printf "\nNo changes pushed"
-    sleep 2 
+    printf "\nNo changes pushed\n"
+    sleep 0.5                         # sleep for 0.5 second after replying No
     exit 
 fi

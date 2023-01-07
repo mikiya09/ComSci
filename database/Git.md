@@ -1,5 +1,5 @@
 
-# What to do
+## What to do
 ```
 [1] initialize repo 
 [2] make changes 
@@ -10,14 +10,14 @@
 [7] ignore some file
 ```
 
-### [1] Intialize/Create local repo
+#### [1] Intialize/Create local repo
 ```
 >> cd "any_directory"               // which directory to use .git
 >> git init                         // create .git files 
 >> git status                       // check branch
 ```
-### [2] Connect Local Repository with remote one (github)
-##### &#x25cb; username and email 
+#### [2] Connect Local Repository with remote one (github)
+##### &#x21e2; username and email 
 ```
 1) username and useremail are used for tracking who are making changes to repo locally
 2) could be any string, but better use the same as github one
@@ -26,7 +26,7 @@
 >> git config --global user.email "spacelion121319@gmail.com"
 >> git config -l                                                 // check username and email
 ```
-##### &#x25cb; access token for login from terminal 
+##### &#x21e2; access token for login from terminal 
 ```
 1) www.github.com --> settings --> Developers settings --> Personal Access Tokens
 2) name your token || delete || expire || regenerate new one
@@ -34,12 +34,12 @@
 4) whenever you pull or push from github, if ask username and token: "JoJo" and that token
 ```
 
-##### &#x25cb; set/cancel one-time pass (optional)
+##### &#x21e2; set/cancel one-time pass (optional)
 ```
 >> git config --global credential.helper cache          // set 
 >> git config --global --unset credential.helper        // cancel
 ```
-##### &#x25cb; setting up remote repo 
+##### &#x21e2; setting up remote repo 
 ```
 # create new repo on github 
 # go to github page --> click "+" --> New Repository --> Name it --> Public/Private 
@@ -52,7 +52,7 @@
 >> git remote add origin https://github.com/user_name/repo_name.git
 ```
 
-##### &#x25cb; change remote repo -> refer to [*github docs*](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
+##### &#x21e2; change remote repo -> refer to [*github docs*](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
 ```
 # list current remote repo 
 >> git remote -v 
@@ -61,18 +61,18 @@
 >> git remote set-url origin https://github.com/user_name/repo_name.git
 ```
 
-### [3] Add changes 
+#### [3] Add changes 
 ```
 >> git add filename.xxx             // add single file 
 >> git add .                        // add all files 
 ```
 
-### [4] Commit 
+#### [4] Commit 
 ```
 >> git commit -m "commit message"   // describe what you had changed in this commit
 >> git status                       // check status
 ```
-##### &#x25cb; cancel commit 
+##### &#x21e2; cancel commit 
 ```
 # undo last changes 
 >> git reset
@@ -80,8 +80,22 @@
 # undo all commit
 >> git reset --soft HEAD~
 ```
+##### &#x21e2; see change on commit
+```
+# check passed commit 
+git log 
 
-### [5] Push/Pull
+# check passed commit with more details 
+git log -p 
+
+# if you have hash, you can check on single hash
+git show 5eba8ab3b718a6ab6610186be934ba214e228a58
+
+# show modified
+git diff
+```
+
+#### [5] Push/Pull
 ```
 >> git push -u origin main          // when you have multiple branch, you need to specify one to push 
 >> git push                         // if you only have one main branch
@@ -90,7 +104,7 @@
 [+]: you can run all three steps in one line
 >> git add . && git commit -m "xxx" && git push
 ```
-### [6] Branch
+#### [6] Branch
 ##### &#x25cb; checkout/switch
 ```
 # check out
@@ -142,7 +156,7 @@
 >> git remote set-head origin -a                // act that link and remote and local for push/pull, i guess
 ```
 
-### [7] Ignore Some file
+#### [7] Ignore Some file
 [auto-generating .gitignore](https://www.toptal.com/developers/gitignore)
 ```
 include this file in the local .git directory for eliminating items you don't want to push 

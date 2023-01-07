@@ -131,13 +131,17 @@ clear
 
 
 #### &#x2314; automate git operation
-**[`code`]()**
+**[`code`](./scripts/gitPush)**
 ```
-1) https://www.youtube.com/watch?v=qBCN7vc0ciw
-2) https://www.youtube.com/@mislavjuric9775/search
-3) https://www.youtube.com/watch?v=B2JaYUfv20E
-4) https://www.youtube.com/watch?v=guiNI3fcXZk
-5) https://www.youtube.com/watch?v=PPQ8m8xQAs8&t=1s
+# put the file to somewhere easy to locate: like ~/ 
+# run it with sh command, solely ./ doesn't seem to work 
+# example
+>> sh ~/gitPush ComSci *
+```
+#### &#x2314: universal scripts 
+```
+>> I assume we can do that by adding the script under "/usr/sbin/" or somewhere like those places
+>> and then we can use those scripts like normal "ls"
 ```
 
 
