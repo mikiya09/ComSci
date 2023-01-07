@@ -105,7 +105,7 @@ git diff
 >> git add . && git commit -m "xxx" && git push
 ```
 #### [6] Branch
-##### &#x25cb; checkout/switch
+##### &#x21e2; checkout/switch
 ```
 # check out
 >> git checkout -b new_branch               // -b: create new branchs 
@@ -115,7 +115,7 @@ git diff
 # switch
 >> checkout branch_name 
 ```
-##### &#x25cb; merge
+##### &#x21e2; merge
 ```
 # merge: if you work on another branch, and finish doing it 
 # you wanna merge you work to the main branch like the following:
@@ -125,21 +125,21 @@ git diff
 >> git checkout main                        # first checkout to the main branch (you need to be on main)
 >> git merge other_branch                   # merge other branch to the main 
 ```
-##### &#x25cb; List Branch
+##### &#x21e2; List Branch
 ```
 # list
 >> git branch -a                            // list all branch 
 >> git branch -r                            // list remote? 
 >> git branch                               // try, won't kill you
 ```
-##### &#x25cb; Delete Branch
+##### &#x21e2; Delete Branch
 ```
 # delete branch 
 >> git branch -d branch_name                // won't let you delete the branch you currently in
 >> git push origin --delete branch_name 
 
 ```
-##### &#x25cb; Diverge/Converge
+##### &#x21e2; Diverge/Converge
 ```
 # branches diverge/converge
 # if you make changes directly through github(remote)
@@ -149,7 +149,7 @@ git diff
 >> git status 
 >> git merge origin/branch_name             // here branch_name = main
 ```
-##### &#x25cb; Rename Branch(main)
+##### &#x21e2; Rename Branch(main)
 ```
 # go to repo -> settings -> under Code and automation -> click Branches -> rename it
 
@@ -169,14 +169,14 @@ include this file in the local .git directory for eliminating items you don't wa
 >> {copy and paste}
 ```
 
-##### &#x25cb; Current Directory 
+##### &#x21e2; Current Directory 
 ```
 if you have .git repo inside a git repo, the .gitignore inside parent directory won't have effect on children's
 
 don't do ths if not necessary
 ```
 
-##### &#x25cb; syntax 
+##### &#x21e2; syntax 
 ```
 no pdf -> *.pdf
 ```
