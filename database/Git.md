@@ -117,9 +117,13 @@ git diff
 ```
 ##### &#x25cb; merge
 ```
-# merge 
->> git merge main                           // merge all stuff in my branch to main
+# merge: if you work on another branch, and finish doing it 
+# you wanna merge you work to the main branch like the following:
+>> git checkout branchA                     # first checkout branchA 
+>> git merge branchB                        # merge branchB to branchA
 
+>> git checkout main                        # first checkout to the main branch (you need to be on main)
+>> git merge other_branch                   # merge other branch to the main 
 ```
 ##### &#x25cb; List Branch
 ```
