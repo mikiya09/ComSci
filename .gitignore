@@ -50,4 +50,8 @@ ipython_config.py
 # db file 
 *.db*
 
+# notes apps 
+.obsidian
+
+
 # End of https://www.toptal.com/developers/gitignore/api/macos
