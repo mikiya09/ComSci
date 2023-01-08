@@ -133,7 +133,7 @@ clear
 
 ##### &#x21e2; automate git operation
 **[`code`](./scripts/gitPush)**
-```
+```shell
 # put the file to somewhere easy to locate: like ~/ 
 # run it with sh command, solely ./ doesn't seem to work 
 # example
@@ -151,7 +151,7 @@ clear
 *`• path`*
 ```shell
 >> sudo mkdir /opt/bin 
->> mv scripts /opt/bin
+>> mv <scripts_you_wrote> /opt/bin
 
 # export the path variable to .zprofile (login shell)
 export PATH="/opt/bin:${PATH}"
