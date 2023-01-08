@@ -109,7 +109,7 @@ Zsh  (Z shell):            built on top of bash
 
 #### &#x2314; configure .zprofile
 *[`reference`](https://github.com/ChristianChiarulli/Machfiles/blob/master/x/.xprofile)*
-```
+```shell
 # startup login shell: 
 # --------------------
 # .zprofile always has higher priority over .zshrc even in the same directory
@@ -151,7 +151,7 @@ clear
 *`• path`*
 ```shell
 >> sudo mkdir /opt/bin 
->> mv <scripts_you_wrote> /opt/bin
+>> mv scripts_you_wrote /opt/bin
 
 # export the path variable to .zprofile (login shell)
 export PATH="/opt/bin:${PATH}"
