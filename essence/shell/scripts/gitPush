@@ -57,12 +57,6 @@ printf "\n --- add message --- \n"
 read -r message                     # whatever I entered 
 
     git commit -m "$message"
-
-
-
-    # keep getting permission deny if writing the push like below, seen like some SSH problem refer to the link
-    # https://gist.github.com/adamjohnson/5682757
-    # git push git@github.com:mikiya09/"$repo".git $current_branch
     git push -u "https://github.com/mikiya09/$repo".git $current_branch
 
 
