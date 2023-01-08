@@ -28,7 +28,7 @@ others(o): all other users on the system that are not any of two above
 ```
 
 #### &#x2314; examples 
-```
+```shell
 # make this file that others user can run 
 >> chmod o+x file.xxx
 

@@ -1,0 +1,69 @@
+
+
+#! /bin/zsh 
+
+
+# be default even you command went wrong, .sh script will continue running
+# we have a command to stop .sh went something went wrong 
+set -eo pipefail 
+
+# these two are the direct text typed after scripting file separateing with space 
+# something like this: ./gitPush repo file.xxx
+#                      --------- ---- -------- 
+#                       script    $1     $2
+#
+repo=$1         # the repository name up on the github (like ComSci, not your local directory)
+file=$2         # the file you modified or all of them (*)
+
+
+
+# color red 
+RED='\033[0;31m'
+# no color 
+NOCOLOR='\033[0m'
+# check current branch 
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ "$current_branch" != main ] && [ "$current_branch" != master ]; then 
+    # echo WARNINGS: YOU ARE ON BRANCH: "$current_branch", not main or master. 
+    echo "\n${RED}WARNINGS: YOU ARE ON BRANCH '$current_branch' NOT MAIN OR MASTER${NOCOLOR}"
+fi
+
+
+# check if both repo and file variables has a value or not, if any of them doesn't have a value, exit
+if [ -z "$1" ] || [ -z "$2" ]; then 
+        echo ERROR: include repo name followed by filename or \* \(glob\) for entire dir. 
+    exit 1
+fi
+
+# run git status 
+git status;
+
+
+# print instructions and waiting for reply 
+read -p "push changes?: " -n 1 -r 
+# if the reply command == yes[Y|y]
+if [[ $REPLY =~ ^[Yy]$ ]]; then 
+
+    # if $2 receive not a file name, but a astersisk 
+    if [[ "$2" = * ]]; then 
+        git add .                   # add all files that had changed 
+    else 
+        git add "$file"             # add only the specified file
+    fi 
+
+
+# ask for commit message 
+printf "\n --- add message --- \n"
+read -r message                     # whatever I entered 
+
+    git commit -m "$message"
+    git push -u origin git@github.com:mikiya09/"$repo".git
+    #git push
+
+
+# if received N/n on the second if question (because we don't end it with fi)
+elif [[ $REPLY =~ ^[Nn]$ ]]; then 
+    printf "\nNo changes pushed\n"
+    sleep 0.5                         # sleep for 0.5 second after replying No
+    exit 
+fi
