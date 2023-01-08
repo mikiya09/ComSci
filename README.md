@@ -37,5 +37,4 @@ math is important almost for everything
 
 # &#x232d; More to know
 
-### &#x26af; Dart (Flutter)
 ### &#x26af; Distributed System
