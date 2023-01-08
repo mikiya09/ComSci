@@ -57,7 +57,7 @@ printf "\n --- add message --- \n"
 read -r message                     # whatever I entered 
 
     git commit -m "$message"
-    git push -u origin git@github.com:mikiya09/"$repo".git
+    git push git@github.com:mikiya09/"$repo".git main
     #git push
 
 
