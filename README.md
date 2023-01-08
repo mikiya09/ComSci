@@ -3,7 +3,7 @@
 # &#x232d; Computer Science
 
 ```
-understand something is importan
+understand something is important
 ```
 
 ## &#x237e; Essence
