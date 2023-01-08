@@ -129,8 +129,9 @@ export ZDOTDIR=/Users/mikiya/.config/zsh
 clear
 ```
 
+#### &#x2314; scripts 
 
-#### &#x2314; automate git operation
+##### &#x21e2; automate git operation
 **[`code`](./scripts/gitPush)**
 ```
 # put the file to somewhere easy to locate: like ~/ 
@@ -138,10 +139,22 @@ clear
 # example
 >> sh ~/gitPush ComSci *
 ```
-#### &#x2314: universal scripts 
+
+##### &#x21e2; universal scripts 
+*`• explain`*
 ```
->> I assume we can do that by adding the script under "/usr/sbin/" or somewhere like those places
->> and then we can use those scripts like normal "ls"
+1) commands like "ls" are put in the /usr/bin directory. We can use these commands without specifying their path
+2) to create commands for our own purpose, we can write scripts and save to somewhere similar
+3) just by specifying the path of the commands you saved 
+4) actually you can store wherever you want, but for consistent, storing them at the following
+```
+*`• path`*
+```shell
+>> sudo mkdir /opt/bin 
+>> mv scripts /opt/bin
+
+# export the path variable to .zprofile (login shell)
+export PATH="/opt/bin:${PATH}"
 ```
 
 
