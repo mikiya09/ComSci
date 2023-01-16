@@ -1,5 +1,4 @@
 
-#testing
 #! /bin/zsh 
 
 
@@ -67,3 +66,4 @@ elif [[ $REPLY =~ ^[Nn]$ ]]; then
     sleep 0.5                         # sleep for 0.5 second after replying No
     exit 
 fi
+
