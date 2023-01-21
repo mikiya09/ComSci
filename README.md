@@ -39,3 +39,4 @@ math is important almost for everything
 
 ### &#x26af; Distributed System
 ### &#x26af; [AutoML system](https://www.youtube.com/watch?v=nUzqmZyX4oU)
+### &#x26af; [iPad SSH setup](https://www.youtube.com/watch?v=B-1wGwvUwm8) | [SSH automated](https://www.youtube.com/watch?v=DYYxLSrJdW8)
