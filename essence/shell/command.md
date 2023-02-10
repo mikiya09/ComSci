@@ -1,6 +1,13 @@
 
 # Shell Command
 
+### Execution time
+#### time 
+```
+1) time python xxx.py       # check the execution time for a running program 
+2) time ls                  # check the execution time for a command(shell)
+```
+
 ### Permissions 
 
 #### chmod (change mode)
