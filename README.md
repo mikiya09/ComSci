@@ -5,7 +5,6 @@
 ```
 understand something is important
 ```
-
 ## &#x237e; Essence
 ##### &#x23f5; Computer Organization: [concept](./essence/computer-organization/computer-organization.md)
 ##### &#x23f5; Theory of Computation: [concept](./essence/theory-of-computation/theory-of-computation.md)
