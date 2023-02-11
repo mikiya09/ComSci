@@ -132,7 +132,7 @@ clear
 #### &#x2314; scripts 
 
 ##### &#x21e2; automate git operation
-**[`code`](./scripts/gitPush)**
+**[`code`](./scripts/gpush)**
 ```shell
 # put the file to somewhere easy to locate: like ~/ 
 # run it with sh command, solely ./ doesn't seem to work 
