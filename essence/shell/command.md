@@ -1,16 +1,16 @@
 
 # Shell Command
 
-### Execution time
-#### time 
+### &#x2314; Execution time
+##### &#x21e2; time 
 ```
 1) time python xxx.py       # check the execution time for a running program 
 2) time ls                  # check the execution time for a command(shell)
 ```
 
-### Permissions 
+### &#x2314; Permissions 
 
-#### chmod (change mode)
+##### &#x21e2; chmod (change mode)
 ```
 # long listing 
 >> ls -l
@@ -34,7 +34,7 @@ group(g):  the group that has been assigned to the file or directory
 others(o): all other users on the system that are not any of two above
 ```
 
-#### &#x2314; examples 
+##### &#x21e2; examples 
 ```shell
 # make this file that others user can run 
 >> chmod o+x file.xxx
@@ -48,4 +48,23 @@ others(o): all other users on the system that are not any of two above
 
 # assign (r) and (x) permission to both (u) and (g) and add (r) permission to others for the file abc.c
 >> chmod ug=rx,o+r abc.c
+```
+
+### &#x2314; With Remote Server
+##### &#x21e2; [Copy](https://medium.com/srcecde/copy-file-directory-to-from-ec2-using-scp-secure-copy-685c46636399)
+```shell
+-------------------------------------------------------------------------------------------
+# From local to remote 
+# 1) syntax: scp [local file] username@ip-address:[remote directory]
+# 2) the following exmaple use private key(.pem). Remove -i ai.pem if password is used 
+# 3) scp -r: meaning copy file recursively from sub-directories
+>> scp -i access.pem -r ~/wormhole/toKnow/dataset/ ubuntu@0.0.0.0:/home/ubuntu/llm/
+
+# copy file from local to remote 
+# remove -r: meaning just copy one file 
+>> scp -i access.pem ~/wormhole/toKnow/dataset/ ubuntu@0.0.0.0:/home/ubuntu/llm/newName
+
+-------------------------------------------------------------------------------------------
+# From remote to local is the reverse order 
+>> scp -i access.pem -r ubuntu@0.0.0.0:/home/ubuntu/source_dir ~/Documents/directory1
 ```
