@@ -53,6 +53,8 @@ others(o): all other users on the system that are not any of two above
 ### &#x2314; With Remote Server
 ##### &#x21e2; connect 
 ```shell
+# need to change .pem mode so that only you can modify it (which is require step)
+>> chmod 600 /path/to/.pem
 # with .pem private key 
 >> ssh -i access.pem username@ip-address
 ```
