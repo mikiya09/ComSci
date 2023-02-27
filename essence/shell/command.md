@@ -51,6 +51,12 @@ others(o): all other users on the system that are not any of two above
 ```
 
 ### &#x2314; With Remote Server
+##### &#x21e2; connect 
+```shell
+# with .pem private key 
+>> ssh -i access.pem username@ip-address
+```
+
 ##### &#x21e2; [Copy](https://medium.com/srcecde/copy-file-directory-to-from-ec2-using-scp-secure-copy-685c46636399)
 ```shell
 -------------------------------------------------------------------------------------------
