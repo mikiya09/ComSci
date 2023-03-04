@@ -70,9 +70,20 @@ others(o): all other users on the system that are not any of two above
 
 # copy file from local to remote 
 # remove -r: meaning just copy one file 
->> scp -i access.pem ~/wormhole/toKnow/dataset/ ubuntu@0.0.0.0:/home/ubuntu/llm/newName
+>> scp -i access.pem ~/wormhole/toKnow/data.csv ubuntu@0.0.0.0:/home/ubuntu/llm/newName
 
 -------------------------------------------------------------------------------------------
 # From remote to local is the reverse order 
 >> scp -i access.pem -r ubuntu@0.0.0.0:/home/ubuntu/source_dir ~/Documents/directory1
+```
+
+##### &#x21e2; Jump through Intermediate 
+```
+# check ip-address 
+>> nslookup 
+
+# you won't be able to check ip-address if the destination host is protected from the outside world 
+# in this case, you need a jump host, port is usually 22
+# for directory I think is by adding -r after it like above
+>> scp -J username@jumphost:22 /path/to/localfile user@destination:/home/user/directory
 ```
