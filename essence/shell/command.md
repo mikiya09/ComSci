@@ -78,16 +78,22 @@ others(o): all other users on the system that are not any of two above
 ```
 
 ### &#x2314; Intermediate Host
-*protected server in remote*
+
+
+##### &#x21e2; Check IP
 ```
-1) you won't be able to check ip-address if the destination host is protected from the outside world 
-2) in this case, you need a jump host, port is usually 22
-```
-*check if ip-address exist in remote*
-```
+# check if ip-address exist in remote
 >> nslookup 
 ```
-*Jump Host: [FileZilla](https://www.unixcloudfusion.in/2016/01/using-filezilla-to-connect-ec2-with.html)*
+
+##### &#x21e2; Projected Server
+```
+# protected server in remote
+1) won't be able to check ip-address if the destination host is protected from the outside world 
+2) in this case, you need a jump host, port is usually 22
+```
+
+##### &#x21e2; Jump Host: [FileZilla](https://www.unixcloudfusion.in/2016/01/using-filezilla-to-connect-ec2-with.html)
 ```
 # tunnel way 
 1) reserve a pane for opening a tunnel on your local host, which connect to the jump host (Intermediate one). 
@@ -110,7 +116,7 @@ Port: leave it empty
 ======================================
 > Quickconnect 
 ```
-*Jump Host (scp)*
+##### &#x21e2; Jump Host (scp)
 ```
 # from local to remote 
 >> scp -J username@jumphost:22 /path/to/localfile user@destination:/home/user/directory
