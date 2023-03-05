@@ -78,12 +78,46 @@ others(o): all other users on the system that are not any of two above
 ```
 
 ##### &#x21e2; Jump through Intermediate 
+*check if ip-address exist in remote*
 ```
-# check ip-address 
 >> nslookup 
+```
 
-# you won't be able to check ip-address if the destination host is protected from the outside world 
-# in this case, you need a jump host, port is usually 22
-# for directory I think is by adding -r after it like above
+*protected server in remote*
+```
+1) you won't be able to check ip-address if the destination host is protected from the outside world 
+2) in this case, you need a jump host, port is usually 22
+```
+
+*Jump Host: [FileZilla](https://www.unixcloudfusion.in/2016/01/using-filezilla-to-connect-ec2-with.html)*
+```
+# tunnel way 
+1) reserve a pane for opening a tunnel on your local host, which connect to the jump host (Intermediate one). 
+>> ssh -D 8001 username@xxx.xxx.xxx
+
+2) set up Generic Proxy in FileZilla
+Settings > Generic Proxy > Socks 5: 
+=====================
+Proxy host: 127.0.0.1 
+Proxy Port: 8001 
+=====================
+> Save, nothing more
+
+3) connect through FileZilla UI: 
+======================================
+Host: destination-host
+Username: destination-username
+Password: destination-password 
+Port: leave it empty
+======================================
+> Quickconnect 
+```
+*Jump Host (scp)*
+```
+# from local to remote 
 >> scp -J username@jumphost:22 /path/to/localfile user@destination:/home/user/directory
+
+# from remote to local: I think it's the same idea?
+1) open tunnel 
+2) directly scp through the tunnel from local host?
 ```
