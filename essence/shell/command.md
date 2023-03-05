@@ -77,18 +77,16 @@ others(o): all other users on the system that are not any of two above
 >> scp -i access.pem -r ubuntu@0.0.0.0:/home/ubuntu/source_dir ~/Documents/directory1
 ```
 
-##### &#x21e2; Jump through Intermediate 
-*check if ip-address exist in remote*
-```
->> nslookup 
-```
-
+### &#x2314; Intermediate Host
 *protected server in remote*
 ```
 1) you won't be able to check ip-address if the destination host is protected from the outside world 
 2) in this case, you need a jump host, port is usually 22
 ```
-
+*check if ip-address exist in remote*
+```
+>> nslookup 
+```
 *Jump Host: [FileZilla](https://www.unixcloudfusion.in/2016/01/using-filezilla-to-connect-ec2-with.html)*
 ```
 # tunnel way 
