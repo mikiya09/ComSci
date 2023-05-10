@@ -108,12 +108,12 @@ Proxy Port: 8001
 > Save, nothing more
 
 3) connect through FileZilla UI: 
-======================================
+==============================
 Host: destination-host
 Username: destination-username
 Password: destination-password 
-Port: leave it empty
-======================================
+Port: 22 (or leave it empty)
+===============================
 > Quickconnect 
 ```
 ##### &#x21e2; Jump Host (scp)
